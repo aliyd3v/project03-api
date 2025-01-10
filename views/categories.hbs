@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../src/output.css">
+    <link rel="stylesheet" href="../src/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+</head>
+
+<body class="bg-black">
+    <header class="w-[1400px] h-24 flex justify-between items-center  my-4 mx-auto">
+        <!-- header-logo -->
+        <div class="flex justify-between items-center  h-full px-5 object-cover rounded-xl bg-[#111] w-[75%]"><img
+                class="w-20" src="../img/gijduvon-premium-logo.webp" alt="main-logo">
+
+            <div class="inputbox">
+                <input required="required" type="text">
+                <span class="">
+                    <p class="fa-solid fa-magnifying-glass"></p> Search for a food
+                </span>
+                <i></i>
+            </div>
+
+        </div>
+
+        <!-- header-profil -->
+        <div class="px-5 h-full object-cover rounded-xl bg-[#111] w-[23%] flex justify-between items-center">
+            <a href="">
+
+                <i class="fa-solid fa-bell text-3xl text-white duration-500 cursor-pointer hover:text-[#ffc335] "></i>
+            </a>
+            <a href="">
+
+                <i
+                    class="fa-solid fa-message text-3xl text-[white] duration-500 cursor-pointer hover:text-[#ffc335] "></i>
+            </a>
+            <!-- header-porofil-logo -->
+
+            <div
+                class="w-20 h-20 bg-[white] rounded-full grid place-items-center duration-500 cursor-pointer hover:bg-[#ffc335] ">
+                <img class="w-[90%] object-cover rounded-full " src="../img/3a3f2d35-8167-4708-9ef0-bdaa980989f9.avif"
+                    alt="profil-img">
+            </div>
+        </div>
+    </header>
+    <main class="my-10 mx-auto w-[1400px] flex justify-between gap-5">
+        <!-- ================================= menu ============================================== -->
+        <div class="flex flex-col gap-2 w-[300px]">
+            <!-- =================================menu-profil=============================== -->
+            <div class="w-[300px] bg-[#111] py-3 px-5 rounded-xl">
+                <!-- profil -->
+                <a href="" class=" ">
+                    <div
+                        class="w-20 h-20  bg-[white] my-0 mx-auto rounded-full grid place-items-center duration-500 cursor-pointer hover:bg-[#ffc335] ">
+                        <img class="w-[90%] object-cover rounded-full "
+                            src="../img/3a3f2d35-8167-4708-9ef0-bdaa980989f9.avif" alt="profil-img">
+                    </div>
+                    <h3 class="text-center text-xl my-5 mx-auto w-40 break-normal text-white">Javohir shonazarov</h3>
+                </a>
+            </div>
+              <!-- =========================================menu-Cotigoris=============================== -->
+
+                  <div id="home" class="w-[300px] bg-[#111] py-3 px-5 rounded-xl ml-3  cursor-pointer">
+                    <div class="h-9 w-full flex items-center gap-4">
+                        <i class="fa-solid fa-house text-xl text-[#ffc355] "></i> <a href="index.html" class="text-[#ffc335]">Home</a>
+                    </div>
+                  </div>
+              <!-- =000 -->
+              <div id="order" class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer  duration-500  hover:-ml-3     ">
+                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+                    <i class="fa-solid fa-file  text-xl text-white"></i><a href="order.html" class="text-white ">Order</a>
+                </div>
+              </div>
+              <!--  -->
+              <div id="history" class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer  duration-500    hover:-ml-3 ">
+                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+                    <i class="fa-solid fa-clock text-xl text-white"></i> <a href="history.html" class="text-white">History</a>
+                </div>
+              </div>
+
+              <!-- ==== -->
+              <div id="products" class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500   hover:-ml-3 ">
+                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+                <i class="fa-solid fa-folder-open  text-white"></i> <a href="product.html" class="text-white">Pruducts</a>
+                </div>
+              </div>
+                <!-- ==== -->
+                  <!-- ==== -->
+              <div id="cotigories" class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500   hover:-ml-3 ">
+                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+                    <i class="fa-solid fa-layer-group text-xl text-white"></i> 
+                     <a href="cotigories.html" class="text-white">Categories</a>
+                </div>
+              </div>
+                <!-- ==== -->
+                <button id="logout" class="w-[300px] boss bg-red-600 py-3 px-5 rounded-xl cursor-pointer duration-500   hover:-ml-3 ">
+                    <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+                        <i class="fa-solid fa-right-from-bracket text-white"></i><p class="text-white">Log out</p>
+                    </div>
+                  </button>
+        </div>
+        <!-- ===============================Cotigories=====================  -->
+
+
+        <div class=" w-full ">
+            <div class="bg-main-bg p-5 items-center flex justify-between w-full h-20 rounded-xl mb-5">
+                <p class="text-white font-bold  text-2xl">Cotigories: <span id="cotygory-length"></span></p>
+                <div class="">
+                    <div id="add-btn" class="button bg-green-600">
+                        <div class="button-wrapper catygoryAddBtn">
+                            <div class="text">Add</div>
+                            <span class="icon"><i class="fa-solid fa-plus"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="pruduct-container"
+                class="flex  flex-col bg-main-bg w-[100%] py-6 px-5 rounded-xl gap-5 list-none   overflow-x-scroll cotigories-container">
+
+
+
+                <!-- salad box -->
+                <div class="w-full
+                
+                 h-40
+                 rounded-xl
+                 flex
+                 items-center
+                 justify-between
+                p-4
+              
+                 bg-black">
+
+                          
+                 <div class="flex items-center">
+                    <div class="w-32 h-32 rounded-full overflow-hidden">
+                        <img class="w-full h-full" src="" alt="Mahsulot rasm">
+                    </div>
+
+
+                    <div class="w-[300px]">
+                        <h1 class="text-white text-3xl ">${item.name}</h1>
+                        <p class="text-[#999] text-xl">Maxsulotlar: ${item.meals.length}</p>
+                    </div>
+
+
+                </div>
+
+                <div class="flex gap-3 ">
+                    <div class="button bg-green-600 edit-cotigory">
+                        <div class="button-wrapper">
+                            <div class="text">Edit</div>
+                            <span class="icon"><i class="fa-solid fa-pen"></i></span>
+                        </div>
+                    </div>
+                    <div class="button bg-red-600 del-cotigory">
+                        <div class="button-wrapper ">
+                            <div class="text">Del</div>
+                            <span class="icon"><i class="fa-solid fa-trash"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                </div>
+                <!-- Salad end -->
+
+            </div>
+
+    </main>
+
+    <!-- EDIT -->
+    <div id="cotigory-edit" class="cotigory-edit w-screen hidden z-50 h-screen backdrop-blur fixed top-0  place-items-center">
+        <div class="bg-main-bg w-[400px] p-4  rounded-xl">
+            <form id="edit-form" action="" class="formField">
+
+                <label class="my-4 block" for="">
+                    <h1 class="text-white">Edit</h1>
+                    <h4 class="text-white text-xl"><span class="text-text-color  text-xl">*</span>Cotigory Name</h4>
+                    <div class="flex mt-2 items-center">
+                        <img src="../img/flags'/uzbekistan_square_icon_64.png" class="h-7" alt="">
+                        <input type="text" id="edit_en_name">
+                    </div>
+                    <div class="flex mt-5 items-center">
+
+                        <img src="../img/flags'/russia_square_icon_64.png" class="h-7" alt="">
+                        <input type="text" id="edit_ru_name">
+                    </div>
+                </label>
+
+                <label>
+                    <input type="file" name="file" class="image-upload" id="edit_img_file" accept="image/*" />
+                    <div class="w-32 h-32 rounded-full border overflow-hidden mt-3">
+                      <img id="edit-image-preview"  class="preview-image hidden w-full object-cover" 
+                           src="" 
+                           alt="Preview">
+                    </div>
+                  </label>
+                  
+
+
+                <div class="flex gap-3 mt-4">
+                    <button type="button" id="edit-submit" class="button bg-green-600">
+                        <div class="button-wrapper ">
+                            <div class="text">Edit</div>
+                            <span class="icon"><i class="fa-solid fa-pen"></i></span>
+                        </div>
+                    </button>
+
+                    <div id="closeEdit"
+                        class="button border border-[#333] text-[#333] !duration-500  hover:border-white hover:text-white">
+
+                        <div class=" block mt-1  font-bold">close</div>
+
+
+                    </div>
+
+                </div>
+            </form>
+        </div>
+
+    </div>
+    <!-- ADD -->
+    <div id="cotigory-add" class="w-screen hidden z-50 h-screen backdrop-blur fixed top-0  place-items-center">
+        <div class="bg-main-bg w-[400px] p-4  rounded-xl">
+            <form id="formData"  class="formField" enctype="multipart/form-data"   >
+
+                <label class="my-4 block" for="">
+                    <h4 class="text-white text-xl"><span class="text-text-color  text-xl">*</span>Cotigory Name</h4>
+                    <div class="flex mt-2 items-center">
+                        <img src="../img/flags'/uzbekistan_square_icon_64.png" class="h-7" alt="">
+                        <input id="add_en_name" name="en_name" type="text">
+                    </div>
+                    <div class="flex mt-5 items-center">
+
+                        <img src="../img/flags'/russia_square_icon_64.png" class="h-7" alt="">
+                        <input id="add_ru_name" name="ru_name" type="text">
+                    </div>
+                </label>
+           
+                <label>
+                    <input id="add_img_file" type="file" name="file" class="image-upload" accept="image/*" />
+                    <div class="w-32 h-32 rounded-full border overflow-hidden mt-3">
+                      <img class="preview-image hidden w-full object-cover" 
+                           src="../img/healthy-salad-plate-tomatoes-chickpeas-600nw-2427459441.webp" 
+                           alt="Preview">
+                    </div>
+                  </label>
+                  
+
+
+                <div class="flex gap-3 mt-4">
+                    <div class="button bg-green-600" id="confirmAdd">
+                        <div type="submit" class="button-wrapper ">
+                            <div class="text">Add</div>
+                            <span class="icon"><i class="fa-solid fa-plus"></i></span>
+                        </div>
+                    </div>
+
+                    <div id="closeAdd"
+                        class="button border border-[#333] text-[#333] !duration-500  hover:border-white hover:text-white">
+
+                        <div class=" block mt-1  font-bold">close</div>
+
+
+                    </div>
+
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <!-- DEL -->
+    <div id="cotigory-del" class="place-items-center hidden  fixed top-0  backdrop-blur w-[100vw] z-30 h-[100vh] ">
+        <div class="w-[400px] h-[230px] select-none z-[100]  rounded-xl p-3  top-0 left-0  bg-main-bg">
+            <button class="w-full text-end outline-none"><i id="close-del-popup"
+                    class="fa-solid fa-x text-p-color"></i></button>
+
+            <div class="rounded-full border-4 mx-auto my-2 border-red-600 grid place-items-center  h-16 w-16"><i
+                    class="fa-solid fa-exclamation text-4xl text-red-300"></i></div>
+            <p class="text-center text-p-color">Are you sure you want to delete this user?</p>
+            <div class="text-center my-5">
+                <button id="del-pruduct"
+                    class="py-2 px-4 mx-2 inline-block bg-red-600  rounded-lg text-white font-bold">Yes, I'm
+                    sure</button>
+                <button id="del-canceling" class="py-2 px-4 mx-2 inline-block border rounded-lg text-p-color">No,
+                    cencel</button>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <script type="module" src="../js/catigories.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="../js/cotigoryupdate.js"></script>
+    <script src="../js/index.js"></script>
+
+        <!-- <script src="../js/catigories.js"></script> -->
+         <!-- <script src="../js/categorucatgpt.js"></script> -->
+
+</body>
+
+</html>

@@ -1,0 +1,457 @@
+  <!DOCTYPE html>
+  <html lang="en">
+
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+      <link rel="stylesheet" href="../src/output.css">
+      <link rel="stylesheet" href="../src/style.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+          integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.css" />
+
+
+  </head>
+
+  <body class="bg-black">
+      <header class="w-[1400px] h-24 flex justify-between items-center  my-4 mx-auto">
+          <!-- header-logo -->
+          <div class="flex justify-between items-center  h-full px-5 object-cover rounded-xl bg-[#111] w-[75%]"><img
+                  class="w-20" src="../img/gijduvon-premium-logo.webp" alt="main-logo">
+
+              <div class="inputbox">
+                  <input required="required" type="text">
+                  <span class="">
+                      <p class="fa-solid fa-magnifying-glass"></p> Search for a food
+                  </span>
+                  <i></i>
+              </div>
+
+          </div>
+
+          <!-- header-profil -->
+          <div class="px-5 h-full object-cover rounded-xl bg-[#111] w-[23%] flex justify-between items-center">
+              <a href="">
+
+                  <i class="fa-solid fa-bell text-3xl text-[white] duration-500 cursor-pointer hover:text-[#ffc335] "></i>
+              </a>
+              <a href="">
+
+                  <i
+                      class="fa-solid fa-message text-3xl text-[white] duration-500 cursor-pointer hover:text-[#ffc335] "></i>
+              </a>
+              <!-- header-porofil-logo -->
+
+              <div
+                  class="w-20 h-20 bg-[white] rounded-full grid place-items-center duration-500 cursor-pointer hover:bg-[#ffc335] ">
+                  <img class="w-[90%] object-cover rounded-full " src="../img/3a3f2d35-8167-4708-9ef0-bdaa980989f9.avif"
+                      alt="profil-img">
+              </div>
+          </div>
+      </header>
+
+
+      <!-- ============================= -->
+      <main class="my-10 mx-auto w-[1400px] flex gap-5">
+          <!-- ================================= menu ============================================== -->
+          <div class="flex flex-col gap-2 w-[300px]">
+              <!-- =================================menu-profil=============================== -->
+              <div class="w-[300px] bg-[#111] py-3 px-5 rounded-xl">
+                  <!-- profil -->
+                  <a href="" class=" ">
+                      <div
+                          class="w-20 h-20  bg-[white] my-0 mx-auto rounded-full grid place-items-center duration-500 cursor-pointer hover:bg-[#ffc335] ">
+                          <img class="w-[90%] object-cover rounded-full "
+                              src="../img/3a3f2d35-8167-4708-9ef0-bdaa980989f9.avif" alt="profil-img">
+                      </div>
+                      <h3 class="text-center text-xl my-5 mx-auto w-40 break-normal text-white">Javohir shonazarov</h3>
+                  </a>
+              </div>
+              <!-- =========================================menu-Cotigoris=============================== -->
+        <!-- =========================================menu-Cotigoris=============================== -->
+        <div id="home" class="w-[300px] bg-[#111] py-3 px-5 rounded-xl ml-3  cursor-pointer">
+          <div class="h-9 w-full flex items-center gap-4">
+              <i class="fa-solid fa-house text-xl text-[#ffc355] "></i> <a href="index.html" class="text-[#ffc335]">Home</a>
+          </div>
+        </div>
+        <!-- =000 -->
+        <div id="order" class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer  duration-500  hover:-ml-3     ">
+          <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+              <i class="fa-solid fa-file  text-xl text-white"></i><a href="order.html" class="text-white ">Order</a>
+          </div>
+        </div>
+        <!--  -->
+        <div id="history" class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer  duration-500    hover:-ml-3 ">
+          <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+              <i class="fa-solid fa-clock text-xl text-white"></i> <a href="history.html" class="text-white">History</a>
+          </div>
+        </div>
+
+        <!-- ==== -->
+        <div id="products" class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500   hover:-ml-3 ">
+          <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+          <i class="fa-solid fa-folder-open  text-white"></i> <a href="product.html" class="text-white">Pruducts</a>
+          </div>
+        </div>
+          <!-- ==== -->
+            <!-- ==== -->
+        <div id="cotigories" class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500   hover:-ml-3 ">
+          <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+              <i class="fa-solid fa-layer-group text-xl text-white"></i> 
+              <a href="cotigories.html" class="text-white">Categories</a>
+          </div>
+        </div>
+          <!-- ==== -->
+          <button id="logout" class="w-[300px] boss bg-red-600 py-3 px-5 rounded-xl cursor-pointer duration-500   hover:-ml-3 ">
+              <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+                  <i class="fa-solid fa-right-from-bracket text-white"></i><p class="text-white">Log out</p>
+              </div>
+            </button>
+          </div>
+          <!-- ===============================Cotigories=====================  -->
+          <div class="">
+
+
+            <div class=" w-[11 00px]">
+              <h1 class="text-white text-xl mb-3">Cotigories <span class="text-text-color">*</span></h1>
+            <div class="flex  bg-main-bg w-[100%] py-6 px-5 rounded-xl gap-4    overflow-x-scroll">
+              
+                        
+              
+                          <!-- salad box -->
+                <div class="w-40 h-40 rounded-xl     text-center col-span-2 bg-black">
+                    <div class="w-32 mx-auto -mt-5 rounded-full overflow-hidden">
+
+                        <img class="w-full" src="../img/healthy-salad-plate-tomatoes-chickpeas-600nw-2427459441.webp" alt="salad">
+                    </div>
+                    <p class="text-white mt-4">Salad</p>
+                </div>
+                <!-- salad box end -->
+                          <!-- salad box -->
+                <div class="w-40 h-40 rounded-xl     text-center col-span-2 bg-black">
+                    <div class="w-32 mx-auto -mt-5 rounded-full overflow-hidden">
+
+                        <img class="w-full" src="../img/healthy-salad-plate-tomatoes-chickpeas-600nw-2427459441.webp" alt="salad">
+                    </div>
+                    <p class="text-white mt-4">All</p>
+                </div>
+                <!-- salad box end -->
+                          <!-- salad box -->
+                <div class="w-40 h-40 rounded-xl     text-center col-span-2 bg-black">
+                    <div class="w-32 mx-auto -mt-5 rounded-full overflow-hidden">
+
+                        <img class="w-full" src="../img/healthy-salad-plate-tomatoes-chickpeas-600nw-2427459441.webp" alt="salad">
+                    </div>
+                    <p class="text-white mt-4">Salad</p>
+                </div>
+                <!-- salad box end -->
+                          <!-- salad box -->
+                <div class="w-40 h-40 rounded-xl     text-center col-span-2 bg-black">
+                    <div class="w-32 mx-auto -mt-5 rounded-full overflow-hidden">
+
+                        <img class="w-full" src="../img/healthy-salad-plate-tomatoes-chickpeas-600nw-2427459441.webp" alt="salad">
+                    </div>
+                    <p class="text-white mt-4">Salad</p>
+                </div>
+                <!-- salad box end -->
+                          <!-- salad box -->
+                <div class="w-40 h-40 rounded-xl     text-center col-span-2 bg-black">
+                    <div class="w-32 mx-auto -mt-5 rounded-full overflow-hidden">
+
+                        <img class="w-full" src="../img/healthy-salad-plate-tomatoes-chickpeas-600nw-2427459441.webp" alt="salad">
+                    </div>
+                    <p class="text-white mt-4">Salad</p>
+                </div>
+                <!-- salad box end -->
+                          <!-- salad box -->
+                <div class="w-40 h-40 rounded-xl     text-center col-span-2 bg-black">
+                    <div class="w-32 mx-auto -mt-5 rounded-full overflow-hidden">
+
+                        <img class="w-full" src="../img/healthy-salad-plate-tomatoes-chickpeas-600nw-2427459441.webp" alt="salad">
+                    </div>
+                    <p class="text-white mt-4">Salad</p>
+                </div>
+                <!-- salad box end -->
+
+
+
+            </div>
+          
+          </div>
+
+            <div class=" w-full">
+    
+    
+    
+                <section class="w-full mt-7">
+                    <div class="mx-auto max-w-7xl mt-7">
+                        <h2 class="font-manrope   text-xl text-white mb-8 max-lg:text-center">
+                            Product list <span class="text-text-color ">*</span>
+                        </h2>
+                        <div class="w-full h-20 rounded-xl bg-main-bg  flex justify-between px-7 items-center">
+                            <div class="flex gap-3  formField">
+    
+                                <input type="text">
+                                <div class="button  h-full 
+                                w-241 bg-[#222]">
+                                    <div class="button-wrapper">
+                                        <div class="text">Search</div>
+                                        <span class="icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="">
+                                <div id="add-btn" class="button bg-green-600">
+                                    <div class="button-wrapper">
+                                        <div  class="text">Add</div>
+                                        <span class="icon"><i class="fa-solid fa-plus"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    
+    
+    
+                        <div id="page" class="flex">
+                          <div style="margin-top:20px;" class="bg-main-bg flex items-center justify-around mt-6 w-full h-60 rounded-xl mx-auto sm:mr-0 group cursor-pointer lg:mx-auto  transition-all duration-500">
+                            <div class="rounded-xl">
+                              <img src="" alt="face cream image" class="w-full h-52 aspect-square object-cover">
+                            </div>
+                            <div class="w-[70%] h-52">
+                              <div class="flex items-center justify-between">
+                                <h6 class="font-semibold text-xl leading-8 text-white transition-all duration-500 group-hover:text-indigo-600">
+                                  ${item.title}
+                                </h6>
+                                <h6 class="font-semibold text-xl leading-8 text-indigo-600">
+                                  ${item.price}
+                                </h6>
+                              </div>
+                              <div class="mt-3">
+                                <ul class="list-none overflow-scroll h-32 w-[300px]">
+                                  <li class="mt-2 font-normal text-sm leading-6 text-gray-500">${item.description}</li>
+                                </ul>
+                              </div>
+                              <div class="flex gap-3 ml-[600px]">
+                                <div class="button bg-green-600">
+                                  <div class="button-wrapper">
+                                    <div class="text">Edit</div>
+                                    <span class="icon"><i class="fa-solid fa-pen"></i></span>
+                                  </div>
+                                </div>
+                                <div class="button bg-red-600 open-del-pop">
+                                  <div class="button-wrapper">
+                                    <div class="text">Del</div>
+                                    <span class="icon"><i class="fa-solid fa-trash"></i></span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div id="data-container"></div>
+                        <div id="pagination" class="flex justify-center items-center mt-5 text-white"></div>
+                    </div>
+    
+                </section>
+    
+            </div>
+
+          </div>
+
+      </main>
+      <!--del lkjsdl -->
+
+      <div id="del-popup" class=" place-items-center hidden  fixed top-0  backdrop-blur w-[100vw] z-30 h-[100vh] ">
+          <div class="w-[400px] h-[230px] select-none z-[100]  rounded-xl p-3  top-0 left-0  bg-main-bg">
+              <button class="w-full text-end outline-none"><i id="close-del-popup"
+                      class="fa-solid fa-x text-p-color"></i></button>
+
+              <div class="rounded-full border-4 mx-auto my-2 border-red-600 grid place-items-center  h-16 w-16"><i
+                      class="fa-solid fa-exclamation text-4xl text-red-600"></i></div>
+              <p class="text-center text-p-color">Are you sure you want to delete this user?</p>
+              <div class="text-center my-5">
+                  <button id="del-pruduct"
+                      class="py-2 px-4 mx-2 inline-block bg-red-600  rounded-lg text-white font-bold">Yes, I'm
+                      sure</button>
+                  <button id="del-canceling" class="py-2 px-4 mx-2 inline-block border rounded-lg text-p-color">No,
+                      cencel</button>
+
+              </div>
+          </div>
+      </div>
+
+
+      <!-- Create Pruduct -->
+      <div id="add-display" class="z-50 backdrop-blur fixed top-0  h-[100vh] w-[100vw] hidden place-items-center">
+          <div class="w-[1000px] p-6  rounded-xl bg-black">
+              <div  class="">
+                  <div class="flex items-center">
+                      <button id="uz-lan" class="w-12 h-12  rounded-sm bg-[#222]"><img src="../img/flags'/uzbekistan_square_icon_64.png" alt="uzb flag"></button>
+                      <button id="ru-lan" class="w-12 h-12"> <img src="../img/flags'/russia_square_icon_64.png" alt=""></button>
+                  </div>
+                  <h1 class="text-white font-bold my-3 text-3xl ">Create Pruduct</h1>
+                  <div class="w-full flex">
+                      <form id="uz-create" action="" class="w-[30%] formField">
+                          <label class="my-4 block" for=""><h4 class="text-white text-xl"><span class="text-text-color  text-xl">*</span>title</h4> <input type="text"></label>
+                          <label class="my-4 block" for=""><h4 class="text-white text-xl"><span class="text-text-color  text-xl">*</span>description</h4> <textarea name="" id=""></textarea></label>
+                          <label class="my-4 block" for=""><h4 class="text-white text-xl"><span class="text-text-color text-xl ">*</span>Price</h4> <input type="number"></label>
+                          <label class="my-4 block">
+                            <h4 class="text-white text-xl"><span class="text-text-color text-xl ">*</span>Cotigories</h4>
+                            <select class="w-[80%]" name="" id="select-cotigories">
+                              <option value="" class="mt-6">saload</option>
+                              <option value="">shashlik</option>
+                            </select>
+                          </label>
+                    
+
+                      </form>
+                      <form id="ru-create" action="" class="w-[30%] hidden formField">
+                          <label class="my-4 block" for=""><h4 class="text-white text-xl"><span class="text-text-color  text-xl">*</span>заголовок</h4> <input type="text"></label>
+                          <label class="my-4 block" for=""><h4 class="text-white text-xl"><span class="text-text-color  text-xl">*</span>описание</h4> <textarea name="" id=""></textarea></label>
+                          <label class="my-4 block" for=""><h4 class="text-white text-xl"><span class="text-text-color text-xl ">*</span>Цена</h4> <input type="number"></label>
+                          <label class="my-4 block">
+                            <h4 class="text-white text-xl"><span class="text-text-color text-xl ">*</span>Котигории</h4>
+                            <select class="w-[80%]" name="" id="select-cotigories">
+                              <option value="" class="mt-6">saload</option>
+                              <option value="">shashlik</option>
+                            </select>
+                      
+                          </label>
+
+                      </form>
+
+                      <!-- upload img -->
+                      <div class="w-[70%]">
+  <!-- component -->
+  <div class= "">
+      <main class="container mx-auto max-w-screen-lg h-full">
+        <!-- file upload modal -->
+        <article aria-label="File Upload Modal" class="relative h-full flex flex-col bg-[#222] shadow-xl rounded-md" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);" ondragleave="dragLeaveHandler(event);" ondragenter="dragEnterHandler(event);">
+          <!-- overlay -->
+          <div id="overlay" class="w-full h-full absolute top-0 left-0 pointer-events-none z-50 flex flex-col items-center justify-center rounded-md">
+            <i>
+              <svg class="fill-current w-12 h-12 mb-3 text-blue-700" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path d="M19.479 10.092c-.212-3.951-3.473-7.092-7.479-7.092-4.005 0-7.267 3.141-7.479 7.092-2.57.463-4.521 2.706-4.521 5.408 0 3.037 2.463 5.5 5.5 5.5h13c3.037 0 5.5-2.463 5.5-5.5 0-2.702-1.951-4.945-4.521-5.408zm-7.479-1.092l4 4h-3v4h-2v-4h-3l4-4z" />
+              </svg>
+            </i>
+            <p class="text-lg text-white">Drop files to upload</p>
+          </div>
+
+          <!-- scroll area -->
+          <section class=" overflow-auto p-8 w-full h-full flex flex-col">
+            <header class="border-dashed border-2 border-gray-400 py-12 flex flex-col justify-center items-center">
+              <p class="mb-3 font-semibold text-white flex flex-wrap justify-center">
+                <span>Drag and drop your</span>&nbsp;<span>files anywhere or</span>
+              </p>
+              <input id="hidden-input" type="file" multiple class="hidden" />
+              <button id="button" class="mt-2 rounded-sm px-3 py-1 bg-gray-200 hover:bg-gray-300 focus:shadow-outline focus:outline-none">
+                Upload a file
+              </button>
+            </header>
+
+            <h1 class="pt-8 pb-3 font-semibold sm:text-lg text-white">
+              To Upload
+            </h1>
+
+            <ul id="gallery" class="flex flex-1 flex-wrap -m-1">
+              <li id="empty" class="h-full w-full text-center flex flex-col items-center justify-center">
+                <img class="mx-auto w-32" src="https://user-images.githubusercontent.com/507615/54591670-ac0a0180-4a65-11e9-846c-e55ffce0fe7b.png" alt="no data" />
+                <span class="text-small text-gray-500">No files selected</span>
+              </li>
+            </ul>
+          </section>
+
+          <!-- sticky footer -->
+          <footer class="flex justify-end px-8 pb-8 pt-4">
+            <button id="submit" class="rounded-sm px-3 duration-300 py-1 bg-green-600 hover:bg-green-500 text-white focus:shadow-outline focus:outline-none">
+              Upload now
+            </button>
+            <button id="cancel" class="ml-3 rounded-sm px-3 py-1 duration-300 hover:bg-gray-300 focus:shadow-outline focus:outline-none">
+              Cancel
+            </button>
+          </footer>
+        </article>
+      </main>
+    </div>
+
+    <!-- using two similar templates for simplicity in js code -->
+    <template id="file-template">
+      <li class="block p-1 w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/6 xl:w-1/8 h-24">
+        <article tabindex="0" class="group w-full h-full rounded-md focus:outline-none focus:shadow-outline elative bg-gray-100 cursor-pointer relative shadow-sm">
+          <img alt="upload preview" class="img-preview hidden w-full h-full sticky object-cover rounded-md bg-fixed" />
+
+          <section class="flex flex-col rounded-md text-xs break-words w-full h-full z-20 absolute top-0 py-2 px-3">
+            <h1 class="flex-1 group-hover:text-blue-800"></h1>
+            <div class="flex">
+              <span class="p-1 text-blue-800">
+                <i>
+                  <svg class="fill-current w-4 h-4 ml-auto pt-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path d="M15 2v5h5v15h-16v-20h11zm1-2h-14v24h20v-18l-6-6z" />
+                  </svg>
+                </i>
+              </span>
+              <p class="p-1 size text-xs text-gray-700"></p>
+              <button class="delete ml-auto focus:outline-none hover:bg-gray-300 p-1 rounded-md text-gray-800">
+                <svg class="pointer-events-none fill-current w-4 h-4 ml-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                  <path class="pointer-events-none" d="M3 6l3 18h12l3-18h-18zm19-4v2h-20v-2h5.711c.9 0 1.631-1.099 1.631-2h5.316c0 .901.73 2 1.631 2h5.711z" />
+                </svg>
+              </button>
+            </div>
+          </section>
+        </article>
+      </li>
+    </template>
+
+    <template id="image-template">
+      <li class="block p-1 w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/6 xl:w-1/8 h-24">
+        <article tabindex="0" class="group hasImage w-full h-full rounded-md focus:outline-none focus:shadow-outline bg-gray-100 cursor-pointer relative text-transparent hover:text-white shadow-sm">
+          <img alt="upload preview" class="img-preview w-full h-full sticky object-cover rounded-md bg-fixed" />
+
+          <section class="flex flex-col rounded-md text-xs break-words w-full h-full z-20 absolute top-0 py-2 px-3">
+            <h1 class="flex-1"></h1>
+            <div class="flex">
+              <span class="p-1">
+                <i>
+                  <svg class="fill-current w-4 h-4 ml-auto pt-" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path d="M5 8.5c0-.828.672-1.5 1.5-1.5s1.5.672 1.5 1.5c0 .829-.672 1.5-1.5 1.5s-1.5-.671-1.5-1.5zm9 .5l-2.519 4-2.481-1.96-4 5.96h14l-5-8zm8-4v14h-20v-14h20zm2-2h-24v18h24v-18z" />
+                  </svg>
+                </i>
+              </span>
+
+              <p class="p-1 size text-xs"></p>
+              <button class="delete ml-auto focus:outline-none hover:bg-gray-300 p-1 rounded-md">
+                <svg class="pointer-events-none fill-current w-4 h-4 ml-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                  <path class="pointer-events-none" d="M3 6l3 18h12l3-18h-18zm19-4v2h-20v-2h5.711c.9 0 1.631-1.099 1.631-2h5.316c0 .901.73 2 1.631 2h5.711z" />
+                </svg>
+              </button>
+            </div>
+          </section>
+        </article>
+      </li>
+    </template>
+
+
+                      </div>
+                      
+                  </div>
+                  <div class=" my-5">
+                      <button id="cancel-create" class="py-2 px-4 mx-2 inline-block border rounded-lg text-p-color">No,
+                          cencel</button>
+                      <button id="del-pruduct"
+                          class="py-2 px-4 mx-2 inline-block bg-green-600  rounded-lg text-white font-bold">Create</button>
+      
+                  </div>
+              </div>
+
+          </div>
+      </div>
+
+      <script src="../js/product.js"></script>
+      <script src="../js/index.js"></script>
+
+
+  </body>
+
+  </html>

@@ -1,3 +1,5 @@
-const router = require('express').Router()
+const router = require("./root/rootRouter")
 
-module.exports = router
+exports.appRouter = (app) => {
+    app.use('/', router)
+}

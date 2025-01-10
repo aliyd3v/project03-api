@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../src/output.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../src/style.css">
+</head>
+
+<body class="bg-black">
+    <!-- Go -->
+    <header class="w-[1400px] h-24 flex justify-between items-center  my-4 mx-auto">
+        <!-- header-logo -->
+        <div class="flex justify-between items-center  h-full px-5 object-cover rounded-xl bg-[#111] w-[75%]"><img
+                class="w-20" src="../img/gijduvon-premium-logo.webp" alt="main-logo">
+
+            <div class="inputbox">
+                <input required="required" type="text">
+                <span class="">
+                    <p class="fa-solid fa-magnifying-glass"></p> Search for a food
+                </span>
+                <i></i>
+            </div>
+
+        </div>
+
+        <!-- header-profil -->
+        <div class="px-5 h-full object-cover rounded-xl bg-[#111] w-[23%] flex justify-between items-center">
+            <a href="">
+
+                <i class="fa-solid fa-bell text-3xl text-[white] duration-500 cursor-pointer hover:text-[#ffc335] "></i>
+            </a>
+            <a href="">
+
+                <i
+                    class="fa-solid fa-message text-3xl text-[white] duration-500 cursor-pointer hover:text-[#ffc335] "></i>
+            </a>
+            <!-- header-porofil-logo -->
+
+            <div
+                class="w-20 h-20 bg-[white] rounded-full grid place-items-center duration-500 cursor-pointer hover:bg-[#ffc335] ">
+                <img class="w-[90%] object-cover rounded-full " src="../img/3a3f2d35-8167-4708-9ef0-bdaa980989f9.avif"
+                    alt="profil-img">
+            </div>
+        </div>
+    </header>
+
+
+    <!-- ============================= -->
+    <main class="my-10 mx-auto w-[1400px] flex gap-5">
+        <!-- ================================= menu ============================================== -->
+        <div class="flex flex-col gap-2 w-[300px]">
+            <!-- =================================menu-profil=============================== -->
+            <div class="w-[300px] bg-[#111] py-3 px-5 rounded-xl">
+                <!-- profil -->
+                <a href="" class=" ">
+                    <div
+                        class="w-20 h-20  bg-[white] my-0 mx-auto rounded-full grid place-items-center duration-500 cursor-pointer hover:bg-[#ffc335] ">
+                        <img class="w-[90%] object-cover rounded-full "
+                            src="../img/3a3f2d35-8167-4708-9ef0-bdaa980989f9.avif" alt="profil-img">
+                    </div>
+                    <h3 class="text-center text-xl my-5 mx-auto w-40 break-normal text-white">Javohir shonazarov</h3>
+                </a>
+            </div>
+            <!-- =========================================menu-Cotigoris=============================== -->
+            <div id="home" class="w-[300px] bg-[#111] py-3 px-5 rounded-xl ml-3  cursor-pointer">
+                <div class="h-9 w-full flex items-center gap-4">
+                    <i class="fa-solid fa-house text-xl text-[#ffc355] "></i> <a href="index.html"
+                        class="text-[#ffc335]">Home</a>
+                </div>
+            </div>
+            <!-- =000 -->
+            <div id="order"
+                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer  duration-500  hover:-ml-3     ">
+                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+                    <i class="fa-solid fa-file  text-xl text-white"></i><a href="order.html"
+                        class="text-white ">Order</a>
+                </div>
+            </div>
+            <!--  -->
+            <div id="history"
+                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer  duration-500    hover:-ml-3 ">
+                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+                    <i class="fa-solid fa-clock text-xl text-white"></i> <a href="history.html"
+                        class="text-white">History</a>
+                </div>
+            </div>
+
+            <!-- ==== -->
+            <div id="products"
+                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500   hover:-ml-3 ">
+                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+                    <i class="fa-solid fa-folder-open  text-white"></i> <a href="product.html"
+                        class="text-white">Pruducts</a>
+                </div>
+            </div>
+            <!-- ==== -->
+            <!-- ==== -->
+            <div id="cotigories"
+                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500   hover:-ml-3 ">
+                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+                    <i class="fa-solid fa-layer-group text-xl text-white"></i>
+                    <a href="cotigories.html" class="text-white">Categories</a>
+                </div>
+            </div>
+            <!-- ==== -->
+            <button id="logout"
+                class="w-[300px] boss bg-red-600 py-3 px-5 rounded-xl cursor-pointer duration-500   hover:-ml-3 ">
+                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+                    <i class="fa-solid fa-right-from-bracket text-white"></i>
+                    <p class="text-white">Log out</p>
+                </div>
+            </button>
+        </div>
+        <!-- ===============================Cotigories=====================  -->
+
+        <div class="w-full">
+            <!-- order flex -->
+            <div class="w-full p-5 flex flex-col gap-5 h-[100vh] bg-main-bg rounded-xl">
+                <h1 class="text-3xl font-bold mb-4 text-[#ffc335]">Order</h1>
+                <!-- order box -->
+                <div class="w-full bg-black p-6 rounded-xl">
+                    <!-- order -->
+                    <p class="text-white ">order ID <span class="text-text-color">#09340923</span></p>
+                    <div class="flex justify-between w-[90%]">
+                        <div class="">
+                            <div class="text-white ml-5 mt-3">
+                                <p class="">email: <span class="ml-3 text-xl">javohirshonazarov.oo8@gmail.com</span>
+                                </p>
+                                <p class="">phone: <span class="ml-3 text-xl">+998-91-420-82-77</span> </p>
+                                <p class="">total price: <span class="ml-3 text-xl">&14000000</span></p>
+                            </div>
+                        </div>
+                        <div class="w-[40%]">
+                            <ul class="flex justify-around text-end text-white">
+                                <h1>Maxsulotlar: </h1>
+                                <br>
+                                <ul>
+                                    <li>meal name</li>
+                                    <li>meal name</li>
+                                    <li>meal name</li>
+                                </ul>
+
+
+
+
+                            </ul>
+
+                        </div>
+                    </div>
+                    <div class="text-end mt-10">
+                        <button class="bg-green-600 text-white rounded py-2 px-5">Acept</button>
+
+                    </div>
+
+                </div>
+
+                <!-- order make section -->
+                <div class="bg-black p-6 rounded-xl">
+                    <p class="text-white mb-4">order ID <span class="text-text-color">#09340923</span></p>
+
+
+
+                    <div id="checkbox-container" class="p-4 bg-main-bg rounded-xl">
+                        <ul class="space-y-2" id="checkbox-list">
+                            <!-- Backenddan keladigan ma'lumotlar asosida checkboxlar qo'shiladi -->
+                        </ul>
+                    </div>
+
+                    <div class="flex justify-between items-center mt-4 p-4 bg-main-bg    rounded-xl">
+                        <p class="text-lg font-semibold text-white">
+                            Umumiy narx: <span id="total-price" class="text-green-400">0</span> so'm
+                        </p>
+                        <button id="done" disabled
+                            class="px-4 py-2 bg-gray-500 text-gray-300 rounded cursor-not-allowed">
+                            Done
+                        </button>
+                    </div>
+                </div>
+
+                    <div class="bg-black p-6 rounded-xl">
+                        <p class="text-white mb-4">order ID <span class="text-text-color">#09340923</span></p>
+                    <div class="flex justify-between">
+
+                        <div class=" flex justify-between w-[20%] h-12 items-center">
+                            
+                            <p class="text-white text-xl">Waiting payment</p>
+                            <div class="container">
+                                <div class="line"></div>
+                                <div class="line"></div>
+                                <div class="line"></div>
+                                <div class="line"></div>
+                                <div class="line"></div>
+                                <div class="line"></div>
+                                <div class="line"></div>
+                                <div class="line"></div>
+                                <div class="line"></div>
+                                <div class="line"></div>
+                                <div class="line"></div>
+                                <div class="line"></div>
+                            </div>
+                            
+                        </div>
+
+                        <button class="text-gray-300 bg-gray-500 px-4 py-2 rounded cursor-not-allowed">Add to history</button>
+
+                    </div>
+
+                    </div>
+
+            </div>
+        </div>
+        </div>
+
+    </main>
+    <!-- garph========================== -->
+
+
+
+
+
+    <script src="../js/index.js"></script>
+    <script src="../js/order.js"></script>
+
+</body>
+
+</html>
