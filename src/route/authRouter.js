@@ -1,4 +1,4 @@
-const { loginPage, login } = require('../controller/auth/authController')
+const { loginPage, login } = require('../controller/authController')
 const { checkSchema } = require('express-validator')
 const { loginValidationSchema } = require('../validation/loginValidationSchema')
 
