@@ -1,4 +1,4 @@
-exports.loginValidationSchema = {
+exports.createAdminValidationSchema = {
     username: {
         notEmpty: {
             errorMessage: "Username cannot be empty!"

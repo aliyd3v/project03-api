@@ -1,5 +1,21 @@
-const router = require("./root/rootRouter")
+const rootRouter = require("./root/rootRouter")
+const adminRouter = require("./admin/adminRouter")
+const authRouter = require("./auth/authRouter")
+const bookingRouter = require("./booking/bookingRouter")
+const categoryRouter = require("./category/categoryRouter")
+const historyRouter = require("./history/historyRouter")
+const mealRouter = require("./meal/mealRouter")
+const orderRouter = require("./order/orderRouter")
+const stolRouter = require("./stol/stolRouter")
 
 exports.appRouter = (app) => {
-    app.use('/', router)
+    app.use('/', rootRouter)
+    app.use('/', adminRouter)
+    app.use('/', authRouter)
+    app.use('/', bookingRouter)
+    app.use('/', categoryRouter)
+    app.use('/', historyRouter)
+    app.use('/', mealRouter)
+    app.use('/', orderRouter)
+    app.use('/', stolRouter)
 }

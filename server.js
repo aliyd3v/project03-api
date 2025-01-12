@@ -3,6 +3,14 @@ const app = express()
 const router = require('./src/route/route')
 const { create } = require('express-handlebars')
 const handlebars = require('handlebars')
+const cookieParser = require('cookie-parser')
+const { port } = require('./src/config/config')
+const cors = require('cors')
+const { connectMongodb } = require('./src/database/database')
+const { default: helmet } = require('helmet')
+
+// Setup MongoDB.
+connectMongodb()
 
 // Setup static folder.
 app.use(express.static('./public'))
@@ -18,8 +26,12 @@ app.set('view engine', 'hbs')
 // Body parsing tools.
 app.use(express.json())
 
+// Setup security tools.
+app.use(cors())
+app.use(helmet())
+
 // Router setup.
 router.appRouter(app)
 
 // Listening port setup.
-app.listen(3000, () => console.log(`Server runned on port 3000`))
+app.listen(port, () => console.log(`Server runned on port 3000`))

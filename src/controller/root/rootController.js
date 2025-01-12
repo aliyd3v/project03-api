@@ -1,15 +1,16 @@
+const { errorHandling } = require("../errorController")
+
 exports.rootController = async (req, res) => {
     try {
+        // Rendering.
         return res.render('home', {
             layout: false,
-            title: 'Home'
+            rootPage: true
         })
-    } catch (error) {
-        console.log(error)
-        return res.status(500).send({
-            success: false,
-            data: null,
-            error: { message: "Internal server error!" }
-        })
+    }
+
+    // Error handling.
+    catch (error) {
+        errorHandling(error, res)
     }
 }

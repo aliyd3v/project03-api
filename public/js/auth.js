@@ -1,3 +1,7 @@
+// Checking token for exitstence.
+let token = localStorage.getItem('token')
+if (token) window.location.href = "/"
+
 let form = document.getElementById("form");
 
 form.addEventListener("submit", (event) => {
@@ -11,13 +15,10 @@ form.addEventListener("submit", (event) => {
 });
 
 function logIn(username, password) {
-    // fetch('http://192.168.0.118:5050/category/:id/delete',{
-    //     method:"POST"
-    // })
-    fetch('https://project06.onrender.com/login', {
+    fetch('/login', {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
-        
+
         body: JSON.stringify({ username: username, password: password })
     })
         .then(response => response.json())
@@ -25,7 +26,7 @@ function logIn(username, password) {
             if (response.success) {
                 let token = response.data.token
                 localStorage.setItem('token', token)
-                return window.location.href = "index.html"
+                return window.location.href = "/"
             } else {
                 alert("Login failed: " + response.error.message)
             }

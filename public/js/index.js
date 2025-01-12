@@ -3,40 +3,30 @@ let logOut = document.getElementById("logout")
 logOut.addEventListener("click", logout)
 function logout() {
     localStorage.removeItem("token")
-    window.location.href="login.html"
+    window.location.href = "/login"
 }
 
-
-
-
-
 let home = document.querySelector("#home")
-home.addEventListener("click" , () => {
-    window.localStorage.href = "index.html"
+home.addEventListener("click", () => {
+    window.localStorage.href = "/"
 })
 
 let products = document.querySelector("#products")
 products.addEventListener("click", () => {
-    window.location.href = "product.html"
-
+    window.location.href = "/product"
 })
-
 
 let cotigories = document.querySelector("#cotigories")
 cotigories.addEventListener("click", () => {
-    window.location.href = "cotigories.html"
-
+    window.location.href = "/category"
 })
 
 let history = document.querySelector("#history")
 history.addEventListener("click", () => {
-    window.location.href = "history.html"
-
+    window.location.href = "/history"
 })
-
 
 let order = document.querySelector("#order")
 order.addEventListener("click", () => {
-    window.location.href = "order.html"
-
+    window.location.href = "/order"
 })
