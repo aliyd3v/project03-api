@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const api = "https://project06.onrender.com/category";
     
     // Modalni boshqarish funksiyalari
     function openModal(modalId) {
@@ -73,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Kategoriyalarni yuklash funksiyasi
     function getCategories() {
-        fetch(api)
+        fetch('/categories')
             .then(response => response.json())
             .then(response => {
                 if (response.success) {
@@ -87,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function deleteCategory(id) {
         const token = localStorage.getItem("token");
 
-        fetch(`${api}/${id}/delete`, {
+        fetch(`/category/${id}/delete`, {
             method: "POST",
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -129,7 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function editCategory(id, updatedData) {
         const token = localStorage.getItem("token");
 
-        fetch(`${api}/${id}/edit`, {
+        fetch(`/category/${id}/edit`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -194,7 +193,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const selectedId = parentElement?.getAttribute("data-id");
 
             if (selectedId) {
-                fetch(`${api}/${selectedId}`)
+                fetch(`/category/${selectedId}`)
                     .then(response => response.json())
                     .then(response => {
                         if (response.success) {
@@ -259,7 +258,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        fetch(`${api}/create`, {
+        fetch(`/category/create`, {
             method: "POST",
             headers: {
                 Authorization: `Bearer ${token}`,

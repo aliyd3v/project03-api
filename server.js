@@ -27,11 +27,11 @@ app.set('view engine', 'hbs')
 app.use(express.json())
 
 // Setup security tools.
-app.use(cors())
-app.use(helmet())
+// app.use(cors())
+// app.use(helmet())
 
 // Router setup.
 router.appRouter(app)
 
 // Listening port setup.
-app.listen(port, () => console.log(`Server runned on port 3000`))
+app.listen(port, () => console.log(`Server runned on port ${port}`))

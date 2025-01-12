@@ -1,6 +1,6 @@
-const { errorHandling } = require("../errorController")
+const { errorHandling } = require("./errorController")
 
-exports.rootController = async (req, res) => {
+exports.rootController = (req, res) => {
     try {
         // Rendering.
         return res.render('home', {

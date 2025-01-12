@@ -1,6 +1,6 @@
-const { loginPage, login } = require('../../controller/auth/authController')
+const { loginPage, login } = require('../controller/auth/authController')
 const { checkSchema } = require('express-validator')
-const { loginValidationSchema } = require('../../validation/loginValidationSchema')
+const { loginValidationSchema } = require('../validation/loginValidationSchema')
 
 const router = require('express').Router()
 

@@ -1,3 +1,6 @@
+const token = localStorage.getItem('token')
+if (!token) window.location.href = '/login'
+
 let logOut = document.getElementById("logout")
 
 logOut.addEventListener("click", logout)
@@ -16,8 +19,8 @@ products.addEventListener("click", () => {
     window.location.href = "/product"
 })
 
-let cotigories = document.querySelector("#cotigories")
-cotigories.addEventListener("click", () => {
+let category = document.querySelector("#category")
+category.addEventListener("click", () => {
     window.location.href = "/category"
 })
 
