@@ -46,5 +46,5 @@ function loading() {
 
     setTimeout(function() {
         containerLoad.style.display = "none";
-    }, 3000);
+    });
 }

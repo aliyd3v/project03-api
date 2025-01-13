@@ -128,7 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function editCategory(id, updatedData) {
         const token = localStorage.getItem("token");
 
-        fetch(`/category/${id}/edit`, {
+        fetch(`/category/${id}/update`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -184,10 +184,12 @@ document.addEventListener("DOMContentLoaded", () => {
             if (deleteModal && selectedId) {
                 deleteModal.setAttribute("data-selected-id", selectedId);
                 openModal("#cotigory-del");
+                getId(selectedId)
             }
         }
+        // deleteCategory(selectedId) delete category function
 
-        // Category edit.
+        // Get category data for edit.
         if (event.target.closest(".edit-cotigory")) {
             const parentElement = event.target.closest(".w-full");
             const selectedId = parentElement?.getAttribute("data-id");
@@ -224,6 +226,10 @@ document.addEventListener("DOMContentLoaded", () => {
             closeModal("#cotigory-edit");
         }
     });
+    let confirmDel=document.querySelector(".del-pruduct")
+    confirmDel.addEventListener("click",getId())
+
+
 
     const addButton = document.querySelector("#add-btn");
     const cotigoryAddSection = document.querySelector("#cotigory-add");
