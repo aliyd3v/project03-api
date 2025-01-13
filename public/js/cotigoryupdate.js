@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const api = "https://project06.onrender.com/category";
 
     // Open Modal Function
     function openModal(modalId) {
@@ -21,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const selectedId = parentElement?.getAttribute("data-id");
 
             if (selectedId) {
-                fetch(`${api}/${selectedId}`)
+                fetch(`/category/${selectedId}`)
                     .then(response => response.json())
                     .then(response => {
                         if (response.success) {
@@ -75,10 +74,10 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             const updatedData = { en_name: enName, ru_name: ruName, image_url: imageUrl };
-        const token = localStorage.getItem("token");
+            const token = localStorage.getItem("token");
 
             // Send update request
-            fetch(`${api}/${selectedId}/update`, {
+            fetch(`/category/${selectedId}/update`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

@@ -1,6 +1,3 @@
-// API URL
-let apiURL = "https://project06.onrender.com/meal";
-
 // DOMContentLoaded eventida ma'lumotlarni yuklash
 document.addEventListener("DOMContentLoaded", function () {
   fetchData();
@@ -38,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function fetchData() {
-  fetch(apiURL)
+  fetch('/meals')
     .then((response) => response.json())
     .then((data) => {
       console.log("Fetched data:", data);
@@ -103,7 +100,7 @@ function showDeletePopup(itemId) {
 
   // Store the itemId on the confirm button
   delProductButton.dataset.id = itemId;
-  
+
   // Change the popup visibility by removing 'hidden' and adding 'grid'
   delPopup.classList.remove("hidden");
   delPopup.classList.add("grid");
@@ -120,12 +117,12 @@ function hideDeletePopup() {
 function confirmDeleteItem() {
   const itemId = document.getElementById("del-pruduct").dataset.id;
   deleteItem(itemId);
-  hideDeletePopup(); 
+  hideDeletePopup();
 }
 
 
 function addNewItem(newItem) {
-  fetch(apiURL, {
+  fetch('/meal/create', {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -135,15 +132,15 @@ function addNewItem(newItem) {
     .then((response) => response.json())
     .then((data) => {
       console.log("Added new item:", data);
-      fetchData(); 
+      fetchData();
     })
     .catch((error) => console.error("Error adding new item:", error));
 }
 
 
 function deleteItem(itemId) {
-  fetch(`${apiURL}/${itemId}/delete`, {
-    method: "DELETE",
+  fetch(`/meal/${itemId}/delete`, {
+    method: "POST",
   })
     .then(() => {
       console.log(`Deleted item with ID: ${itemId}`);
@@ -160,8 +157,8 @@ function editItem(itemId) {
     description: "Updated description",
   };
 
-  fetch(`${apiURL}/${itemId}`, {
-    method: "PUT",
+  fetch(`/meal/${itemId}`, {
+    method: "POST",
     headers: {
       "Content-Type": "application/json",
     },

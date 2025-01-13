@@ -1,90 +1,147 @@
-<!-- ============================= -->
-<main class="my-10 mx-auto w-[1400px] flex gap-5">
-    <!-- ================================= menu ============================================== -->
-    <div class="flex flex-col gap-2 w-[300px]">
-        <!-- =================================menu-profil=============================== -->
-        <div class="w-[300px] bg-[#111] py-3 px-5 rounded-xl">
-            <!-- profil -->
-            <a href="" class=" ">
-                <div
-                    class="w-20 h-20  bg-[white] my-0 mx-auto rounded-full grid place-items-center duration-500 cursor-pointer hover:bg-[#ffc335] ">
-                    <img class="w-[90%] object-cover rounded-full "
-                        src="/img/3a3f2d35-8167-4708-9ef0-bdaa980989f9.avif" alt="profil-img">
-                </div>
-                <h3 class="text-center text-xl my-5 mx-auto w-40 break-normal text-white">Javohir shonazarov</h3>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/src/output.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/src/style.css">
+</head>
+
+<body class="bg-black">
+    <!-- Go -->
+    <header class="w-[1400px] h-24 flex justify-between items-center  my-4 mx-auto">
+        <!-- header-logo -->
+        <div class="flex justify-between items-center  h-full px-5 object-cover rounded-xl bg-[#111] w-[75%]"><img
+                class="w-20" src="/img/gijduvon-premium-logo.webp" alt="main-logo">
+
+            <div class="inputbox">
+                <input required="required" type="text">
+                <span class="">
+                    <p class="fa-solid fa-magnifying-glass"></p> Search for a food
+                </span>
+                <i></i>
+            </div>
+
+        </div>
+
+        <!-- header-profil -->
+        <div class="px-5 h-full object-cover rounded-xl bg-[#111] w-[23%] flex justify-between items-center">
+            <a href="">
+
+                <i class="fa-solid fa-bell text-3xl text-[white] duration-500 cursor-pointer hover:text-[#ffc335] "></i>
             </a>
-        </div>
-        <!-- =========================================menu-Cotigoris=============================== -->
-        <div id="home" class="w-[300px] bg-[#111] py-3 px-5 rounded-xl ml-3  cursor-pointer">
-            <div class="h-9 w-full flex items-center gap-4">
-                <i class="fa-solid fa-house text-xl text-[#ffc355] "></i> <a href="index.html"
-                    class="text-[#ffc335]">Home</a>
+            <a href="">
+
+                <i
+                    class="fa-solid fa-message text-3xl text-[white] duration-500 cursor-pointer hover:text-[#ffc335] "></i>
+            </a>
+            <!-- header-porofil-logo -->
+
+            <div
+                class="w-20 h-20 bg-[white] rounded-full grid place-items-center duration-500 cursor-pointer hover:bg-[#ffc335] ">
+                <img class="w-[90%] object-cover rounded-full " src="/img/3a3f2d35-8167-4708-9ef0-bdaa980989f9.avif"
+                    alt="profil-img">
             </div>
         </div>
-        <!-- =000 -->
-        <div id="order"
-            class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer  duration-500  hover:-ml-3     ">
-            <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
-                <i class="fa-solid fa-file  text-xl text-white"></i><a href="order.html" class="text-white ">Order</a>
+    </header>
+
+
+    <!-- ============================= -->
+    <main class="my-10 mx-auto w-[1400px] flex gap-5">
+        <!-- ================================= menu ============================================== -->
+        <div class="flex flex-col gap-2 w-[300px]">
+            <!-- =================================menu-profil=============================== -->
+            <div class="w-[300px] bg-[#111] py-3 px-5 rounded-xl">
+                <!-- profil -->
+                <a href="" class=" ">
+                    <div
+                        class="w-20 h-20  bg-[white] my-0 mx-auto rounded-full grid place-items-center duration-500 cursor-pointer hover:bg-[#ffc335] ">
+                        <img class="w-[90%] object-cover rounded-full "
+                            src="/img/3a3f2d35-8167-4708-9ef0-bdaa980989f9.avif" alt="profil-img">
+                    </div>
+                    <h3 class="text-center text-xl my-5 mx-auto w-40 break-normal text-white">Javohir shonazarov</h3>
+                </a>
             </div>
-        </div>
-        <!--  -->
-        <div id="history"
-            class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer  duration-500    hover:-ml-3 ">
-            <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
-                <i class="fa-solid fa-clock text-xl text-white"></i> <a href="history.html"
-                    class="text-white">History</a>
+            <!-- =========================================menu-Cotigoris=============================== -->
+            <div id="home" class="w-[300px] bg-[#111] py-3 px-5 rounded-xl ml-3  cursor-pointer">
+                <div class="h-9 w-full flex items-center gap-4">
+                    <i class="fa-solid fa-house text-xl text-[#ffc355] "></i> <a href="/"
+                        class="text-[#ffc335]">Home</a>
+                </div>
             </div>
-        </div>
-
-        <!-- ==== -->
-        <div id="products"
-            class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500   hover:-ml-3 ">
-            <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
-                <i class="fa-solid fa-folder-open  text-white"></i> <a href="product.html"
-                    class="text-white">Pruducts</a>
+            <!-- =000 -->
+            <div id="order"
+                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer  duration-500  hover:-ml-3     ">
+                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+                    <i class="fa-solid fa-file  text-xl text-white"></i><a href="/order" class="text-white ">Order</a>
+                </div>
             </div>
-        </div>
-        <!-- ==== -->
-        <!-- ==== -->
-        <div id="cotigories"
-            class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500   hover:-ml-3 ">
-            <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
-                <i class="fa-solid fa-layer-group text-xl text-white"></i>
-                <a href="cotigories.html" class="text-white">Categories</a>
+            <!--  -->
+            <div id="history"
+                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer  duration-500    hover:-ml-3 ">
+                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+                    <i class="fa-solid fa-clock text-xl text-white"></i> <a href="/history"
+                        class="text-white">History</a>
+                </div>
             </div>
-        </div>
-        <!-- ==== -->
-        <button id="logout"
-            class="w-[300px] boss bg-red-600 py-3 px-5 rounded-xl cursor-pointer duration-500   hover:-ml-3 ">
-            <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
-                <i class="fa-solid fa-right-from-bracket text-white"></i>
-                <p class="text-white">Log out</p>
+
+            <!-- ==== -->
+            <div id="products"
+                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500   hover:-ml-3 ">
+                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+                    <i class="fa-solid fa-folder-open  text-white"></i> <a href="/meal" class="text-white">Pruducts</a>
+                </div>
             </div>
-        </button>
-    </div>
-    <!-- ===============================Cotigories=====================  -->
-    <!-- History Section -->
-    <div id="history-section" class="w-[1100px] bg-[#111] rounded-xl p-5 mt-5 text-white">
-        <h2 class="text-3xl font-bold mb-4 text-[#ffc335]">History</h2>
+            <!-- ==== -->
+            <!-- ==== -->
+            <div id="cotigories"
+                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500   hover:-ml-3 ">
+                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+                    <i class="fa-solid fa-layer-group text-xl text-white"></i>
+                    <a href="/category" class="text-white">Categories</a>
+                </div>
+            </div>
+            <!-- ==== -->
+            <button id="logout"
+                class="w-[300px] boss bg-red-600 py-3 px-5 rounded-xl cursor-pointer duration-500   hover:-ml-3 ">
+                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+                    <i class="fa-solid fa-right-from-bracket text-white"></i>
+                    <p class="text-white">Log out</p>
+                </div>
+            </button>
+        </div>
+        <!-- ===============================Cotigories=====================  -->
+        <!-- History Section -->
+        <div id="history-section" class="w-[1100px] bg-[#111] rounded-xl p-5 mt-5 text-white">
+            <h2 class="text-3xl font-bold mb-4 text-[#ffc335]">History</h2>
 
-        <!-- Header Box -->
-        <div class="flex justify-between bg-[#222] p-4 rounded-lg mb-3 font-bold text-[#ffc335]">
-            <p class="w-[10%] text-center">#</p>
-            <p class="w-[20%] text-center">Date</p>
-            <p class="w-[25%] text-center">Order ID</p>
-            <p class="w-[20%] text-center">Status</p>
-            <p class="w-[25%] text-center">Actions</p>
+            <!-- Header Box -->
+            <div class="flex justify-between bg-[#222] p-4 rounded-lg mb-3 font-bold text-[#ffc335]">
+                <p class="w-[10%] text-center">#</p>
+                <p class="w-[20%] text-center">Date</p>
+                <p class="w-[25%] text-center">Order ID</p>
+                <p class="w-[20%] text-center">Status</p>
+                <p class="w-[25%] text-center">Actions</p>
+            </div>
+
+            <!-- Orders Container -->
+            <div id="orders-container"></div>
+
+            <!-- Pagination -->
+            <div id="pagination" class="flex justify-center mt-5 gap-2"></div>
         </div>
 
-        <!-- Orders Container -->
-        <div id="orders-container"></div>
+    </main>
+    <!-- garph========================== -->
 
-        <!-- Pagination -->
-        <div id="pagination" class="flex justify-center mt-5 gap-2"></div>
-    </div>
+    <script src="/js/index.js"></script>
+    <script src="/js/history.js"></script>
 
+</body>
 
-
-</main>
-<!-- garph========================== -->
+</html>

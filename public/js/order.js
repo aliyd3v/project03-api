@@ -25,7 +25,7 @@ function checkAllChecked() {
     }
 }
 
-// Checkboxlarni yuklash funksiyasi
+// Getting checkboxes function.
 function loadCheckboxes(data) {
     const list = document.getElementById("checkbox-list");
     list.innerHTML = ""; // Oldingi ma'lumotlarni tozalash
@@ -52,12 +52,12 @@ function loadCheckboxes(data) {
     document.getElementById("total-price").innerText = data.totalPrice;
 }
 
-// "Done" tugmasi bosilganda
+// "Done" tugmasi bosilganda.
 document.getElementById("done").addEventListener("click", () => {
     alert(`Buyurtma qabul qilindi. Umumiy narx: ${backendData.totalPrice} so'm. Rahmat!`);
 });
 
-// Ma'lumotlarni yuklaymiz
+// Getting data.
 loadCheckboxes(backendData);
 checkAllChecked(); // Boshlang'ich tugma holatini o'rnatish
 

@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
-    
-    // Modalni boshqarish funksiyalari
+
+    // Modal function.
     function openModal(modalId) {
         const modal = document.querySelector(modalId);
         if (modal) modal.style.display = "grid";
@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (modal) modal.style.display = "none";
     }
 
-    // Kategoriyalarni yaratish funksiyasi
+    // Category create function.
     function createProduct(array) {
         const productContainer = document.querySelector("#pruduct-container");
         const categoryCount = document.querySelector("#cotygory-length");
@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Kategoriyalarni yuklash funksiyasi
+    // Get categories function.
     function getCategories() {
         fetch('/categories')
             .then(response => response.json())
@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
             .catch(error => console.error("Xatolik:", error));
     }
 
-    // Kategoriya o'chirish funksiyasi
+    // Delete category function.
     function deleteCategory(id) {
         const token = localStorage.getItem("token");
 
@@ -124,7 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
     }
 
-    // Kategoriya tahrirlash funksiyasi
+    // Edit category function.
     function editCategory(id, updatedData) {
         const token = localStorage.getItem("token");
 
@@ -168,7 +168,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
     }
 
-    // Add va Delete modallarni boshqarish
+    // Add va Delete control.
     document.addEventListener("click", event => {
         // Modal ochish
         if (event.target.closest("#openAdd")) openModal("#cotigory-add");
@@ -187,7 +187,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
 
-        // Kategoriya tahrirlash
+        // Category edit.
         if (event.target.closest(".edit-cotigory")) {
             const parentElement = event.target.closest(".w-full");
             const selectedId = parentElement?.getAttribute("data-id");
@@ -200,7 +200,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             const category = response.data.category;
                             document.querySelector("#edit_en_name").value = category.en_name;
                             document.querySelector("#edit_ru_name").value = category.ru_name;
-                            
+
                             openModal("#cotigory-edit");
                             document.querySelector("#edit-form").setAttribute("data-id", selectedId);
                         }
@@ -219,7 +219,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            const updatedData = { en_name: enName, ru_name: ruName, image_name:imgEdit };
+            const updatedData = { en_name: enName, ru_name: ruName, image_name: imgEdit };
             editCategory(selectedId, updatedData);
             closeModal("#cotigory-edit");
         }
@@ -232,7 +232,7 @@ document.addEventListener("DOMContentLoaded", () => {
         cotigoryAddSection.style.display = "grid";
     });
 
-    // Kategoriya qo'shish
+    // Create category.
     const formData = document.querySelector("#formData");
 
     formData?.addEventListener("submit", (e) => {
@@ -298,6 +298,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
     });
 
-    // Kategoriyalarni yuklashni boshlash
+    // Start get category.
     getCategories();
 });
