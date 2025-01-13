@@ -16,7 +16,7 @@ home.addEventListener("click", () => {
 
 let products = document.querySelector("#products")
 products.addEventListener("click", () => {
-    window.location.href = "/product"
+    window.location.href = "/meal"
 })
 
 let category = document.querySelector("#category")
@@ -33,3 +33,18 @@ let order = document.querySelector("#order")
 order.addEventListener("click", () => {
     window.location.href = "/order"
 })
+
+let containerLoad = document.querySelector(".container-loader");
+
+window.onload = function() {
+    loading();
+};
+
+function loading() {
+   
+    containerLoad.style.display = "grid";
+
+    setTimeout(function() {
+        containerLoad.style.display = "none";
+    }, 3000);
+}

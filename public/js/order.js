@@ -60,9 +60,3 @@ document.getElementById("done").addEventListener("click", () => {
 // Getting data.
 loadCheckboxes(backendData);
 checkAllChecked(); // Boshlang'ich tugma holatini o'rnatish
-
-
-
-// =====
-
-
