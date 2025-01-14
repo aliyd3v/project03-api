@@ -1,4 +1,5 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model, plugin } = require("mongoose");
+const mongoosePaginate = require('mongoose-paginate-v2')
 
 const categorySchema = new Schema({
     en_name: String,
@@ -10,5 +11,7 @@ const categorySchema = new Schema({
         ref: 'Meal'
     }]
 })
+
+categorySchema.plugin(mongoosePaginate)
 
 exports.Category = model('Category', categorySchema)

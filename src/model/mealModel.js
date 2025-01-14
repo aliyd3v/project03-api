@@ -1,4 +1,5 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model, plugin } = require("mongoose");
+const mongoosePaginate = reqire('mongoose-paginate-v2')
 
 const mealSchema = new Schema({
     en_name: String,
@@ -13,5 +14,7 @@ const mealSchema = new Schema({
     image_url: String,
     image_name: String
 })
+
+mealSchema.plugin(mongoosePaginate)
 
 exports.Meal = model('Meal', mealSchema)

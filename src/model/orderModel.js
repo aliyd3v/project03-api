@@ -1,4 +1,5 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model, plugin } = require("mongoose");
+const mongoosePaginate = reqire('mongoose-paginate-v2')
 
 const orderSchema = new Schema({
     customer_name: String,
@@ -13,5 +14,7 @@ const orderSchema = new Schema({
         amount: Number
     }]
 }, { timestamps: true })
+
+orderSchema.plugin(mongoosePaginate)
 
 exports.Order = model('Order', orderSchema)
