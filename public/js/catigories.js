@@ -184,16 +184,17 @@ document.addEventListener("DOMContentLoaded", () => {
             if (deleteModal && selectedId) {
                 deleteModal.setAttribute("data-selected-id", selectedId);
                 openModal("#cotigory-del");
-                getId(selectedId)
             }
         }
 
         if (event.target.closest("#del-pruduct")) {
-            const selectedId = document.querySelector("#cotigory-del").getAttribute("data-id");
-            console.log(selectedId)
-            deleteCategory(selectedId)
+            const deleteModal = document.querySelector("#cotigory-del");
+            const selectedId = deleteModal?.getAttribute("data-selected-id");
 
-            closeModal("#cotigory-del");
+            if (selectedId) {
+                deleteCategory(selectedId)
+                closeModal("#cotigory-del")
+            }
         }
 
         if (event.target.closest("#edit-submit")) {
