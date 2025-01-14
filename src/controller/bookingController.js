@@ -103,7 +103,7 @@ exports.checkBookingForAvailability = async (req, res) => {
     const { query: { date, time_start, time_end } } = req
     try {
         // Checking data and time to valid.
-        if (!date, !time_start, !time_end || time_start < time_end) {
+        if (!date, !time_start, !time_end || time_start > time_end) {
             return res.status(400).send({
                 success: false,
                 data: null,
