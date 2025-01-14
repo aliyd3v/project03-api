@@ -124,7 +124,6 @@
         </div>
         <!-- ===============================Cotigories=====================  -->
 
-
         <div class=" w-full ">
             <div class="bg-main-bg p-5 items-center flex justify-between w-full h-20 rounded-xl mb-5">
                 <p class="text-white font-bold  text-2xl">Cotigories: <span id="cotygory-length"></span></p>
@@ -140,56 +139,7 @@
 
             <div id="pruduct-container"
                 class="flex  flex-col bg-main-bg w-[100%] py-6 px-5 rounded-xl gap-5 list-none   overflow-x-scroll cotigories-container">
-
-
-
-                <!-- salad box -->
-                {{!-- <div class="w-full
-                
-                 h-40
-                 rounded-xl
-                 flex
-                 items-center
-                 justify-between
-                p-4
-              
-                 bg-black">
-
-
-                    <div class="flex items-center">
-                        <div class="w-32 h-32 rounded-full overflow-hidden">
-                            <img class="w-full h-full" src="" alt="Mahsulot rasm">
-                        </div>
-
-
-                        <div class="w-[300px]">
-                            <h1 class="text-white text-3xl ">${item.name}</h1>
-                            <p class="text-[#999] text-xl">Maxsulotlar: ${item.meals.length}</p>
-                        </div>
-
-
-                    </div>
-
-                    <div class="flex gap-3 ">
-                        <div class="button bg-green-600 edit-cotigory">
-                            <div class="button-wrapper">
-                                <div class="text">Edit</div>
-                                <span class="icon"><i class="fa-solid fa-pen"></i></span>
-                            </div>
-                        </div>
-                        <div class="button bg-red-600 del-cotigory">
-                            <div class="button-wrapper ">
-                                <div class="text">Del</div>
-                                <span class="icon"><i class="fa-solid fa-trash"></i></span>
-                            </div>
-                        </div>
-                    </div>
-
-                </div> --}}
-                <!-- Salad end -->
-
             </div>
-
     </main>
 
     <!-- EDIT -->
@@ -220,8 +170,6 @@
                     </div>
                 </label>
 
-
-
                 <div class="flex gap-3 mt-4">
                     <button type="button" id="edit-submit" class="button bg-green-600">
                         <div class="button-wrapper ">
@@ -230,13 +178,10 @@
                         </div>
                     </button>
 
-                    <div id="closeEdit"
+                    <button id="closeEdit" type="button"
                         class="button border border-[#333] text-[#333] !duration-500  hover:border-white hover:text-white">
-
                         <div class=" block mt-1  font-bold">close</div>
-
-
-                    </div>
+                    </button>
 
                 </div>
             </form>
@@ -269,14 +214,12 @@
                     </div>
                 </label>
 
-
-
                 <div class="flex gap-3 mt-4">
                     <div class="button bg-green-600" id="confirmAdd">
-                        <div type="submit" class="button-wrapper ">
+                        <button type="submit" class="button-wrapper ">
                             <div class="text">Add</div>
                             <span class="icon"><i class="fa-solid fa-plus"></i></span>
-                        </div>
+                        </button>
                     </div>
 
                     <div id="closeAdd"
@@ -308,7 +251,6 @@
                     sure</button>
                 <button id="del-canceling" class="py-2 px-4 mx-2 inline-block border rounded-lg text-p-color">No,
                     cencel</button>
-
             </div>
         </div>
     </div>

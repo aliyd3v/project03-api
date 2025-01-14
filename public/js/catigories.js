@@ -57,15 +57,15 @@ document.addEventListener("DOMContentLoaded", () => {
                             <div class="text">Edit</div>
                             <span class="icon"><i class="fa-solid fa-pen"></i></span>
                         </div>
-                    </div>
-                    <div class="button bg-red-600 del-cotigory">
-                        <div class="button-wrapper">
-                            <div class="text">Del</div>
-                            <span class="icon"><i class="fa-solid fa-trash"></i></span>
                         </div>
-                    </div>
-                </div>
-            `;
+                        <div class="button bg-red-600 del-cotigory">
+                        <div class="button-wrapper">
+                        <div class="text">Del</div>
+                        <span class="icon"><i class="fa-solid fa-trash"></i></span>
+                        </div>
+                        </div>
+                        </div>
+                        `;
             productContainer.appendChild(product);
         });
     }
@@ -187,7 +187,28 @@ document.addEventListener("DOMContentLoaded", () => {
                 getId(selectedId)
             }
         }
-        // deleteCategory(selectedId) delete category function
+
+        if (event.target.closest("#del-pruduct")) {
+            const selectedId = document.querySelector("#cotigory-del").getAttribute("data-id");
+            console.log(selectedId)
+            deleteCategory(selectedId)
+
+            closeModal("#cotigory-del");
+        }
+
+        if (event.target.closest("#edit-submit")) {
+            const enName = document.querySelector("#edit_en_name").value.trim();
+            const ruName = document.querySelector("#edit_ru_name").value.trim();
+            const imgEdit = document.querySelector(".preview-image")
+
+            if (!enName || !ruName || !imgEdit) {
+                alert("Iltimos, barcha maydonlarni to'ldiring!");
+                return;
+            }
+
+            const updatedData = { en_name: enName, ru_name: ruName, image_name: imgEdit };
+            editCategory(selectedId, updatedData);
+        }
 
         // Get category data for edit.
         if (event.target.closest(".edit-cotigory")) {
@@ -225,11 +246,11 @@ document.addEventListener("DOMContentLoaded", () => {
             editCategory(selectedId, updatedData);
             closeModal("#cotigory-edit");
         }
+
+        if (event.target.closest("#closeEdit")) {
+            closeModal("#cotigory-edit");
+        }
     });
-    let confirmDel=document.querySelector(".del-pruduct")
-    confirmDel.addEventListener("click",getId())
-
-
 
     const addButton = document.querySelector("#add-btn");
     const cotigoryAddSection = document.querySelector("#cotigory-add");
