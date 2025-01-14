@@ -1,5 +1,5 @@
 const { Schema, model, plugin } = require("mongoose");
-const mongoosePaginate = reqire('mongoose-paginate-v2')
+const mongoosePaginate = require('mongoose-paginate-v2')
 
 const orderSchema = new Schema({
     customer_name: String,
