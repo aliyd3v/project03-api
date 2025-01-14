@@ -624,7 +624,7 @@ input[type=number]::-webkit-outer-spin-button{
   z-index: 10;
   display: grid;
   place-items: center;
-  display: none;
+  display: grid;
 
 }
 @keyframes l1 {to{transform: rotate(.5turn)}}

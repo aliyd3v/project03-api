@@ -60,3 +60,12 @@ document.getElementById("done").addEventListener("click", () => {
 // Getting data.
 loadCheckboxes(backendData);
 checkAllChecked(); // Boshlang'ich tugma holatini o'rnatish
+
+// Loader closer.
+let containerLoad = document.querySelector(".container-loader");
+window.onload = function () {
+    loading();
+};
+function loading() {
+    containerLoad.style.display = "none";
+}
