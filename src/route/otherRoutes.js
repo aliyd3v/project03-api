@@ -16,6 +16,7 @@ const { deleteAllOrders } = require('../controller/orderController')
 const { deleteManyStols } = require('../controller/stolController')
 const { deleteManyMeals } = require('../controller/mealController')
 const { deleteAllHistory } = require('../controller/historyController')
+const { badRequest } = require('../controller/badRequestPage')
 
 const router = require('express').Router()
 
@@ -39,6 +40,9 @@ router
     .get('/search/meal', checkSchema(searchMealsValidatorSchema), searchingMeals)
     .get('/search/search', jwtAccessMiddleware, checkSchema(searchCustomerValidatorSchema), searchCustomer)
 
+    // Bad request message.
+    .get('/bad-request', badRequest)
+    
     // Direct not found message.
     .use(directNotFound)
 

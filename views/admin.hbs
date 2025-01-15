@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div div {
+            background-color: palegreen;
+            justify-content: center;
+            height: 50px;
+            font-size: x-large;
+            text-align: center;
+            width: 150px;
+        }
+    </style>
+</head>
+<div id="list"></div>
+
+<body>
+    <script>
+        let token = localStorage.getItem('token')
+        let list = document.querySelector('#list')
+        list.innerHTML = ''
+        fetch('/admins', {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
+            .then(response => response.json())
+            .then(response => {
+                if (response.success) {
+                    response.data.admins.forEach(admin => {
+                        let qator = document.createElement('div')
+                        qator.innerHTML = `<p> ${admin.username} </p>`
+                        list.appendChild(qator)
+                    })
+                }
+                else {
+                    alert('Failed fetch!')
+                }
+            })
+    </script>
+</body>
+
+</html>
