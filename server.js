@@ -27,7 +27,7 @@ app.set('view engine', 'hbs')
 app.use(express.json())
 
 // Setup security tools.
-// app.use(cors())
+app.use(cors())
 // app.use(helmet())
 
 // Router setup.
