@@ -7,6 +7,7 @@ const historyRouter = require("./historyRouter")
 const mealRouter = require("./mealRouter")
 const orderRouter = require("./orderRouter")
 const stolRouter = require("./stolRouter")
+const otherRoutes = require('./otherRoutes')
 
 exports.appRouter = (app) => {
     app.use('/', rootRouter)
@@ -18,4 +19,5 @@ exports.appRouter = (app) => {
     app.use('/', mealRouter)
     app.use('/', orderRouter)
     app.use('/', stolRouter)
+    app.use('/', otherRoutes)
 }

@@ -127,7 +127,7 @@ exports.checkBookingForAvailability = async (req, res) => {
                 const requestingTimeStart = new Date(`${date} ${time_start}`)
                 const requestingTimeEnd = new Date(`${date} ${time_end}`)
                 if (requestingTimeStart < existingTimeEnd && requestingTimeEnd > existingTimeStart) {
-                    let indexBooking = availableStols.findIndex(booking.stol.number)
+                    let indexBooking = availableStols.indexOf(booking.stol.number)
                     availableStols.splice(indexBooking, 1)
                 }
             }
