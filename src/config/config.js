@@ -32,3 +32,6 @@ exports.telegramChannelEn = process.env.TG_CHANNEL_EN
 
 // Russian telegram channel username.
 exports.telegramChannelRu = process.env.TG_CHANNEL_RU
+
+// Salt for crypto.
+exports.salt = process.env.SCRYPT_SALT

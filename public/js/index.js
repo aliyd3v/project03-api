@@ -1,5 +1,20 @@
 const token = localStorage.getItem('token')
 if (!token) window.location.href = '/login'
+fetch('/checking/token', {
+    headers: { 'Authorization': `Bearer ${token}` }
+})
+    .then(response => response.json())
+    .then(response => {
+        if (!response.success) {
+            localStorage.removeItem('token')
+            alert("Login failed: " + response.error.message)
+            return window.location.href = "/login"
+        }
+    })
+    .catch(error => {
+        alert("Error: " + error.message);
+    })
+
 
 let logOut = document.getElementById("logout")
 

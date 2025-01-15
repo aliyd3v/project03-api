@@ -3,6 +3,7 @@ const { validationController } = require('./validationController')
 const { errorHandling } = require('./errorController')
 const { jwtSecretKey } = require('../config/config')
 const { Admin } = require('../model/userModel')
+const { scryptVerify } = require('../helper/crypto')
 
 const tokenGenerate = (id) => {
     const payload = {
@@ -39,7 +40,7 @@ exports.login = async (req, res) => {
             })
         }
 
-        // Checking user and password to valid.
+        // Checking user for existence.
         const user = await Admin.findOne({ username: data.username })
         if (!user) {
             // Responding.
@@ -49,7 +50,11 @@ exports.login = async (req, res) => {
                 error: { message: `Admin not found with username "${data.username}".` }
             })
         }
-        if (user.password !== data.password) {
+
+        // Verify password.
+        const verify = await scryptVerify(data.password, user.password)
+
+        if (!verify) {
             // Responding.
             return res.status(403).send({
                 success: false,

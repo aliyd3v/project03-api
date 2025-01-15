@@ -21,6 +21,9 @@ const router = require('express').Router()
 
 router
 
+    // Checking token to valid.
+    .get('/checking/token', jwtAccessMiddleware, (req, res) => res.status(200).send({ success: true, error: false, data: { message: "Token is valid." } }))
+
     // Customer cabinet route.
     .post('/cabinet/create-verify', checkSchema(createVerifyTokenForGetAllBookingsOrdersValidationSchema), createVerifyForGetAllBookingAndOrder)
     .post('/cabinet/cancel-booking/:id', checkSchema(queryEmailValidationSchema), cancelBookingForCustomer)

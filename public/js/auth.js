@@ -1,6 +1,23 @@
 // Checking token for exitstence.
 let token = localStorage.getItem('token')
-if (token) window.location.href = "/"
+if (token) {
+    fetch('/checking/token', {
+        headers: { 'Authorization': `Bearer ${token}` }
+    })
+        .then(response => response.json())
+        .then(response => {
+            if (response.success) {
+                return window.location.href = "/"
+            } else {
+                localStorage.removeItem('token')
+                alert("Login failed: " + response.error.message)
+                return window.location.href = "/login"
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error.message);
+        })
+}
 
 let form = document.getElementById("form");
 
