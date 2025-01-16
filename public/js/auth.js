@@ -14,7 +14,7 @@ if (token) {
             }
         })
         .catch(error => {
-            alert("Error: " + error.message);
+            console.log("Error: " + error.message);
         })
 }
 
@@ -48,6 +48,6 @@ function logIn(username, password) {
             }
         })
         .catch(error => {
-            alert("Error: " + error.message);
+            console.log("Error: " + error.message);
         });
 }

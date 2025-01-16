@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             })
             .catch(error => {
-                alert("Xatolik: " + error.message);
+                console("Xatolik: " + error.message);
             });
     }
 
@@ -164,7 +164,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             })
             .catch(error => {
-                alert("Xatolik: " + error.message);
+                console("Xatolik: " + error.message);
             });
     }
 
@@ -322,7 +322,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             })
             .catch((error) => {
-                alert("Xatolik: " + error.message);
+                console("Xatolik: " + error.message);
             });
     });
 
