@@ -13,7 +13,7 @@ function checkingToken(token) {
             }
         })
         .catch(error => {
-            console("Error: " + error.message);
+            console.log("Error: " + error.message);
         })
 }
 checkingToken(token)
