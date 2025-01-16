@@ -10,7 +10,6 @@ if (token) {
                 return window.location.href = "/"
             } else {
                 localStorage.removeItem('token')
-                alert("Login failed: " + response.error.message)
                 return window.location.href = "/login"
             }
         })
