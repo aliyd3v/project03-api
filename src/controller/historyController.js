@@ -39,6 +39,17 @@ exports.getAllHistory = async (req, res) => {
     }
 }
 
+exports.getOrderHistory = async (req, res) => {
+    try {
+        
+    }
+
+    // Error handling.
+    catch (error) {
+        errorHandling(error, res)
+    }
+}
+
 exports.deleteAllHistory = async (req, res) => {
     try {
         // Deleting all orders with status "Delivered" and deactivated bookings.

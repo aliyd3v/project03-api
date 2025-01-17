@@ -11,6 +11,12 @@ function toggleDetails(element) {
 }
 
 
+function getHistory(page, limit) {
+    fetch(`/histories/?page=${page}&limit=${limit}`, {
+        method: "GET",
+        headers: { "Authorization": `Bearer ${localStorage.getItem('token')}` }
+    })
+}
 
 // Example orders data
 const orders = Array.from({ length: 100 }, (_, index) => ({

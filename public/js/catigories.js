@@ -201,12 +201,14 @@ document.addEventListener("DOMContentLoaded", () => {
             const enName = document.querySelector("#edit_en_name").value.trim();
             const ruName = document.querySelector("#edit_ru_name").value.trim();
             const imgEdit = document.querySelector(".preview-image")
+            const selectedId = document.querySelector("#edit-form").getAttribute("data-id")
 
             if (!enName || !ruName || !imgEdit) {
                 alert("Iltimos, barcha maydonlarni to'ldiring!");
                 return;
             }
 
+            console.log(selectedId)  // Fix thissssss! ----------------------------------------------,,,,,,,,,,,,,,
             const updatedData = { en_name: enName, ru_name: ruName, image_name: imgEdit };
             editCategory(selectedId, updatedData);
         }

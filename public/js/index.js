@@ -50,3 +50,8 @@ let order = document.querySelector("#order")
 order.addEventListener("click", () => {
     window.location.href = "/order"
 })
+
+let admin = document.querySelector("#admin")
+order.addEventListener("click", () => {
+    window.location.href = "/admin"
+})

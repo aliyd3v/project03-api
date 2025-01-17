@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Categories</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -75,10 +75,10 @@
             </div>
             <!-- =========================================menu-Cotigoris=============================== -->
 
-            <div id="home" class="w-[300px] bg-[#111] py-3 px-5 rounded-xl ml-3  cursor-pointer">
+            <div id="home"
+                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500   hover:-ml-3 ">
                 <div class="h-9 w-full flex items-center gap-4">
-                    <i class="fa-solid fa-house text-xl text-[#ffc355] "></i> <a href="/"
-                        class="text-[#ffc335]">Home</a>
+                    <i class="fa-solid fa-house text-xl text-white "></i> <a href="/" class="text-white">Home</a>
                 </div>
             </div>
             <!-- =000 -->
@@ -106,11 +106,18 @@
             </div>
             <!-- ==== -->
             <!-- ==== -->
-            <div id="category"
+            <div id="category" class="w-[300px] bg-[#111] py-3 px-5 rounded-xl ml-3  cursor-pointer">
+                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+                    <i class="fa-solid fa-layer-group text-xl text-[#ffc355]"></i>
+                    <a href="/category" class="text-[#ffc355]">Categories</a>
+                </div>
+            </div>
+            <!-- ==== -->
+            <div id="admin"
                 class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500   hover:-ml-3 ">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
-                    <i class="fa-solid fa-layer-group text-xl text-white"></i>
-                    <a href="/category" class="text-white">Categories</a>
+                    <i class="fa-solid fa-users text-xl text-white"></i>
+                    <a href="/admin" class="text-white">Admins</a>
                 </div>
             </div>
             <!-- ==== -->
@@ -126,7 +133,7 @@
 
         <div class=" w-full ">
             <div class="bg-main-bg p-5 items-center flex justify-between w-full h-20 rounded-xl mb-5">
-                <p class="text-white font-bold  text-2xl">Cotigories: <span id="cotygory-length"></span></p>
+                <p class="text-white font-bold  text-2xl">Categories: <span id="cotygory-length"></span></p>
                 <div class="">
                     <div id="add-btn" class="button bg-green-600">
                         <div class="button-wrapper catygoryAddBtn">
@@ -150,7 +157,7 @@
 
                 <label class="my-4 block" for="">
                     <h1 class="text-white">Edit</h1>
-                    <h4 class="text-white text-xl"><span class="text-text-color  text-xl">*</span>Cotigory Name</h4>
+                    <h4 class="text-white text-xl"><span class="text-text-color  text-xl">*</span>Category Name</h4>
                     <div class="flex mt-2 items-center">
                         <img src="/img/flags'/uzbekistan_square_icon_64.png" class="h-7" alt="">
                         <input type="text" id="edit_en_name">
@@ -194,7 +201,7 @@
             <form id="formData" class="formField" enctype="multipart/form-data">
 
                 <label class="my-4 block" for="">
-                    <h4 class="text-white text-xl"><span class="text-text-color  text-xl">*</span>Cotigory Name</h4>
+                    <h4 class="text-white text-xl"><span class="text-text-color  text-xl">*</span>Category Name</h4>
                     <div class="flex mt-2 items-center">
                         <img src="/img/flags'/uzbekistan_square_icon_64.png" class="h-7" alt="">
                         <input id="add_en_name" name="en_name" type="text">

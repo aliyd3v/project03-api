@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Meals</title>
   <link rel="stylesheet" href="/src/output.css">
   <link rel="stylesheet" href="/src/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
@@ -75,9 +75,9 @@
       </div>
       <!-- =========================================menu-Cotigoris=============================== -->
       <!-- =========================================menu-Cotigoris=============================== -->
-      <div id="home" class="w-[300px] bg-[#111] py-3 px-5 rounded-xl ml-3  cursor-pointer">
+      <div id="home" class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500   hover:-ml-3 ">
         <div class="h-9 w-full flex items-center gap-4">
-          <i class="fa-solid fa-house text-xl text-[#ffc355] "></i> <a href="/" class="text-[#ffc335]">Home</a>
+          <i class="fa-solid fa-house text-xl text-white "></i> <a href="/" class="text-white">Home</a>
         </div>
       </div>
       <!-- =000 -->
@@ -96,19 +96,25 @@
       </div>
 
       <!-- ==== -->
-      <div id="products"
-        class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500   hover:-ml-3 ">
+      <div id="products" class="w-[300px] bg-[#111] py-3 px-5 rounded-xl ml-3  cursor-pointer">
         <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
-          <i class="fa-solid fa-folder-open  text-white"></i> <a href="/meal" class="text-white">Pruducts</a>
+          <i class="fa-solid fa-folder-open  text-[#ffc355]"></i> <a href="/meal" class="text-[#ffc355]">Pruducts</a>
         </div>
       </div>
       <!-- ==== -->
       <!-- ==== -->
-      <div id="cotigories"
+      <div id="category"
         class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500   hover:-ml-3 ">
         <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
           <i class="fa-solid fa-layer-group text-xl text-white"></i>
           <a href="/category" class="text-white">Categories</a>
+        </div>
+      </div>
+      <!-- ==== -->
+      <div id="admin" class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500   hover:-ml-3 ">
+        <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+          <i class="fa-solid fa-users text-xl text-white"></i>
+          <a href="/admin" class="text-white">Admins</a>
         </div>
       </div>
       <!-- ==== -->
@@ -124,7 +130,7 @@
     <div class="">
 
       <div class=" w-[11 00px]">
-        <h1 class="text-white text-xl mb-3">Cotigories <span class="text-text-color">*</span></h1>
+        <h1 class="text-white text-xl mb-3">Categories <span class="text-text-color">*</span></h1>
         <div class="flex  bg-main-bg w-[100%] py-6 px-5 rounded-xl gap-4    overflow-x-scroll">
 
           <!-- salad box -->
@@ -312,7 +318,7 @@
                 type="number">
             </label>
             <label class="my-4 block">
-              <h4 class="text-white text-xl"><span class="text-text-color text-xl ">*</span>Cotigories</h4>
+              <h4 class="text-white text-xl"><span class="text-text-color text-xl ">*</span>Categories</h4>
               <select class="w-[80%]" name="" id="select-cotigories">
                 <option value="" class="mt-6">saload</option>
                 <option value="">shashlik</option>

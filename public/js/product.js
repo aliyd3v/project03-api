@@ -38,7 +38,6 @@ function fetchData() {
   fetch('/meals')
     .then((response) => response.json())
     .then((data) => {
-      console.log("Fetched data:", data);
       const meals = data.data.meals;
       if (Array.isArray(meals)) {
         displayItemsFromAPI(meals);
@@ -56,25 +55,25 @@ function displayItemsFromAPI(meals) {
       (item) => `
       <div style="margin-top:20px;" class="bg-main-bg flex items-center justify-around mt-6 w-full h-60 rounded-xl mx-auto sm:mr-0 group cursor-pointer lg:mx-auto transition-all duration-500">
         <div class="rounded-xl">
-          <img src="${item.image_url}" alt="${item.en_name}" class="w-full h-52 aspect-square object-cover">
+        <img src="${item.image_url}" alt="${item.en_name}" class="w-full h-52 aspect-square object-cover">
         </div>
         <div class="w-[70%] h-52">
-          <div class="flex items-center justify-between">
-            <h6 class="font-semibold text-xl leading-8 text-white transition-all duration-500 group-hover:text-indigo-600">
-              ${item.en_name}
-            </h6>
-            <h6 class="font-semibold text-xl leading-8 text-indigo-600">
-              $${item.price}
-            </h6>
-          </div>
-          <div class="mt-3">
-            <ul class="list-none overflow-scroll h-32 w-[300px]">
-              <li class="mt-2 font-normal text-sm leading-6 text-gray-500">${item.en_description}</li>
-            </ul>
-          </div>
-          <div class="flex gap-3 ml-[600px]">
-            <div class="button bg-green-600" data-id="${item._id}">
-              <div class="button-wrapper">
+        <div class="flex items-center justify-between">
+        <h6 class="font-semibold text-xl leading-8 text-white transition-all duration-500 group-hover:text-indigo-600">
+        ${item.en_name}
+        </h6>
+        <h6 class="font-semibold text-xl leading-8 text-indigo-600">
+        $${item.price}
+        </h6>
+        </div>
+        <div class="mt-3">
+        <ul class="list-none overflow-scroll h-32 w-[300px]">
+        <li class="mt-2 font-normal text-sm leading-6 text-gray-500">${item.en_description}</li>
+        </ul>
+        </div>
+        <div class="flex gap-3 ml-[600px]">
+        <div class="button bg-green-600" data-id="${item._id}">
+        <div class="button-wrapper">
                 <div class="text">Edit</div>
                 <span class="icon"><i class="fa-solid fa-pen"></i></span>
               </div>
@@ -83,12 +82,12 @@ function displayItemsFromAPI(meals) {
               <div class="button-wrapper">
                 <div class="text">Del</div>
                 <span class="icon"><i class="fa-solid fa-trash"></i></span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    `
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                `
     )
     .join("");  // Join all the items into a single string to be injected into the container
 }
@@ -172,10 +171,10 @@ function editItem(itemId) {
     .catch((error) => console.error("Error updating item:", error));
 }
 
-let containerLoad = document.querySelector(".container-loader");
 window.onload = function () {
-    loading();
+  loading();
 };
 function loading() {
-    containerLoad.style.display = "none";
+  let containerLoad = document.querySelector(".container-loader");
+  containerLoad.style.display = "none";
 }
