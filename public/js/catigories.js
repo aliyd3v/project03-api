@@ -143,7 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         text: "Kategoriya muvaffaqiyatli tahrirlandi!",
                         duration: 3000,
                         style: {
-                            background: "linear-gradient(to right,rgb(5, 5, 5), #96c93d)",
+                            background: "linear-gradient(to right, #ff5f6d, #96c93d)",
                             color: "#fff",
                             fontWeight: "bold",
                         },
@@ -218,29 +218,11 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
 
-        // if (event.target.closest("#edit-submit")) {
-        //     const selectedId = document.querySelector("#edit-form").getAttribute("data-id");
-        //     const enName = document.querySelector("#edit_en_name").value.trim();
-        //     const ruName = document.querySelector("#edit_ru_name").value.trim();
-        //     const imgEdit = document.querySelector(".preview-image")
-
-        //     if (!enName || !ruName || !imgEdit) {
-        //         alert("Iltimos, barcha maydonlarni to'ldiring!");
-        //         return;
-        //     }
-
-        //     const updatedData = { en_name: enName, ru_name: ruName, image_name: imgEdit };
-        //     editCategory(selectedId, updatedData);
-        //     closeModal("#cotigory-edit");
-        // }
-
         if (event.target.closest("#edit-submit")) {
             const enName = document.querySelector("#edit_en_name").value.trim();
             const ruName = document.querySelector("#edit_ru_name").value.trim();
             const imgEdit = document.querySelector(".preview-image")
             const selectedId = document.querySelector("#edit-form").getAttribute("data-id")
-
-            console.log(imgEdit)
 
             if (!enName || !ruName || !imgEdit) {
                 alert("Iltimos, barcha maydonlarni to'ldiring!");

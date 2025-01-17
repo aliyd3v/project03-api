@@ -1,13 +1,15 @@
+const token = localStorage.getItem('token')
 
-
-fetch('/admins', {
-    method: "GET",
-    headers: { "Authorization": `Bearer ${localStorage.getItem('token')}` }
-})
-    .then(response => response.json())
-    .then(response => {
-        console.log(response)
+function getAdmins() {
+    fetch('/admins', {
+        method: "GET",
+        headers: { "Authorization": `Bearer ${token}` }
     })
+        .then(response => response.json())
+        .then(response => {
+            console.log(response)
+        })
+}
 
 window.onload = function () {
     loading();
