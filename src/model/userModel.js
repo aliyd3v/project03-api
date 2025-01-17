@@ -3,7 +3,13 @@ const mongoosePaginate = require('mongoose-paginate-v2')
 
 const adminSchema = new Schema({
     username: String,
-    password: String
+    password: String,
+    email: String,
+    phone: String,
+    role: {
+        type: String,
+        enum: ['SUPERUSER', 'ADMIN'],
+    }
 })
 
 adminSchema.plugin(mongoosePaginate)

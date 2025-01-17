@@ -24,5 +24,23 @@ exports.createAdminValidationSchema = {
             options: { min: 4 },
             errorMessage: "Password must be at least 4 characters long!"
         }
-    }
+    },
+    email: {
+        notEmpty: {
+            errorMessage: 'Email is required!',
+        },
+        isEmail: {
+            errorMessage: 'Email is not valid!',
+        },
+        normalizeEmail: true,
+    },
+    phone: {
+        notEmpty: {
+            errorMessage: 'Phone number is required!',
+        },
+        matches: {
+            options: [/^(\+998|998|0)?[3-9]\d{8}$/],
+            errorMessage: 'Phone number is not valid!',
+        },
+    },
 }
