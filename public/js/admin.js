@@ -1,6 +1,6 @@
-const token = localStorage.getItem('token')
 
-function getAdmins() {
+(function getAdmins() {
+    let token = localStorage.getItem('token')
     fetch('/admins', {
         method: "GET",
         headers: { "Authorization": `Bearer ${token}` }
@@ -9,7 +9,7 @@ function getAdmins() {
         .then(response => {
             console.log(response)
         })
-}
+})()
 
 window.onload = function () {
     loading();
