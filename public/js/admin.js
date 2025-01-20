@@ -1,5 +1,5 @@
 
-(function getAdmins() {
+function getAdmins() {
     let token = localStorage.getItem('token')
     fetch('/admins', {
         method: "GET",
@@ -9,7 +9,8 @@
         .then(response => {
             console.log(response)
         })
-})()
+}
+getAdmins()
 
 window.onload = function () {
     loading();
