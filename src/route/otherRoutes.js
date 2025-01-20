@@ -21,10 +21,6 @@ const { badRequest } = require('../controller/badRequestPage')
 const router = require('express').Router()
 
 router
-
-    // Checking token to valid.
-    .get('/checking/token', jwtAccessMiddleware, (req, res) => res.status(200).send({ success: true, error: false, data: { message: "Token is valid." } }))
-
     // Customer cabinet route.
     .post('/cabinet/create-verify', checkSchema(createVerifyTokenForGetAllBookingsOrdersValidationSchema), createVerifyForGetAllBookingAndOrder)
     .post('/cabinet/cancel-booking/:id', checkSchema(queryEmailValidationSchema), cancelBookingForCustomer)
@@ -42,9 +38,9 @@ router
 
     // Bad request message.
     .get('/bad-request', badRequest)
-    
+
     // Direct not found message.
-    .use(directNotFound)
+    .use(jwtAccessMiddleware, directNotFound)
 
     // For testing.
     .post('/categories/delete-all', jwtAccessMiddleware, deleteAllCategories)

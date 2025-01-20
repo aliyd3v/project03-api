@@ -4,11 +4,15 @@ const { Admin } = require("../model/userModel")
 const { errorHandling } = require("./errorController")
 const { validationController } = require("./validationController")
 
-exports.adminsPage = (req, res) => {
+exports.adminsPage = async (req, res) => {
     try {
+        // Get all admins from database.
+        const admins = await Admin.find()
+        console.log(admins)
+        // Rendering.
         return res.render('admin', {
             layout: false,
-            adminsPage: true
+            admins: admins
         })
     }
 
@@ -49,7 +53,13 @@ exports.adminCreate = async (req, res) => {
         const passwordHash = await scryptHash(data.password, salt)
 
         // Writing new admin to database.
-        await Admin.create({ username: data.username, password: passwordHash })
+        await Admin.create({
+            username: data.username,
+            password: passwordHash,
+            email: data.email,
+            phone: data.phone,
+            role: "ADMIN"
+        })
 
         // Responding.
         return res.status(201).send({

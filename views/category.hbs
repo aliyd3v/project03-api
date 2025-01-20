@@ -74,60 +74,53 @@
                 </a>
             </div>
             <!-- =========================================menu-Cotigoris=============================== -->
-
-            <div id="home"
-                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500   hover:-ml-3 ">
-                <div class="h-9 w-full flex items-center gap-4">
-                    <i class="fa-solid fa-house text-xl text-white "></i> <a href="/" class="text-white">Home</a>
-                </div>
-            </div>
-            <!-- =000 -->
-            <div id="order"
-                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer  duration-500  hover:-ml-3     ">
+            <a href="/" class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
-                    <i class="fa-solid fa-file  text-xl text-white"></i><a href="/order" class="text-white ">Order</a>
+                    <i class="fa-solid fa-home text-white"></i>
+                    <p class="text-white">Home</p>
                 </div>
-            </div>
-            <!--  -->
-            <div id="history"
-                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer  duration-500    hover:-ml-3 ">
+            </a>
+            <a href="/order"
+                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
-                    <i class="fa-solid fa-clock text-xl text-white"></i> <a href="/history"
-                        class="text-white">History</a>
+                    <i class="fa-solid fa-file text-xl text-white"></i>
+                    <p class="text-white">Order</p>
                 </div>
-            </div>
-
-            <!-- ==== -->
-            <div id="products"
+            </a>
+            <a href="/history"
+                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
+                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+                    <i class="fa-solid fa-clock text-xl text-white"></i>
+                    <p class="text-white">History</p>
+                </div>
+            </a>
+            <a href="/meal"
                 class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500   hover:-ml-3 ">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
-                    <i class="fa-solid fa-folder-open  text-white"></i> <a href="/meal" class="text-white">Pruducts</a>
+                    <i class="fa-solid fa-folder-open text-xl text-white"></i>
+                    <p class="text-white">Products</p>
                 </div>
-            </div>
-            <!-- ==== -->
-            <!-- ==== -->
-            <div id="category" class="w-[300px] bg-[#111] py-3 px-5 rounded-xl ml-3  cursor-pointer">
+            </a>
+            <a href="/category" class="w-[300px] bg-[#111] py-3 px-5 rounded-xl ml-3  cursor-pointer">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
                     <i class="fa-solid fa-layer-group text-xl text-[#ffc355]"></i>
-                    <a href="/category" class="text-[#ffc355]">Categories</a>
+                    <p class="text-[#ffc355]">Categories</p>
                 </div>
-            </div>
-            <!-- ==== -->
-            <div id="admin"
-                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500   hover:-ml-3 ">
+            </a>
+            <a href="/admin"
+                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
                     <i class="fa-solid fa-users text-xl text-white"></i>
-                    <a href="/admin" class="text-white">Admins</a>
+                    <p class="text-white">Admins</p>
                 </div>
-            </div>
-            <!-- ==== -->
-            <button id="logout"
-                class="w-[300px] boss bg-red-600 py-3 px-5 rounded-xl cursor-pointer duration-500   hover:-ml-3 ">
+            </a>
+            <a href="/logout"
+                class="w-[300px] boss bg-red-600 py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
                     <i class="fa-solid fa-right-from-bracket text-white"></i>
                     <p class="text-white">Log out</p>
                 </div>
-            </button>
+            </a>
         </div>
         <!-- ===============================Cotigories=====================  -->
 
@@ -198,7 +191,7 @@
     <!-- ADD -->
     <div id="cotigory-add" class="w-screen hidden z-50 h-screen backdrop-blur fixed top-0  place-items-center">
         <div class="bg-main-bg w-[400px] p-4  rounded-xl">
-            <form id="formData" class="formField" enctype="multipart/form-data">
+            <form id="formData" action="/category/create" method="post" class="formField" enctype="multipart/form-data">
 
                 <label class="my-4 block" for="">
                     <h4 class="text-white text-xl"><span class="text-text-color  text-xl">*</span>Category Name</h4>
@@ -264,7 +257,6 @@
 
     <script type="module" src="/js/catigories.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-    <script src="/js/index.js"></script>
 
 </body>
 

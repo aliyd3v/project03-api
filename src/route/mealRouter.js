@@ -8,7 +8,7 @@ const { mealUpdateValidationSchema } = require('../validation/mealUpdateValidati
 const router = require('express').Router()
 
 router
-    .get('/meal', mealPage)
+    .get('/meal', jwtAccessMiddleware, mealPage)
     .post('/meal/create', jwtAccessMiddleware, upload.single('file'), checkSchema(mealCreateValidationSchema), createMeal)
     .get('/meals', getAllMeals)
     .get('/meal/:id', getOneMeal)

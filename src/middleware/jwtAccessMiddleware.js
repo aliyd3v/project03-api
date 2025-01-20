@@ -6,66 +6,35 @@ const { idChecking } = require("../controller/idController")
 
 exports.jwtAccessMiddleware = async function (req, res, next) {
     try {
-        // Checking header authorization.
-        const authHeader = req.headers.authorization
-        if (!authHeader) {
-            // Responding.
-            return res.status(403).send({
-                success: false,
-                data: null,
-                error: { message: "Access denied. Invalid token!" }
-            })
-        }
-
         //Checking token for valid.
-        const token = authHeader.split(' ')[1]
+        const token = req.cookies.token
         if (!token) {
-            // Responding.
-            return res.status(403).send({
-                success: false,
-                data: null,
-                error: { message: "Access denied. Invalid token!" }
-            })
+            // Redirect.
+            return res.redirect('/login')
         }
         const { decoded, error } = jwt.verify(token, jwtSecretKey, (error, decoded) => {
             return { decoded, error }
         })
         if (error) {
-            // Responding.
-            return res.status(403).send({
-                success: false,
-                data: null,
-                error: { message: "Access denied. Invalid token!" }
-            })
+            // Redirect.
+            return res.redirect('/login')
         }
         if (decoded === undefined) {
-            // Responding.
-            return res.status(403).send({
-                success: false,
-                data: null,
-                error: { message: "Access denied. Invalid token!" }
-            })
+            // Redirect.
+            return res.redirect('/login')
         }
         const { id } = decoded
 
         // Checking id to valid.
         const idError = idChecking(req, id)
         if (idError) {
-            // Responding.
-            return res.status(400).send({
-                success: false,
-                data: null,
-                error: idError
-            })
+            // Redirect.
+            return res.redirect('/login')
         }
         const admin = await Admin.findById(id)
         if (!admin) {
-            // Responding.
-            return res.status(403).send({
-                success: false,
-                data: null,
-                error: { message: "Access denied. Invalid token!" }
-            })
+            // Redirect.
+            return res.redirect('/login')
         }
 
         next()

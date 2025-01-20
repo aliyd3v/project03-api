@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../src/output.css">
+    <link rel="stylesheet" href="../src/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+
+    <!-- icon  -->
+    <link rel="icon" href="../img/gijduvon-premium-logo.webp">
+    <link rel="stylesheet" href="src/createC.css">
+</head>
+
+<body class="bg-black">
+
+    <div class="container-loader">
+        <div class="loader"></div>
+    </div>
+
+    <header class="w-[1400px] h-24 flex justify-between items-center  my-4 mx-auto">
+        <!-- header-logo -->
+        <div class="flex justify-between items-center  h-full px-5 object-cover rounded-xl bg-[#111] w-[75%]"><img
+                class="w-20" src="../img/gijduvon-premium-logo.webp" alt="main-logo">
+
+            <div class="inputbox">
+                <input required="required" type="text">
+                <span class="">
+                    <p class="fa-solid fa-magnifying-glass"></p> Search for a food
+                </span>
+                <i></i>
+            </div>
+
+        </div>
+
+        <!-- header-profil -->
+        <div class="px-5 h-full object-cover rounded-xl bg-[#111] w-[23%] flex justify-between items-center">
+            <a href="">
+
+                <i class="fa-solid fa-bell text-3xl text-white duration-500 cursor-pointer hover:text-[#ffc335] "></i>
+            </a>
+            <a href="">
+
+                <i
+                    class="fa-solid fa-message text-3xl text-[white] duration-500 cursor-pointer hover:text-[#ffc335] "></i>
+            </a>
+            <!-- header-porofil-logo -->
+
+            <div
+                class="w-20 h-20 bg-[white] rounded-full grid place-items-center duration-500 cursor-pointer hover:bg-[#ffc335] ">
+                <img class="w-[90%] object-cover rounded-full " src="./img/3a3f2d35-8167-4708-9ef0-bdaa980989f9.avif"
+                    alt="profil-img">
+            </div>
+        </div>
+    </header>
+    <main class="my-10 mx-auto w-[1400px] flex justify-between gap-5">
+        <!-- ================================= menu ============================================== -->
+        <div class="flex flex-col gap-2 w-[300px]">
+            <!-- =================================menu-profil=============================== -->
+            <div class="w-[300px] bg-[#111] py-3 px-5 rounded-xl">
+                <!-- profil -->
+                <a href="" class=" ">
+                    <div
+                        class="w-20 h-20  bg-[white] my-0 mx-auto rounded-full grid place-items-center duration-500 cursor-pointer hover:bg-[#ffc335] ">
+                        <img class="w-[90%] object-cover rounded-full "
+                            src="../img/3a3f2d35-8167-4708-9ef0-bdaa980989f9.avif" alt="profil-img">
+                    </div>
+                    <h3 class="text-center text-xl my-5 mx-auto w-40 break-normal text-white">Javohir shonazarov</h3>
+                </a>
+            </div>
+            <!-- =========================================menu-Cotigoris=============================== -->
+            <a href="/" class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
+                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+                    <i class="fa-solid fa-home text-white"></i>
+                    <p class="text-white">Home</p>
+                </div>
+            </a>
+            <a href="/order"
+                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
+                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+                    <i class="fa-solid fa-file text-xl text-white"></i>
+                    <p class="text-white">Order</p>
+                </div>
+            </a>
+            <a href="/history"
+                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
+                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+                    <i class="fa-solid fa-clock text-xl text-white"></i>
+                    <p class="text-white">History</p>
+                </div>
+            </a>
+            <a href="/meal"
+                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500   hover:-ml-3 ">
+                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+                    <i class="fa-solid fa-folder-open text-xl text-white"></i>
+                    <p class="text-white">Products</p>
+                </div>
+            </a>
+            <a href="/category" class="w-[300px] bg-[#111] py-3 px-5 rounded-xl ml-3  cursor-pointer">
+                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+                    <i class="fa-solid fa-layer-group text-xl text-[#ffc355]"></i>
+                    <p class="text-[#ffc355]">Categories</p>
+                </div>
+            </a>
+            <a href="/admin"
+                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
+                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+                    <i class="fa-solid fa-users text-xl text-white"></i>
+                    <p class="text-white">Admins</p>
+                </div>
+            </a>
+            <a href="/logout"
+                class="w-[300px] boss bg-red-600 py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
+                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+                    <i class="fa-solid fa-right-from-bracket text-white"></i>
+                    <p class="text-white">Log out</p>
+                </div>
+            </a>
+        </div>
+        <!-- ===============================Cotigories=====================  -->
+
+        <div class=" w-full ">
+
+            <!-- Create Cotegory -->
+
+            <div class="category-container">
+                <div class="category-header">
+                    <h1 class="category-title" id="page-title">Create Category</h1>
+                </div>
+
+                <form class="category-form" action="/category/create" method="post" id="category-form">
+                    <div class="form-group category-title-group">
+                        <div>
+                            <label for="category-title-en" id="title-en-label" class="category-label">Category Title
+                                (EN)</label>
+                            <input type="text" id="category-title-en" name="category-title-en" class="category-input"
+                                placeholder="Enter category title (EN)">
+                        </div>
+                        <div>
+                            <label for="category-title-uz" id="title-uz-label" class="category-label">Category Title
+                                (RU)</label>
+                            <input type="text" id="category-title-uz" name="category-title-uz" class="category-input"
+                                placeholder="Enter category title (RU)">
+                        </div>
+                    </div>
+
+                    <div class="form-group category-gallery-group">
+                        <label id="gallery-label" class="category-label">Category Gallery</label>
+                        <input type="file" id="category-image" class="category-file-input" accept="image/*">
+                        <div id="upload-placeholder" class="category-image-placeholder">Drop files here or click to
+                            upload</div>
+                    </div>
+
+                    <div class="buttons">
+                        <button type="submit" id="submit-btn" class="product-submit-btn">Save Product</button>
+                        <a type="button" id="cancel-btn" class="product-cancel-btn" href="/category">Cancel</a>
+                    </div>
+                </form>
+            </div>
+
+
+    </main>
+
+
+
+
+    <!-- <script type="module" src="./js/catigories.js"></script> -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script>
+        // Loader closer.
+        let containerLoad = document.querySelector(".container-loader");
+        window.onload = function () {
+            loading();
+        };
+        function loading() {
+            containerLoad.style.display = "none";
+        }
+    </script>
+
+
+
+</body>
+
+</html>

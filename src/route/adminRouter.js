@@ -8,7 +8,7 @@ const router = require('express').Router()
 
 router
     .post('/admin-create', SUjwtAccessMiddleware, checkSchema(createAdminValidationSchema), adminCreate)
-    .get('/admin', adminsPage)
+    .get('/admin', jwtAccessMiddleware, adminsPage)
     .get('/admins', jwtAccessMiddleware, getAllAdmins)
     .post('/admin/:id', SUjwtAccessMiddleware, deleteOneAdmin)
 

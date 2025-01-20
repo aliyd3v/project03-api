@@ -3,9 +3,11 @@ const app = express()
 const router = require('./src/route/route')
 const { create } = require('express-handlebars')
 const handlebars = require('handlebars')
-const { port } = require('./src/config/config')
+const { port, cookieParserKey } = require('./src/config/config')
 const cors = require('cors')
 const { connectMongodb } = require('./src/database/database')
+const cookieParser = require('cookie-parser')
+const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access')
 
 // Setup MongoDB.
 connectMongodb()
@@ -16,13 +18,15 @@ app.use(express.static('./public'))
 // Handlebars setup
 const hbs = create({
     extname: 'hbs',
-    handlebars: handlebars
+    handlebars: allowInsecurePrototypeAccess(handlebars)
 })
 app.engine('hbs', hbs.engine)
 app.set('view engine', 'hbs')
 
-// Body parsing tools.
+// Body and cookie parsing tools setup.
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.use(cookieParser(cookieParserKey))
 
 // Setup security tools.
 app.use(cors())

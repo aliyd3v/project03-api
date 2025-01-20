@@ -6,10 +6,10 @@ const { jwtAccessMiddleware } = require('../middleware/jwtAccessMiddleware')
 const router = require('express').Router()
 
 router
-    .get('/order', orderPage)
+    .get('/order', jwtAccessMiddleware, orderPage)
     .post('/order/create', checkSchema(orderCreateValidationSchema), createOrderWithVerification)
     .get('/orders', jwtAccessMiddleware, getAllActualOrders)
     .get('/order/:id', jwtAccessMiddleware, getOneOrder)
-    .post('/order/:id/delivered', markAsDelivered)
+    .post('/order/:id/delivered', jwtAccessMiddleware, markAsDelivered)
 
 module.exports = router

@@ -8,8 +8,10 @@ const mealRouter = require("./mealRouter")
 const orderRouter = require("./orderRouter")
 const stolRouter = require("./stolRouter")
 const otherRoutes = require('./otherRoutes')
+const apiRouter = require('../api/route/route')
 
 exports.appRouter = (app) => {
+    app.use('/api', apiRouter)
     app.use('/', rootRouter)
     app.use('/', adminRouter)
     app.use('/', authRouter)

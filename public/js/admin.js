@@ -1,17 +1,3 @@
-
-function getAdmins() {
-    let token = localStorage.getItem('token')
-    fetch('/admins', {
-        method: "GET",
-        headers: { "Authorization": `Bearer ${token}` }
-    })
-        .then(response => response.json())
-        .then(response => {
-            console.log(response)
-        })
-}
-getAdmins()
-
 window.onload = function () {
     loading();
 };

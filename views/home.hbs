@@ -68,66 +68,58 @@
                     <h3 class="text-center text-xl my-5 mx-auto w-40 break-normal text-white">Javohir shonazarov</h3>
                 </a>
             </div>
-            <div id="home" class="w-[300px] bg-[#111] py-3 px-5 rounded-xl ml-3 cursor-pointer">
-                <div class="h-9 w-full flex items-center gap-4">
-                    <i class="fa-solid fa-house text-xl text-[#ffc355]"></i> <a href="/" class="text-[#ffc335]">Home</a>
+            <!-- Menu-items -->
+            <a href="/" class="w-[300px] bg-[#111] py-3 px-5 rounded-xl ml-3  cursor-pointer">
+                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+                    <i class="fa-solid fa-house text-xl text-[#ffc355]"></i>
+                    <p class="text-[#ffc355]">Home</p>
                 </div>
-            </div>
-            <div id="order"
+            </a>
+            <a href="/order"
                 class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
-                    <i class="fa-solid fa-file text-xl text-white"></i><a href="/order" class="text-white">Order</a>
+                    <i class="fa-solid fa-file text-xl text-white"></i>
+                    <p class="text-white">Order</p>
                 </div>
-            </div>
-            <div id="history"
+            </a>
+            <a href="/history"
                 class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
-                    <i class="fa-solid fa-clock text-xl text-white"></i> <a href="/history"
-                        class="text-white">History</a>
+                    <i class="fa-solid fa-clock text-xl text-white"></i>
+                    <p class="text-white">History</p>
                 </div>
-            </div>
-            <div id="products"
-                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
+            </a>
+            <a href="/meal"
+                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500   hover:-ml-3 ">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
-                    <i class="fa-solid fa-folder-open text-white"></i> <a href="/meal" class="text-white">Products</a>
+                    <i class="fa-solid fa-folder-open text-xl text-white"></i>
+                    <p class="text-white">Products</p>
                 </div>
-            </div>
-            <div id="category"
+            </a>
+            <a href="/category"
                 class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
                     <i class="fa-solid fa-layer-group text-xl text-white"></i>
-                    <a href="/category" class="text-white">Categories</a>
+                    <p class="text-white">Categories</p>
                 </div>
-            </div>
-            <!-- ==== -->
-            <div id="admin"
+            </a>
+            <a href="/admin"
                 class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500   hover:-ml-3 ">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
                     <i class="fa-solid fa-users text-xl text-white"></i>
-                    <a href="/admin" class="text-white">Admins</a>
+                    <p class="text-white">Admins</p>
                 </div>
-            </div>
-            <button id="logout"
+            </a>
+            <a href="/logout"
                 class="w-[300px] boss bg-red-600 py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
                     <i class="fa-solid fa-right-from-bracket text-white"></i>
                     <p class="text-white">Log out</p>
                 </div>
-            </button>
+            </a>
         </div>
-        {{!-- <div class="chart">
-            <canvas id="myChart" class="boxChart"></canvas>
-        </div> --}}
     </main>
 
-    {{!-- <div class="charts">
-        <canvas id="lineChart"></canvas>
-        <canvas id="pieChart"></canvas>
-    </div> --}}
-
-    {{!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> --}}
-    <script src="/js/index.js"></script>
-    {{!-- <script src="/js/chart.js"></script> --}}
     <script src="/js/home.js"></script>
 </body>
 

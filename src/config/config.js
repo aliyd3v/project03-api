@@ -35,3 +35,6 @@ exports.telegramChannelRu = process.env.TG_CHANNEL_RU
 
 // Salt for crypto.
 exports.salt = process.env.SCRYPT_SALT
+
+// cookie-parser secret key.
+exports.cookieParserKey = process.env.COOKIE_PARSER_SECRET_KEY

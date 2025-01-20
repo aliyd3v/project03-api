@@ -122,10 +122,8 @@ exports.getOneCategory = async (req, res) => {
         const idError = idChecking(req, id)
         if (idError) {
             // Responding.
-            return res.status(400).send({
-                success: false,
-                data: null,
-                error: idError
+            return res.render('bad-request', {
+                layout: false
             })
         }
 
@@ -134,11 +132,9 @@ exports.getOneCategory = async (req, res) => {
 
         // Checking category for existence.
         if (!category) {
-            // Responding.
-            return res.status(404).send({
-                success: false,
-                data: null,
-                error: { message: "Category is not found!" }
+            // Rendering.
+            return res.render('not-found', {
+                layout: false
             })
         }
 
@@ -197,6 +193,36 @@ exports.getCategoryMeals = async (req, res) => {
                 message: `Meals in category ${category.en_name} (${category.ru_name}) has been getted successful.`,
                 meals
             }
+        })
+    }
+
+    // Error handling.
+    catch (error) {
+        errorHandling(error, res)
+    }
+}
+
+exports.updateCategoryPage = async (req, res) => {
+    const { params: { id } } = req
+    try {
+        // Checking id to valid.
+        const idError = idChecking(req, id)
+        if (idError) {
+            // Redirect.
+            return res.redirect('bad-request')
+        }
+
+        // Get old category from database.
+        const oldCategory = await Category.findById(id)
+        if (!oldCategory) {
+            return res.render('not-found', {
+                layout: false
+            })
+        }
+
+        return res.render('category-update', {
+            layout: false,
+            oldCategory
         })
     }
 

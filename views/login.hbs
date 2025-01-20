@@ -22,12 +22,16 @@
 
         <div class="p-8 rounded-2xl bg-main-bg shadow">
           <h2 class="text-white text-center text-2xl font-bold">Sign in</h2>
-          <form class="mt-8 space-y-4" id="form">
+          <form class="mt-8 space-y-4" id="form" action="/login" method="post">
             <div>
 
               <div class="relative flex items-center ">
                 <div class="inputbox" style="width: 100%;">
+                  {{#if username}}
+                  <input id="user-name" required="required" type="text" name="username" value="{{username}}">
+                  {{else}}
                   <input id="user-name" required="required" type="text" name="username">
+                  {{/if}}
                   <span class="">
                     User name
                   </span>
@@ -44,7 +48,12 @@
             <div>
               <div class="relative flex items-center">
                 <div class="inputbox" style="width: 100%;">
+                  {{#if password}}
+                  <input id="password" required="required" type="password" name="password" value="{{password}}"><i
+                    class=" "></i>
+                  {{else}}
                   <input id="password" required="required" type="password" name="password"><i class=" "></i>
+                  {{/if}}
                   <span class="">
                     password
                   </span>
@@ -53,6 +62,13 @@
                 </svg>
               </div>
             </div>
+
+            {{#if errorMessage}}
+            <div class="login-error">
+              <p>{{errorMessage}}</p>
+            </div>
+            {{else}}
+            {{/if}}
 
             <div class="!mt-8">
               <button id="sign-in" type="submit"
@@ -68,7 +84,5 @@
   </div>
 
 </body>
-
-<script src="/js/auth.js"></script>
 
 </html>

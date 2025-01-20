@@ -1,52 +1,3 @@
-{{!--
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        div div {
-            background-color: palegreen;
-            justify-content: center;
-            height: 50px;
-            font-size: x-large;
-            text-align: center;
-            width: 150px;
-        }
-    </style>
-</head>
-<div id="list"></div>
-
-<body>
-    <script>
-        let token = localStorage.getItem('token')
-        let list = document.querySelector('#list')
-        list.innerHTML = ''
-        fetch('/admins', {
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
-        })
-            .then(response => response.json())
-            .then(response => {
-                if (response.success) {
-                    response.data.admins.forEach(admin => {
-                        let qator = document.createElement('div')
-                        qator.innerHTML = `<p> ${admin.username} </p>`
-                        list.appendChild(qator)
-                    })
-                }
-                else {
-                    alert('Failed fetch!')
-                }
-            })
-    </script>
-</body>
-
-</html> --}}
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -115,7 +66,7 @@
             <!-- =================================menu-profil=============================== -->
             <div class="w-[300px] bg-[#111] py-3 px-5 rounded-xl">
                 <!-- profil -->
-                <a href="" class=" ">
+                <a href="/">
                     <div
                         class="w-20 h-20  bg-[white] my-0 mx-auto rounded-full grid place-items-center duration-500 cursor-pointer hover:bg-[#ffc335] ">
                         <img class="w-[90%] object-cover rounded-full "
@@ -125,60 +76,53 @@
                 </a>
             </div>
             <!-- =========================================menu-Cotigoris=============================== -->
-            <div id="home"
-                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer  duration-500  hover:-ml-3">
+            <a href="/" class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
-                    <i class="fa-solid fa-house text-xl text-white"></i><a href="/" class="text-white ">Home</a>
+                    <i class="fa-solid fa-home text-white"></i>
+                    <p class="text-white">Home</p>
                 </div>
-            </div>
-            <!-- =000 -->
-            <div id="order"
-                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer  duration-500 hover:-ml-3">
-                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
-                    <i class="fa-solid fa-file  text-xl text-white"></i><a href="/order" class="text-white ">Order</a>
-                </div>
-            </div>
-            <!--  -->
-            <div id="history"
+            </a>
+            <a href="/order"
                 class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
-                    <i class="fa-solid fa-clock text-xl text-white"></i> <a href="/history"
-                        class="text-white">History</a>
+                    <i class="fa-solid fa-file text-xl text-white"></i>
+                    <p class="text-white">Order</p>
                 </div>
-            </div>
-
-            <!-- ==== -->
-            <div id="products"
+            </a>
+            <a href="/history"
                 class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
-                    <i class="fa-solid fa-folder-open text-xl text-white"></i><a href="/meal"
-                        class="text-white">Pruducts</a>
+                    <i class="fa-solid fa-clock text-xl text-white"></i>
+                    <p class="text-white">History</p>
                 </div>
-            </div>
-            <!-- ==== -->
-            <!-- ==== -->
-            <div id="category"
-                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500   hover:-ml-3">
+            </a>
+            <a href="/meal"
+                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500   hover:-ml-3 ">
+                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+                    <i class="fa-solid fa-folder-open text-xl text-white"></i>
+                    <p class="text-white">Products</p>
+                </div>
+            </a>
+            <a href="/category"
+                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
                     <i class="fa-solid fa-layer-group text-xl text-white"></i>
-                    <a href="/category" class="text-white">Categories</a>
+                    <p class="text-white">Categories</p>
                 </div>
-            </div>
-            <!-- ==== -->
-            <div id="admin" class="w-[300px] bg-[#111] py-3 px-5 rounded-xl ml-3  cursor-pointer">
+            </a>
+            <a href="/admin" class="w-[300px] bg-[#111] py-3 px-5 rounded-xl ml-3  cursor-pointer">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
                     <i class="fa-solid fa-users text-xl text-[#ffc355]"></i>
-                    <a href="/admin" class="text-[#ffc355]">Admins</a>
+                    <p class="text-[#ffc355]">Admins</p>
                 </div>
-            </div>
-            <!-- ==== -->
-            <button id="logout"
-                class="w-[300px] boss bg-red-600 py-3 px-5 rounded-xl cursor-pointer duration-500   hover:-ml-3 ">
+            </a>
+            <a href="/logout"
+                class="w-[300px] boss bg-red-600 py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
                     <i class="fa-solid fa-right-from-bracket text-white"></i>
                     <p class="text-white">Log out</p>
                 </div>
-            </button>
+            </a>
         </div>
         <!-- ===============================Cotigories=====================  -->
         <!-- History Section -->
@@ -187,12 +131,31 @@
 
             <!-- Header Box -->
             <div class="flex justify-between bg-[#222] p-4 rounded-lg mb-3 font-bold text-[#ffc335]">
-                <p class="w-[10%] text-center">#</p>
+                <p class="w-[10%] text-center">Role</p>
                 <p class="w-[20%] text-center">Username</p>
                 <p class="w-[25%] text-center">Admin ID</p>
                 <p class="w-[20%] text-center">Email</p>
                 <p class="w-[25%] text-center">Phone</p>
             </div>
+            <script>
+                console.log({{ admins }})
+            </script>
+
+            {{#if admins.length}}
+            {{#each admins}}
+            <div class="order-container bg-[#222] p-4 rounded-lg mb-3">
+                <div class="flex justify-between items-center">
+                    <p class="w-[10%] text-center">{{role}}</p>
+                    <p class="w-[20%] text-center">{{username}}</p>
+                    <p class="w-[25%] text-center">{{_id}}</p>
+                    <p class="w-[20%] text-center">{{email}} </p>
+                    <p class="w-[25%] text-center">{{phone}}</p>
+                </div>
+            </div>
+            {{/each}}
+            {{else}}
+            <p>Empty</p>
+            {{/if}}
 
             <div id="admins-container"
                 class="flex  flex-col bg-main-bg w-[100%] py-6 px-5 rounded-xl gap-5 list-none   overflow-x-scroll cotigories-container">
@@ -203,9 +166,7 @@
         </div>
 
     </main>
-    <!-- garph========================== -->
 
-    <script src="/js/index.js"></script>
     <script src="/js/admin.js"></script>
 
 </body>
