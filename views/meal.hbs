@@ -96,7 +96,7 @@
       <a href="/meal" class="w-[300px] bg-[#111] py-3 px-5 rounded-xl ml-3  cursor-pointer">
         <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
           <i class="fa-solid fa-folder-open text-xl text-[#ffc355]"></i>
-          <p class="text-[#ffc355]">Products</p>
+          <p class="text-[#ffc355]">Meals</p>
         </div>
       </a>
       <a href="/category"
@@ -189,71 +189,19 @@
 
         <section class="w-full mt-7">
           <div class="mx-auto max-w-7xl mt-7">
-            <h2 class="font-manrope   text-xl text-white mb-8 max-lg:text-center">
-              Product list <span class="text-text-color ">*</span>
-            </h2>
-            <div class="w-full h-20 rounded-xl bg-main-bg  flex justify-between px-7 items-center">
-              <div class="flex gap-3  formField">
-
-                <input type="text">
-                <div class="button  h-full 
-                                w-241 bg-[#222]">
-                  <div class="button-wrapper">
-                    <div class="text">Search</div>
-                    <span class="icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-                  </div>
-                </div>
-              </div>
-              <div class="">
-                <div id="add-btn" class="button bg-green-600">
-                  <div class="button-wrapper">
-                    <div class="text">Add</div>
-                    <span class="icon"><i class="fa-solid fa-plus"></i></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div id="page" class="flex">
-
-              {{!-- <div style="margin-top:20px;"
-                class="bg-main-bg flex items-center justify-around mt-6 w-full h-60 rounded-xl mx-auto sm:mr-0 group cursor-pointer lg:mx-auto  transition-all duration-500">
-                <div class="rounded-xl">
-                  <img src="" alt="face cream image" class="w-full h-52 aspect-square object-cover">
-                </div>
-                <div class="w-[70%] h-52">
-                  <div class="flex items-center justify-between">
-                    <h6
-                      class="font-semibold text-xl leading-8 text-white transition-all duration-500 group-hover:text-indigo-600">
-                      ${item.title}
-                    </h6>
-                    <h6 class="font-semibold text-xl leading-8 text-indigo-600">
-                      ${item.price}
-                    </h6>
-                  </div>
-                  <div class="mt-3">
-                    <ul class="list-none overflow-scroll h-32 w-[300px]">
-                      <li class="mt-2 font-normal text-sm leading-6 text-gray-500">${item.description}</li>
-                    </ul>
-                  </div>
-                  <div class="flex gap-3 ml-[600px]">
+            <div class="bg-main-bg p-5 items-center flex justify-between w-full h-20 rounded-xl mb-5">
+                <p class="text-white font-bold  text-2xl">MEALS: <span
+                        id="cotygory-length"> {{meals.length}}</span></p>
+                <a href="/meal/create">
                     <div class="button bg-green-600">
-                      <div class="button-wrapper">
-                        <div class="text">Edit</div>
-                        <span class="icon"><i class="fa-solid fa-pen"></i></span>
-                      </div>
+                        <div class="button-wrapper catygoryAddBtn">
+                            <div class="text">ADD</div>
+                            <span class="icon"><i class="fa-solid fa-plus"></i></span>
+                        </div>
                     </div>
-                    <div class="button bg-red-600 open-del-pop">
-                      <div class="button-wrapper">
-                        <div class="text">Del</div>
-                        <span class="icon"><i class="fa-solid fa-trash"></i></span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div> --}}
-
+                </a>
             </div>
+
             <div id="data-container"></div>
             <div id="pagination" class="flex justify-center items-center mt-5 text-white"></div>
           </div>
@@ -494,6 +442,15 @@
   </div>
 
   <script src="/js/product.js"></script>
+  <script>
+    window.onload = function () {
+      loading();
+    };
+    function loading() {
+      let containerLoad = document.querySelector(".container-loader");
+      containerLoad.style.display = "none";
+    }
+  </script>
 
 </body>
 

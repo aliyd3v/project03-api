@@ -8,14 +8,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="../src/output.css">
-    <link rel="stylesheet" href="../src/style.css">
+    <link rel="stylesheet" href="/src/output.css">
+    <link rel="stylesheet" href="/src/style.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
 
     <!-- icon  -->
-    <link rel="icon" href="../img/gijduvon-premium-logo.webp">
-    <link rel="stylesheet" href="src/createC.css">
+    <link rel="icon" href="/img/gijduvon-premium-logo.webp">
+    <link rel="stylesheet" href="/src/createC.css">
 </head>
 
 <body class="bg-black">
@@ -27,7 +27,7 @@
     <header class="w-[1400px] h-24 flex justify-between items-center  my-4 mx-auto">
         <!-- header-logo -->
         <div class="flex justify-between items-center  h-full px-5 object-cover rounded-xl bg-[#111] w-[75%]"><img
-                class="w-20" src="../img/gijduvon-premium-logo.webp" alt="main-logo">
+                class="w-20" src="/img/gijduvon-premium-logo.webp" alt="main-logo">
 
             <div class="inputbox">
                 <input required="required" type="text">
@@ -54,7 +54,7 @@
 
             <div
                 class="w-20 h-20 bg-[white] rounded-full grid place-items-center duration-500 cursor-pointer hover:bg-[#ffc335] ">
-                <img class="w-[90%] object-cover rounded-full " src="./img/3a3f2d35-8167-4708-9ef0-bdaa980989f9.avif"
+                <img class="w-[90%] object-cover rounded-full " src="/img/3a3f2d35-8167-4708-9ef0-bdaa980989f9.avif"
                     alt="profil-img">
             </div>
         </div>
@@ -69,7 +69,7 @@
                     <div
                         class="w-20 h-20  bg-[white] my-0 mx-auto rounded-full grid place-items-center duration-500 cursor-pointer hover:bg-[#ffc335] ">
                         <img class="w-[90%] object-cover rounded-full "
-                            src="../img/3a3f2d35-8167-4708-9ef0-bdaa980989f9.avif" alt="profil-img">
+                            src="/img/3a3f2d35-8167-4708-9ef0-bdaa980989f9.avif" alt="profil-img">
                     </div>
                     <h3 class="text-center text-xl my-5 mx-auto w-40 break-normal text-white">Javohir shonazarov</h3>
                 </a>
@@ -99,7 +99,7 @@
                 class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500   hover:-ml-3 ">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
                     <i class="fa-solid fa-folder-open text-xl text-white"></i>
-                    <p class="text-white">Products</p>
+                    <p class="text-white">Meals</p>
                 </div>
             </a>
             <a href="/category" class="w-[300px] bg-[#111] py-3 px-5 rounded-xl ml-3  cursor-pointer">
@@ -134,36 +134,52 @@
                     <h1 class="category-title" id="page-title">Create Category</h1>
                 </div>
 
-                <form class="category-form" action="/category/create" method="post" id="category-form">
+                <form class="category-form" action="/category/create" method="post" enctype="multipart/form-data">
                     <div class="form-group category-title-group">
                         <div>
                             <label for="category-title-en" id="title-en-label" class="category-label">Category Title
                                 (EN)</label>
-                            <input type="text" id="category-title-en" name="category-title-en" class="category-input"
-                                placeholder="Enter category title (EN)">
+                            {{#if inputedData}}
+                            <input type="text" id="category-title-en" name="en_name" class="category-input"
+                                placeholder="Enter category title (EN)" value="{{inputedData.en_name}}" required>
+                            {{else}}
+                            <input type="text" id="category-title-en" name="en_name" class="category-input"
+                                placeholder="Enter category title (EN)" required>
+                            {{/if}}
                         </div>
                         <div>
                             <label for="category-title-uz" id="title-uz-label" class="category-label">Category Title
                                 (RU)</label>
-                            <input type="text" id="category-title-uz" name="category-title-uz" class="category-input"
-                                placeholder="Enter category title (RU)">
+                            {{#if inputedData}}
+                            <input type="text" id="category-title-uz" name="ru_name" class="category-input"
+                                placeholder="Enter category title (RU)" value="{{inputedData.ru_name}}" required>
+                            {{else}}
+                            <input type="text" id="category-title-uz" name="ru_name" class="category-input"
+                                placeholder="Enter category title (RU)" required>
+                            {{/if}}
                         </div>
                     </div>
 
                     <div class="form-group category-gallery-group">
                         <label id="gallery-label" class="category-label">Category Gallery</label>
-                        <input type="file" id="category-image" class="category-file-input" accept="image/*">
+                        <input type="file" id="category-image" name="file" class="category-file-input" accept="image/*"
+                            required>
                         <div id="upload-placeholder" class="category-image-placeholder">Drop files here or click to
                             upload</div>
                     </div>
 
                     <div class="buttons">
-                        <button type="submit" id="submit-btn" class="product-submit-btn">Save Product</button>
-                        <a type="button" id="cancel-btn" class="product-cancel-btn" href="/category">Cancel</a>
+                        <button type="submit" class="category-submit-btn">CREATE CATEGORY</button>
+                        <a class="category-cancel-btn" href="/category">CANCEL</a>
                     </div>
                 </form>
             </div>
 
+            {{#if errorMessage}}
+            <div class="bg-main-bg p-5 items-center flex justify-between w-full h-20 rounded-xl mb-5">
+                <p class="create-error-message">{{errorMessage}}</p>
+            </div>
+            {{/if}}
 
     </main>
 

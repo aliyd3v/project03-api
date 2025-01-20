@@ -8,14 +8,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="./src/output.css">
-    <link rel="stylesheet" href="./src/style.css">
+    <link rel="stylesheet" href="/src/output.css">
+    <link rel="stylesheet" href="/src/style.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
 
     <!-- icon  -->
-    <link rel="icon" href="./img/gijduvon-premium-logo.webp">
-    <link rel="stylesheet" href="src/productC.css">
+    <link rel="icon" href="/img/gijduvon-premium-logo.webp">
+    <link rel="stylesheet" href="/src/productC.css">
 </head>
 
 <body class="bg-black">
@@ -27,7 +27,7 @@
     <header class="w-[1400px] h-24 flex justify-between items-center  my-4 mx-auto">
         <!-- header-logo -->
         <div class="flex justify-between items-center  h-full px-5 object-cover rounded-xl bg-[#111] w-[75%]"><img
-                class="w-20" src="./img/gijduvon-premium-logo.webp" alt="main-logo">
+                class="w-20" src="/img/gijduvon-premium-logo.webp" alt="main-logo">
 
             <div class="inputbox">
                 <input required="required" type="text">
@@ -54,7 +54,7 @@
 
             <div
                 class="w-20 h-20 bg-[white] rounded-full grid place-items-center duration-500 cursor-pointer hover:bg-[#ffc335] ">
-                <img class="w-[90%] object-cover rounded-full " src="./img/3a3f2d35-8167-4708-9ef0-bdaa980989f9.avif"
+                <img class="w-[90%] object-cover rounded-full " src="/img/3a3f2d35-8167-4708-9ef0-bdaa980989f9.avif"
                     alt="profil-img">
             </div>
         </div>
@@ -69,7 +69,7 @@
                     <div
                         class="w-20 h-20  bg-[white] my-0 mx-auto rounded-full grid place-items-center duration-500 cursor-pointer hover:bg-[#ffc335] ">
                         <img class="w-[90%] object-cover rounded-full "
-                            src="./img/3a3f2d35-8167-4708-9ef0-bdaa980989f9.avif" alt="profil-img">
+                            src="/img/3a3f2d35-8167-4708-9ef0-bdaa980989f9.avif" alt="profil-img">
                     </div>
                     <h3 class="text-center text-xl my-5 mx-auto w-40 break-normal text-white">Javohir shonazarov</h3>
                 </a>
@@ -95,17 +95,17 @@
                     <p class="text-white">History</p>
                 </div>
             </a>
-            <a href="/meal"
-                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500   hover:-ml-3 ">
+            <a href="/meal" class="w-[300px] bg-[#111] py-3 px-5 rounded-xl ml-3  cursor-pointer">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
-                    <i class="fa-solid fa-folder-open text-xl text-white"></i>
-                    <p class="text-white">Products</p>
+                    <i class="fa-solid fa-folder-open text-xl text-[#ffc355]"></i>
+                    <p class="text-[#ffc355]">Meals</p>
                 </div>
             </a>
-            <a href="/category" class="w-[300px] bg-[#111] py-3 px-5 rounded-xl ml-3  cursor-pointer">
+            <a href="/category"
+                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500   hover:-ml-3 ">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
-                    <i class="fa-solid fa-layer-group text-xl text-[#ffc355]"></i>
-                    <p class="text-[#ffc355]">Categories</p>
+                    <i class="fa-solid fa-layer-group text-xl text-white"></i>
+                    <p class="text-white">Categories</p>
                 </div>
             </a>
             <a href="/admin"
@@ -132,58 +132,75 @@
             <div class="product-container">
                 <!-- Header -->
                 <div class="product-header">
-                  <h1 class="product-title" id="page-title">Create Product</h1>
+                    <h1 class="product-title" id="page-title">CREATE MEAL</h1>
                 </div>
-              
+
                 <!-- Form -->
-                <form class="product-form" id="product-form">
-                  <!-- Product Title (EN and UZ) -->
-                  <div class="form-group product-title-group">
-                    <div>
-                      <label for="product-title-en" id="title-en-label" class="product-label">Product Title (EN)</label>
-                      <input type="text" id="product-title-en" name="product-title-en" class="product-input" placeholder="Enter product title (EN)">
+                <form class="product-form" action="/meal/create" method="post" enctype="multipart/form-data">
+                    <!-- Product Title (EN and UZ) -->
+                    <div class="form-group product-title-group">
+                        <div>
+                            <label for="product-title-en" id="title-en-label" class="product-label">Product Title
+                                (EN)</label>
+                            <input type="text" id="product-title-en" name="en_name" class="product-input"
+                                placeholder="Enter product title (EN)" required>
+                        </div>
+                        <div>
+                            <label for="product-title-uz" id="title-uz-label" class="product-label">Product Title
+                                (RU)</label>
+                            <input type="text" id="product-title-uz" name="ru_name" class="product-input"
+                                placeholder="Enter product title (RU)">
+                        </div>
                     </div>
-                    <div>
-                      <label for="product-title-uz" id="title-uz-label" class="product-label">Product Title (UZ)</label>
-                      <input type="text" id="product-title-uz" name="product-title-uz" class="product-input" placeholder="Enter product title (UZ)">
+
+                    <!-- Product Description (EN and UZ) -->
+                    <div class="form-group product-description-group">
+                        <label for="product-description-en" id="description-en-label" class="product-label">Product
+                            Description (EN)</label>
+                        <textarea id="product-description-en" name="en_description" class="product-textarea"
+                            placeholder="Enter product description (EN)" required></textarea>
+
+                        <label for="product-description-uz" id="description-uz-label" class="product-label">Product
+                            Description (RU)</label>
+                        <textarea id="product-description-uz" name="ru_description" class="product-textarea"
+                            placeholder="Enter product description (RU)" required></textarea>
                     </div>
-                  </div>
-              
-                  <!-- Product Description (EN and UZ) -->
-                  <div class="form-group product-description-group">
-                    <label for="product-description-en" id="description-en-label" class="product-label">Product Description (EN)</label>
-                    <textarea id="product-description-en" name="product-description-en" class="product-textarea" placeholder="Enter product description (EN)"></textarea>
-                    
-                    <label for="product-description-uz" id="description-uz-label" class="product-label">Product Description (UZ)</label>
-                    <textarea id="product-description-uz" name="product-description-uz" class="product-textarea" placeholder="Enter product description (UZ)"></textarea>
-                  </div>
-              
-                  
-                  <!-- Product Gallery -->
-                  <div class="form-group product-gallery-group">
-                      <label id="gallery-label" class="product-label">Product Gallery</label>
-                      <input type="file" id="product-image" class="product-file-input" accept="image/*">
-                      <div id="upload-placeholder" class="product-image-placeholder">Drop files here or click to upload</div>
+
+
+                    <!-- Product Gallery -->
+                    <div class="form-group product-gallery-group">
+                        <label id="gallery-label" class="product-label">Meal Gallery</label>
+                        <input type="file" id="product-image" name="file" class="product-file-input" accept="image/*"
+                            required>
+                        <div id="upload-placeholder" class="product-image-placeholder">Drop files here or click to
+                            upload</div>
                     </div>
-                    
+
                     <!-- Category Dropdown -->
                     <div class="form-group product-category-group">
-                      <label for="product-category" id="category-label" class="product-label">Select Category</label>
-                      <select id="product-category" name="product-category" class="product-select">
-                        <option value="category1">Category 1</option>
-                        <option value="category2">Category 2</option>
-                        <option value="category3">Category 3</option>
-                      </select>
+                        <label for="product-category" id="category-label" class="product-label">Select Category</label>
+                        <select id="product-category" name="product-category" class="product-select">
+                            <option value="">Select category</option>
+                            {{#each categories}}
+                            <option value="{{this._id}}">{{this.en_name}}</option>
+                            {{/each}}
+                        </select>
                     </div>
+
                     <!-- Submit Button -->
                     <div class="buttons">
-                        <button type="button" id="cancel-btn" class="product-cancel-btn">Cancel</button>
-                        <button type="submit" id="submit-btn" class="product-submit-btn">Save Product</button>
+                        <button type="submit" id="submit-btn" class="product-submit-btn">CREATE</button>
+                        <a type="button" href="/meal" class="product-cancel-btn">CANCEL</a>
                     </div>
                 </form>
-              </div>
-              
-              
+            </div>
+
+            {{#if errorMessage}}
+            <div class="bg-main-bg p-5 items-center flex justify-between w-full h-20 rounded-xl mb-5">
+                <p class="create-error-message">{{errorMessage}}</p>
+            </div>
+            {{/if}}
+
     </main>
 
 

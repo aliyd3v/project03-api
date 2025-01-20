@@ -6,7 +6,7 @@ const { Meal } = require("../../model/mealModel")
 exports.getAllCategories = async (req, res) => {
     try {
         // Getting all categories from database.
-        const categories = await Category.find()
+        const categories = await Category.find().populate('meals')
 
         // Responding.
         return res.status(200).send({
@@ -40,7 +40,7 @@ exports.getOneCategory = async (req, res) => {
         }
 
         // Searching category with id.
-        const category = await Category.findById(id)
+        const category = await Category.findById(id).populate('meals')
 
         // Checking category for existence.
         if (!category) {

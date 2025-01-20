@@ -8,7 +8,6 @@ exports.adminsPage = async (req, res) => {
     try {
         // Get all admins from database.
         const admins = await Admin.find()
-        console.log(admins)
         // Rendering.
         return res.render('admin', {
             layout: false,

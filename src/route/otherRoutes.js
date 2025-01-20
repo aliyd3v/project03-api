@@ -10,12 +10,6 @@ const { searchingCategory, searchingMeals, searchCustomer } = require('../contro
 const { searchMealsValidatorSchema } = require('../validation/searchMealsValidationSchema')
 const { searchCustomerValidatorSchema } = require('../validation/searchCustomerValidatorSchema')
 const { directNotFound } = require('../controller/directNotFoundMessage')
-const { deleteAllCategories } = require('../controller/categoryController')
-const { deleteAllBookings } = require('../controller/bookingController')
-const { deleteAllOrders } = require('../controller/orderController')
-const { deleteManyStols } = require('../controller/stolController')
-const { deleteManyMeals } = require('../controller/mealController')
-const { deleteAllHistory } = require('../controller/historyController')
 const { badRequest } = require('../controller/badRequestPage')
 
 const router = require('express').Router()
@@ -41,14 +35,5 @@ router
 
     // Direct not found message.
     .use(jwtAccessMiddleware, directNotFound)
-
-    // For testing.
-    .post('/categories/delete-all', jwtAccessMiddleware, deleteAllCategories)
-    .post('/booking/delete-all', jwtAccessMiddleware, deleteAllBookings)
-    .post('/order/delete-all', jwtAccessMiddleware, deleteAllOrders)
-    .post('/stol/delete-all', jwtAccessMiddleware, deleteManyStols)
-    .post('/meal/delete-all', jwtAccessMiddleware, deleteManyMeals)
-    .post('/history/delete-all', jwtAccessMiddleware, deleteAllHistory)
-
 
 module.exports = router

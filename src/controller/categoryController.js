@@ -6,11 +6,29 @@ const { uploadImage, getImageUrl, deleteImage } = require("./imageConroller")
 const { validationController } = require("./validationController")
 const { Meal } = require("../model/mealModel")
 
-exports.categoryPage = (req, res) => {
+exports.categoryPage = async (req, res) => {
     try {
+        // Get all categories from database.
+        const categories = await Category.find().populate('meals')
+
+        // Rendering.
         return res.render('category', {
             layout: false,
-            categoryPage: true
+            categories
+        })
+    }
+
+    // Error handling.
+    catch (error) {
+        errorHandling(error, res)
+    }
+}
+
+exports.createCategoryPage = (req, res) => {
+    try {
+        // Rendering.
+        return res.render('category-create', {
+            layout: false
         })
     }
 
@@ -25,12 +43,11 @@ exports.createCategory = async (req, res) => {
         // Result validation.
         const { data, error } = validationController(req, res)
         if (error) {
-            return res.status(400).send({
-                success: false,
-                data: null,
-                error: {
-                    message: error
-                }
+            // Rendering.
+            return res.render('category-create', {
+                layout: false,
+                inputedData: data,
+                errorMessage: error
             })
         }
 
@@ -39,19 +56,24 @@ exports.createCategory = async (req, res) => {
         const fileName = req.file.filename
 
         // Checking name for existence. (If exists responsing error.)
-        const condidat = await Category.findOne({
-            $or: [
-                { en_name: data.en_name },
-                { ru_name: data.ru_name }
-            ]
-        })
-        if (condidat) {
+        const en_name_condidat = await Category.findOne({ en_name: data.en_name })
+        if (en_name_condidat) {
             fs.unlinkSync(filePath)
-            // Responding.
-            return res.status(400).send({
-                success: false,
-                data: null,
-                error: { message: `Already exists category with current name (en or ru).` }
+            // Rendering.
+            return res.render('category-create', {
+                layout: false,
+                inputedData: data,
+                errorMessage: `Already exists category with english name "${data.en_name}". Please enter another english name!`
+            })
+        }
+        const ru_name_condidat = await Category.findOne({ ru_name: data.ru_name })
+        if (ru_name_condidat) {
+            fs.unlinkSync(filePath)
+            // Rendering.
+            return res.render('category-create', {
+                layout: false,
+                inputedData: data,
+                errorMessage: `Already exists category with russian name "${data.ru_name}". Please enter another russian name!`
             })
         }
 
@@ -60,31 +82,25 @@ exports.createCategory = async (req, res) => {
         if (errorSupabase) {
             fs.unlinkSync(filePath)
             // Responding.
-            return res.status(400).send({
-                success: false,
-                data: null,
-                error: { message: 'Error uploading image!' }
+            return res.render('category-create', {
+                layout: false,
+                inputed: data,
+                errorMessage: 'Error uploading image! Please try again later.'
             })
         }
         const { publicUrl } = await getImageUrl(fileName, filePath)
         fs.unlinkSync(filePath)
 
         // Writing new category to database.
-        const newCategory = await Category.create({
+        await Category.create({
             en_name: data.en_name,
             ru_name: data.ru_name,
             image_url: publicUrl,
             image_name: fileName
         })
 
-        // Responding.
-        return res.status(201).send({
-            success: true,
-            error: false,
-            data: {
-                message: "Category has been created successfully."
-            }
-        })
+        // Redirect.
+        return res.redirect('/category')
     }
 
     // Error handling.
@@ -96,7 +112,7 @@ exports.createCategory = async (req, res) => {
 exports.getAllCategories = async (req, res) => {
     try {
         // Getting all categories from database.
-        const categories = await Category.find()
+        const categories = await Category.find().populate('meals')
 
         // Responding.
         return res.status(200).send({
@@ -121,14 +137,12 @@ exports.getOneCategory = async (req, res) => {
         // Checking id to valid.
         const idError = idChecking(req, id)
         if (idError) {
-            // Responding.
-            return res.render('bad-request', {
-                layout: false
-            })
+            // Rendering.
+            return res.render('bad-request', { layout: false })
         }
 
         // Searching category with id.
-        const category = await Category.findById(id)
+        const category = await Category.findById(id).populate('meals')
 
         // Checking category for existence.
         if (!category) {
@@ -208,13 +222,14 @@ exports.updateCategoryPage = async (req, res) => {
         // Checking id to valid.
         const idError = idChecking(req, id)
         if (idError) {
-            // Redirect.
-            return res.redirect('bad-request')
+            // Rendering.
+            return res.render('bad-request', { layout: false })
         }
 
         // Get old category from database.
         const oldCategory = await Category.findById(id)
         if (!oldCategory) {
+            // Rendering.
             return res.render('not-found', {
                 layout: false
             })
@@ -238,12 +253,8 @@ exports.updateOneCategory = async (req, res) => {
         // Checking id to valid.
         const idError = idChecking(req, id)
         if (idError) {
-            // Responding.
-            return res.status(400).send({
-                success: false,
-                data: null,
-                error: idError
-            })
+            // Rendering.
+            return res.render('bad-request', { layout: false })
         }
 
         // Checking category for existence.
@@ -253,44 +264,43 @@ exports.updateOneCategory = async (req, res) => {
                 fs.unlinkSync(req.file.path)
             }
 
-            // Responding.
-            return res.status(404).send({
-                success: false,
-                data: null,
-                error: { message: "Category is not found!" }
+            // Rendering.
+            return res.render('not-found', {
+                layout: false
             })
         }
 
         // Result validation.
         const { data, error } = validationController(req, res)
         if (error) {
-            return res.status(400).send({
-                success: false,
-                data: null,
-                error: {
-                    message: error
-                }
+            // Rendering.
+            return res.render('category-update', {
+                layout: false,
+                errorMessage: error
             })
         }
 
         if (!req.file) {
             if (category.en_name != data.en_name || category.ru_name != data.ru_name) {
-                // Checking name for exists. (If exists responsing error.)
-                const condidat = await Category.findOne({
-                    $or: [
-                        { en_name: data.en_name },
-                        { ru_name: data.ru_name }
-                    ]
-                })
-                if (condidat) {
-                    if (condidat._id != id) {
-                        // Responding.
-                        return res.status(400).send({
-                            success: false,
-                            data: null,
-                            error: { message: `Already exists category with name (en or ru).` }
-                        })
-                    }
+
+                // Checking name for existence. (If exists responsing error.)
+                const en_name_condidat = await Category.findOne({ en_name: data.en_name })
+                if (en_name_condidat) {
+                    // Rendering.
+                    return res.render('category-update', {
+                        layout: false,
+                        inputedData: data,
+                        errorMessage: `Already exists category with english name "${data.en_name}". Please enter another english name!`
+                    })
+                }
+                const ru_name_condidat = await Category.findOne({ ru_name: data.ru_name })
+                if (ru_name_condidat) {
+                    // Rendering.
+                    return res.render('category-update', {
+                        layout: false,
+                        inputedData: data,
+                        errorMessage: `Already exists category with russian name "${data.ru_name}". Please enter another russian name!`
+                    })
                 }
 
                 // Writing to database.
@@ -303,20 +313,26 @@ exports.updateOneCategory = async (req, res) => {
             const filePath = req.file.path
             const fileName = req.file.filename
 
-            // Checking name for exists. (If exists responsing error.)
-            const condidat = await Category.findOne({
-                $or: [
-                    { en_name: data.en_name },
-                    { ru_name: data.ru_name }
-                ]
-            })
-            if (condidat._id != id) {
+
+            // Checking name for existence. (If exists responsing error.)
+            const en_name_condidat = await Category.findOne({ en_name: data.en_name })
+            if (en_name_condidat) {
                 fs.unlinkSync(filePath)
-                // Responding.
-                return res.status(400).send({
-                    success: false,
-                    data: null,
-                    error: { message: `Already exists category with name (en or ru).` }
+                // Rendering.
+                return res.render('category-update', {
+                    layout: false,
+                    inputedData: data,
+                    errorMessage: `Already exists category with english name "${data.en_name}". Please enter another english name!`
+                })
+            }
+            const ru_name_condidat = await Category.findOne({ ru_name: data.ru_name })
+            if (ru_name_condidat) {
+                fs.unlinkSync(filePath)
+                // Rendering.
+                return res.render('category-update', {
+                    layout: false,
+                    inputedData: data,
+                    errorMessage: `Already exists category with russian name "${data.ru_name}". Please enter another russian name!`
                 })
             }
 
@@ -333,17 +349,11 @@ exports.updateOneCategory = async (req, res) => {
             category.ru_name = data.ru_name
             category.image_url = publicUrl
             category.image_name = fileName
-            const updateCategory = await Category.findByIdAndUpdate(id, category)
+            await Category.findByIdAndUpdate(id, category)
         }
 
-        // Responding.
-        return res.status(201).send({
-            success: true,
-            error: false,
-            data: {
-                message: "Category has been updated successfully."
-            }
-        })
+        // Redirect.
+        return res.redirect('/category')
     }
 
     // Error handling.
@@ -358,23 +368,15 @@ exports.deleteOneCategory = async (req, res) => {
         // Checking id to valid.
         const idError = idChecking(req, id)
         if (idError) {
-            // Responding.
-            return res.status(400).send({
-                success: false,
-                data: null,
-                error: idError
-            })
+            // Rendering.
+            return res.render('bad-request', { layout: false })
         }
 
         // Checking category for existence.
         const category = await Category.findById(id)
         if (!category) {
-            // Responding.
-            return res.status(404).send({
-                success: false,
-                data: null,
-                error: { message: "Category is not found!" }
-            })
+            // Rendering.
+            return res.render('not-found', { layout: false })
         }
 
         // Deleting meals in category.
@@ -392,52 +394,8 @@ exports.deleteOneCategory = async (req, res) => {
         // Deleting category from database.
         await Category.findByIdAndDelete(id)
 
-        // Responding.
-        return res.status(201).send({
-            success: true,
-            error: false,
-            data: {
-                message: "Category has been deleted successfully."
-            }
-        })
-    }
-
-    // Error handling.
-    catch (error) {
-        errorHandling(error, res)
-    }
-}
-
-exports.deleteAllCategories = async (req, res) => {
-    try {
-        // Checking categories for existence.
-        const categories = await Category.find()
-
-        for (const category of categories) {
-            // Deleting meals in categories.
-            const meals = await Meal.find({ category: category._id })
-
-            // Deleting images of meals from supabase storage.
-            await Promise.all(meals.map(meal => deleteImage(meal.image_name)))
-
-            // Deleting all meals of category from database.
-            await Meal.deleteMany({ category: category._id })
-        }
-
-        // Deleting images in categories from supabase storage.
-        await Promise.all(categories.map(category => deleteImage(category.image_name)))
-
-        // Deleting categories from database.
-        await Category.deleteMany()
-
-        // Responding.
-        return res.status(200).send({
-            success: true,
-            error: false,
-            data: {
-                message: "Categories have been deleted successfully."
-            }
-        })
+        // Redirect.
+        return res.redirect('/category')
     }
 
     // Error handling.

@@ -6,11 +6,42 @@ const { uploadImage, getImageUrl, deleteImage } = require("./imageConroller")
 const { validationController } = require("./validationController")
 const fs = require('fs')
 
-exports.mealPage = (req, res) => {
+exports.mealPage = async (req, res) => {
     try {
+        // Get all meals from database.
+        const meals = await Meal.find().populate('category')
+
+        // Rendering.
         return res.render('meal', {
             layout: false,
-            mealPage: true
+            meals
+        })
+    }
+
+    // Error handling.
+    catch (error) {
+        errorHandling(error, res)
+    }
+}
+
+exports.createMealPage = async (req, res) => {
+    try {
+        // Get all categories from database.
+        const categories = await Category.find()
+
+        // Checking categories for existence.
+        if (!categories) {
+            // Rendering.
+            return res.render('meal-create', {
+                layout: false,
+                errorMessage: "Categories are empty. Please, first create category!"
+            })
+        }
+
+        // Rendering.
+        return res.render('meal-create', {
+            layout: false,
+            categories
         })
     }
 
@@ -25,12 +56,10 @@ exports.createMeal = async (req, res) => {
         // Result validation.
         const { data, error } = validationController(req, res)
         if (error) {
-            return res.status(400).send({
-                success: false,
-                data: null,
-                error: {
-                    message: error
-                }
+            // Rendering.
+            return res.render('meal-create', {
+                layout: false,
+                errorMessage: error
             })
         }
 

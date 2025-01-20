@@ -170,11 +170,3 @@ function editItem(itemId) {
     })
     .catch((error) => console.error("Error updating item:", error));
 }
-
-window.onload = function () {
-  loading();
-};
-function loading() {
-  let containerLoad = document.querySelector(".container-loader");
-  containerLoad.style.display = "none";
-}
