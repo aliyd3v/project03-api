@@ -14,7 +14,7 @@ router
     .get('/meals', getAllMeals)
     .get('/meal/:id', getOneMeal)
     .get('/meal/:id/update', jwtAccessMiddleware, updateMealPage)
-    .post('/meal/:id/update', jwtAccessMiddleware, checkSchema(mealUpdateValidationSchema), updateOneMeal)
+    .post('/meal/:id/update', jwtAccessMiddleware, upload.single('file'), checkSchema(mealUpdateValidationSchema), updateOneMeal)
     .post('/meal/:id/delete', jwtAccessMiddleware, deleteOneMeal)
 
 module.exports = router

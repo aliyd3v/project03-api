@@ -131,14 +131,8 @@ exports.createMeal = async (req, res) => {
             image_name: fileName
         })
 
-        // Responding.
-        return res.status(201).send({
-            success: true,
-            error: false,
-            data: {
-                message: "Meal has been created successful."
-            }
-        })
+        // Redirect.
+        return res.redirect('/meal')
     }
 
     // Error handling.
@@ -259,16 +253,15 @@ exports.updateOneMeal = async (req, res) => {
             return res.render('not-found', { layout: false })
         }
 
+        // Checking meal for existence.
         const meal = await Meal.findById(id).populate('category')
         if (!meal) {
-            if (req.file) {
-                fs.unlinkSync(req.file.path)
-            }
-
+            if (req.file) fs.unlinkSync(req.file.path)
             // Rendering.
             return res.render('not-found', { layout: false })
         }
 
+        // Get all categories from database.
         const categories = await Category.find()
 
         // Result validation.
@@ -332,7 +325,6 @@ exports.updateOneMeal = async (req, res) => {
             if (en_name_condidat) {
                 if (en_name_condidat._id != id) {
                     fs.unlinkSync(filePath)
-
                     // Rendering.
                     return res.render('meal-update', {
                         layout: false,
@@ -347,7 +339,6 @@ exports.updateOneMeal = async (req, res) => {
             if (ru_name_condidat) {
                 if (en_name_condidat._id != id) {
                     fs.unlinkSync(filePath)
-
                     // Rendering.
                     return res.render('meal-update', {
                         layout: false,
@@ -395,22 +386,15 @@ exports.deleteOneMeal = async (req, res) => {
         // Checking id to valid.
         const idError = idChecking(req, id)
         if (idError) {
-            // Responding.
-            return res.status(400).send({
-                success: false,
-                data: null,
-                error: idError
-            })
+            // Rendering.
+            return res.render('not-found', { layout: false })
         }
 
         // Checking meal to exists.
         const meal = await Meal.findById(id)
         if (!meal) {
-            return res.status(404).send({
-                success: false,
-                data: null,
-                error: { message: "Meal is not found!" }
-            })
+            // Rendering.
+            return res.render('not-found', { layout: false })
         }
 
         // Deleting image of category.
@@ -419,14 +403,8 @@ exports.deleteOneMeal = async (req, res) => {
         // Deleting meal from database.
         await Meal.findByIdAndDelete(id)
 
-        // Responding.
-        return res.status(201).send({
-            success: true,
-            error: false,
-            data: {
-                message: "Meal has been deleted successful."
-            }
-        })
+        // Redirect.
+        return res.redirect('/meal')
     }
 
     // Error handling.

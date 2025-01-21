@@ -1,5 +1,5 @@
 exports.mealUpdateValidationSchema = {
-    name: {
+    en_name: {
         notEmpty: {
             errorMessage: "Name a meal cannot be empty!"
         },
@@ -8,7 +8,25 @@ exports.mealUpdateValidationSchema = {
         },
         escape: true
     },
-    description: {
+    ru_name: {
+        notEmpty: {
+            errorMessage: "Name a meal cannot be empty!"
+        },
+        isString: {
+            errorMessage: "Name a meal must be a string!"
+        },
+        escape: true
+    },
+    en_description: {
+        notEmpty: {
+            errorMessage: "Description a meal cannot be empty!"
+        },
+        isString: {
+            errorMessage: "Description a meal must be a string!"
+        },
+        escape: true
+    },
+    ru_description: {
         notEmpty: {
             errorMessage: "Description a meal cannot be empty!"
         },
@@ -34,5 +52,18 @@ exports.mealUpdateValidationSchema = {
             errorMessage: "Category is wrong!"
         },
         escape: true
+    },
+    file: {
+        custom: {
+            options: (value, { req }) => {
+                if (req.file) {
+                    const validMimeTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+                    if (!validMimeTypes.includes(req.file.mimetype)) {
+                        throw new Error('Image must be only JPEG, PNG, GIF, WEBP format!');
+                    }
+                }
+                return true;
+            },
+        },
     }
 }
