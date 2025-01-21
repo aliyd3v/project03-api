@@ -189,18 +189,56 @@ exports.getOneMeal = async (req, res) => {
     }
 }
 
+exports.updateMealPage = async (req, res) => {
+    const { params: { id } } = req
+    try {
+        // Checking id to valid.
+        const idError = idChecking(req, id)
+        if (idError) {
+            // Rendering.
+            return res.render('not-found', {
+                layout: false
+            })
+        }
+
+        // Checking meal for existence.
+        const meal = await Meal.findById(id).populate('category')
+        if (!meal) {
+            // Rendering.
+            return res.render('not-found', {
+                layout: false
+            })
+        }
+
+        // Get all categories from database.
+        const categories = await Category.find()
+        const categoryIndex = categories.findIndex((value, index, array) => {
+            return value.en_name == meal.category.en_name
+        })
+        categories.splice(categoryIndex, 1)
+
+        // Rendering.
+        return res.render('meal-update', {
+            layout: false,
+            oldMeal: meal,
+            categories
+        })
+    }
+
+    // Error handling.
+    catch (error) {
+        errorHandling(error, res)
+    }
+}
+
 exports.updateOneMeal = async (req, res) => {
     const { params: { id } } = req
     try {
         // Checking id to valid.
         const idError = idChecking(req, id)
         if (idError) {
-            // Responding.
-            return res.status(400).send({
-                success: false,
-                data: null,
-                error: idError
-            })
+            // Rendering.
+            return res.render('not-found', { layout: false })
         }
 
         const meal = await Meal.findById(id).populate('category')
@@ -209,23 +247,22 @@ exports.updateOneMeal = async (req, res) => {
                 fs.unlinkSync(req.file.path)
             }
 
-            // Responding.
-            return res.status(404).send({
-                success: false,
-                data: null,
-                error: { message: "Meal is not found!" }
-            })
+            // Rendering.
+            return res.render('not-found', { layout: false })
         }
+
+        const categories = await Category.find()
 
         // Result validation.
         const { data, error } = validationController(req, res)
         if (error) {
-            return res.status(400).send({
-                success: false,
-                data: null,
-                error: {
-                    message: error
-                }
+            // Rendering.
+            return res.render('meal-update', {
+                layout: false,
+                oldMeal: meal,
+                inputedData: data,
+                errorMessage: error,
+                categories
             })
         }
 
@@ -300,14 +337,8 @@ exports.updateOneMeal = async (req, res) => {
             }
         }
 
-        // Responding.
-        return res.status(201).send({
-            success: true,
-            error: false,
-            data: {
-                message: "Meal has been updated successful."
-            }
-        })
+        // Redirect.
+        return res.redirect('/meal')
     }
 
     // Error handling.

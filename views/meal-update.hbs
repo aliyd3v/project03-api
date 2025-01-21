@@ -4,17 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Categories</title>
+    <title>UPDATE MEAL</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="../src/output.css">
-    <link rel="stylesheet" href="../src/style.css">
+    <link rel="stylesheet" href="/src/output.css">
+    <link rel="stylesheet" href="/src/style.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
 
     <!-- icon  -->
     <link rel="icon" href="/img/gijduvon-premium-logo.webp">
+    <link rel="stylesheet" href="/src/productC.css">
 </head>
 
 <body class="bg-black">
@@ -94,17 +95,17 @@
                     <p class="text-white">History</p>
                 </div>
             </a>
-            <a href="/meal"
-                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500   hover:-ml-3 ">
+            <a href="/meal" class="w-[300px] bg-[#111] py-3 px-5 rounded-xl ml-3  cursor-pointer">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
-                    <i class="fa-solid fa-folder-open text-xl text-white"></i>
-                    <p class="text-white">Meals</p>
+                    <i class="fa-solid fa-folder-open text-xl text-[#ffc355]"></i>
+                    <p class="text-[#ffc355]">Meals</p>
                 </div>
             </a>
-            <a href="/category" class="w-[300px] bg-[#111] py-3 px-5 rounded-xl ml-3  cursor-pointer">
+            <a href="/category"
+                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500   hover:-ml-3 ">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
-                    <i class="fa-solid fa-layer-group text-xl text-[#ffc355]"></i>
-                    <p class="text-[#ffc355]">Categories</p>
+                    <i class="fa-solid fa-layer-group text-xl text-white"></i>
+                    <p class="text-white">Categories</p>
                 </div>
             </a>
             <a href="/admin"
@@ -125,53 +126,109 @@
         <!-- ===============================Cotigories=====================  -->
 
         <div class=" w-full ">
-            <div class="bg-main-bg p-5 items-center flex justify-between w-full h-20 rounded-xl mb-5">
-                <p class="text-white font-bold  text-2xl">CATEGORIES: <span
-                        id="cotygory-length"> {{categories.length}}</span></p>
-                <a href="/category/create">
-                    <div id="add-btn" class="button bg-green-600">
-                        <div class="button-wrapper catygoryAddBtn">
-                            <div class="text">ADD</div>
-                            <span class="icon"><i class="fa-solid fa-plus"></i></span>
-                        </div>
-                    </div>
-                </a>
-            </div>
 
-            <div id="pruduct-container"
-                class="flex  flex-col bg-main-bg w-[100%] py-6 px-5 rounded-xl gap-5 list-none   overflow-x-scroll cotigories-container">
-                {{#if categories.length}}
+            <!-- Create Cotegory -->
 
-                {{#each categories}}
-                <div class="w-full gap-7 rounded-xl flex items-center p-4 col-span-2 bg-black justify-between">
-                    <div class="flex gap-3 items-center">
-                        <div class="w-32 h-32 rounded-full overflow-hidden">
-                            <img class="w-full" src="{{this.image_url}}" alt="Mahsulot rasm">
-                        </div>
-                        <div class="w-[300px]">
-                            <h1 class="text-white text-3xl">{{this.en_name}}</h1>
-                            <p class="text-[#999] text-xl">Meals: {{this.meals.length}}</p>
-                        </div>
-                    </div>
-                    <div class="flex gap-3">
-                        <a href="/category/{{this._id}}/update">
-                            <div type="submit" class="button bg-green-600 edit-cotigory">
-                                <div class="button-wrapper">
-                                    <div class="text">Edit</div>
-                                    <span class="icon"><i class="fa-solid fa-pen"></i></span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
+            <div class="product-container">
+                <!-- Header -->
+                <div class="product-header">
+                    <h1 class="product-title" id="page-title">UPDATE MEAL</h1>
                 </div>
-                {{/each}}
 
-                {{else}}
-                <p class="text-white">Categories are empty.</p>
-                {{/if}}
+                <!-- Form -->
+                <form class="product-form" action="/meal/{{oldMeal._id}}/update" method="post"
+                    enctype="multipart/form-data">
+                    <!-- Product Title (EN and UZ) -->
+                    <div class="form-group product-title-group">
+                        <div>
+                            <label for="product-title-en" id="title-en-label" class="product-label">Product Title
+                                (EN)</label>
+                            {{#if inputedData}}
+                            <input type="text" id="product-title-en" name="en_name" class="product-input"
+                                placeholder="Enter product title (EN)" required value="{{inputedData.en_name}}">
+                            {{else}}
+                            <input type="text" id="product-title-en" name="en_name" class="product-input"
+                                placeholder="Enter product title (EN)" required value="{{oldMeal.en_name}}">
+                            {{/if}}
+                        </div>
+                        <div>
+                            <label for="product-title-uz" id="title-uz-label" class="product-label">Product Title
+                                (RU)</label>
+                            {{#if inputedData}}
+                            <input type="text" id="product-title-uz" name="ru_name" class="product-input"
+                                placeholder="Enter product title (RU)" value="{{inputedData.ru_name}}">
+                            {{else}}
+                            <input type="text" id="product-title-uz" name="ru_name" class="product-input"
+                                placeholder="Enter product title (RU)" required value="{{oldMeal.ru_name}}">
+                            {{/if}}
+                        </div>
+                    </div>
+
+                    <!-- Product Description (EN and UZ) -->
+                    <div class="form-group product-description-group">
+                        <label for="product-description-en" id="description-en-label" class="product-label">Product
+                            Description (EN)</label>
+                        {{#if inputedData}}
+                        <textarea id="product-description-en" name="en_description" class="product-textarea"
+                            placeholder="Enter product description (EN)"
+                            required>{{inputedData.en_description}}</textarea>
+                        {{else}}
+                        <textarea id="product-description-en" name="en_description" class="product-textarea"
+                            placeholder="Enter product description (EN)" required>{{oldMeal.en_description}}</textarea>
+                        {{/if}}
+
+                        <label for="product-description-uz" id="description-uz-label" class="product-label">Product
+                            Description (RU)</label>
+                        {{#if inputedData}}
+                        <textarea id="product-description-uz" name="ru_description" class="product-textarea"
+                            placeholder="Enter product description (RU)"
+                            required>{{inputedData.ru_description}}</textarea>
+                        {{else}}
+                        <textarea id="product-description-uz" name="ru_description" class="product-textarea"
+                            placeholder="Enter product description (RU)" required>{{oldMeal.ru_description}}</textarea>
+                        {{/if}}
+                    </div>
+
+
+                    <!-- Product Gallery -->
+                    <div class="form-group product-gallery-group">
+                        <label id="gallery-label" class="product-label">Meal Gallery</label>
+                        <input type="file" id="product-image" name="file" class="product-file-input" accept="image/*">
+                        <div id="upload-placeholder" class="product-image-placeholder">Drop files here or click to
+                            upload</div>
+                    </div>
+
+                    <!-- Category Dropdown -->
+                    <div class="form-group product-category-group">
+                        <label for="product-category" id="category-label" class="product-label">Select Category</label>
+                        <select id="product-category" name="product-category" class="product-select" required>
+                            <option value="{{oldMeal.category._id}}">{{oldMeal.category.en_name}} (Current)</option>
+                            {{#each categories}}
+                            <option value="{{this._id}}">{{this.en_name}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="buttons">
+                        <button type="submit" id="submit-btn" class="product-submit-btn">UPDATE</button>
+                        <a type="button" href="/meal" class="product-cancel-btn">CANCEL</a>
+                    </div>
+                </form>
             </div>
+
+            {{#if errorMessage}}
+            <div class="bg-main-bg p-5 items-center flex justify-between w-full h-20 rounded-xl mb-5">
+                <p class="create-error-message">{{errorMessage}}</p>
+            </div>
+            {{/if}}
+
     </main>
 
+
+
+
+    <!-- <script type="module" src="./js/catigories.js"></script> -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script>
         // Loader closer.
@@ -183,6 +240,7 @@
             containerLoad.style.display = "none";
         }
     </script>
+
 
 </body>
 
