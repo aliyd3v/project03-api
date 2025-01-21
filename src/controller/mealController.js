@@ -59,6 +59,7 @@ exports.createMeal = async (req, res) => {
             // Rendering.
             return res.render('meal-create', {
                 layout: false,
+                inputedData: data,
                 errorMessage: error
             })
         }
@@ -67,32 +68,49 @@ exports.createMeal = async (req, res) => {
         const filePath = req.file.path
         const fileName = req.file.filename
 
-        // Checking name a meal to exists. (If mael exists with current name return error.)
-        const condidat = await Meal.findOne({
-            $or: [
-                { en_name: data.en_name },
-                { ru_name: data.ru_name }
-            ]
-        })
-        if (condidat) {
-            fs.unlinkSync(filePath)
-            // Responding.
-            return res.status(400).send({
-                success: false,
-                data: null,
-                error: { message: "Name a meal is already exists! Please enter another name." }
-            })
-        }
-
-        // Checking category to valid and exists.
+        // Find selected and all category from database.
         const selectedCategory = await Category.findById(data.category)
-        if (!selectedCategory) {
+        const categories = await Category.find()
+
+        // Checking name a meal to exists. (If mael exists with current name return error.)
+        const en_name_condidat = await Meal.findOne({ en_name: data.en_name })
+        if (selectedCategory) {
+
+            const categoryIndex = categories.findIndex((value, index, array) => {
+                return value.en_name == selectedCategory.en_name
+            })
+            categories.splice(categoryIndex, 1)
+
+            if (en_name_condidat) {
+                fs.unlinkSync(filePath)
+                // Rendering.
+                return res.render('meal-create', {
+                    layout: false,
+                    inputedData: data,
+                    categories,
+                    selectedCategory,
+                    errorMessage: `Already exists with english name "${data.en_name}"! Please enter another name.`
+                })
+            }
+            const ru_name_condidat = await Meal.findOne({ ru_name: data.ru_name })
+            if (ru_name_condidat) {
+                fs.unlinkSync(filePath)
+                // Rendering.
+                return res.render('meal-create', {
+                    layout: false,
+                    inputedData: data,
+                    categories,
+                    selectedCategory,
+                    errorMessage: `Already exists with russian name "${data.ru_name}"! Please enter another name.`
+                })
+            }
+        } else {
             fs.unlinkSync(filePath)
-            // Responding.
-            return res.status(404).send({
-                success: false,
-                data: null,
-                error: { message: "Selected category is not found!" }
+            // Rendering.
+            return res.render('meal-create', {
+                layout: false,
+                inputedData: data,
+                errorMessage: `Category is not valid. Please, select try again!`
             })
         }
 
@@ -268,61 +286,32 @@ exports.updateOneMeal = async (req, res) => {
 
         if (!req.file) {
             if (meal.en_name != data.en_name || meal.ru_name != data.ru_name || meal.en_description != data.en_description || meal.ru_description != data.ru_description || meal.price != data.price || meal.category != data.category) {
-                const condidat = await Meal.findOne({
-                    $or: [
-                        { en_name: data.en_name },
-                        { ru_name: data.ru_name }
-                    ]
-                })
-                if (condidat) {
-                    if (condidat._id != id) {
-                        // Responding.
-                        return res.status(400).send({
-                            success: false,
-                            data: null,
-                            error: { message: `Already exists meal with name (en or ru).` }
+                const en_name_condidat = await Meal.findOne({ en_name: data.en_name })
+                if (en_name_condidat) {
+                    if (en_name_condidat._id != id) {
+                        // Rendering.
+                        return res.render('meal-update', {
+                            layout: false,
+                            oldMeal: meal,
+                            inputedData: data,
+                            errorMessage: `Already exists with english title meal "${data.en_name}".`,
+                            categories
                         })
                     }
-                } else {
-                    // Writing changes to database.
-                    meal.en_name = data.en_name
-                    meal.ru_name = data.ru_name
-                    meal.en_description = data.en_description
-                    meal.ru_description = data.ru_description
-                    meal.price = data.price
-                    meal.category = data.category
-                    await Meal.findByIdAndUpdate(id, meal)
                 }
-            }
-        } else {
-            // Registration path and name of file.
-            const filePath = req.file.path
-            const fileName = req.file.filename
-
-            // Checking name for exists. (If exists responsing error.)
-            const condidat = await Meal.findOne({
-                $or: [
-                    { en_name: data.en_name },
-                    { ru_name: data.ru_name }
-                ]
-            })
-            if (condidat._id != id) {
-                fs.unlinkSync(filePath)
-
-                // Responding.
-                return res.status(400).send({
-                    success: false,
-                    data: null,
-                    error: { message: `Already exists meal with name (en or ru).` }
-                })
-            } else {
-                // Delete old image of category.
-                deleteImage(meal.image_name)
-
-                // Uploading image to supabse storage and get image url.
-                await uploadImage(fileName, filePath)
-                const { publicUrl } = await getImageUrl(fileName, filePath)
-                fs.unlinkSync(filePath)
+                const ru_name_condidat = await Meal.findOne({ ru_name: data.ru_name })
+                if (ru_name_condidat) {
+                    if (en_name_condidat._id != id) {
+                        // Rendering.
+                        return res.render('meal-update', {
+                            layout: false,
+                            oldMeal: meal,
+                            inputedData: data,
+                            errorMessage: `Already exists with russian title meal "${data.ru_name}".`,
+                            categories
+                        })
+                    }
+                }
 
                 // Writing changes to database.
                 meal.en_name = data.en_name
@@ -331,10 +320,63 @@ exports.updateOneMeal = async (req, res) => {
                 meal.ru_description = data.ru_description
                 meal.price = data.price
                 meal.category = data.category
-                meal.image_url = publicUrl
-                meal.image_name = fileName
                 await Meal.findByIdAndUpdate(id, meal)
             }
+        } else {
+            // Registration path and name of file.
+            const filePath = req.file.path
+            const fileName = req.file.filename
+
+            // Checking name for exists. (If exists responsing error.)
+            const en_name_condidat = await Meal.findOne({ en_name: data.en_name })
+            if (en_name_condidat) {
+                if (en_name_condidat._id != id) {
+                    fs.unlinkSync(filePath)
+
+                    // Rendering.
+                    return res.render('meal-update', {
+                        layout: false,
+                        oldMeal: meal,
+                        inputedData: data,
+                        errorMessage: `Already exists with english title meal "${data.en_name}".`,
+                        categories
+                    })
+                }
+            }
+            const ru_name_condidat = await Meal.findOne({ ru_name: data.ru_name })
+            if (ru_name_condidat) {
+                if (en_name_condidat._id != id) {
+                    fs.unlinkSync(filePath)
+
+                    // Rendering.
+                    return res.render('meal-update', {
+                        layout: false,
+                        oldMeal: meal,
+                        inputedData: data,
+                        errorMessage: `Already exists with russian title meal "${data.ru_name}".`,
+                        categories
+                    })
+                }
+            }
+
+            // Delete old image of category.
+            deleteImage(meal.image_name)
+
+            // Uploading image to supabse storage and get image url.
+            await uploadImage(fileName, filePath)
+            const { publicUrl } = await getImageUrl(fileName, filePath)
+            fs.unlinkSync(filePath)
+
+            // Writing changes to database.
+            meal.en_name = data.en_name
+            meal.ru_name = data.ru_name
+            meal.en_description = data.en_description
+            meal.ru_description = data.ru_description
+            meal.price = data.price
+            meal.category = data.category
+            meal.image_url = publicUrl
+            meal.image_name = fileName
+            await Meal.findByIdAndUpdate(id, meal)
         }
 
         // Redirect.
@@ -390,30 +432,5 @@ exports.deleteOneMeal = async (req, res) => {
     // Error handling.
     catch (error) {
         errorHandling(error, res)
-    }
-}
-
-exports.deleteManyMeals = async (req, res) => {
-    try {
-        // Deleting images of meals from supabase database.
-        const meals = await Meal.find()
-        for (const meal of meals) {
-            await deleteImage(meal.image_name)
-        }
-
-        // Deleting all meals from database.
-        await Meal.deleteMany()
-
-        // Responding.
-        return res.status(200).send({
-            success: true,
-            error: false,
-            data: { message: "Meals have been deleted successfully." }
-        })
-    }
-
-    // Error handling.
-    catch (error) {
-
     }
 }

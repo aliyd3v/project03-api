@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UPDATE MEAL</title>
+    <title>Update meal</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -132,7 +132,7 @@
             <div class="product-container">
                 <!-- Header -->
                 <div class="product-header">
-                    <h1 class="product-title" id="page-title">UPDATE MEAL</h1>
+                    <h1 class="product-title" id="page-title">Update meal</h1>
                 </div>
 
                 <!-- Form -->
@@ -156,7 +156,7 @@
                                 (RU)</label>
                             {{#if inputedData}}
                             <input type="text" id="product-title-uz" name="ru_name" class="product-input"
-                                placeholder="Enter product title (RU)" value="{{inputedData.ru_name}}">
+                                placeholder="Enter product title (RU)" required value="{{inputedData.ru_name}}">
                             {{else}}
                             <input type="text" id="product-title-uz" name="ru_name" class="product-input"
                                 placeholder="Enter product title (RU)" required value="{{oldMeal.ru_name}}">

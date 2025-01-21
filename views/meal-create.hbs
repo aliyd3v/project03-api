@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CREATE MEAL</title>
+    <title>Create meal</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -142,14 +142,24 @@
                         <div>
                             <label for="product-title-en" id="title-en-label" class="product-label">Product Title
                                 (EN)</label>
+                            {{#if inputedData}}
+                            <input type="text" id="product-title-en" name="en_name" class="product-input"
+                                placeholder="Enter product title (EN)" required value="{{inputedData.en_name}}">
+                            {{else}}
                             <input type="text" id="product-title-en" name="en_name" class="product-input"
                                 placeholder="Enter product title (EN)" required>
+                            {{/if}}
                         </div>
                         <div>
                             <label for="product-title-uz" id="title-uz-label" class="product-label">Product Title
                                 (RU)</label>
+                            {{#if inputedData}}
                             <input type="text" id="product-title-uz" name="ru_name" class="product-input"
-                                placeholder="Enter product title (RU)">
+                                placeholder="Enter product title (RU)" required value="{{inputedData.ru_name}}">
+                            {{else}}
+                            <input type="text" id="product-title-uz" name="ru_name" class="product-input"
+                                placeholder="Enter product title (RU)" required>
+                            {{/if}}
                         </div>
                     </div>
 
@@ -157,19 +167,43 @@
                     <div class="form-group product-description-group">
                         <label for="product-description-en" id="description-en-label" class="product-label">Product
                             Description (EN)</label>
+                        {{#if inputedData}}
+                        <textarea id="product-description-en" name="en_description" class="product-textarea"
+                            placeholder="Enter product description (EN)"
+                            required>{{inputedData.en_description}}</textarea>
+                        {{else}}
                         <textarea id="product-description-en" name="en_description" class="product-textarea"
                             placeholder="Enter product description (EN)" required></textarea>
+                        {{/if}}
 
                         <label for="product-description-uz" id="description-uz-label" class="product-label">Product
                             Description (RU)</label>
+                        {{#if inputedData}}
+                        <textarea id="product-description-uz" name="ru_description" class="product-textarea"
+                            placeholder="Enter product description (RU)"
+                            required>{{inputedData.ru_description}}</textarea>
+                        {{else}}
                         <textarea id="product-description-uz" name="ru_description" class="product-textarea"
                             placeholder="Enter product description (RU)" required></textarea>
+                        {{/if}}
                     </div>
 
+                    <div class="form-group product-title-group">
+                        <div>
+                            <label for="product-price" class="product-label">Price ($)</label>
+                            {{#if inputedData}}
+                            <input type="number" id="product-price" name="price" class="product-input"
+                                placeholder="Enter product price" required value="{{inputedData.price}}">
+                            {{else}}
+                            <input type="number" id="product-price" name="price" class="product-input"
+                                placeholder="Enter product price" required>
+                            {{/if}}
+                        </div>
+                    </div>
 
                     <!-- Product Gallery -->
                     <div class="form-group product-gallery-group">
-                        <label id="gallery-label" class="product-label">Meal Gallery</label>
+                        <label id="gallery-label" class="product-label">Select new image</label>
                         <input type="file" id="product-image" name="file" class="product-file-input" accept="image/*"
                             required>
                         <div id="upload-placeholder" class="product-image-placeholder">Drop files here or click to
@@ -179,11 +213,18 @@
                     <!-- Category Dropdown -->
                     <div class="form-group product-category-group">
                         <label for="product-category" id="category-label" class="product-label">Select Category</label>
-                        <select id="product-category" name="product-category" class="product-select">
+                        <select id="product-category" name="category" class="product-select" required>
+                            {{#if selectedCategory}}
+                            <option value="{{selectedCategory._id}}">{{selectedCategory.en_name}}</option>
+                            {{#each categories}}
+                            <option value="{{this._id}}">{{this.en_name}}</option>
+                            {{/each}}
+                            {{else}}
                             <option value="">Select category</option>
                             {{#each categories}}
                             <option value="{{this._id}}">{{this.en_name}}</option>
                             {{/each}}
+                            {{/if}}
                         </select>
                     </div>
 
