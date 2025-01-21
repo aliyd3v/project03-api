@@ -131,6 +131,10 @@ exports.createMeal = async (req, res) => {
             image_name: fileName
         })
 
+        // Write new meal to selected category on database.
+        selectedCategory.meals.push(newMeal)
+        await Category.findByIdAndUpdate(selectedCategory._id, selectedCategory)
+
         // Redirect.
         return res.redirect('/meal')
     }
@@ -260,6 +264,7 @@ exports.updateOneMeal = async (req, res) => {
             // Rendering.
             return res.render('not-found', { layout: false })
         }
+        const oldCategory = meal.category
 
         // Get all categories from database.
         const categories = await Category.find()
@@ -314,6 +319,22 @@ exports.updateOneMeal = async (req, res) => {
                 meal.price = data.price
                 meal.category = data.category
                 await Meal.findByIdAndUpdate(id, meal)
+
+                // Checking changing and update categories.
+                if (meal.category != oldCategory) {
+                    // Delete meal from old selected category.
+                    const oldCategoryData = await Category.findById(oldCategory).populate('meals')
+                    const indexMeal = oldCategoryData.meals.findIndex((value, index, array) => {
+                        return value._id == id
+                    })
+                    oldCategoryData.meals.splice(indexMeal, 1)
+                    await Category.findByIdAndUpdate(oldCategory, oldCategoryData)
+
+                    // Add meal to new selected category.
+                    const newSelectedCategory = await Category.findById(meal.category).populate('meals')
+                    newSelectedCategory.meals.push(meal)
+                    await Category.findByIdAndUpdate(meal.category, newSelectedCategory)
+                }
             }
         } else {
             // Registration path and name of file.
@@ -368,6 +389,22 @@ exports.updateOneMeal = async (req, res) => {
             meal.image_url = publicUrl
             meal.image_name = fileName
             await Meal.findByIdAndUpdate(id, meal)
+
+            // Checking changing and update categories.
+            if (meal.category != oldCategory) {
+                // Delete meal from old selected category.
+                const oldCategoryData = await Category.findById(oldCategory).populate('meals')
+                const indexMeal = oldCategoryData.meals.findIndex((value, index, array) => {
+                    return value._id == id
+                })
+                oldCategoryData.meals.splice(indexMeal, 1)
+                await Category.findByIdAndUpdate(oldCategory, oldCategoryData)
+
+                // Add meal to new selected category.
+                const newSelectedCategory = await Category.findById(meal.category).populate('meals')
+                newSelectedCategory.meals.push(meal)
+                await Category.findByIdAndUpdate(meal.category, newSelectedCategory)
+            }
         }
 
         // Redirect.
