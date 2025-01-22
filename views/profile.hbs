@@ -4,14 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Categories</title>
+    <title>Admins</title>
+    <link rel="stylesheet" href="/src/output.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="../src/output.css">
-    <link rel="stylesheet" href="../src/style.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+    <link rel="stylesheet" href="/src/style.css">
 
     <!-- icon  -->
     <link rel="icon" href="/img/gijduvon-premium-logo.webp">
@@ -23,6 +21,7 @@
         <div class="loader"></div>
     </div>
 
+    <!-- Go -->
     <header class="w-[1400px] h-24 flex justify-between items-center  my-4 mx-auto">
         <!-- header-logo -->
         <div class="flex justify-between items-center  h-full px-5 object-cover rounded-xl bg-[#111] w-[75%]"><img
@@ -42,7 +41,7 @@
         <div class="px-5 h-full object-cover rounded-xl bg-[#111] w-[23%] flex justify-between items-center">
             <a href="">
 
-                <i class="fa-solid fa-bell text-3xl text-white duration-500 cursor-pointer hover:text-[#ffc335] "></i>
+                <i class="fa-solid fa-bell text-3xl text-[white] duration-500 cursor-pointer hover:text-[#ffc335] "></i>
             </a>
             <a href="">
 
@@ -60,13 +59,16 @@
             </a>
         </div>
     </header>
-    <main class="my-10 mx-auto w-[1400px] flex justify-between gap-5">
+
+
+    <!-- ============================= -->
+    <main class="my-10 mx-auto w-[1400px] flex gap-5">
         <!-- ================================= menu ============================================== -->
         <div class="flex flex-col gap-2 w-[300px]">
             <!-- =================================menu-profil=============================== -->
             <div class="w-[300px] bg-[#111] py-3 px-5 rounded-xl">
                 <!-- profil -->
-                <a href="" class=" ">
+                <a href="/">
                     <div
                         class="w-20 h-20  bg-[white] my-0 mx-auto rounded-full grid place-items-center duration-500 cursor-pointer hover:bg-[#ffc335] ">
                         <img class="w-[90%] object-cover rounded-full "
@@ -103,10 +105,11 @@
                     <p class="text-white">Meals</p>
                 </div>
             </a>
-            <a href="/category" class="w-[300px] bg-[#111] py-3 px-5 rounded-xl ml-3  cursor-pointer">
+            <a href="/category"
+                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
-                    <i class="fa-solid fa-layer-group text-xl text-[#ffc355]"></i>
-                    <p class="text-[#ffc355]">Categories</p>
+                    <i class="fa-solid fa-layer-group text-xl text-white"></i>
+                    <p class="text-white">Categories</p>
                 </div>
             </a>
             <a href="/admin"
@@ -125,63 +128,54 @@
             </a>
         </div>
         <!-- ===============================Cotigories=====================  -->
+        <!-- History Section -->
+        <div id="history-section" class="w-[1100px] bg-[#111] rounded-xl p-5 mt-5 text-white">
+            <h2 class="text-3xl font-bold mb-4 text-[#ffc335]">Admins</h2>
 
-        <div class=" w-full ">
-            <div class="bg-main-bg p-5 items-center flex justify-between w-full h-20 rounded-xl mb-5">
-                <p class="text-white font-bold  text-2xl">CATEGORIES: <span id="cotygory-length">
-                        {{categories.length}}</span></p>
-                <a href="/category/create">
-                    <div id="add-btn" class="button bg-green-600">
-                        <div class="button-wrapper catygoryAddBtn">
-                            <div class="text">ADD</div>
-                            <span class="icon"><i class="fa-solid fa-plus"></i></span>
-                        </div>
-                    </div>
-                </a>
+            <!-- Header Box -->
+            <div class="flex justify-between bg-[#222] p-4 rounded-lg mb-3 font-bold text-[#ffc335]">
+                <p class="w-[10%] text-center">Role</p>
+                <p class="w-[20%] text-center">Username</p>
+                <p class="w-[25%] text-center">Admin ID</p>
+                <p class="w-[20%] text-center">Email</p>
+                <p class="w-[25%] text-center">Phone</p>
             </div>
+            <script>
+                console.log({{ admins }})
+            </script>
 
-            <div id="pruduct-container"
-                class="flex  flex-col bg-main-bg w-[100%] py-6 px-5 rounded-xl gap-5 list-none   overflow-x-scroll cotigories-container">
-                {{#if categories.length}}
-
-                {{#each categories}}
-                <div class="w-full gap-7 rounded-xl flex items-center p-4 col-span-2 bg-black justify-between">
-                    <div class="flex gap-3 items-center">
-                        <div class="w-32 h-32 rounded-full overflow-hidden">
-                            <img class="w-full" src="{{this.image_url}}" alt="Mahsulot rasm">
-                        </div>
-                        <div class="w-[300px]">
-                            <h1 class="text-white text-3xl">{{this.en_name}}</h1>
-                            <p class="text-[#999] text-xl">Meals: {{this.meals.length}}</p>
-                        </div>
-                    </div>
-                    <div class="flex gap-3">
-                        <a href="/category/{{this._id}}/update">
-                            <div type="submit" class="button bg-green-600 edit-cotigory">
-                                <div class="button-wrapper">
-                                    <div class="text">Edit</div>
-                                    <span class="icon"><i class="fa-solid fa-pen"></i></span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
+            {{#if admins.length}}
+            {{#each admins}}
+            <div class="order-container bg-[#222] p-4 rounded-lg mb-3">
+                <div class="flex justify-between items-center">
+                    <p class="w-[10%] text-center">{{role}}</p>
+                    <p class="w-[20%] text-center">{{username}}</p>
+                    <p class="w-[25%] text-center">{{_id}}</p>
+                    <p class="w-[20%] text-center">{{email}} </p>
+                    <p class="w-[25%] text-center">{{phone}}</p>
                 </div>
-                {{/each}}
-
-                {{else}}
-                <p class="text-white">Categories are empty.</p>
-                {{/if}}
             </div>
+            {{/each}}
+            {{else}}
+            <p>Empty</p>
+            {{/if}}
+
+            <div id="admins-container"
+                class="flex  flex-col bg-main-bg w-[100%] py-6 px-5 rounded-xl gap-5 list-none   overflow-x-scroll cotigories-container">
+            </div>
+
+            <!-- Pagination -->
+            <div id="pagination" class="flex justify-center mt-5 gap-2"></div>
+        </div>
+
     </main>
 
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script>
-        // Loader closer.
-        let containerLoad = document.querySelector(".container-loader");
         window.onload = function () {
             loading();
         };
         function loading() {
+            let containerLoad = document.querySelector(".container-loader");
             containerLoad.style.display = "none";
         }
     </script>

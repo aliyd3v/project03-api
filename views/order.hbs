@@ -50,11 +50,13 @@
             </a>
             <!-- header-porofil-logo -->
 
-            <div
-                class="w-20 h-20 bg-[white] rounded-full grid place-items-center duration-500 cursor-pointer hover:bg-[#ffc335] ">
-                <img class="w-[90%] object-cover rounded-full " src="/img/3a3f2d35-8167-4708-9ef0-bdaa980989f9.avif"
-                    alt="profil-img">
-            </div>
+            <a href="/profile">
+                <div
+                    class="w-20 h-20 bg-[white] rounded-full grid place-items-center duration-500 cursor-pointer hover:bg-[#ffc335] ">
+                    <img class="w-[90%] object-cover rounded-full " src="/img/3a3f2d35-8167-4708-9ef0-bdaa980989f9.avif"
+                        alt="profil-img">
+                </div>
+            </a>
         </div>
     </header>
 
@@ -227,7 +229,16 @@
 
     </main>
 
-    <script src="/js/order.js"></script>
+    <script>
+        // Loader closer.
+        let containerLoad = document.querySelector(".container-loader");
+        window.onload = function () {
+            loading();
+        };
+        function loading() {
+            containerLoad.style.display = "none";
+        }
+    </script>
 
 </body>
 

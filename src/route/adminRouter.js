@@ -1,6 +1,6 @@
 const { checkSchema } = require('express-validator')
 const { jwtAccessMiddleware } = require('../middleware/jwtAccessMiddleware')
-const { getAllAdmins, adminCreate, deleteOneAdmin, adminsPage } = require('../controller/adminContoller')
+const { getAllAdmins, adminCreate, deleteOneAdmin, adminsPage, profilePage } = require('../controller/adminContoller')
 const { createAdminValidationSchema } = require('../validation/adminCreateValidationSchema')
 const { SUjwtAccessMiddleware } = require('../middleware/SUjwtAccessMiddleware')
 
@@ -11,5 +11,6 @@ router
     .get('/admin', jwtAccessMiddleware, adminsPage)
     .get('/admins', jwtAccessMiddleware, getAllAdmins)
     .post('/admin/:id', SUjwtAccessMiddleware, deleteOneAdmin)
+    .get('/profile', jwtAccessMiddleware, profilePage)
 
 module.exports = router

@@ -118,8 +118,9 @@ exports.login = async (req, res) => {
         // Generating token.
         const token = tokenGenerate(user._id)
 
-        // Write cookie to browser.
+        // Write cookies to browser.
         res.cookie('token', token)
+        res.cookie('userId', user._id)
 
         // Redirect.
         return res.redirect('/')

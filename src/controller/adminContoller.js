@@ -2,6 +2,7 @@ const { salt } = require("../config/config")
 const { scryptHash } = require("../helper/crypto")
 const { Admin } = require("../model/userModel")
 const { errorHandling } = require("./errorController")
+const { idChecking } = require("./idController")
 const { validationController } = require("./validationController")
 
 exports.adminsPage = async (req, res) => {
@@ -95,6 +96,13 @@ exports.getAllAdmins = async (req, res) => {
 exports.deleteOneAdmin = async (req, res) => {
     const { params: { id } } = req
     try {
+        // Checking id to valid.
+        const idError = idChecking(req, id)
+        if (idError) {
+            // Rendering.
+            return res.render('bad-request', { layout: false })
+        }
+
         // Checking admin for existence.
         const admin = await Admin.findById(id)
         if (!admin) {
@@ -106,11 +114,10 @@ exports.deleteOneAdmin = async (req, res) => {
             })
         }
 
-        // Checking for existence another admin for controlling.
-        const admins = await Admin.find()
-        if (admins.length < 2) {
+        // Checking admin role.
+        if (admin.role == 'SUPERUSER') {
             // Responding.
-            return res.status(404).send({
+            return res.status(400).send({
                 success: false,
                 data: null,
                 error: { message: `You can't delete latest admin!` }
@@ -125,6 +132,38 @@ exports.deleteOneAdmin = async (req, res) => {
             success: true,
             error: false,
             data: { message: "Admin has been deleted successfully." }
+        })
+    }
+
+    // Error handling.
+    catch (error) {
+        errorHandling(error, res)
+    }
+}
+
+exports.profilePage = async (req, res) => {
+    try {
+        // Getting userId from cookies.
+        const id = req.cookies.userId
+        // Checking id to valid.
+        const idError = idChecking(req, id)
+        if (idError) {
+            // Rendering.
+            return res.render('bad-request', { layout: false })
+        }
+
+        // Find profile from database.
+        const profile = await Admin.findById(id)
+        if (!profile) {
+            // Rendering.
+            return res.render('not-found', { layout: false })
+        }
+
+        // Rendering.
+        return res.render('profile', {
+            layout: false,
+            userId: id,
+            profile
         })
     }
 
