@@ -28,7 +28,6 @@ exports.createVerifyForGetAllBookingAndOrder = async (req, res) => {
             })
         }
 
-
         // Create nonce for once using from token.
         const nonce = crypto.randomUUID()
         await TokenStore.create({ nonce })
@@ -95,7 +94,7 @@ exports.verifyTokenAndCreateOrderOrBooking = async (req, res) => {
                 phone: data.phone,
                 email: data.email,
                 meals: data.meals,
-                status: "Pending"
+                status: "Wait accept"
             })
 
             // Deleting nonce from database for once using from token.
@@ -111,7 +110,7 @@ exports.verifyTokenAndCreateOrderOrBooking = async (req, res) => {
                 phone: data.phone,
                 email: data.email,
                 meals,
-                status: "Pending",
+                status: "Wait accept",
                 createdAt: newOrder.createdAt
             }
             sendingOrderToTgChannel(selectedPieceFromOrder)
