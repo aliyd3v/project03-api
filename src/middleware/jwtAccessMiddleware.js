@@ -16,10 +16,14 @@ exports.jwtAccessMiddleware = async function (req, res, next) {
             return { decoded, error }
         })
         if (error) {
+            // Clear token cookie.
+            res.clearCookie('token')
             // Redirect.
             return res.redirect('/login')
         }
         if (decoded === undefined) {
+            // Clear token cookie.
+            res.clearCookie('token')
             // Redirect.
             return res.redirect('/login')
         }
@@ -28,11 +32,24 @@ exports.jwtAccessMiddleware = async function (req, res, next) {
         // Checking id to valid.
         const idError = idChecking(req, id)
         if (idError) {
+            // Clear token cookie.
+            res.clearCookie('token')
             // Redirect.
             return res.redirect('/login')
         }
         const admin = await Admin.findById(id)
         if (!admin) {
+            // Clear token cookie.
+            res.clearCookie('token')
+            // Redirect.
+            return res.redirect('/login')
+        }
+
+        // Checking userId cookie.
+        const userIdCookie = req.cookies.userId
+        if (id != userIdCookie || !userIdCookie) {
+            // Clear token cookie.
+            res.clearCookie('token')
             // Redirect.
             return res.redirect('/login')
         }
