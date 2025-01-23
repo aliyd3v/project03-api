@@ -2,7 +2,6 @@ const { TokenStore } = require('../../model/tokenStoreModel')
 const { Order } = require('../../model/orderModel')
 const { succesMsgToHtml } = require('../../helper/successMsgToHtml')
 const { sendingOrderToTgChannel } = require('../../helper/sendingOrderToTgChannel')
-const { gettingMealsFromOrder } = require('../../helper/gettingMealsFromOrder')
 const { Booking } = require('../../model/bookingModel')
 const { sendingBookingToTgChannel } = require('../../helper/sendingBookingToTgChannel')
 const { errorHandling } = require('./errorController')
@@ -12,6 +11,7 @@ const { generateToken, verifyToken } = require('./tokenController')
 const { validationController } = require('./validationController')
 const { domain } = require('../../config/config')
 const { sendVerifyToEmail } = require('../../helper/sendToMail')
+const { Meal } = require('../../model/mealModel')
 
 exports.createVerifyForGetAllBookingAndOrder = async (req, res) => {
     try {
@@ -27,7 +27,6 @@ exports.createVerifyForGetAllBookingAndOrder = async (req, res) => {
                 }
             })
         }
-
 
         // Create nonce for once using from token.
         const nonce = crypto.randomUUID()
@@ -90,28 +89,31 @@ exports.verifyTokenAndCreateOrderOrBooking = async (req, res) => {
 
         // For order.
         if (data.meals) {
-            const newOrder = await Order.create({
-                customer_name: data.customer_name,
-                phone: data.phone,
-                email: data.email,
-                meals: data.meals,
-                status: "Pending"
-            })
-
-            // Deleting nonce from database for once using from token.
-            await TokenStore.findByIdAndDelete(nonce._id)
-
-            // Getting meals from order.
-            const meals = await gettingMealsFromOrder(data.meals)
-
-            // Sending order to telegram channel.
-            const selectedPieceFromOrder = {
-                id: newOrder._id,
+            const meals = await Promise.all(
+                data.meals.map(async (element) => {
+                    const meal = await Meal.findById(element.mealId)
+                    return {
+                        meal,
+                        amount: element.amount,
+                    }
+                })
+            )
+            const order = {
                 customer_name: data.customer_name,
                 phone: data.phone,
                 email: data.email,
                 meals,
-                status: "Pending",
+                status: "Wait accept"
+            }
+            const newOrder = await Order.create(order)
+            
+            // Deleting nonce from database for once using from token.
+            await TokenStore.findByIdAndDelete(nonce._id)
+
+            // Sending order to telegram channel.
+            const selectedPieceFromOrder = {
+                id: newOrder._id,
+                ...order,
                 createdAt: newOrder.createdAt
             }
             sendingOrderToTgChannel(selectedPieceFromOrder)

@@ -9,9 +9,9 @@ exports.sendingOrderToTgChannel = (message) => {
         let mealsText = ''
         for (let i = 0; i < meals.length; i++) {
             mealsText += `${i + 1}. 
-   Meal name: ${meals[i].en_name},
+   Meal name: ${meals[i].meal.en_name},
    Amount: ${meals[i].amount},
-   Price: $${meals[i].price}
+   Price: $${meals[i].meal.price * meals[i].amount}
 `
         }
         let result = `Order id: ${msg.id},
@@ -33,9 +33,9 @@ ${mealsText}`
         let mealsText = ''
         for (let i = 0; i < meals.length; i++) {
             mealsText += `${i + 1}. 
-   Название блюда: ${meals[i].ru_name},
+   Название блюда: ${meals[i].meal.ru_name},
    Количество: ${meals[i].amount},
-   Цена: $${meals[i].price}
+   Цена: $${meals[i].meal.price * meals[i].amount}
 `
         }
         let result = `Id бронирования: ${msg.id},

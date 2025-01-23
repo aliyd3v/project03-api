@@ -5,14 +5,24 @@ const { validationController } = require("./validationController")
 const { sendVerifyToEmail } = require("../helper/sendToMail")
 const { TokenStore } = require("../model/tokenStoreModel")
 const { generateToken } = require("./tokenController")
+const { idChecking } = require("./idController")
+
+let limit = 3
+let page
 
 exports.orderPage = async (req, res) => {
+    const { query } = req
     try {
+        query.page ? page = query.page : page = 1
+
         // Get orders.
-        const orders = await Order.find().populate({ path: 'meals.mealId' })
-        const waitAcceptOrders = await Order.find({ status: 'Wait accept' }).populate({ path: 'meals.mealId' })
-        const cookingOrders = await Order.find({ status: 'Cooking' }).populate({ path: 'meals.mealId' })
-        const onWayOrders = await Order.find({ status: 'On way' }).populate({ path: 'meals.mealId' })
+        const orders = await Order.paginate(
+            { status: { $ne: "Delivered" } },
+            { page, limit, sort: { createdAt: -1 } }
+        )
+        const waitAcceptOrders = await Order.find({ status: 'Wait accept' })
+        const cookingOrders = await Order.find({ status: 'Cooking' })
+        const onWayOrders = await Order.find({ status: 'On way' })
 
         // Rendering.
         return res.render('order', {
@@ -32,12 +42,18 @@ exports.orderPage = async (req, res) => {
 }
 
 exports.waitAcceptOrderPage = async (req, res) => {
+    const { query } = req
     try {
+        query.page ? page = query.page : page = 1
+
         // Get orders.
-        const orders = await Order.find().populate({ path: 'meals.mealId' })
-        const waitAcceptOrders = await Order.find({ status: 'Wait accept' }).populate({ path: 'meals.mealId' })
-        const cookingOrders = await Order.find({ status: 'Cooking' }).populate({ path: 'meals.mealId' })
-        const onWayOrders = await Order.find({ status: 'On way' }).populate({ path: 'meals.mealId' })
+        const orders = await Order.find({ status: { $ne: "Delivered" } })
+        const waitAcceptOrders = await Order.paginate(
+            { status: "Wait accept" },
+            { page, limit, sort: { createdAt: -1 } }
+        )
+        const cookingOrders = await Order.find({ status: 'Cooking' })
+        const onWayOrders = await Order.find({ status: 'On way' })
 
         // Rendering.
         return res.render('order', {
@@ -57,12 +73,18 @@ exports.waitAcceptOrderPage = async (req, res) => {
 }
 
 exports.cookingOrderPage = async (req, res) => {
+    const { query } = req
     try {
+        query.page ? page = query.page : page = 1
+
         // Get orders.
-        const orders = await Order.find().populate({ path: 'meals.mealId' })
-        const waitAcceptOrders = await Order.find({ status: 'Wait accept' }).populate({ path: 'meals.mealId' })
-        const cookingOrders = await Order.find({ status: 'Cooking' }).populate({ path: 'meals.mealId' })
-        const onWayOrders = await Order.find({ status: 'On way' }).populate({ path: 'meals.mealId' })
+        const orders = await Order.find({ status: { $ne: "Delivered" } })
+        const waitAcceptOrders = await Order.find({ status: 'Wait accept' })
+        const cookingOrders = await Order.paginate(
+            { status: "Cooking" },
+            { page, limit, sort: { createdAt: -1 } }
+        )
+        const onWayOrders = await Order.find({ status: 'On way' })
 
         // Rendering.
         return res.render('order', {
@@ -82,12 +104,18 @@ exports.cookingOrderPage = async (req, res) => {
 }
 
 exports.onWayOrderPage = async (req, res) => {
+    const { query } = req
     try {
+        query.page ? page = query.page : page = 1
+
         // Get orders.
-        const orders = await Order.find().populate({ path: 'meals.mealId' })
-        const waitAcceptOrders = await Order.find({ status: 'Wait accept' }).populate({ path: 'meals.mealId' })
-        const cookingOrders = await Order.find({ status: 'Cooking' }).populate({ path: 'meals.mealId' })
-        const onWayOrders = await Order.find({ status: 'On way' }).populate({ path: 'meals.mealId' })
+        const orders = await Order.find({ status: { $ne: "Delivered" } })
+        const waitAcceptOrders = await Order.find({ status: 'Wait accept' })
+        const cookingOrders = await Order.find({ status: 'Cooking' })
+        const onWayOrders = await Order.paginate(
+            { status: "On way" },
+            { page, limit, sort: { createdAt: -1 } }
+        )
 
         // Rendering.
         return res.render('order', {
@@ -157,18 +185,14 @@ exports.createOrderWithVerification = async (req, res) => {
     }
 }
 
-exports.markAsDelivered = async (req, res) => {
+exports.changingStatus = async (req, res) => {
     const { params: { id } } = req
     try {
         // Checking id to valid.
         const idError = idChecking(req, id)
         if (idError) {
-            // Responding.
-            return res.status(400).send({
-                success: false,
-                data: null,
-                error: idError
-            })
+            // Rendering.
+            return res.render('not-found', { layout: false })
         }
 
         // Getting an order from database by id.
@@ -176,26 +200,25 @@ exports.markAsDelivered = async (req, res) => {
 
         // Checking order for exists.
         if (!order) {
-            // Responding.
-            return res.status(404).send({
-                success: false,
-                data: null,
-                error: {
-                    message: "Order is not found!"
-                }
-            })
+            // Rendering.
+            return res.render('not-found', { layout: false })
         }
 
         // Writing update to database.
-        order.status = 'Delivered'
+        if (order.status == 'Wait accept') {
+            order.status = 'Cooking'
+        } else if (order.status == 'Cooking') {
+            order.status = 'On way'
+        } else if (order.status == 'On way') {
+            order.status = 'Delivered'
+        } else {
+            // Rendering.
+            return res.render('bad-request', { layout: false })
+        }
         await Order.findByIdAndUpdate(id, order)
 
-        // Responding.
-        return res.status(201).send({
-            success: true,
-            error: false,
-            data: { message: "Order status has been updated successfully." }
-        })
+        // Redirect.
+        return res.redirect('/order')
     }
 
     // Error handling.

@@ -10,10 +10,7 @@ const orderSchema = new Schema({
         enum: ['Delivered', 'Cooking', 'On way', 'Wait accept'],
     },
     meals: [{
-        mealId: {
-            type: Schema.Types.ObjectId,
-            ref: 'Meal'
-        },
+        meal: Object,
         amount: Number
     }]
 }, { timestamps: true })
