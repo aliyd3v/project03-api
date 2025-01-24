@@ -5,15 +5,20 @@ const { idChecking } = require("./idController")
 const { uploadImage, getImageUrl, deleteImage } = require("./imageConroller")
 const { validationController } = require("./validationController")
 const { Meal } = require("../model/mealModel")
+const { Admin } = require('../model/userModel')
 
 exports.categoryPage = async (req, res) => {
     try {
+        // Get user.
+        const user = await Admin.findById(req.cookies.userId)
+
         // Get all categories from database.
         const categories = await Category.find().populate('meals')
 
         // Rendering.
         return res.render('category', {
             layout: false,
+            user,
             categories
         })
     }
@@ -24,11 +29,15 @@ exports.categoryPage = async (req, res) => {
     }
 }
 
-exports.createCategoryPage = (req, res) => {
+exports.createCategoryPage = async (req, res) => {
     try {
+        // Get user.
+        const user = await Admin.findById(req.cookies.userId)
+
         // Rendering.
         return res.render('category-create', {
-            layout: false
+            layout: false,
+            user
         })
     }
 
@@ -40,6 +49,9 @@ exports.createCategoryPage = (req, res) => {
 
 exports.createCategory = async (req, res) => {
     try {
+        // Get user.
+        const user = await Admin.findById(req.cookies.userId)
+
         // Result validation.
         const { data, error } = validationController(req, res)
         if (error) {
@@ -47,7 +59,8 @@ exports.createCategory = async (req, res) => {
             return res.render('category-create', {
                 layout: false,
                 inputedData: data,
-                errorMessage: error
+                errorMessage: error,
+                user
             })
         }
 
@@ -63,7 +76,8 @@ exports.createCategory = async (req, res) => {
             return res.render('category-create', {
                 layout: false,
                 inputedData: data,
-                errorMessage: `Already exists category with english name "${data.en_name}". Please enter another english name!`
+                errorMessage: `Already exists category with english name "${data.en_name}". Please enter another english name!`,
+                user
             })
         }
         const ru_name_condidat = await Category.findOne({ ru_name: data.ru_name })
@@ -73,7 +87,8 @@ exports.createCategory = async (req, res) => {
             return res.render('category-create', {
                 layout: false,
                 inputedData: data,
-                errorMessage: `Already exists category with russian name "${data.ru_name}". Please enter another russian name!`
+                errorMessage: `Already exists category with russian name "${data.ru_name}". Please enter another russian name!`,
+                user
             })
         }
 
@@ -85,7 +100,8 @@ exports.createCategory = async (req, res) => {
             return res.render('category-create', {
                 layout: false,
                 inputed: data,
-                errorMessage: 'Error uploading image! Please try again later.'
+                errorMessage: 'Error uploading image! Please try again later.',
+                user
             })
         }
         const { publicUrl } = await getImageUrl(fileName, filePath)
@@ -101,66 +117,6 @@ exports.createCategory = async (req, res) => {
 
         // Redirect.
         return res.redirect('/category')
-    }
-
-    // Error handling.
-    catch (error) {
-        errorHandling(error, res)
-    }
-}
-
-exports.getAllCategories = async (req, res) => {
-    try {
-        // Getting all categories from database.
-        const categories = await Category.find().populate('meals')
-
-        // Responding.
-        return res.status(200).send({
-            success: true,
-            error: false,
-            data: {
-                message: "Getting all categories successfully.",
-                categories
-            }
-        })
-    }
-
-    // Error handling.
-    catch (error) {
-        errorHandling(error, res)
-    }
-}
-
-exports.getOneCategory = async (req, res) => {
-    const { params: { id } } = req
-    try {
-        // Checking id to valid.
-        const idError = idChecking(req, id)
-        if (idError) {
-            // Rendering.
-            return res.render('bad-request', { layout: false })
-        }
-
-        // Searching category with id.
-        const category = await Category.findById(id).populate('meals')
-
-        // Checking category for existence.
-        if (!category) {
-            // Rendering.
-            return res.render('not-found', {
-                layout: false
-            })
-        }
-
-        // Responding.
-        return res.status(200).send({
-            success: true,
-            error: false,
-            data: {
-                message: "Category has been getted successful.",
-                category
-            }
-        })
     }
 
     // Error handling.
@@ -219,6 +175,9 @@ exports.getCategoryMeals = async (req, res) => {
 exports.updateCategoryPage = async (req, res) => {
     const { params: { id } } = req
     try {
+        // Get user.
+        const user = await Admin.findById(req.cookies.userId)
+
         // Checking id to valid.
         const idError = idChecking(req, id)
         if (idError) {
@@ -237,7 +196,8 @@ exports.updateCategoryPage = async (req, res) => {
 
         return res.render('category-update', {
             layout: false,
-            oldCategory
+            oldCategory,
+            user
         })
     }
 
@@ -270,13 +230,17 @@ exports.updateOneCategory = async (req, res) => {
             })
         }
 
+        // Get user.
+        const user = await Admin.findById(req.cookies.userId)
+
         // Result validation.
         const { data, error } = validationController(req, res)
         if (error) {
             // Rendering.
             return res.render('category-update', {
                 layout: false,
-                errorMessage: error
+                errorMessage: error,
+                user
             })
         }
 
@@ -290,7 +254,8 @@ exports.updateOneCategory = async (req, res) => {
                     return res.render('category-update', {
                         layout: false,
                         inputedData: data,
-                        errorMessage: `Already exists category with english name "${data.en_name}". Please enter another english name!`
+                        errorMessage: `Already exists category with english name "${data.en_name}". Please enter another english name!`,
+                        user
                     })
                 }
                 const ru_name_condidat = await Category.findOne({ ru_name: data.ru_name })
@@ -299,7 +264,8 @@ exports.updateOneCategory = async (req, res) => {
                     return res.render('category-update', {
                         layout: false,
                         inputedData: data,
-                        errorMessage: `Already exists category with russian name "${data.ru_name}". Please enter another russian name!`
+                        errorMessage: `Already exists category with russian name "${data.ru_name}". Please enter another russian name!`,
+                        user
                     })
                 }
 
@@ -322,7 +288,8 @@ exports.updateOneCategory = async (req, res) => {
                 return res.render('category-update', {
                     layout: false,
                     inputedData: data,
-                    errorMessage: `Already exists category with english name "${data.en_name}". Please enter another english name!`
+                    errorMessage: `Already exists category with english name "${data.en_name}". Please enter another english name!`,
+                    user
                 })
             }
             const ru_name_condidat = await Category.findOne({ ru_name: data.ru_name })
@@ -332,7 +299,8 @@ exports.updateOneCategory = async (req, res) => {
                 return res.render('category-update', {
                     layout: false,
                     inputedData: data,
-                    errorMessage: `Already exists category with russian name "${data.ru_name}". Please enter another russian name!`
+                    errorMessage: `Already exists category with russian name "${data.ru_name}". Please enter another russian name!`,
+                    user
                 })
             }
 

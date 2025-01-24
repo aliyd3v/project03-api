@@ -7,12 +7,34 @@ const { validationController } = require("./validationController")
 
 exports.adminsPage = async (req, res) => {
     try {
+        // Get user.
+        const user = await Admin.findById(req.cookies.userId)
+
         // Get all admins from database.
         const admins = await Admin.find()
         // Rendering.
         return res.render('admin', {
             layout: false,
-            admins: admins
+            user,
+            admins
+        })
+    }
+
+    // Error handling.
+    catch (error) {
+        errorHandling(error, res)
+    }
+}
+
+exports.adminCreatePage = async (req, res) => {
+    try {
+        // Get user.
+        const user = await Admin.findById(req.cookies.userId)
+
+        // Rendering.
+        return res.render('admin-create', {
+            layout: false,
+            user
         })
     }
 
@@ -77,14 +99,34 @@ exports.adminCreate = async (req, res) => {
     }
 }
 
-exports.getAllAdmins = async (req, res) => {
+exports.updateOneAdmin = async (req, res) => {
+    const { params: { id } } = req
     try {
-        const admins = await Admin.find()
-        return res.status(201).send({
-            success: true,
-            error: false,
-            data: { admins }
-        })
+        // Checking id to valid.
+        const idError = idChecking(req, id)
+        if (idError) {
+            // Rendering.
+            return res.render('bad-request', { layout: false })
+        }
+
+        // Checking admin for existence.
+        const admin = await Admin.findById(id)
+        if (!admin) {
+            // Rendering.
+            return res.render('not-found', { layout: false })
+        }
+
+        // Checking admin role.
+        if (admin.role == 'SUPERUSER') {
+            // Rendering.
+            return res.render('bad-request', { layout: false })
+        }
+
+        // Deleting admin from database.
+        await Admin.findByIdAndUpdate(id, admin)
+
+        // Redirect.
+        return res.redirect('/admin')
     }
 
     // Error handling.
@@ -106,33 +148,21 @@ exports.deleteOneAdmin = async (req, res) => {
         // Checking admin for existence.
         const admin = await Admin.findById(id)
         if (!admin) {
-            // Responding.
-            return res.status(404).send({
-                success: false,
-                data: null,
-                error: { message: `Admin is not found!` }
-            })
+            // Rendering.
+            return res.render('not-found', { layout: false })
         }
 
         // Checking admin role.
         if (admin.role == 'SUPERUSER') {
-            // Responding.
-            return res.status(400).send({
-                success: false,
-                data: null,
-                error: { message: `You can't delete latest admin!` }
-            })
+            // Rendering.
+            return res.render('bad-request', { layout: false })
         }
 
         // Deleting admin from database.
         await Admin.findByIdAndDelete(id)
 
-        // Responding.
-        return res.status(200).send({
-            success: true,
-            error: false,
-            data: { message: "Admin has been deleted successfully." }
-        })
+        // Redirect.
+        return res.redirect('/admin')
     }
 
     // Error handling.
@@ -158,12 +188,14 @@ exports.profilePage = async (req, res) => {
             // Rendering.
             return res.render('not-found', { layout: false })
         }
+        const user = profile
 
         // Rendering.
         return res.render('profile', {
             layout: false,
             userId: id,
-            profile
+            profile,
+            user
         })
     }
 

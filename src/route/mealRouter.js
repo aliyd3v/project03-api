@@ -11,8 +11,6 @@ router
     .get('/meal', jwtAccessMiddleware, mealPage)
     .get('/meal/create', jwtAccessMiddleware, createMealPage)
     .post('/meal/create', jwtAccessMiddleware, upload.single('file'), checkSchema(mealCreateValidationSchema), createMeal)
-    .get('/meals', getAllMeals)
-    .get('/meal/:id', getOneMeal)
     .get('/meal/:id/update', jwtAccessMiddleware, updateMealPage)
     .post('/meal/:id/update', jwtAccessMiddleware, upload.single('file'), checkSchema(mealUpdateValidationSchema), updateOneMeal)
     .post('/meal/:id/delete', jwtAccessMiddleware, deleteOneMeal)

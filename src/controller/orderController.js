@@ -6,6 +6,7 @@ const { sendVerifyToEmail } = require("../helper/sendToMail")
 const { TokenStore } = require("../model/tokenStoreModel")
 const { generateToken } = require("./tokenController")
 const { idChecking } = require("./idController")
+const { Admin } = require('../model/userModel')
 
 let limit = 3
 let page
@@ -24,6 +25,9 @@ exports.orderPage = async (req, res) => {
         const cookingOrders = await Order.find({ status: 'Cooking' })
         const onWayOrders = await Order.find({ status: 'On way' })
 
+        // Get user.
+        const user = await Admin.findById(req.cookies.userId)
+
         // Rendering.
         return res.render('order', {
             layout: false,
@@ -31,7 +35,8 @@ exports.orderPage = async (req, res) => {
             orders,
             waitAcceptOrders,
             cookingOrders,
-            onWayOrders
+            onWayOrders,
+            user
         })
     }
 
@@ -55,6 +60,9 @@ exports.waitAcceptOrderPage = async (req, res) => {
         const cookingOrders = await Order.find({ status: 'Cooking' })
         const onWayOrders = await Order.find({ status: 'On way' })
 
+        // Get user.
+        const user = await Admin.findById(req.cookies.userId)
+
         // Rendering.
         return res.render('order', {
             layout: false,
@@ -62,7 +70,8 @@ exports.waitAcceptOrderPage = async (req, res) => {
             orders,
             waitAcceptOrders,
             cookingOrders,
-            onWayOrders
+            onWayOrders,
+            user
         })
     }
 
@@ -86,6 +95,9 @@ exports.cookingOrderPage = async (req, res) => {
         )
         const onWayOrders = await Order.find({ status: 'On way' })
 
+        // Get user.
+        const user = await Admin.findById(req.cookies.userId)
+
         // Rendering.
         return res.render('order', {
             layout: false,
@@ -93,7 +105,8 @@ exports.cookingOrderPage = async (req, res) => {
             orders,
             waitAcceptOrders,
             cookingOrders,
-            onWayOrders
+            onWayOrders,
+            user
         })
     }
 
@@ -117,6 +130,9 @@ exports.onWayOrderPage = async (req, res) => {
             { page, limit, sort: { createdAt: -1 } }
         )
 
+        // Get user.
+        const user = await Admin.findById(req.cookies.userId)
+
         // Rendering.
         return res.render('order', {
             layout: false,
@@ -124,7 +140,8 @@ exports.onWayOrderPage = async (req, res) => {
             orders,
             waitAcceptOrders,
             cookingOrders,
-            onWayOrders
+            onWayOrders,
+            user
         })
     }
 

@@ -1,0 +1,85 @@
+/* General styling */
+
+.profile-container {
+  width: 100%;
+  padding: 5px;
+  background-color: #111;
+  border-radius: 12px;
+}
+
+.profile-card {
+  display: flex;
+  justify-content: start;
+  gap: 60px;
+  background-color: rgb(17, 17, 17);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile-image {
+  width: 50%;
+  background: black;
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.profile-image img {
+  width: 220px;
+  height: 220px;
+  margin: 0px auto;
+  border-radius: 50%;
+  border: 3px solid #ffc335;
+}
+
+.profile-info {
+  margin-left: 30px;
+  background-color: rgb(17, 17, 17);
+  padding: 10px;
+  border-radius: 10px;
+  width: 50%;
+}
+
+.profile-name {
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+  margin-top: 20px;
+}
+
+.profile-email,
+.profile-phone,
+.profile-address,
+.profil-userName,
+.profile-role {
+  margin: 8px 0;
+  font-size: 20px !important;
+  color: #d1d1d1;
+  background-color: black;
+  padding: 2px 15px;
+
+  border-radius: 10px;
+}
+
+.profile-email span,
+.profile-phone span,
+.profile-address span,
+.profil-userName span,
+.profile-role span {
+  font-size: 16px;
+  color: white;
+}
+
+.profile-email:hover,
+.profile-phone:hover,
+.profile-address:hover,
+.profil-userName:hover,
+.profile-role:hover {
+  color: #ffc335;
+  cursor: pointer;
+}
+
+.profile-info p {
+  font-size: 16px;
+}

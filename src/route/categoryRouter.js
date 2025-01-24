@@ -10,8 +10,6 @@ router
     .get('/category', jwtAccessMiddleware, categoryPage)
     .get('/category/create', jwtAccessMiddleware, createCategoryPage)
     .post('/category/create', jwtAccessMiddleware, upload.single('file'), checkSchema(categoryCreateValidationSchema), createCategory)
-    .get('/categories', getAllCategories)
-    .get('/category/:id', getOneCategory)
     .get('/category/:id/meals', getCategoryMeals)
     .get('/category/:id/update', jwtAccessMiddleware, updateCategoryPage)
     .post('/category/:id/update', jwtAccessMiddleware, upload.single('file'), checkSchema(categoryUpdateValidationSchema), updateOneCategory)

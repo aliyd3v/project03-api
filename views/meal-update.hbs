@@ -67,14 +67,12 @@
             <!-- =================================menu-profil=============================== -->
             <div class="w-[300px] bg-[#111] py-3 px-5 rounded-xl">
                 <!-- profil -->
-                <a href="" class=" ">
-                    <div
-                        class="w-20 h-20  bg-[white] my-0 mx-auto rounded-full grid place-items-center duration-500 cursor-pointer hover:bg-[#ffc335] ">
-                        <img class="w-[90%] object-cover rounded-full "
-                            src="/img/3a3f2d35-8167-4708-9ef0-bdaa980989f9.avif" alt="profil-img">
-                    </div>
-                    <h3 class="text-center text-xl my-5 mx-auto w-40 break-normal text-white">{{user.name}}</h3>
-                </a>
+                <div class="w-20 h-20  bg-[white] my-0 mx-auto rounded-full grid place-items-center duration-500 cursor-pointer hover:bg-[#ffc335]"
+                    style="cursor: auto;">
+                    <img class="w-[90%] object-cover rounded-full " src="/img/3a3f2d35-8167-4708-9ef0-bdaa980989f9.avif"
+                        alt="profil-img">
+                </div>
+                <h3 class="text-center text-xl my-5 mx-auto w-40 break-normal text-white">{{user.name}}</h3>
             </div>
             <!-- =========================================menu-Cotigoris=============================== -->
             <a href="/" class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
@@ -110,6 +108,7 @@
                     <p class="text-white">Categories</p>
                 </div>
             </a>
+            {{#if (isEqual user.role "SUPERUSER")}}
             <a href="/admin"
                 class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
@@ -117,6 +116,7 @@
                     <p class="text-white">Admins</p>
                 </div>
             </a>
+            {{/if}}
             <a href="/logout"
                 class="w-[300px] boss bg-red-600 py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">

@@ -5,16 +5,21 @@ const { idChecking } = require("./idController")
 const { uploadImage, getImageUrl, deleteImage } = require("./imageConroller")
 const { validationController } = require("./validationController")
 const fs = require('fs')
+const { Admin } = require('../model/userModel')
 
 exports.mealPage = async (req, res) => {
     try {
+        // Get user.
+        const user = await Admin.findById(req.cookies.userId)
+
         // Get all meals from database.
         const meals = await Meal.find().populate('category')
 
         // Rendering.
         return res.render('meal', {
             layout: false,
-            meals
+            meals,
+            user
         })
     }
 
@@ -26,6 +31,9 @@ exports.mealPage = async (req, res) => {
 
 exports.createMealPage = async (req, res) => {
     try {
+        // Get user.
+        const user = await Admin.findById(req.cookies.userId)
+
         // Get all categories from database.
         const categories = await Category.find()
 
@@ -34,14 +42,16 @@ exports.createMealPage = async (req, res) => {
             // Rendering.
             return res.render('meal-create', {
                 layout: false,
-                errorMessage: "Categories are empty. Please, first create category!"
+                errorMessage: "Categories are empty. Please, first create category!",
+                user
             })
         }
 
         // Rendering.
         return res.render('meal-create', {
             layout: false,
-            categories
+            categories,
+            user
         })
     }
 
@@ -53,6 +63,9 @@ exports.createMealPage = async (req, res) => {
 
 exports.createMeal = async (req, res) => {
     try {
+        // Get user.
+        const user = await Admin.findById(req.cookies.userId)
+
         // Result validation.
         const { data, error } = validationController(req, res)
         if (error) {
@@ -60,7 +73,8 @@ exports.createMeal = async (req, res) => {
             return res.render('meal-create', {
                 layout: false,
                 inputedData: data,
-                errorMessage: error
+                errorMessage: error,
+                user
             })
         }
 
@@ -89,7 +103,8 @@ exports.createMeal = async (req, res) => {
                     inputedData: data,
                     categories,
                     selectedCategory,
-                    errorMessage: `Already exists with english name "${data.en_name}"! Please enter another name.`
+                    errorMessage: `Already exists with english name "${data.en_name}"! Please enter another name.`,
+                    user
                 })
             }
             const ru_name_condidat = await Meal.findOne({ ru_name: data.ru_name })
@@ -101,7 +116,8 @@ exports.createMeal = async (req, res) => {
                     inputedData: data,
                     categories,
                     selectedCategory,
-                    errorMessage: `Already exists with russian name "${data.ru_name}"! Please enter another name.`
+                    errorMessage: `Already exists with russian name "${data.ru_name}"! Please enter another name.`,
+                    user
                 })
             }
         } else {
@@ -110,7 +126,8 @@ exports.createMeal = async (req, res) => {
             return res.render('meal-create', {
                 layout: false,
                 inputedData: data,
-                errorMessage: `Category is not valid. Please, select try again!`
+                errorMessage: `Category is not valid. Please, select try again!`,
+                user
             })
         }
 
@@ -137,66 +154,6 @@ exports.createMeal = async (req, res) => {
 
         // Redirect.
         return res.redirect('/meal')
-    }
-
-    // Error handling.
-    catch (error) {
-        errorHandling(error, res)
-    }
-}
-
-exports.getAllMeals = async (req, res) => {
-    try {
-        const meals = await Meal.find().populate('category')
-        return res.status(200).send({
-            success: true,
-            error: false,
-            data: {
-                message: "Getting all meals is successful.",
-                meals
-            }
-        })
-    }
-
-    // Error handling.
-    catch (error) {
-        errorHandling(error, res)
-    }
-}
-
-exports.getOneMeal = async (req, res) => {
-    const { params: { id } } = req
-    try {
-        // Checking id to valid.
-        const idError = idChecking(req, id)
-        if (idError) {
-            // Responding.
-            return res.status(400).send({
-                success: false,
-                data: null,
-                error: idError
-            })
-        }
-
-        // Checking meal to exists.
-        const meal = await Meal.findById(id).populate('category')
-        if (!meal) {
-            return res.status(404).send({
-                success: false,
-                data: null,
-                error: { message: "Meal is not found!" }
-            })
-        }
-
-        // Responding.
-        return res.status(200).send({
-            success: true,
-            error: false,
-            data: {
-                message: "Meal has been getted successful.",
-                meal
-            }
-        })
     }
 
     // Error handling.
@@ -233,11 +190,15 @@ exports.updateMealPage = async (req, res) => {
         })
         categories.splice(categoryIndex, 1)
 
+        // Get user.
+        const user = await Admin.findById(req.cookies.userId)
+        
         // Rendering.
         return res.render('meal-update', {
             layout: false,
             oldMeal: meal,
-            categories
+            categories,
+            user
         })
     }
 
@@ -269,6 +230,9 @@ exports.updateOneMeal = async (req, res) => {
         // Get all categories from database.
         const categories = await Category.find()
 
+        // Get user.
+        const user = await Admin.findById(req.cookies.userId)
+        
         // Result validation.
         const { data, error } = validationController(req, res)
         if (error) {
@@ -278,7 +242,8 @@ exports.updateOneMeal = async (req, res) => {
                 oldMeal: meal,
                 inputedData: data,
                 errorMessage: error,
-                categories
+                categories,
+                user
             })
         }
 
@@ -293,7 +258,8 @@ exports.updateOneMeal = async (req, res) => {
                             oldMeal: meal,
                             inputedData: data,
                             errorMessage: `Already exists with english title meal "${data.en_name}".`,
-                            categories
+                            categories,
+                            user
                         })
                     }
                 }
@@ -306,7 +272,8 @@ exports.updateOneMeal = async (req, res) => {
                             oldMeal: meal,
                             inputedData: data,
                             errorMessage: `Already exists with russian title meal "${data.ru_name}".`,
-                            categories
+                            categories,
+                            user
                         })
                     }
                 }
@@ -352,7 +319,8 @@ exports.updateOneMeal = async (req, res) => {
                         oldMeal: meal,
                         inputedData: data,
                         errorMessage: `Already exists with english title meal "${data.en_name}".`,
-                        categories
+                        categories,
+                        user
                     })
                 }
             }
@@ -366,7 +334,8 @@ exports.updateOneMeal = async (req, res) => {
                         oldMeal: meal,
                         inputedData: data,
                         errorMessage: `Already exists with russian title meal "${data.ru_name}".`,
-                        categories
+                        categories,
+                        user
                     })
                 }
             }

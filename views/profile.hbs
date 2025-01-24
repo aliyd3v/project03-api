@@ -4,12 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admins</title>
+    <title>Profile</title>
     <link rel="stylesheet" href="/src/output.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/src/style.css">
+    <link rel="stylesheet" href="/src/admin.css">
 
     <!-- icon  -->
     <link rel="icon" href="/img/gijduvon-premium-logo.webp">
@@ -17,9 +18,9 @@
 
 <body class="bg-black">
 
-    <div class="container-loader">
+    <!-- <div class="container-loader">
         <div class="loader"></div>
-    </div>
+    </div> -->
 
     <!-- Go -->
     <header class="w-[1400px] h-24 flex justify-between items-center  my-4 mx-auto">
@@ -50,13 +51,11 @@
             </a>
             <!-- header-porofil-logo -->
 
-            <a href="/profile">
-                <div
-                    class="w-20 h-20 bg-[white] rounded-full grid place-items-center duration-500 cursor-pointer hover:bg-[#ffc335] ">
-                    <img class="w-[90%] object-cover rounded-full " src="/img/3a3f2d35-8167-4708-9ef0-bdaa980989f9.avif"
-                        alt="profil-img">
-                </div>
-            </a>
+            <div
+                class="w-20 h-20 bg-[white] rounded-full grid place-items-center duration-500 cursor-pointer hover:bg-[#ffc335] ">
+                <img class="w-[90%] object-cover rounded-full " src="/img/3a3f2d35-8167-4708-9ef0-bdaa980989f9.avif"
+                    alt="profil-img">
+            </div>
         </div>
     </header>
 
@@ -68,14 +67,12 @@
             <!-- =================================menu-profil=============================== -->
             <div class="w-[300px] bg-[#111] py-3 px-5 rounded-xl">
                 <!-- profil -->
-                <a href="/">
-                    <div
-                        class="w-20 h-20  bg-[white] my-0 mx-auto rounded-full grid place-items-center duration-500 cursor-pointer hover:bg-[#ffc335] ">
-                        <img class="w-[90%] object-cover rounded-full "
-                            src="/img/3a3f2d35-8167-4708-9ef0-bdaa980989f9.avif" alt="profil-img">
-                    </div>
-                    <h3 class="text-center text-xl my-5 mx-auto w-40 break-normal text-white">{{user.name}}</h3>
-                </a>
+                <div class="w-20 h-20  bg-[white] my-0 mx-auto rounded-full grid place-items-center duration-500 cursor-pointer hover:bg-[#ffc335]"
+                    style="cursor: auto;">
+                    <img class="w-[90%] object-cover rounded-full " src="/img/3a3f2d35-8167-4708-9ef0-bdaa980989f9.avif"
+                        alt="profil-img">
+                </div>
+                <h3 class="text-center text-xl my-5 mx-auto w-40 break-normal text-white">{{user.name}}</h3>
             </div>
             <!-- =========================================menu-Cotigoris=============================== -->
             <a href="/" class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
@@ -112,6 +109,7 @@
                     <p class="text-white">Categories</p>
                 </div>
             </a>
+            {{#if (isEqual user.role "SUPERUSER")}}
             <a href="/admin"
                 class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
@@ -119,6 +117,7 @@
                     <p class="text-white">Admins</p>
                 </div>
             </a>
+            {{/if}}
             <a href="/logout"
                 class="w-[300px] boss bg-red-600 py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
@@ -128,57 +127,35 @@
             </a>
         </div>
         <!-- ===============================Cotigories=====================  -->
-        <!-- History Section -->
-        <div id="history-section" class="w-[1100px] bg-[#111] rounded-xl p-5 mt-5 text-white">
-            <h2 class="text-3xl font-bold mb-4 text-[#ffc335]">Admins</h2>
 
-            <!-- Header Box -->
-            <div class="flex justify-between bg-[#222] p-4 rounded-lg mb-3 font-bold text-[#ffc335]">
-                <p class="w-[10%] text-center">Role</p>
-                <p class="w-[20%] text-center">Username</p>
-                <p class="w-[25%] text-center">Admin ID</p>
-                <p class="w-[20%] text-center">Email</p>
-                <p class="w-[25%] text-center">Phone</p>
-            </div>
-            <script>
-                console.log({{ admins }})
-            </script>
-
-            {{#if admins.length}}
-            {{#each admins}}
-            <div class="order-container bg-[#222] p-4 rounded-lg mb-3">
-                <div class="flex justify-between items-center">
-                    <p class="w-[10%] text-center">{{role}}</p>
-                    <p class="w-[20%] text-center">{{username}}</p>
-                    <p class="w-[25%] text-center">{{_id}}</p>
-                    <p class="w-[20%] text-center">{{email}} </p>
-                    <p class="w-[25%] text-center">{{phone}}</p>
+        <div class="w-full">
+            <!-- -------------------- -->
+            <div class="bg-main-bg p-5 flex flex-col w-full h-20 rounded-xl mb-5">
+                <div class="header">
+                    <h1 class="text-[#ffc335] font-bold  text-2xl">Profile</h1>
                 </div>
             </div>
-            {{/each}}
-            {{else}}
-            <p>Empty</p>
-            {{/if}}
 
-            <div id="admins-container"
-                class="flex  flex-col bg-main-bg w-[100%] py-6 px-5 rounded-xl gap-5 list-none   overflow-x-scroll cotigories-container">
+            <div class="profile-container">
+                <div class="profile-card">
+                    <div class="profile-image">
+                        <img src="img/3a3f2d35-8167-4708-9ef0-bdaa980989f9.avif" alt="Profile Picture">
+                        <h2 class="profile-name">{{user.name}}</h2>
+                    </div>
+                    <div class="profile-info">
+                        <p class="profil-userName"><span>Username:</span><br> {{user.username}}</p>
+                        <p class="profile-email"><span>Email:</span><br> {{user.email}}</p>
+                        <p class="profile-phone"><span>Phone:</span><br> {{user.phone}}</p>
+                        <p class="profile-address"><span>Address:</span><br> 123 Main Street, Tashkent, Uzbekistan</p>
+                        <p class="profile-role"><span>Role:</span><br> {{user.role}}</p>
+                    </div>
+                </div>
             </div>
-
-            <!-- Pagination -->
-            <div id="pagination" class="flex justify-center mt-5 gap-2"></div>
         </div>
 
     </main>
 
-    <script>
-        window.onload = function () {
-            loading();
-        };
-        function loading() {
-            let containerLoad = document.querySelector(".container-loader");
-            containerLoad.style.display = "none";
-        }
-    </script>
+    <script src="./js/order.js"></script>
 
 </body>
 

@@ -39,12 +39,11 @@
 
         <!-- header-profil -->
         <div class="px-5 h-full object-cover rounded-xl bg-[#111] w-[23%] flex justify-between items-center">
-            <a href="">
-                <i class="fa-solid fa-bell text-3xl text-[white] duration-500 cursor-pointer hover:text-[#ffc335]"></i>
+            <a href="/profile">
+                <p class="text-xl text-[white] duration-500 cursor-pointer hover:text-[#ffc335]">@{{user.username}}</p>
             </a>
-            <a href="">
-                <i
-                    class="fa-solid fa-message text-3xl text-[white] duration-500 cursor-pointer hover:text-[#ffc335]"></i>
+            <a href="/profile">
+                <p class="text-x text-[white] duration-500 cursor-pointer hover:text-[#ffc335]">{{user.role}}</p>
             </a>
             <!-- header-porofil-logo -->
             <a href="/profile">
@@ -61,14 +60,12 @@
         <!-- menu -->
         <div class="flex flex-col gap-2 w-[300px]">
             <div class="w-[300px] bg-[#111] py-3 px-5 rounded-xl">
-                <a href="">
-                    <div
-                        class="w-20 h-20 bg-[white] my-0 mx-auto rounded-full grid place-items-center duration-500 cursor-pointer hover:bg-[#ffc335]">
-                        <img class="w-[90%] object-cover rounded-full"
-                            src="/img/3a3f2d35-8167-4708-9ef0-bdaa980989f9.avif" alt="profil-img">
-                    </div>
-                    <h3 class="text-center text-xl my-5 mx-auto w-40 break-normal text-white">{{user.name}}</h3>
-                </a>
+                <div class="w-20 h-20  bg-[white] my-0 mx-auto rounded-full grid place-items-center duration-500 cursor-pointer hover:bg-[#ffc335]"
+                    style="cursor: auto;">
+                    <img class="w-[90%] object-cover rounded-full " src="/img/3a3f2d35-8167-4708-9ef0-bdaa980989f9.avif"
+                        alt="profil-img">
+                </div>
+                <h3 class="text-center text-xl my-5 mx-auto w-40 break-normal text-white">{{user.name}}</h3>
             </div>
             <!-- Menu-items -->
             <a href="/" class="w-[300px] bg-[#111] py-3 px-5 rounded-xl ml-3  cursor-pointer">
@@ -105,13 +102,15 @@
                     <p class="text-white">Categories</p>
                 </div>
             </a>
+            {{#if (isEqual user.role "SUPERUSER")}}
             <a href="/admin"
-                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500   hover:-ml-3 ">
+                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
                     <i class="fa-solid fa-users text-xl text-white"></i>
                     <p class="text-white">Admins</p>
                 </div>
             </a>
+            {{/if}}
             <a href="/logout"
                 class="w-[300px] boss bg-red-600 py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">

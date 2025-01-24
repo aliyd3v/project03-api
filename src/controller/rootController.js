@@ -1,11 +1,15 @@
 const { errorHandling } = require("./errorController")
+const { Admin } = require('../model/userModel')
 
-exports.rootController = (req, res) => {
+exports.rootController = async (req, res) => {
     try {
+        // Get user.
+        const user = await Admin.findById(req.cookies.userId)
+
         // Rendering.
         return res.render('home', {
             layout: false,
-            rootPage: true
+            user
         })
     }
 

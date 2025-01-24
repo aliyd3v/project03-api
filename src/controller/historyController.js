@@ -1,14 +1,18 @@
 const { Booking } = require("../model/bookingModel")
 const { Order } = require("../model/orderModel")
 const { errorHandling } = require("./errorController")
+const { Admin } = require('../model/userModel')
 
 let page = 1
-let limit = 10
+let limit = 4
 
 exports.historyPage = async (req, res) => {
     try {
-        let docs = []
+        // Get user.
+        const user = await Admin.findById(req.cookies.userId)
 
+        // Get all history.
+        let docs = []
         const order = await Order.paginate(
             { status: 'Delivered' },
             { sort: { createdAt: -1 } })
@@ -18,7 +22,7 @@ exports.historyPage = async (req, res) => {
         )
         docs.push(...order.docs, ...booking.docs)
 
-        console.log(docs)
+        // console.log(docs)
 
         const totalCount = order.totalDocs + booking.totalDocs
 
@@ -27,7 +31,64 @@ exports.historyPage = async (req, res) => {
             isAll: true,
             totalCount,
             order,
-            booking
+            booking,
+            user
+        })
+    }
+
+    // Error handling.
+    catch (error) {
+        errorHandling(error, res)
+    }
+}
+
+exports.orderHistoryPage = async (req, res) => {
+    const { query } = req
+    try {
+        query.page ? page = query.page : false
+
+        // Get orders with status "Delivered".
+        const orders = await Order.paginate(
+            { status: 'Delivered' },
+            { page, limit, sort: { createdAt: -1 } }
+        )
+
+        // Get user.
+        const user = await Admin.findById(req.cookies.userId)
+
+        // Rendering.
+        return res.render('order-history', {
+            layout: false,
+            user,
+            orders
+        })
+    }
+
+    // Error handling.
+    catch (error) {
+        errorHandling(error, res)
+    }
+}
+
+exports.bookingHistoryPage = async (req, res) => {
+    const { query } = req
+    try {
+        query.page ? page = query.page : false
+
+        // Get bookings.
+        const bookings = await Booking.paginate(
+            {},
+            { page, limit, sort: { createdAt: -1 } }
+        )
+
+        // Get user.
+        const user = await Admin.findById(req.cookies.userId)
+
+        // Rendering.
+        return res.render('order-history', {
+            layout: false,
+            user,
+            bookings
         })
     }
 
