@@ -5,6 +5,5 @@ const router = require('express').Router()
 
 router
     .get('/history', jwtAccessMiddleware, historyPage)
-    .get('/histories', jwtAccessMiddleware, getAllHistory)
 
 module.exports = router

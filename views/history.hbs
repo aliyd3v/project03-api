@@ -127,30 +127,75 @@
             </a>
         </div>
         <!-- ===============================Cotigories=====================  -->
-        <!-- History Section -->
-        <div id="history-section" class="w-[1100px] bg-[#111] rounded-xl p-5 mt-5 text-white">
-            <h2 class="text-3xl font-bold mb-4 text-[#ffc335]">History</h2>
 
-            <!-- Header Box -->
-            <div class="flex justify-between bg-[#222] p-4 rounded-lg mb-3 font-bold text-[#ffc335]">
-                <p class="w-[10%] text-center">#</p>
-                <p class="w-[20%] text-center">Date</p>
-                <p class="w-[25%] text-center">Order ID</p>
-                <p class="w-[20%] text-center">Status</p>
-                <p class="w-[25%] text-center">Actions</p>
+        <div class="w-full">
+            <!-- order flex -->
+            <div class="w-full p-5 flex flex-col gap-5 h-[100vh] bg-main-bg rounded-xl">
+                <div class="header">
+                    <h1 class="text-3xl font-bold mb-4 text-[#ffc335]">History</h1>
+                    <div class="button-group">
+                        {{#if isAll}}
+                        <a href="/history">
+                            <button class="status-button-active">All ({{totalCount}})</button>
+                        </a>
+                        {{else}}
+                        <a href="/history">
+                            <button class="status-button">All ({{totalCount}})</button>
+                        </a>
+                        {{/if}}
+                        {{#if isOrder}}
+                        <a href="/history/order">
+                            <button class="status-button-active">Order
+                                ({{order.totalDocs}})</button>
+                        </a>
+                        {{else}}
+                        <a href="/orders/order">
+                            <button class="status-button">Order ({{order.totalDocs}})</button>
+                        </a>
+                        {{/if}}
+                        {{#if isBooking}}
+                        <a href="/history/booking">
+                            <button class="status-button-active">Booking ({{booking.totalDocs}})</button>
+                        </a>
+                        {{else}}
+                        <a href="/history/booking">
+                            <button class="status-button">Booking ({{booking.totalDocs}})</button>
+                        </a>
+                        {{/if}}
+                    </div>
+                </div>
+                <!-- order box -->
+
+                <!-- Header Box -->
+                <div class="flex justify-between bg-[#222] p-4 rounded-lg mb-3 font-bold text-[#ffc335]">
+                    <p class="w-[10%] text-center">#</p>
+                    <p class="w-[20%] text-center">Date</p>
+                    <p class="w-[25%] text-center">ID</p>
+                    <p class="w-[20%] text-center">Status</p>
+                    <p class="w-[25%] text-center">Actions</p>
+                </div>
+
+                <!-- Begin History Container -->
+                <div id="orders-container">
+
+                </div>
+                {{!-- End History Container --}}
             </div>
-
-            <!-- Orders Container -->
-            <div id="orders-container"></div>
-
-            <!-- Pagination -->
-            <div id="pagination" class="flex justify-center mt-5 gap-2"></div>
         </div>
 
     </main>
     <!-- garph========================== -->
 
-    <script src="/js/history.js"></script>
+    <script>
+        // Loader closer.
+        let containerLoad = document.querySelector(".container-loader");
+        window.onload = function () {
+            loading();
+        };
+        function loading() {
+            containerLoad.style.display = "none";
+        }
+    </script>
 
 </body>
 
