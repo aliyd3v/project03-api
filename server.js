@@ -18,7 +18,10 @@ app.use(express.static('./public'))
 // Handlebars setup
 const hbs = create({
     extname: 'hbs',
-    handlebars: allowInsecurePrototypeAccess(handlebars)
+    handlebars: allowInsecurePrototypeAccess(handlebars),
+    helpers: {
+        isEqual: (a, b) => a === b
+    }
 })
 app.engine('hbs', hbs.engine)
 app.set('view engine', 'hbs')

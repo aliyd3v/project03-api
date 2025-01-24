@@ -209,12 +209,22 @@
                     </div>
                     <form action="/order/{{_id}}/change-status" method="post">
                         <div class="text-end mt-10">
-                            <button type="submit" class="bg-green-600 text-white rounded py-2 px-5">Acept</button>
+                            <button type="submit" class="bg-green-600 text-white rounded py-2 px-5">{{#if (isEqual
+                                status "Wait accept")}}Wait accept{{/if}}{{#if (isEqual status
+                                "Cooking")}}Cooked{{/if}}{{#if (isEqual status "On way")}}Delivered{{/if}}</button>
                         </div>
                     </form>
-
                 </div>
                 {{/each}}
+                <!-- Pagination -->
+                <div id="pagination" class="flex justify-center mt-5 gap-2">
+                    {{#if orders.hasPrevPage}}<a href="/order/?page={{orders.prevPage}}"><button
+                            class="px-3 py-2 rounded-lg bg-[#222] text-white">Previous</button></a>{{/if}}
+                    <button class="px-3 py-2 rounded-lg bg-[#ffc335] text-white">{{orders.page}}</button>
+                    {{!-- <a href=""><button class="px-3 py-2 rounded-lg bg-[#222] text-white">2</button></a> --}}
+                    {{#if orders.hasNextPage}}<a href="/order/?page={{orders.nextPage}}"><button
+                            class="px-3 py-2 rounded-lg bg-[#222] text-white">Next</button></a>{{/if}}
+                </div>
                 {{else}}
                 <p class="empty-message">Orders are empty!</p>
                 {{/if}}
@@ -261,6 +271,15 @@
 
                 </div>
                 {{/each}}
+                <!-- Pagination -->
+                <div id="pagination" class="flex justify-center mt-5 gap-2">
+                    {{#if waitAcceptOrders.hasPrevPage}}<a href="/order/?page={{waitAcceptOrders.prevPage}}"><button
+                            class="px-3 py-2 rounded-lg bg-[#222] text-white">Previous</button></a>{{/if}}
+                    <button class="px-3 py-2 rounded-lg bg-[#ffc335] text-white">{{waitAcceptOrders.page}}</button>
+                    {{!-- <a href=""><button class="px-3 py-2 rounded-lg bg-[#222] text-white">2</button></a> --}}
+                    {{#if waitAcceptOrders.hasNextPage}}<a href="/order/?page={{waitAcceptOrders.nextPage}}"><button
+                            class="px-3 py-2 rounded-lg bg-[#222] text-white">Next</button></a>{{/if}}
+                </div>
                 {{else}}
                 <p class="empty-message">Orders are empty!</p>
                 {{/if}}
@@ -301,12 +320,21 @@
                     </div>
                     <form action="/order/{{_id}}/change-status" method="post">
                         <div class="text-end mt-10">
-                            <button type="submit" class="bg-green-600 text-white rounded py-2 px-5">Acept</button>
+                            <button type="submit" class="bg-green-600 text-white rounded py-2 px-5">Cooked</button>
                         </div>
                     </form>
 
                 </div>
                 {{/each}}
+                <!-- Pagination -->
+                <div id="pagination" class="flex justify-center mt-5 gap-2">
+                    {{#if cookingOrders.hasPrevPage}}<a href="/order/?page={{cookingOrders.prevPage}}"><button
+                            class="px-3 py-2 rounded-lg bg-[#222] text-white">Previous</button></a>{{/if}}
+                    <button class="px-3 py-2 rounded-lg bg-[#ffc335] text-white">{{cookingOrders.page}}</button>
+                    {{!-- <a href=""><button class="px-3 py-2 rounded-lg bg-[#222] text-white">2</button></a> --}}
+                    {{#if cookingOrders.hasNextPage}}<a href="/order/?page={{cookingOrders.nextPage}}"><button
+                            class="px-3 py-2 rounded-lg bg-[#222] text-white">Next</button></a>{{/if}}
+                </div>
                 {{else}}
                 <p class="empty-message">Orders are empty!</p>
                 {{/if}}
@@ -314,7 +342,7 @@
 
                 {{!-- On way Orders --}}
                 {{#if isOnWay}}
-                {{#if onWayOrders.length}}
+                {{#if onWayOrders.docs.length}}
                 {{#each onWayOrders.docs}}
                 <div class="w-full bg-black p-6 rounded-xl">
                     <!-- order -->
@@ -345,13 +373,23 @@
 
                         </div>
                     </div>
-                    <div class="text-end mt-10">
-                        <button class="bg-green-600 text-white rounded py-2 px-5">Acept</button>
-
-                    </div>
+                    <form action="/order/{{_id}}/change-status" method="post">
+                        <div class="text-end mt-10">
+                            <button type="submit" class="bg-green-600 text-white rounded py-2 px-5">Delivered</button>
+                        </div>
+                    </form>
 
                 </div>
                 {{/each}}
+                <!-- Pagination -->
+                <div id="pagination" class="flex justify-center mt-5 gap-2">
+                    {{#if onWayOrders.hasPrevPage}}<a href="/order/?page={{onWayOrders.prevPage}}"><button
+                            class="px-3 py-2 rounded-lg bg-[#222] text-white">Previous</button></a>{{/if}}
+                    <button class="px-3 py-2 rounded-lg bg-[#ffc335] text-white">{{onWayOrders.page}}</button>
+                    {{!-- <a href=""><button class="px-3 py-2 rounded-lg bg-[#222] text-white">2</button></a> --}}
+                    {{#if onWayOrders.hasNextPage}}<a href="/order/?page={{onWayOrders.nextPage}}"><button
+                            class="px-3 py-2 rounded-lg bg-[#222] text-white">Next</button></a>{{/if}}
+                </div>
                 {{else}}
                 <p class="empty-message">Orders are empty!</p>
                 {{/if}}
