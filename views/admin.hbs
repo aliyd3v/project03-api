@@ -74,7 +74,7 @@
                         <img class="w-[90%] object-cover rounded-full "
                             src="/img/3a3f2d35-8167-4708-9ef0-bdaa980989f9.avif" alt="profil-img">
                     </div>
-                    <h3 class="text-center text-xl my-5 mx-auto w-40 break-normal text-white">Javohir shonazarov</h3>
+                    <h3 class="text-center text-xl my-5 mx-auto w-40 break-normal text-white">{{user.name}}</h3>
                 </a>
             </div>
             <!-- =========================================menu-Cotigoris=============================== -->
@@ -127,44 +127,53 @@
             </a>
         </div>
         <!-- ===============================Cotigories=====================  -->
-        <!-- History Section -->
-        <div id="history-section" class="w-[1100px] bg-[#111] rounded-xl p-5 mt-5 text-white">
-            <h2 class="text-3xl font-bold mb-4 text-[#ffc335]">Admins</h2>
 
-            <!-- Header Box -->
-            <div class="flex justify-between bg-[#222] p-4 rounded-lg mb-3 font-bold text-[#ffc335]">
-                <p class="w-[10%] text-center">Role</p>
-                <p class="w-[20%] text-center">Username</p>
-                <p class="w-[25%] text-center">Admin ID</p>
-                <p class="w-[20%] text-center">Email</p>
-                <p class="w-[25%] text-center">Phone</p>
+        <div class=" w-full ">
+            <div class="bg-main-bg p-5 items-center flex justify-between w-full h-20 rounded-xl mb-5">
+                <p class="text-[#ffc335] font-bold  text-2xl">Admins: <span id="cotygory-length">
+                        {{admins.length}}</span></p>
+                {{#if (isEqual user.role "SUPERUSER")}}
+                <a href="/admin-create">
+                    <div id="add-btn" class="button bg-green-600">
+                        <div class="button-wrapper catygoryAddBtn">
+                            <div class="text">ADD</div>
+                            <span class="icon"><i class="fa-solid fa-plus"></i></span>
+                        </div>
+                    </div>
+                </a>
+                {{/if}}
             </div>
-            <script>
-                console.log({{ admins }})
-            </script>
+            <!-- -------------------- -->
+            <div id="history-section" class="w-[1100px] bg-[#111] rounded-xl p-5 mt-5 text-white">
 
-            {{#if admins.length}}
-            {{#each admins}}
-            <div class="order-container bg-[#222] p-4 rounded-lg mb-3">
-                <div class="flex justify-between items-center">
-                    <p class="w-[10%] text-center">{{role}}</p>
-                    <p class="w-[20%] text-center">{{username}}</p>
-                    <p class="w-[25%] text-center">{{_id}}</p>
-                    <p class="w-[20%] text-center">{{email}} </p>
-                    <p class="w-[25%] text-center">{{phone}}</p>
+                <!-- Header Box -->
+                <div class="flex justify-between bg-[#222] p-4 rounded-lg mb-3 font-bold text-[#ffc335]">
+                    <p class="w-[10%] text-center">Role</p>
+                    <p class="w-[20%] text-center">Username</p>
+                    <p class="w-[25%] text-center">Admin ID</p>
+                    <p class="w-[20%] text-center">Email</p>
+                    <p class="w-[25%] text-center">Phone</p>
                 </div>
-            </div>
-            {{/each}}
-            {{else}}
-            <p>Empty</p>
-            {{/if}}
 
-            <div id="admins-container"
-                class="flex  flex-col bg-main-bg w-[100%] py-6 px-5 rounded-xl gap-5 list-none   overflow-x-scroll cotigories-container">
-            </div>
+                {{#each admins}}
+                <div class="order-container bg-black p-4 rounded-lg mb-3">
+                    <div class="flex justify-between items-center">
+                        <p class="w-[10%] text-center">{{role}}</p>
+                        <p class="w-[20%] text-center">{{username}}</p>
+                        <p class="w-[25%] text-center">{{_id}}</p>
+                        <p class="w-[20%] text-center">{{email}} </p>
+                        <p class="w-[25%] text-center">{{phone}}</p>
+                    </div>
+                </div>
+                {{/each}}
 
-            <!-- Pagination -->
-            <div id="pagination" class="flex justify-center mt-5 gap-2"></div>
+                <div id="admins-container"
+                    class="flex  flex-col bg-main-bg w-[100%] py-6 px-5 rounded-xl gap-5 list-none   overflow-x-scroll cotigories-container">
+                </div>
+
+                <!-- Pagination -->
+                <div id="pagination" class="flex justify-center mt-5 gap-2"></div>
+            </div>
         </div>
 
     </main>

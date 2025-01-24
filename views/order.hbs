@@ -74,7 +74,7 @@
                         <img class="w-[90%] object-cover rounded-full "
                             src="/img/3a3f2d35-8167-4708-9ef0-bdaa980989f9.avif" alt="profil-img">
                     </div>
-                    <h3 class="text-center text-xl my-5 mx-auto w-40 break-normal text-white">Javohir shonazarov</h3>
+                    <h3 class="text-center text-xl my-5 mx-auto w-40 break-normal text-white">{{user.name}}</h3>
                 </a>
             </div>
             <!-- =========================================menu-Cotigoris=============================== -->
@@ -129,8 +129,10 @@
         <!-- ===============================Cotigories=====================  -->
 
         <div class="w-full">
+
             <!-- order flex -->
-            <div class="w-full p-5 flex flex-col gap-5 h-[100vh] bg-main-bg rounded-xl">
+
+            <div class="bg-main-bg p-5 flex flex-col w-full h-20 rounded-xl mb-5">
                 <div class="header">
                     <h1 class="text-3xl font-bold mb-4 text-[#ffc335]">Orders</h1>
                     <div class="button-group">
@@ -172,6 +174,10 @@
                         {{/if}}
                     </div>
                 </div>
+            </div>
+
+            <div class="w-full p-5 flex flex-col gap-5 h-[100vh] bg-main-bg rounded-xl">
+
                 <!-- order box -->
 
                 {{!-- All Orders --}}
@@ -179,7 +185,9 @@
                 {{#if orders.docs.length}}
                 {{#each orders.docs}}
                 <div class="w-full bg-black p-6 rounded-xl">
+
                     <!-- order -->
+
                     <p class="text-white ">Order ID <span class="text-text-color">#{{_id}}</span></p>
                     <div class="flex justify-between w-[90%]">
                         <div class="">
@@ -216,7 +224,9 @@
                     </form>
                 </div>
                 {{/each}}
+
                 <!-- Pagination -->
+
                 <div id="pagination" class="flex justify-center mt-5 gap-2">
                     {{#if orders.hasPrevPage}}<a href="/order/?page={{orders.prevPage}}"><button
                             class="px-3 py-2 rounded-lg bg-[#222] text-white">Previous</button></a>{{/if}}
@@ -231,11 +241,14 @@
                 {{/if}}
 
                 {{!-- Wait accept Orders --}}
+
                 {{#if isWaitAccept}}
                 {{#if waitAcceptOrders.docs.length}}
                 {{#each waitAcceptOrders.docs}}
                 <div class="w-full bg-black p-6 rounded-xl">
+
                     <!-- order -->
+
                     <p class="text-white ">Order ID <span class="text-text-color">#{{_id}}</span></p>
                     <div class="flex justify-between w-[90%]">
                         <div class="">
@@ -271,7 +284,9 @@
 
                 </div>
                 {{/each}}
+
                 <!-- Pagination -->
+
                 <div id="pagination" class="flex justify-center mt-5 gap-2">
                     {{#if waitAcceptOrders.hasPrevPage}}<a href="/order/?page={{waitAcceptOrders.prevPage}}"><button
                             class="px-3 py-2 rounded-lg bg-[#222] text-white">Previous</button></a>{{/if}}
@@ -286,6 +301,7 @@
                 {{/if}}
 
                 {{!-- Cooking Orders --}}
+
                 {{#if isCooking}}
                 {{#if cookingOrders.docs.length}}
                 {{#each cookingOrders.docs}}
@@ -326,7 +342,9 @@
 
                 </div>
                 {{/each}}
+
                 <!-- Pagination -->
+
                 <div id="pagination" class="flex justify-center mt-5 gap-2">
                     {{#if cookingOrders.hasPrevPage}}<a href="/order/?page={{cookingOrders.prevPage}}"><button
                             class="px-3 py-2 rounded-lg bg-[#222] text-white">Previous</button></a>{{/if}}
@@ -341,11 +359,14 @@
                 {{/if}}
 
                 {{!-- On way Orders --}}
+
                 {{#if isOnWay}}
                 {{#if onWayOrders.docs.length}}
                 {{#each onWayOrders.docs}}
                 <div class="w-full bg-black p-6 rounded-xl">
+
                     <!-- order -->
+
                     <p class="text-white ">Order ID <span class="text-text-color">#{{_id}}</span></p>
                     <div class="flex justify-between w-[90%]">
                         <div class="">
@@ -381,7 +402,9 @@
 
                 </div>
                 {{/each}}
+
                 <!-- Pagination -->
+
                 <div id="pagination" class="flex justify-center mt-5 gap-2">
                     {{#if onWayOrders.hasPrevPage}}<a href="/order/?page={{onWayOrders.prevPage}}"><button
                             class="px-3 py-2 rounded-lg bg-[#222] text-white">Previous</button></a>{{/if}}

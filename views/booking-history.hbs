@@ -4,14 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Categories</title>
+    <title>History</title>
+    <link rel="stylesheet" href="/src/output.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="../src/output.css">
-    <link rel="stylesheet" href="../src/style.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+    <link rel="stylesheet" href="/src/style.css">
 
     <!-- icon  -->
     <link rel="icon" href="/img/gijduvon-premium-logo.webp">
@@ -23,6 +21,7 @@
         <div class="loader"></div>
     </div>
 
+    <!-- Go -->
     <header class="w-[1400px] h-24 flex justify-between items-center  my-4 mx-auto">
         <!-- header-logo -->
         <div class="flex justify-between items-center  h-full px-5 object-cover rounded-xl bg-[#111] w-[75%]"><img
@@ -42,7 +41,7 @@
         <div class="px-5 h-full object-cover rounded-xl bg-[#111] w-[23%] flex justify-between items-center">
             <a href="">
 
-                <i class="fa-solid fa-bell text-3xl text-white duration-500 cursor-pointer hover:text-[#ffc335] "></i>
+                <i class="fa-solid fa-bell text-3xl text-[white] duration-500 cursor-pointer hover:text-[#ffc335] "></i>
             </a>
             <a href="">
 
@@ -60,7 +59,10 @@
             </a>
         </div>
     </header>
-    <main class="my-10 mx-auto w-[1400px] flex justify-between gap-5">
+
+
+    <!-- ============================= -->
+    <main class="my-10 mx-auto w-[1400px] flex gap-5">
         <!-- ================================= menu ============================================== -->
         <div class="flex flex-col gap-2 w-[300px]">
             <!-- =================================menu-profil=============================== -->
@@ -85,15 +87,14 @@
             <a href="/order"
                 class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
-                    <i class="fa-solid fa-file text-xl text-white"></i>
+                    <i class="fa-solid fa-file text-white"></i>
                     <p class="text-white">Order</p>
                 </div>
             </a>
-            <a href="/history"
-                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
+            <a href="/history" class="w-[300px] bg-[#111] py-3 px-5 rounded-xl ml-3  cursor-pointer">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
-                    <i class="fa-solid fa-clock text-xl text-white"></i>
-                    <p class="text-white">History</p>
+                    <i class="fa-solid fa-clock text-xl text-[#ffc355]"></i>
+                    <p class="text-[#ffc355]">History</p>
                 </div>
             </a>
             <a href="/meal"
@@ -103,10 +104,11 @@
                     <p class="text-white">Meals</p>
                 </div>
             </a>
-            <a href="/category" class="w-[300px] bg-[#111] py-3 px-5 rounded-xl ml-3  cursor-pointer">
+            <a href="/category"
+                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
-                    <i class="fa-solid fa-layer-group text-xl text-[#ffc355]"></i>
-                    <p class="text-[#ffc355]">Categories</p>
+                    <i class="fa-solid fa-layer-group text-xl text-white"></i>
+                    <p class="text-white">Categories</p>
                 </div>
             </a>
             <a href="/admin"
@@ -126,55 +128,64 @@
         </div>
         <!-- ===============================Cotigories=====================  -->
 
-        <div class=" w-full ">
-            <div class="bg-main-bg p-5 items-center flex justify-between w-full h-20 rounded-xl mb-5">
-                <p class="text-[#ffc335] font-bold  text-2xl">Categories: <span id="cotygory-length">
-                        {{categories.length}}</span></p>
-                <a href="/category/create">
-                    <div id="add-btn" class="button bg-green-600">
-                        <div class="button-wrapper catygoryAddBtn">
-                            <div class="text">ADD</div>
-                            <span class="icon"><i class="fa-solid fa-plus"></i></span>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            <div id="pruduct-container"
-                class="flex  flex-col bg-main-bg w-[100%] py-6 px-5 rounded-xl gap-5 list-none   overflow-x-scroll cotigories-container">
-                {{#if categories.length}}
-
-                {{#each categories}}
-                <div class="w-full gap-7 rounded-xl flex items-center p-4 col-span-2 bg-black justify-between">
-                    <div class="flex gap-3 items-center">
-                        <div class="w-32 h-32 rounded-full overflow-hidden">
-                            <img class="w-full" src="{{this.image_url}}" alt="Mahsulot rasm">
-                        </div>
-                        <div class="w-[300px]">
-                            <h1 class="text-white text-3xl">{{this.en_name}}</h1>
-                            <p class="text-[#999] text-xl">Meals: {{this.meals.length}}</p>
-                        </div>
-                    </div>
-                    <div class="flex gap-3">
-                        <a href="/category/{{this._id}}/update">
-                            <div type="submit" class="button bg-green-600 edit-cotigory">
-                                <div class="button-wrapper">
-                                    <div class="text">Edit</div>
-                                    <span class="icon"><i class="fa-solid fa-pen"></i></span>
-                                </div>
-                            </div>
+        <div class="w-full">
+            <!-- order flex -->
+            <div class="w-full p-5 flex flex-col gap-5 h-[100vh] bg-main-bg rounded-xl">
+                <div class="header">
+                    <h1 class="text-3xl font-bold mb-4 text-[#ffc335]">History</h1>
+                    <div class="button-group">
+                        {{#if isAll}}
+                        <a href="/history">
+                            <button class="status-button-active">All ({{totalCount}})</button>
                         </a>
+                        {{else}}
+                        <a href="/history">
+                            <button class="status-button">All ({{totalCount}})</button>
+                        </a>
+                        {{/if}}
+                        {{#if isOrder}}
+                        <a href="/history/order">
+                            <button class="status-button-active">Order
+                                ({{order.totalDocs}})</button>
+                        </a>
+                        {{else}}
+                        <a href="/orders/order">
+                            <button class="status-button">Order ({{order.totalDocs}})</button>
+                        </a>
+                        {{/if}}
+                        {{#if isBooking}}
+                        <a href="/history/booking">
+                            <button class="status-button-active">Booking ({{booking.totalDocs}})</button>
+                        </a>
+                        {{else}}
+                        <a href="/history/booking">
+                            <button class="status-button">Booking ({{booking.totalDocs}})</button>
+                        </a>
+                        {{/if}}
                     </div>
                 </div>
-                {{/each}}
+                <!-- order box -->
 
-                {{else}}
-                <p class="text-white">Categories are empty.</p>
-                {{/if}}
+                <!-- Header Box -->
+                <div class="flex justify-between bg-[#222] p-4 rounded-lg mb-3 font-bold text-[#ffc335]">
+                    <p class="w-[10%] text-center">#</p>
+                    <p class="w-[20%] text-center">Date</p>
+                    <p class="w-[25%] text-center">ID</p>
+                    <p class="w-[20%] text-center">Status</p>
+                    <p class="w-[25%] text-center">Actions</p>
+                </div>
+
+                <!-- Begin History Container -->
+                <div id="orders-container">
+
+                </div>
+                {{!-- End History Container --}}
             </div>
-    </main>
+        </div>
 
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    </main>
+    <!-- garph========================== -->
+
     <script>
         // Loader closer.
         let containerLoad = document.querySelector(".container-loader");
