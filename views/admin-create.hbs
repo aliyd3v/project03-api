@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="/src/output.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/src/style.css">
+    <link rel="stylesheet" href="/src/admin.css">
+
+    <!-- icon  -->
+    <link rel="icon" href="/img/gijduvon-premium-logo.webp">
+</head>
+
+<body class="bg-black">
+
+    <div class="container-loader">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Go -->
+    <header class="w-[1400px] h-24 flex justify-between items-center  my-4 mx-auto">
+        <!-- header-logo -->
+        <div class="flex justify-between items-center  h-full px-5 object-cover rounded-xl bg-[#111] w-[75%]"><img
+                class="w-20" src="/img/gijduvon-premium-logo.webp" alt="main-logo">
+
+            <div class="inputbox">
+                <input required="required" type="text">
+                <span class="">
+                    <p class="fa-solid fa-magnifying-glass"></p> Search for a food
+                </span>
+                <i></i>
+            </div>
+
+        </div>
+
+        <!-- header-profil -->
+        <div class="px-5 h-full object-cover rounded-xl bg-[#111] w-[23%] flex justify-between items-center">
+            <a href="">
+
+                <i class="fa-solid fa-bell text-3xl text-[white] duration-500 cursor-pointer hover:text-[#ffc335] "></i>
+            </a>
+            <a href="">
+
+                <i
+                    class="fa-solid fa-message text-3xl text-[white] duration-500 cursor-pointer hover:text-[#ffc335] "></i>
+            </a>
+            <!-- header-porofil-logo -->
+
+            <div
+                class="w-20 h-20 bg-[white] rounded-full grid place-items-center duration-500 cursor-pointer hover:bg-[#ffc335] ">
+                <img class="w-[90%] object-cover rounded-full " src="/img/3a3f2d35-8167-4708-9ef0-bdaa980989f9.avif"
+                    alt="profil-img">
+            </div>
+        </div>
+    </header>
+
+
+    <!-- ============================= -->
+    <main class="my-10 mx-auto w-[1400px] flex gap-5">
+        <!-- ================================= menu ============================================== -->
+        <div class="flex flex-col gap-2 w-[300px]">
+            <!-- =================================menu-profil=============================== -->
+            <div class="w-[300px] bg-[#111] py-3 px-5 rounded-xl">
+                <!-- profil -->
+                <div class="w-20 h-20  bg-[white] my-0 mx-auto rounded-full grid place-items-center duration-500 cursor-pointer hover:bg-[#ffc335]"
+                    style="cursor: auto;">
+                    <img class="w-[90%] object-cover rounded-full " src="/img/3a3f2d35-8167-4708-9ef0-bdaa980989f9.avif"
+                        alt="profil-img">
+                </div>
+                <h3 class="text-center text-xl my-5 mx-auto w-40 break-normal text-white">{{user.name}}</h3>
+            </div>
+            <!-- =========================================menu-Cotigoris=============================== -->
+            <a href="/" class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
+                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+                    <i class="fa-solid fa-home text-white"></i>
+                    <p class="text-white">Home</p>
+                </div>
+            </a>
+            <a href="/order"
+                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
+                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+                    <i class="fa-solid fa-file text-xl text-white"></i>
+                    <p class="text-white">Order</p>
+                </div>
+            </a>
+            <a href="/history"
+                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
+                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+                    <i class="fa-solid fa-clock text-xl text-white"></i>
+                    <p class="text-white">History</p>
+                </div>
+            </a>
+            <a href="/meal"
+                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500   hover:-ml-3 ">
+                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+                    <i class="fa-solid fa-folder-open text-xl text-white"></i>
+                    <p class="text-white">Meals</p>
+                </div>
+            </a>
+            <a href="/category"
+                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
+                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+                    <i class="fa-solid fa-layer-group text-xl text-white"></i>
+                    <p class="text-white">Categories</p>
+                </div>
+            </a>
+            {{#if (isEqual user.role "SUPERUSER")}}
+            <a href="/admin"
+                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
+                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+                    <i class="fa-solid fa-users text-xl text-white"></i>
+                    <p class="text-white">Admins</p>
+                </div>
+            </a>
+            {{/if}}
+            <a href="/logout"
+                class="w-[300px] boss bg-red-600 py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
+                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+                    <i class="fa-solid fa-right-from-bracket text-white"></i>
+                    <p class="text-white">Log out</p>
+                </div>
+            </a>
+        </div>
+        <!-- ===============================Cotigories=====================  -->
+
+        <div class="w-full">
+            <!-- -------------------- -->
+            <div class="bg-main-bg p-5 flex flex-col w-full h-20 rounded-xl mb-5">
+                <div class="header">
+                    <h1 class="text-[#ffc335] font-bold  text-2xl">Create admin:</h1>
+                </div>
+            </div>
+
+            <form action="/admin-create" method="post" enctype="multipart/form-data">
+                <div class="profile-container" style="width: 100%;">
+                    <div class="profile-card" style="width: 100%;">
+                        <div class="profile-info" style="width: 100%; margin-left: 100; margin-right: 100px;">
+
+                            <div>
+                                <div class="relative flex items-center ">
+                                    <div class="inputbox" style="width: 100%;">
+                                        {{#if inputedData}}
+                                        <input id="user-name" required="required" type="text" name="name"
+                                            value="{{inputedData.name}}">
+                                        {{else}}
+                                        <input id="user-name" required="required" type="text" name="name">
+                                        {{/if}}
+                                        <span class="">
+                                            Name
+                                        </span>
+                                        <i class=""></i>
+                                    </div>
+                                    <circle cx="10" cy="7" r="6" data-original="#000000"></circle>
+                                    <path
+                                        d="M14 15H6a5 5 0 0 0-5 5 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 5 5 0 0 0-5-5zm8-4h-2.59l.3-.29a1 1 0 0 0-1.42-1.42l-2 2a1 1 0 0 0 0 1.42l2 2a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42l-.3-.29H22a1 1 0 0 0 0-2z"
+                                        data-original="#000000"></path>
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="relative flex items-center ">
+                                    <div class="inputbox" style="width: 100%;">
+                                        {{#if inputedData}}
+                                        <input id="user-name" required="required" type="email" name="email"
+                                            value="{{inputedData.email}}">
+                                        {{else}}
+                                        <input id="user-name" required="required" type="email" name="email">
+                                        {{/if}}
+                                        <span class="">
+                                            Email
+                                        </span>
+                                        <i class=""></i>
+                                    </div>
+                                    <circle cx="10" cy="7" r="6" data-original="#000000"></circle>
+                                    <path
+                                        d="M14 15H6a5 5 0 0 0-5 5 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 5 5 0 0 0-5-5zm8-4h-2.59l.3-.29a1 1 0 0 0-1.42-1.42l-2 2a1 1 0 0 0 0 1.42l2 2a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42l-.3-.29H22a1 1 0 0 0 0-2z"
+                                        data-original="#000000"></path>
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="relative flex items-center ">
+                                    <div class="inputbox" style="width: 100%;">
+                                        {{#if inputedData}}
+                                        <input id="user-name" required="required" type="text" name="phone"
+                                            value="{{inputedData.phone}}">
+                                        {{else}}
+                                        <input id="user-name" required="required" type="text" name="phone">
+                                        {{/if}}
+                                        <span class="">
+                                            Phone
+                                        </span>
+                                        <i class=""></i>
+                                    </div>
+                                    <circle cx="10" cy="7" r="6" data-original="#000000"></circle>
+                                    <path
+                                        d="M14 15H6a5 5 0 0 0-5 5 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 5 5 0 0 0-5-5zm8-4h-2.59l.3-.29a1 1 0 0 0-1.42-1.42l-2 2a1 1 0 0 0 0 1.42l2 2a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42l-.3-.29H22a1 1 0 0 0 0-2z"
+                                        data-original="#000000"></path>
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="relative flex items-center ">
+                                    <div class="inputbox" style="width: 100%;">
+                                        {{#if inputedData}}
+                                        <input id="user-name" required="required" type="text" name="username"
+                                            value="{{inputedData.username}}">
+                                        {{else}}
+                                        <input id="user-name" required="required" type="text" name="username">
+                                        {{/if}}
+                                        <span class="">
+                                            Username
+                                        </span>
+                                        <i class=""></i>
+                                    </div>
+                                    <circle cx="10" cy="7" r="6" data-original="#000000"></circle>
+                                    <path
+                                        d="M14 15H6a5 5 0 0 0-5 5 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 5 5 0 0 0-5-5zm8-4h-2.59l.3-.29a1 1 0 0 0-1.42-1.42l-2 2a1 1 0 0 0 0 1.42l2 2a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42l-.3-.29H22a1 1 0 0 0 0-2z"
+                                        data-original="#000000"></path>
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="relative flex items-center">
+                                    <div class="inputbox" style="width: 100%;">
+                                        {{#if inputedData}}
+                                        <input id="password" required="required" type="password" name="password"
+                                            value="{{inputedData.password}}"><i class=" "></i>
+                                        {{else}}
+                                        <input id="password" required="required" type="password" name="password"><i
+                                            class=" "></i>
+                                        {{/if}}
+                                        <span class="">
+                                            Password
+                                        </span>
+                                    </div>
+
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <div class=" category-gallery-group" style="margin-bottom: 15px;">
+
+                                <input type="file" id="category-image" name="file"
+                                    style="width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #555; border-radius: 5px; background-color: #000000; color: #000000;"
+                                    accept="image/*" required>
+                                <div id="upload-placeholder"
+                                    style="padding: 20px; border: 2px dashed #000000; text-align: center; font-size: 14px; color: #ffffff; cursor: pointer;">
+                                    Drop files here or click
+                                    to
+                                    upload</div>
+                            </div>
+
+                            {{#if errorMessage}}
+                            <div class="login-error">
+                                <p>{{errorMessage}}</p>
+                            </div>
+                            {{else}}
+                            {{/if}}
+
+                            <div class="!mt-8">
+                                <button type="submit"
+                                    class="w-full py-3 px-4 text-sm tracking-wide duration-500 rounded-lg text-white border hover:bg-white hover:text-black focus:outline-none">
+                                    Create
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+
+    </main>
+
+    <script>
+        window.onload = function () {
+            loading();
+        };
+        function loading() {
+            let containerLoad = document.querySelector(".container-loader");
+            containerLoad.style.display = "none";
+        }
+    </script>
+
+</body>
+
+</html>

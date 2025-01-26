@@ -14,7 +14,7 @@ exports.historyPage = async (req, res) => {
         // Get all history.
         let docs = []
         const order = await Order.paginate(
-            { status: 'Delivered' },
+            { status: { $in: ['Delivered', 'Dismissed'] } },
             { sort: { createdAt: -1 } })
         const booking = await Booking.paginate(
             {},
@@ -47,12 +47,13 @@ exports.orderHistoryPage = async (req, res) => {
     try {
         query.page ? page = query.page : false
 
-        // Get orders with status "Delivered".
+        // Get orders with status "Delivered" and "Dismissed".
         const orders = await Order.paginate(
-            { status: 'Delivered' },
+            { status: { $in: ['Delivered', 'Dismissed'] } },
             { page, limit, sort: { createdAt: -1 } }
         )
-
+        const deliveredOrders = await Order.paginate({ status: 'Delivered' }, { page: 1, limit: 0 })
+        const dismissedOrders = await Order.paginate({ status: 'Dismissed' }, { page: 1, limit: 0 })
         // Get user.
         const user = await Admin.findById(req.cookies.userId)
 
@@ -60,7 +61,74 @@ exports.orderHistoryPage = async (req, res) => {
         return res.render('order-history', {
             layout: false,
             user,
-            orders
+            orders,
+            isAll: true,
+            deliveredOrders,
+            dismissedOrders
+        })
+    }
+
+    // Error handling.
+    catch (error) {
+        errorHandling(error, res)
+    }
+}
+
+exports.deliveredOrderHistoryPage = async (req, res) => {
+    const { query } = req
+    try {
+        query.page ? page = query.page : false
+
+        // Get orders with status "Delivered" and "Dismissed".
+        const deliveredOrders = await Order.paginate({ status: 'Delivered' }, { page, limit, sort: { createdAt: -1 } })
+        const orders = await Order.paginate(
+            { status: { $in: ['Delivered', 'Dismissed'] } },
+            { page: 1, limit: 0 }
+        )
+        const dismissedOrders = await Order.paginate({ status: 'Dismissed' }, { page: 1, limit: 0 })
+        // Get user.
+        const user = await Admin.findById(req.cookies.userId)
+
+        // Rendering.
+        return res.render('order-history', {
+            layout: false,
+            user,
+            orders,
+            isDelivered: true,
+            deliveredOrders,
+            dismissedOrders
+        })
+    }
+
+    // Error handling.
+    catch (error) {
+        errorHandling(error, res)
+    }
+}
+
+exports.dismissedOrderHistoryPage = async (req, res) => {
+    const { query } = req
+    try {
+        query.page ? page = query.page : false
+
+        // Get orders with status "Delivered" and "Dismissed".
+        const dismissedOrders = await Order.paginate({ status: 'Dismissed' }, { page, limit, sort: { createdAt: -1 } })
+        const orders = await Order.paginate(
+            { status: { $in: ['Delivered', 'Dismissed'] } },
+            { page: 1, limit: 0 }
+        )
+        const deliveredOrders = await Order.paginate({ status: 'Delivered' }, { page: 1, limit: 0 })
+        // Get user.
+        const user = await Admin.findById(req.cookies.userId)
+
+        // Rendering.
+        return res.render('order-history', {
+            layout: false,
+            user,
+            orders,
+            isDismissed: true,
+            deliveredOrders,
+            dismissedOrders
         })
     }
 

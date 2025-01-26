@@ -131,7 +131,7 @@
         <div class=" w-full ">
             <div class="bg-main-bg p-5 items-center flex justify-between w-full h-20 rounded-xl mb-5">
                 <p class="text-[#ffc335] font-bold  text-2xl">Admins: <span id="cotygory-length">
-                        {{admins.length}}</span></p>
+                        {{admins.docs.length}}</span></p>
                 {{#if (isEqual user.role "SUPERUSER")}}
                 <a href="/admin-create">
                     <div id="add-btn" class="button bg-green-600">
@@ -155,7 +155,7 @@
                     <p class="w-[25%] text-center">Phone</p>
                 </div>
 
-                {{#each admins}}
+                {{#each admins.docs}}
                 <div class="order-container bg-black p-4 rounded-lg mb-3">
                     <div class="flex justify-between items-center">
                         <p class="w-[10%] text-center">{{role}}</p>

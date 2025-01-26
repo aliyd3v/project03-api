@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const { jwtAccessMiddleware } = require('../middleware/jwtAccessMiddleware')
-const { categoryPage, createCategory, getAllCategories, getOneCategory, updateOneCategory, deleteOneCategory, getCategoryMeals, updateCategoryPage, createCategoryPage } = require('../controller/categoryController')
+const { categoryPage, createCategory, updateOneCategory, deleteOneCategory, getCategoryMeals, updateCategoryPage, createCategoryPage } = require('../controller/categoryController')
 const { categoryCreateValidationSchema } = require('../validation/categoryCreateValidationSchema')
 const { categoryUpdateValidationSchema } = require('../validation/categoryUpdateValidationSchema')
 const { upload } = require('../helper/upload')

@@ -10,7 +10,9 @@ const adminSchema = new Schema({
     role: {
         type: String,
         enum: ['SUPERUSER', 'ADMIN'],
-    }
+    },
+    image_url: String,
+    image_name: String
 })
 
 adminSchema.plugin(mongoosePaginate)

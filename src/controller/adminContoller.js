@@ -3,7 +3,9 @@ const { scryptHash } = require("../helper/crypto")
 const { Admin } = require("../model/userModel")
 const { errorHandling } = require("./errorController")
 const { idChecking } = require("./idController")
+const { uploadImage, getImageUrl } = require("./imageConroller")
 const { validationController } = require("./validationController")
+const fs = require('fs')
 
 exports.adminsPage = async (req, res) => {
     try {
@@ -11,7 +13,8 @@ exports.adminsPage = async (req, res) => {
         const user = await Admin.findById(req.cookies.userId)
 
         // Get all admins from database.
-        const admins = await Admin.find()
+        const admins = await Admin.paginate({}, { sort: { username: 1 } })
+
         // Rendering.
         return res.render('admin', {
             layout: false,
@@ -46,51 +49,70 @@ exports.adminCreatePage = async (req, res) => {
 
 exports.adminCreate = async (req, res) => {
     try {
+        // Get user.
+        const user = await Admin.findById(req.cookies.userId)
+
         // Result validation.
         const { data, error } = validationController(req, res)
         if (error) {
-            return res.status(400).send({
-                success: false,
-                data: null,
-                error: {
-                    message: error
-                }
+            // Rendering.
+            return res.render('admin-create', {
+                layout: false,
+                inputedData: data,
+                errorMessage: error,
+                user
             })
         }
+
+        // Registration path and name of file.
+        const filePath = req.file.path
+        const fileName = req.file.filename
 
         // Checking for existence admin with currend username.
         const condidat = await Admin.findOne({ username: data.username })
         if (condidat) {
-            // Responding.
-            return res.status(400).send({
-                success: false,
-                data: null,
-                error: {
-                    message: `'${data.username}' already used. Please, enter another username!`
-                }
+            // Rendering.
+            fs.unlinkSync(filePath)
+            return res.render('admin-create', {
+                layout: false,
+                inputedData: data,
+                errorMessage: `'${data.username}' already used. Please, enter another username!`,
+                user
             })
         }
+
+        // Uploading image to supabse storage and get image url.
+        const { errorSupabase } = await uploadImage(fileName, filePath)
+        if (errorSupabase) {
+            fs.unlinkSync(filePath)
+            // Responding.
+            return res.render('category-create', {
+                layout: false,
+                inputed: data,
+                errorMessage: 'Error uploading image! Please try again later.',
+                user
+            })
+        }
+        const { publicUrl } = await getImageUrl(fileName, filePath)
+        fs.unlinkSync(filePath)
 
         // Hashing password.
         const passwordHash = await scryptHash(data.password, salt)
 
         // Writing new admin to database.
         await Admin.create({
+            name: data.name,
             username: data.username,
             password: passwordHash,
             email: data.email,
             phone: data.phone,
-            role: "ADMIN"
+            role: "ADMIN",
+            image_url: publicUrl,
+            image_name: fileName
         })
 
-        // Responding.
-        return res.status(201).send({
-            success: true,
-            error: false,
-            data: {
-                message: `Admin has been created successful.`
-            }
-        })
+        // Redirect.
+        return res.redirect('/admin')
     }
 
     // Error handling.

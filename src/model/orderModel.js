@@ -7,7 +7,7 @@ const orderSchema = new Schema({
     phone: String,
     status: {
         type: String,
-        enum: ['Delivered', 'Cooking', 'On way', 'Wait accept'],
+        enum: ['Delivered', 'Cooking', 'On way', 'Wait accept', 'Dismissed'],
     },
     meals: [{
         meal: Object,

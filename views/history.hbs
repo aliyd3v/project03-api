@@ -137,18 +137,33 @@
             </div>
 
             <!-- order flex -->
-            <div class="w-full p-5 flex flex-col gap-5 h-[100vh] bg-main-bg rounded-xl">
+            <div class="w-full p-5 flex flex-col gap-5 bg-main-bg rounded-xl">
                 <!-- Begin History Container -->
-                <div id="orders-container">
-                    <div class="">
+                <div>
+                    <div style="display: flex; justify-content: space-between;">
                         <a href="/history/order">
-                            <div>
-                                <button class="status-button">Order ({{order.totalDocs}})</button>
+                            <div style="width: 510px; height: 350px; background-color: black; border-radius: 15px;">
+                                <p
+                                    style="width: 100%; color: white; text-align: center; padding-top: 10px; font-size: 40px;">
+                                    Order history:
+                                </p>
+                                <p
+                                    style="width: 100%; color: white; text-align: center; padding-top: 10px; font-size: 150px;">
+                                    {{order.totalDocs}}
+                                </p>
                             </div>
                         </a>
                         <a href="/history/booking">
-                            <div>
-                                <button class="status-button">Booking ({{booking.totalDocs}})</button>
+                            <div
+                                style="width: 510px; height: 350px; background-color: black; black; border-radius: 15px;">
+                                <p
+                                    style="width: 100%; color: white; text-align: center; padding-top: 10px; font-size: 40px;">
+                                    Booking history:
+                                </p>
+                                <p
+                                    style="width: 100%; color: white; text-align: center; padding-top: 10px; font-size: 150px;">
+                                    {{booking.totalDocs}}
+                                </p>
                             </div>
                         </a>
                     </div>

@@ -1,4 +1,18 @@
 exports.createAdminValidationSchema = {
+    name: {
+        escape: true,
+        notEmpty: {
+            errorMessage: "Name cannot be empty!"
+        },
+        matches: {
+            options: /^[a-zA-Z ]+$/,
+            errorMessage: "Name can only contain letters (a-z, A-Z)!"
+        },
+        isLength: {
+            options: { min: 3, max: 30 },
+            errorMessage: "Name must be between 3 and 30 characters!"
+        }
+    },
     username: {
         trim: true,
         escape: true,
@@ -43,4 +57,18 @@ exports.createAdminValidationSchema = {
             errorMessage: 'Phone number is not valid!',
         },
     },
+    file: {
+        custom: {
+            options: (value, { req }) => {
+                if (!req.file) {
+                    throw new Error('Image is required!');
+                }
+                const validMimeTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+                if (!validMimeTypes.includes(req.file.mimetype)) {
+                    throw new Error('Image must be only JPEG, PNG, GIF, WEBP format!');
+                }
+                return true;
+            },
+        },
+    }
 }

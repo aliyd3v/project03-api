@@ -18,9 +18,9 @@
 
 <body class="bg-black">
 
-    <!-- <div class="container-loader">
+    <div class="container-loader">
         <div class="loader"></div>
-    </div> -->
+    </div>
 
     <!-- Go -->
     <header class="w-[1400px] h-24 flex justify-between items-center  my-4 mx-auto">
@@ -139,7 +139,7 @@
             <div class="profile-container">
                 <div class="profile-card">
                     <div class="profile-image">
-                        <img src="img/3a3f2d35-8167-4708-9ef0-bdaa980989f9.avif" alt="Profile Picture">
+                        <img src="{{user.image_url}}" alt="Profile Picture">
                         <h2 class="profile-name">{{user.name}}</h2>
                     </div>
                     <div class="profile-info">
@@ -155,7 +155,15 @@
 
     </main>
 
-    <script src="./js/order.js"></script>
+    <script>
+        window.onload = function () {
+            loading();
+        };
+        function loading() {
+            let containerLoad = document.querySelector(".container-loader");
+            containerLoad.style.display = "none";
+        }
+    </script>
 
 </body>
 

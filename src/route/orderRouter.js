@@ -1,5 +1,5 @@
 const { checkSchema } = require('express-validator')
-const { orderPage, createOrderWithVerification, waitAcceptOrderPage, cookingOrderPage, onWayOrderPage, changingStatus } = require('../controller/orderController')
+const { orderPage, createOrderWithVerification, waitAcceptOrderPage, cookingOrderPage, onWayOrderPage, changingStatus, dismissOrder } = require('../controller/orderController')
 const { orderCreateValidationSchema } = require('../validation/orderCreateValidationSchema')
 const { jwtAccessMiddleware } = require('../middleware/jwtAccessMiddleware')
 
@@ -12,5 +12,6 @@ router
     .get('/orders/on-way', jwtAccessMiddleware, onWayOrderPage)
     .post('/order/create', checkSchema(orderCreateValidationSchema), createOrderWithVerification)
     .post('/order/:id/change-status', jwtAccessMiddleware, changingStatus)
+    .post('/order/:id/dismiss', jwtAccessMiddleware, dismissOrder)
 
 module.exports = router

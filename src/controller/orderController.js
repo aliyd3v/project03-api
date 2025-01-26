@@ -18,7 +18,7 @@ exports.orderPage = async (req, res) => {
 
         // Get orders.
         const orders = await Order.paginate(
-            { status: { $ne: "Delivered" } },
+            { status: { $nin: ['Delivered', 'Dismissed'] } },
             { page, limit, sort: { createdAt: -1 } }
         )
         const waitAcceptOrders = await Order.find({ status: 'Wait accept' })
@@ -52,7 +52,7 @@ exports.waitAcceptOrderPage = async (req, res) => {
         query.page ? page = query.page : page = 1
 
         // Get orders.
-        const orders = await Order.find({ status: { $ne: "Delivered" } })
+        const orders = await Order.find({ status: { $nin: ['Delivered', 'Dismissed'] } })
         const waitAcceptOrders = await Order.paginate(
             { status: "Wait accept" },
             { page, limit, sort: { createdAt: -1 } }
@@ -87,7 +87,7 @@ exports.cookingOrderPage = async (req, res) => {
         query.page ? page = query.page : page = 1
 
         // Get orders.
-        const orders = await Order.find({ status: { $ne: "Delivered" } })
+        const orders = await Order.find({ status: { $nin: ['Delivered', 'Dismissed'] } })
         const waitAcceptOrders = await Order.find({ status: 'Wait accept' })
         const cookingOrders = await Order.paginate(
             { status: "Cooking" },
@@ -122,7 +122,7 @@ exports.onWayOrderPage = async (req, res) => {
         query.page ? page = query.page : page = 1
 
         // Get orders.
-        const orders = await Order.find({ status: { $ne: "Delivered" } })
+        const orders = await Order.find({ status: { $nin: ['Delivered', 'Dismissed'] } })
         const waitAcceptOrders = await Order.find({ status: 'Wait accept' })
         const cookingOrders = await Order.find({ status: 'Cooking' })
         const onWayOrders = await Order.paginate(
@@ -232,6 +232,43 @@ exports.changingStatus = async (req, res) => {
             // Rendering.
             return res.render('bad-request', { layout: false })
         }
+        await Order.findByIdAndUpdate(id, order)
+
+        // Redirect.
+        return res.redirect('/order')
+    }
+
+    // Error handling.
+    catch (error) {
+        errorHandling(error, res)
+    }
+}
+
+exports.dismissOrder = async (req, res) => {
+    const { params: { id } } = req
+    try {
+        // Checking id to valid.
+        const idError = idChecking(req, id)
+        if (idError) {
+            // Rendering.
+            return res.render('not-found', { layout: false })
+        }
+
+        // Getting an order from database by id.
+        let order = await Order.findById(id)
+
+        // Checking order for exists.
+        if (!order) {
+            // Rendering.
+            return res.render('not-found', { layout: false })
+        }
+
+        // Checking status and writing update to database.
+        if (order.status == 'Delivered' || order.status == 'Dismissed') {
+            // Rendering.
+            return res.render('bad-request', { layout: false })
+        }
+        order.status = 'Dismissed'
         await Order.findByIdAndUpdate(id, order)
 
         // Redirect.
