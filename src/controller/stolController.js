@@ -1,50 +1,68 @@
 const { Stol } = require("../model/stolModel")
+const { Admin } = require("../model/userModel")
 const { errorHandling } = require("./errorController")
 const { idChecking } = require("./idController")
 const { validationController } = require("./validationController")
 
+let page = 1
+let limit = 10
+
+exports.createStolPage = async (req, res) => {
+    try {
+        // Get user.
+        const user = await Admin.findById(req.cookies.userId)
+
+        // Rendering.
+        return res.render('table-create', {
+            layout: false,
+            user
+        })
+    }
+
+    // Error handling.
+    catch (error) {
+        errorHandling(error, res)
+    }
+}
+
 exports.createStol = async (req, res) => {
     try {
+        // Get user.
+        const user = await Admin.findById(req.cookies.userId)
+
         // Result validation.
         const { data, error } = validationController(req, res)
         if (error) {
-            // Responding.
-            return res.status(400).send({
-                success: false,
-                data: null,
-                error: {
-                    message: error
-                }
+            // Rendering.
+            return res.render('table-create', {
+                layout: false,
+                inputedData: data,
+                errorMessage: error,
+                user
             })
         }
 
         // Checking stol-number for exists.
         const condidat = await Stol.findOne({ number: data.number })
         if (condidat) {
-            // Responding.
-            return res.status(400).send({
-                success: false,
-                data: null,
-                error: {
-                    message: `Already exists stol with number - ${data.number}. Please enter another number!`
-                }
+            // Rendering.
+            return res.render('table-create', {
+                layout: false,
+                inputedData: data,
+                errorMessage: `Already exists stol with number - ${data.number}. Please enter another number!`,
+                user
             })
         }
 
         // Writing to database.
         await Stol.create({
             number: data.number,
-            price: data.price
+            price: data.price,
+            capacity: data.capacity
         })
 
-        // Responding.
-        return res.status(201).send({
-            success: true,
-            error: false,
-            data: {
-                message: "Stol has been created successfully."
-            }
-        })
+        // Redirecting.
+        return res.redirect('/stol')
     }
 
     // Error handling.
@@ -54,18 +72,19 @@ exports.createStol = async (req, res) => {
 }
 
 exports.getAllStols = async (req, res) => {
+    const { query: { page } } = req
     try {
+        // Get user.
+        const user = await Admin.findById(req.cookies.userId)
+
         // Getting all stols from database.
-        const stols = await Stol.find()
+        const stols = await Stol.paginate({}, { page, limit, sort: { number: 1 } })
 
         // Responding.
-        return res.status(200).send({
-            success: true,
-            error: false,
-            data: {
-                message: "Stols getted successfully.",
-                stols
-            }
+        return res.render('table', {
+            layout: false,
+            stols,
+            user
         })
     }
 
@@ -75,18 +94,17 @@ exports.getAllStols = async (req, res) => {
     }
 }
 
-exports.getOneStol = async (req, res) => {
+exports.updateOneStolPage = async (req, res) => {
     const { params: { id } } = req
     try {
+        // Get user.
+        const user = await Admin.findById(req.cookies.userId)
+
         // Checking id to valid.
         const idError = idChecking(req, id)
         if (idError) {
-            // Responding.
-            return res.status(400).send({
-                success: false,
-                data: null,
-                error: idError
-            })
+            // Rendering.
+            return res.render('bad-request', { layout: false })
         }
 
         // Geting a stol from database via id.
@@ -94,24 +112,15 @@ exports.getOneStol = async (req, res) => {
 
         // Checking stol for exists.
         if (!stol) {
-            // Responding.
-            return res.status(404).send({
-                success: false,
-                data: null,
-                error: {
-                    message: "Stol is not found!"
-                }
-            })
+            // Rendering.
+            return res.render('not-found', { layout: false })
         }
 
-        // Responding.
-        return res.status(200).send({
-            success: true,
-            error: false,
-            data: {
-                message: "Stol getted successfully.",
-                stol
-            }
+        // Rendering.
+        return res.render('table-update', {
+            layout: false,
+            stol,
+            user
         })
     }
 
@@ -124,15 +133,14 @@ exports.getOneStol = async (req, res) => {
 exports.updateOneStol = async (req, res) => {
     const { params: { id } } = req
     try {
+        // Get user.
+        const user = await Admin.findById(req.cookies.userId)
+
         // Checking id to valid.
         const idError = idChecking(req, id)
         if (idError) {
-            // Responding.
-            return res.status(400).send({
-                success: false,
-                data: null,
-                error: idError
-            })
+            // Rendering.
+            return res.render('bad-request', { layout: false })
         }
 
         // Geting a stol from database via id.
@@ -140,53 +148,36 @@ exports.updateOneStol = async (req, res) => {
 
         // Checking stol for exists.
         if (!stol) {
-            // Responding.
-            return res.status(404).send({
-                success: false,
-                data: null,
-                error: {
-                    message: "Stol is not found!"
-                }
-            })
+            // Rendering.
+            return res.render('not-found', { layout: false })
         }
 
         // Result validation.
         const { data, error } = validationController(req, res)
         if (error) {
-            return res.status(400).send({
-                success: false,
-                data: null,
-                error: {
-                    message: error
-                }
+            // Rendering.
+            return res.render('table-update', {
+                layout: false,
+                inputedData: data,
+                errorMessage: error,
+                user
             })
         }
 
         // Checking for changing data.
-        if (stol.number == data.number && stol.price == data.price) {
-            // Responding.
-            return res.status(201).send({
-                success: true,
-                error: false,
-                data: {
-                    message: "Stol has been updated successfully."
-                }
-            })
+        if (stol.number == data.number && stol.price == data.price && stol.capacity == data.capacity) {
+            // Redirect.
+            return res.redirect('/stol')
         }
 
         // Writing updates to database.
         stol.number = data.number
         stol.price = data.price
+        stol.capacity = data.capacity
         await Stol.findByIdAndUpdate(id, stol)
 
-        // Responding.
-        return res.status(201).send({
-            success: true,
-            error: false,
-            data: {
-                message: "Stol has been updated successfully."
-            }
-        })
+        // Redirect.
+        return res.redirect('/stol')
     }
 
     // Error handling.
@@ -201,12 +192,8 @@ exports.deleteOneStol = async (req, res) => {
         // Checking id to valid.
         const idError = idChecking(req, id)
         if (idError) {
-            // Responding.
-            return res.status(400).send({
-                success: false,
-                data: null,
-                error: idError
-            })
+            // Rendering.
+            return res.render('not-found', { layout: false })
         }
 
         // Geting a stol from database via id.
@@ -214,44 +201,15 @@ exports.deleteOneStol = async (req, res) => {
 
         // Checking stol for exists.
         if (!stol) {
-            // Responding.
-            return res.status(404).send({
-                success: false,
-                data: null,
-                error: {
-                    message: "Stol is not found!"
-                }
-            })
+            // Rendering.
+            return res.render('not-found', { layout: false })
         }
 
         // Deleting stol from database.
         await Stol.findByIdAndDelete(id)
 
-        // Responding.
-        return res.status(201).send({
-            success: true,
-            error: false,
-            data: {
-                message: "Stol has been deleted successfully."
-            }
-        })
-    }
-
-    // Error handling.
-    catch (error) {
-        errorHandling(error, res)
-    }
-}
-
-exports.deleteManyStols = async (req, res) => {
-    try {
-        await Stol.deleteMany()
-
-        return res.status(201).send({
-            success: true,
-            error: false,
-            data: { message: "Delete all stols successfully." }
-        })
+        // Redirecting.
+        return res.redirect('/stol')
     }
 
     // Error handling.

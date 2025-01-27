@@ -16,5 +16,14 @@ exports.stolUpdateValidationSchema = {
             errorMessage: "Stol price must be a number"
         },
         escape: true
+    },
+    capacity: {
+        notEmpty: {
+            errorMessage: "Stol capacity cannot be empty!"
+        },
+        isInt: {
+            errorMessage: "Stol capacity must be a number"
+        },
+        escape: true
     }
 }

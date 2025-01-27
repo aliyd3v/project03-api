@@ -7,12 +7,16 @@ const adminSchema = new Schema({
     password: String,
     email: String,
     phone: String,
+    image_url: String,
+    image_name: String,
     role: {
         type: String,
         enum: ['SUPERUSER', 'ADMIN'],
     },
-    image_url: String,
-    image_name: String
+    language: {
+        type: String,
+        enum: ['Русский', 'English']
+    }
 })
 
 adminSchema.plugin(mongoosePaginate)

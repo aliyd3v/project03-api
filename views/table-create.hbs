@@ -4,12 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>History</title>
+    <title>Table create</title>
     <link rel="stylesheet" href="/src/output.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/src/style.css">
+    <link rel="stylesheet" href="/src/admin.css">
 
     <!-- icon  -->
     <link rel="icon" href="/img/gijduvon-premium-logo.webp">
@@ -39,17 +40,16 @@
 
         <!-- header-profil -->
         <div class="px-5 h-full object-cover rounded-xl bg-[#111] w-[23%] flex justify-between items-center">
-            <a href="">
+            <a href="/profile">
 
                 <i class="fa-solid fa-bell text-3xl text-[white] duration-500 cursor-pointer hover:text-[#ffc335] "></i>
             </a>
-            <a href="">
+            <a href="/profile">
 
                 <i
                     class="fa-solid fa-message text-3xl text-[white] duration-500 cursor-pointer hover:text-[#ffc335] "></i>
             </a>
             <!-- header-porofil-logo -->
-
             <a href="/profile">
                 <div
                     class="w-20 h-20 bg-[white] rounded-full grid place-items-center duration-500 cursor-pointer hover:bg-[#ffc335] ">
@@ -85,7 +85,7 @@
             <a href="/order"
                 class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
-                    <i class="fa-solid fa-file text-white"></i>
+                    <i class="fa-solid fa-file text-xl text-white"></i>
                     <p class="text-white">Order</p>
                 </div>
             </a>
@@ -96,10 +96,11 @@
                     <p class="text-white">Booking</p>
                 </div>
             </a>
-            <a href="/history" class="w-[300px] bg-[#111] py-3 px-5 rounded-xl ml-3  cursor-pointer">
+            <a href="/history"
+                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
-                    <i class="fa-solid fa-clock text-xl text-[#ffc355]"></i>
-                    <p class="text-[#ffc355]">History</p>
+                    <i class="fa-solid fa-clock text-xl text-white"></i>
+                    <p class="text-white">History</p>
                 </div>
             </a>
             <a href="/meal"
@@ -116,11 +117,10 @@
                     <p class="text-white">Categories</p>
                 </div>
             </a>
-            <a href="/stol"
-                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
+            <a href="/stol" class="w-[300px] bg-[#111] py-3 px-5 rounded-xl ml-3  cursor-pointer">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
-                    <i class="fa-solid fa-table text-xl text-white"></i>
-                    <p class="text-white">Table</p>
+                    <i class="fa-solid fa-table text-xl text-[#ffc355]"></i>
+                    <p class="text-[#ffc355]">Table</p>
                 </div>
             </a>
             {{#if (isEqual user.role "SUPERUSER")}}
@@ -146,56 +146,118 @@
             <!-- -------------------- -->
             <div class="bg-main-bg p-5 flex flex-col w-full h-20 rounded-xl mb-5">
                 <div class="header">
-                    <h1 class="text-[#ffc335] font-bold  text-2xl">History: {{totalCount}}</h1>
+                    <h1 class="text-[#ffc335] font-bold  text-2xl">Create table:</h1>
                 </div>
             </div>
 
-            <!-- order flex -->
-            <div class="w-full p-5 flex flex-col gap-5 bg-main-bg rounded-xl">
-                <!-- Begin History Container -->
-                <div>
-                    <div style="display: flex; justify-content: space-between;">
-                        <a href="/history/order">
-                            <div style="width: 510px; height: 350px; background-color: black; border-radius: 15px;">
-                                <p
-                                    style="width: 100%; color: white; text-align: center; padding-top: 10px; font-size: 40px;">
-                                    Order history:
-                                </p>
-                                <p
-                                    style="width: 100%; color: white; text-align: center; padding-top: 10px; font-size: 150px;">
-                                    {{order.totalDocs}}
-                                </p>
+            <form action="/stol/create" method="post">
+                <div class="profile-container" style="width: 100%;">
+                    <div class="profile-card" style="width: 100%;">
+                        <div class="profile-info" style="width: 100%; margin-left: 100; margin-right: 100px;">
+
+                            <div style="padding: 10px;">
+                                <div class="relative flex items-center ">
+                                    <div class="inputbox" style="width: 100%;">
+                                        {{#if inputedData}}
+                                        <input id="number" required="required" type="number" name="number"
+                                            value="{{inputedData.number}}">
+                                        {{else}}
+                                        <input id="number" required="required" type="number" name="number">
+                                        {{/if}}
+                                        <span class="">
+                                            Number
+                                        </span>
+                                        <i class=""></i>
+                                    </div>
+                                    <circle cx="10" cy="7" r="6" data-original="#000000"></circle>
+                                    <path
+                                        d="M14 15H6a5 5 0 0 0-5 5 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 5 5 0 0 0-5-5zm8-4h-2.59l.3-.29a1 1 0 0 0-1.42-1.42l-2 2a1 1 0 0 0 0 1.42l2 2a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42l-.3-.29H22a1 1 0 0 0 0-2z"
+                                        data-original="#000000"></path>
+                                    </svg>
+                                </div>
                             </div>
-                        </a>
-                        <a href="/history/booking">
-                            <div
-                                style="width: 510px; height: 350px; background-color: black; black; border-radius: 15px;">
-                                <p
-                                    style="width: 100%; color: white; text-align: center; padding-top: 10px; font-size: 40px;">
-                                    Booking history:
-                                </p>
-                                <p
-                                    style="width: 100%; color: white; text-align: center; padding-top: 10px; font-size: 150px;">
-                                    {{booking.totalDocs}}
-                                </p>
+
+                            <div style="padding: 10px;">
+                                <div class="relative flex items-center ">
+                                    <div class="inputbox" style="width: 100%;">
+                                        {{#if inputedData}}
+                                        <input id="price" required="required" type="number" name="price"
+                                            value="{{inputedData.price}}">
+                                        {{else}}
+                                        <input id="price" required="required" type="number" name="price">
+                                        {{/if}}
+                                        <span class="">
+                                            Price $
+                                        </span>
+                                        <i class=""></i>
+                                    </div>
+                                    <circle cx="10" cy="7" r="6" data-original="#000000"></circle>
+                                    <path
+                                        d="M14 15H6a5 5 0 0 0-5 5 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 5 5 0 0 0-5-5zm8-4h-2.59l.3-.29a1 1 0 0 0-1.42-1.42l-2 2a1 1 0 0 0 0 1.42l2 2a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42l-.3-.29H22a1 1 0 0 0 0-2z"
+                                        data-original="#000000"></path>
+                                    </svg>
+                                </div>
                             </div>
-                        </a>
+
+                            <div style="padding: 10px;">
+                                <div class="relative flex items-center ">
+                                    <div class="inputbox" style="width: 100%;">
+                                        {{#if inputedData}}
+                                        <input id="capacity" required="required" type="number" name="capacity"
+                                            value="{{inputedData.capacity}}">
+                                        {{else}}
+                                        <input id="capacity" required="required" type="number" name="capacity">
+                                        {{/if}}
+                                        <span class="">
+                                            Capacity
+                                        </span>
+                                        <i class=""></i>
+                                    </div>
+                                    <circle cx="10" cy="7" r="6" data-original="#000000"></circle>
+                                    <path
+                                        d="M14 15H6a5 5 0 0 0-5 5 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 5 5 0 0 0-5-5zm8-4h-2.59l.3-.29a1 1 0 0 0-1.42-1.42l-2 2a1 1 0 0 0 0 1.42l2 2a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42l-.3-.29H22a1 1 0 0 0 0-2z"
+                                        data-original="#000000"></path>
+                                    </svg>
+                                </div>
+                            </div>
+
+                            {{#if errorMessage}}
+                            <div class="login-error">
+                                <p>{{errorMessage}}</p>
+                            </div>
+                            {{else}}
+                            {{/if}}
+
+                            <div class="!mt-8">
+                                <button type="submit"
+                                    class="w-full py-3 px-4 text-sm tracking-wide duration-500 rounded-lg text-white border hover:bg-white hover:text-black focus:outline-none">
+                                    Create
+                                </button>
+                            </div>
+                            <a href="/stol">
+                                <div class="!mt-8">
+                                    <button type="button"
+                                        class="w-full py-3 px-4 text-sm tracking-wide duration-500 rounded-lg text-white border hover:bg-white hover:text-black focus:outline-none">
+                                        Cancel
+                                    </button>
+                                </div>
+                            </a>
+
+                        </div>
                     </div>
                 </div>
-                {{!-- End History Container --}}
-            </div>
+            </form>
+
         </div>
 
     </main>
-    <!-- garph========================== -->
 
     <script>
-        // Loader closer.
-        let containerLoad = document.querySelector(".container-loader");
         window.onload = function () {
             loading();
         };
         function loading() {
+            let containerLoad = document.querySelector(".container-loader");
             containerLoad.style.display = "none";
         }
     </script>

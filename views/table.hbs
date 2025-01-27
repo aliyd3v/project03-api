@@ -4,12 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admins</title>
-    <link rel="stylesheet" href="/src/output.css">
+    <title>Tables</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="/src/style.css">
+    <link rel="stylesheet" href="../src/output.css">
+    <link rel="stylesheet" href="../src/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
 
     <!-- icon  -->
     <link rel="icon" href="/img/gijduvon-premium-logo.webp">
@@ -21,7 +23,6 @@
         <div class="loader"></div>
     </div>
 
-    <!-- Go -->
     <header class="w-[1400px] h-24 flex justify-between items-center  my-4 mx-auto">
         <!-- header-logo -->
         <div class="flex justify-between items-center  h-full px-5 object-cover rounded-xl bg-[#111] w-[75%]"><img
@@ -41,7 +42,7 @@
         <div class="px-5 h-full object-cover rounded-xl bg-[#111] w-[23%] flex justify-between items-center">
             <a href="">
 
-                <i class="fa-solid fa-bell text-3xl text-[white] duration-500 cursor-pointer hover:text-[#ffc335] "></i>
+                <i class="fa-solid fa-bell text-3xl text-white duration-500 cursor-pointer hover:text-[#ffc335] "></i>
             </a>
             <a href="">
 
@@ -59,23 +60,18 @@
             </a>
         </div>
     </header>
-
-
-    <!-- ============================= -->
-    <main class="my-10 mx-auto w-[1400px] flex gap-5">
+    <main class="my-10 mx-auto w-[1400px] flex justify-between gap-5">
         <!-- ================================= menu ============================================== -->
         <div class="flex flex-col gap-2 w-[300px]">
             <!-- =================================menu-profil=============================== -->
             <div class="w-[300px] bg-[#111] py-3 px-5 rounded-xl">
                 <!-- profil -->
-                <a href="/">
-                    <div
-                        class="w-20 h-20  bg-[white] my-0 mx-auto rounded-full grid place-items-center duration-500 cursor-pointer hover:bg-[#ffc335] ">
-                        <img class="w-[90%] object-cover rounded-full "
-                            src="/img/3a3f2d35-8167-4708-9ef0-bdaa980989f9.png" alt="profil-img">
-                    </div>
-                    <h3 class="text-center text-xl my-5 mx-auto w-40 break-normal text-white">{{user.name}}</h3>
-                </a>
+                <div class="w-20 h-20  bg-[white] my-0 mx-auto rounded-full grid place-items-center duration-500 cursor-pointer hover:bg-[#ffc335]"
+                    style="cursor: auto;">
+                    <img class="w-[90%] object-cover rounded-full " src="/img/3a3f2d35-8167-4708-9ef0-bdaa980989f9.png"
+                        alt="profil-img">
+                </div>
+                <h3 class="text-center text-xl my-5 mx-auto w-40 break-normal text-white">{{user.name}}</h3>
             </div>
             <!-- =========================================menu-Cotigoris=============================== -->
             <a href="/" class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
@@ -119,19 +115,21 @@
                     <p class="text-white">Categories</p>
                 </div>
             </a>
-            <a href="/stol"
+            <a href="/stol" class="w-[300px] bg-[#111] py-3 px-5 rounded-xl ml-3  cursor-pointer">
+                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+                    <i class="fa-solid fa-table text-xl text-[#ffc355]"></i>
+                    <p class="text-[#ffc355]">Table</p>
+                </div>
+            </a>
+            {{#if (isEqual user.role "SUPERUSER")}}
+            <a href="/admin"
                 class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
-                    <i class="fa-solid fa-table text-xl text-white"></i>
-                    <p class="text-white">Table</p>
+                    <i class="fa-solid fa-users text-xl text-white"></i>
+                    <p class="text-white">Admins</p>
                 </div>
             </a>
-            <a href="/admin" class="w-[300px] bg-[#111] py-3 px-5 rounded-xl ml-3  cursor-pointer">
-                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
-                    <i class="fa-solid fa-users text-xl text-[#ffc355]"></i>
-                    <p class="text-[#ffc355]">Admins</p>
-                </div>
-            </a>
+            {{/if}}
             <a href="/logout"
                 class="w-[300px] boss bg-red-600 py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
@@ -143,11 +141,10 @@
         <!-- ===============================Cotigories=====================  -->
 
         <div class=" w-full ">
-            <div class="bg-main-bg p-5 items-center flex justify-between w-full rounded-xl mb-5">
-                <p class="text-[#ffc335] font-bold  text-2xl">Admins: <span id="cotygory-length">
-                        {{admins.docs.length}}</span></p>
-                {{#if (isEqual user.role "SUPERUSER")}}
-                <a href="/admin-create">
+            <div class="bg-main-bg p-5 items-center flex justify-between w-full h-20 rounded-xl mb-5">
+                <p class="text-[#ffc335] font-bold  text-2xl">Tables: <span id="cotygory-length">
+                        {{stols.docs.length}}</span></p>
+                <a href="/stol/create">
                     <div id="add-btn" class="button bg-green-600">
                         <div class="button-wrapper catygoryAddBtn">
                             <div class="text">ADD</div>
@@ -155,43 +152,46 @@
                         </div>
                     </div>
                 </a>
-                {{/if}}
             </div>
-            <!-- -------------------- -->
-            <div id="history-section" class="w-[1100px] bg-[#111] rounded-xl p-5 mt-5 text-white">
 
-                <!-- Header Box -->
-                <div class="flex justify-between bg-[#222] p-4 rounded-lg mb-3 font-bold text-[#ffc335]">
-                    <p class="w-[20%] text-center">Name</p>
-                    <p class="w-[20%] text-center">Username</p>
-                    <p class="w-[25%] text-center">Phone</p>
-                    <p class="w-[20%] text-center">Email</p>
-                    <p class="w-[10%] text-center">Role</p>
-                </div>
+            <div
+                class="flex  flex-col bg-main-bg w-[100%] py-6 px-5 rounded-xl gap-5 list-none   overflow-x-scroll cotigories-container">
+                {{#if stols.docs.length}}
 
-                {{#each admins.docs}}
-                <div class="order-container bg-black p-4 rounded-lg mb-3">
-                    <div class="flex justify-between items-center">
-                        <p class="w-[20%] text-center">{{name}}</p>
-                        <p class="w-[20%] text-center">{{username}}</p>
-                        <p class="w-[25%] text-center">{{phone}}</p>
-                        <p class="w-[20%] text-center">{{email}} </p>
-                        <p class="w-[10%] text-center">{{role}}</p>
+                {{#each stols.docs}}
+                <div class="w-full gap-7 rounded-xl flex items-center p-4 col-span-2 bg-black justify-between">
+                    <div class="flex gap-3 items-center">
+                        <div class="w-[300px]">
+                            <h1 class="text-white text-3xl">Number: {{number}}</h1>
+                            <p class="text-[#999] text-xl">Price: ${{price}}</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-3">
+                        <a href="/stol/{{_id}}/update">
+                            <div type="submit" class="button bg-green-600 edit-cotigory">
+                                <div class="button-wrapper">
+                                    <div class="text">Edit</div>
+                                    <span class="icon"><i class="fa-solid fa-pen"></i></span>
+                                </div>
+                            </div>
+                        </a>
                     </div>
                 </div>
                 {{/each}}
 
+                {{else}}
+                <p class="text-white">Tables are empty.</p>
+                {{/if}}
             </div>
-        </div>
-
     </main>
 
     <script>
+        // Loader closer.
+        let containerLoad = document.querySelector(".container-loader");
         window.onload = function () {
             loading();
         };
         function loading() {
-            let containerLoad = document.querySelector(".container-loader");
             containerLoad.style.display = "none";
         }
     </script>

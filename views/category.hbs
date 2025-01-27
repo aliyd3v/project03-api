@@ -54,7 +54,7 @@
             <a href="/profile">
                 <div
                     class="w-20 h-20 bg-[white] rounded-full grid place-items-center duration-500 cursor-pointer hover:bg-[#ffc335] ">
-                    <img class="w-[90%] object-cover rounded-full " src="/img/3a3f2d35-8167-4708-9ef0-bdaa980989f9.avif"
+                    <img class="w-[90%] object-cover rounded-full " src="/img/3a3f2d35-8167-4708-9ef0-bdaa980989f9.png"
                         alt="profil-img">
                 </div>
             </a>
@@ -68,7 +68,7 @@
                 <!-- profil -->
                 <div class="w-20 h-20  bg-[white] my-0 mx-auto rounded-full grid place-items-center duration-500 cursor-pointer hover:bg-[#ffc335]"
                     style="cursor: auto;">
-                    <img class="w-[90%] object-cover rounded-full " src="/img/3a3f2d35-8167-4708-9ef0-bdaa980989f9.avif"
+                    <img class="w-[90%] object-cover rounded-full " src="/img/3a3f2d35-8167-4708-9ef0-bdaa980989f9.png"
                         alt="profil-img">
                 </div>
                 <h3 class="text-center text-xl my-5 mx-auto w-40 break-normal text-white">{{user.name}}</h3>
@@ -85,6 +85,13 @@
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
                     <i class="fa-solid fa-file text-xl text-white"></i>
                     <p class="text-white">Order</p>
+                </div>
+            </a>
+            <a href="/booking"
+                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
+                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+                    <i class="fa-solid fa-calendar text-xl text-white"></i>
+                    <p class="text-white">Booking</p>
                 </div>
             </a>
             <a href="/history"
@@ -105,6 +112,13 @@
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
                     <i class="fa-solid fa-layer-group text-xl text-[#ffc355]"></i>
                     <p class="text-[#ffc355]">Categories</p>
+                </div>
+            </a>
+            <a href="/stol"
+                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
+                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+                    <i class="fa-solid fa-table text-xl text-white"></i>
+                    <p class="text-white">Table</p>
                 </div>
             </a>
             {{#if (isEqual user.role "SUPERUSER")}}

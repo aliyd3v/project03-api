@@ -106,9 +106,10 @@ exports.adminCreate = async (req, res) => {
             password: passwordHash,
             email: data.email,
             phone: data.phone,
-            role: "ADMIN",
             image_url: publicUrl,
-            image_name: fileName
+            image_name: fileName,
+            language: data.language,
+            role: "ADMIN"
         })
 
         // Redirect.
