@@ -149,7 +149,7 @@
                 <!-- Header -->
                 <div class="product-header">
                     <h1 class="text-[#ffc335] font-bold  text-2xl">Update meal</h1>
-                    <form action="/meal/{{oldMeal._id}}/delete" method="post">
+                    <form onsubmit="startLoader()" action="/meal/{{oldMeal._id}}/delete" method="post">
                         <button type="submit">
                             <div class="button bg-red-600 button-delete">
                                 <div class="button-wrapper">
@@ -162,7 +162,7 @@
                 </div>
 
                 <!-- Form -->
-                <form class="product-form" action="/meal/{{oldMeal._id}}/update" method="post"
+                <form onsubmit="startLoader()" class="product-form" action="/meal/{{oldMeal._id}}/update" method="post"
                     enctype="multipart/form-data">
                     <!-- Product Title (EN and UZ) -->
                     <div class="form-group product-title-group">
@@ -277,6 +277,12 @@
         function loading() {
             containerLoad.style.display = "none";
         }
+
+        function startLoader() {
+            let containerLoad = document.querySelector(".container-loader");
+            containerLoad.style.display = "grid";
+        }
+
     </script>
 
 

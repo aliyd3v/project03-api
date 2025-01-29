@@ -151,7 +151,8 @@
                 </div>
 
                 <!-- Form -->
-                <form class="product-form" action="/meal/create" method="post" enctype="multipart/form-data">
+                <form onsubmit="startLoader()" class="product-form" action="/meal/create" method="post"
+                    enctype="multipart/form-data">
                     <!-- Product Title (EN and UZ) -->
                     <div class="form-group product-title-group">
                         <div>
@@ -273,6 +274,12 @@
         function loading() {
             containerLoad.style.display = "none";
         }
+
+        function startLoader() {
+            let containerLoad = document.querySelector(".container-loader");
+            containerLoad.style.display = "grid";
+        }
+
     </script>
 
 

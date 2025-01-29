@@ -150,7 +150,7 @@
                 </div>
             </div>
 
-            <form action="/stol/create" method="post">
+            <form onsubmit="startLoader()" action="/stol/create" method="post">
                 <div class="profile-container" style="width: 100%;">
                     <div class="profile-card" style="width: 100%;">
                         <div class="profile-info" style="width: 100%; margin-left: 100; margin-right: 100px;">
@@ -260,6 +260,14 @@
             let containerLoad = document.querySelector(".container-loader");
             containerLoad.style.display = "none";
         }
+
+        function startLoader() {
+            let containerInput = document.querySelector('.profile-info')
+            containerInput.style.display = 'none'
+            let containerLoad = document.querySelector(".container-loader");
+            containerLoad.style.display = "grid";
+        }
+
     </script>
 
 </body>

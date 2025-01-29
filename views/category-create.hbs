@@ -150,7 +150,8 @@
                     <h1 class="category-title" id="page-title">Create Category</h1>
                 </div>
 
-                <form class="category-form" action="/category/create" method="post" enctype="multipart/form-data">
+                <form onsubmit="startLoader()" class="category-form" action="/category/create" method="post"
+                    enctype="multipart/form-data">
                     <div class="form-group category-title-group">
                         <div>
                             <label for="category-title-en" id="title-en-label" class="category-label">Category Title
@@ -199,11 +200,6 @@
 
     </main>
 
-
-
-
-    <!-- <script type="module" src="./js/catigories.js"></script> -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script>
         // Loader closer.
         let containerLoad = document.querySelector(".container-loader");
@@ -213,6 +209,12 @@
         function loading() {
             containerLoad.style.display = "none";
         }
+
+        function startLoader() {
+            let containerLoad = document.querySelector(".container-loader");
+            containerLoad.style.display = "grid";
+        }
+
     </script>
 
 

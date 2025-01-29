@@ -205,7 +205,7 @@
         <section class="w-full mt-7">
           <div class="mx-auto max-w-7xl mt-7">
             <div class="bg-main-bg p-5 items-center flex justify-between w-full h-20 rounded-xl mb-5">
-              <p class="text-[#ffc335] font-bold  text-2xl">Meals: <span id="cotygory-length"> {{meals.length}}</span>
+              <p class="text-[#ffc335] font-bold  text-2xl">Meals: <span id="cotygory-length"> {{meals.totalDocs}}</span>
               </p>
               <a href="/meal/create">
                 <div class="button bg-green-600">
@@ -218,32 +218,32 @@
             </div>
 
             <div id="data-container">
-              {{#if meals}}
-              {{#each meals}}
+              {{#if meals.docs.length}}
+              {{#each meals.docs}}
               <div style="margin-top:20px;"
                 class="bg-main-bg flex items-center justify-around mt-6 w-full h-60 rounded-xl mx-auto sm:mr-0 group cursor-pointer lg:mx-auto transition-all duration-500">
                 <div class="rounded-xl">
-                  <img src="{{this.image_url}}" alt="{{this.en_name}}" class="w-full h-52 aspect-square object-cover">
+                  <img src="{{image_url}}" alt="{{en_name}}" class="w-full h-52 aspect-square object-cover">
                 </div>
                 <div class="w-[70%] h-52">
                   <div class="flex items-center justify-between">
                     <h6
                       class="font-semibold text-xl leading-8 text-white transition-all duration-500 group-hover:text-indigo-600">
-                      {{this.en_name}}
+                      {{en_name}}
                     </h6>
                     <h6 class="font-semibold text-xl leading-8 text-indigo-600">
-                      ${{this.price}}
+                      ${{price}}
                     </h6>
                   </div>
                   <div class="mt-3">
                     <ul class="list-none overflow-scroll h-32 w-[300px]">
-                      <li class="mt-2 font-normal text-sm leading-6 text-gray-500">{{this.en_description}}</li>
-                      <li class="mt-2 font-normal text-sm leading-6 text-gray-500">Category: {{this.category.en_name}}
+                      <li class="mt-2 font-normal text-sm leading-6 text-gray-500">{{en_description}}</li>
+                      <li class="mt-2 font-normal text-sm leading-6 text-gray-500">Category: {{category.en_name}}
                       </li>
                     </ul>
                   </div>
                   <div class="flex gap-3 ml-[600px]">
-                    <a href="/meal/{{this._id}}/update">
+                    <a href="/meal/{{_id}}/update">
                       <div class="button bg-green-600" data-id="{{item._id}}">
                         <div class="button-wrapper">
                           <div class="text">EDIT</div>
@@ -255,12 +255,20 @@
                 </div>
               </div>
               {{/each}}
+              <!-- Pagination -->
+
+              <div id="pagination" class="flex justify-center mt-5 gap-2">
+                {{#if meals.hasPrevPage}}<a href="/meal/?page={{meals.prevPage}}"><button
+                    class="px-3 py-2 rounded-lg bg-black text-white">Previous</button></a>{{/if}}
+                <button class="px-3 py-2 rounded-lg bg-black text-[#ffc335]">{{meals.page}}</button>
+                {{!-- <a href=""><button class="px-3 py-2 rounded-lg bg-[#222] text-white">2</button></a> --}}
+                {{#if meals.hasNextPage}}<a href="/meal/?page={{meals.nextPage}}"><button
+                    class="px-3 py-2 rounded-lg bg-black text-white">Next</button></a>{{/if}}
+              </div>
               {{else}}
               <p class="text-white">Meals are empty.</p>
               {{/if}}
             </div>
-            <div id="pagination" class="flex justify-center items-center mt-5 text-white"></div>
-          </div>
 
         </section>
 

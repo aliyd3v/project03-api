@@ -147,7 +147,7 @@
             <div class="bg-main-bg p-5 flex flex-col w-full rounded-xl mb-5">
                 <div class="header">
                     <h1 class="text-[#ffc335] font-bold  text-2xl">Update table:</h1>
-                    <form action="/stol/{{stol._id}}/delete" method="post">
+                    <form onsubmit="startLoader()" action="/stol/{{stol._id}}/delete" method="post">
                         <button type="submit">
                             <div class="button bg-red-600 del-cotigory">
                                 <div class="button-wrapper">
@@ -160,7 +160,7 @@
                 </div>
             </div>
 
-            <form action="/stol/{{stol._id}}/update" method="post">
+            <form onsubmit="startLoader()" action="/stol/{{stol._id}}/update" method="post">
                 <div class="profile-container" style="width: 100%;">
                     <div class="profile-card" style="width: 100%;">
                         <div class="profile-info" style="width: 100%; margin-left: 100; margin-right: 100px;">
@@ -273,6 +273,14 @@
             let containerLoad = document.querySelector(".container-loader");
             containerLoad.style.display = "none";
         }
+
+        function startLoader() {
+            let containerInput = document.querySelector('.profile-info')
+            containerInput.style.display = 'none'
+            let containerLoad = document.querySelector(".container-loader");
+            containerLoad.style.display = "grid";
+        }
+
     </script>
 
 </body>

@@ -7,13 +7,19 @@ const { validationController } = require("./validationController")
 const fs = require('fs')
 const { Admin } = require('../model/userModel')
 
+let page = 1
+let limit = 4
+
 exports.mealPage = async (req, res) => {
+    const { query } = req
     try {
+        if (query.page) page = query.page
+
         // Get user.
         const user = await Admin.findById(req.cookies.userId)
 
         // Get all meals from database.
-        const meals = await Meal.find().populate('category')
+        const meals = await Meal.paginate({}, { page, limit, sort: { en_name: 1 }, populate: 'category' })
 
         // Rendering.
         return res.render('meal', {
@@ -192,7 +198,7 @@ exports.updateMealPage = async (req, res) => {
 
         // Get user.
         const user = await Admin.findById(req.cookies.userId)
-        
+
         // Rendering.
         return res.render('meal-update', {
             layout: false,
@@ -232,7 +238,7 @@ exports.updateOneMeal = async (req, res) => {
 
         // Get user.
         const user = await Admin.findById(req.cookies.userId)
-        
+
         // Result validation.
         const { data, error } = validationController(req, res)
         if (error) {

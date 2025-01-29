@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin create</title>
+    <title>Admin update</title>
     <link rel="stylesheet" href="/src/output.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
@@ -147,10 +147,22 @@
             <div class="bg-main-bg p-5 flex flex-col w-full h-20 rounded-xl mb-5">
                 <div class="header">
                     <h1 class="text-[#ffc335] font-bold  text-2xl">Create admin:</h1>
+
+                    <form onsubmit="startLoader()" action="/admin/{{admin._id}}/delete" method="post">
+                        <button type="submit">
+                            <div class="button bg-red-600 del-cotigory">
+                                <div class="button-wrapper">
+                                    <div class="text">DELETE</div>
+                                    <span class="icon"><i class="fa-solid fa-trash"></i></span>
+                                </div>
+                            </div>
+                        </button>
+                    </form>
                 </div>
             </div>
 
-            <form onsubmit="startLoader()" action="/admin-create" method="post" enctype="multipart/form-data">
+            <form onsubmit="startLoader()" action="/admin/{{admin._id}}/update" method="post"
+                enctype="multipart/form-data">
                 <div class="profile-container" style="width: 100%;">
                     <div class="profile-card" style="width: 100%;">
                         <div class="profile-info" style="width: 100%; margin-left: 100; margin-right: 100px;">
@@ -159,9 +171,11 @@
                                 <div class="relative flex items-center ">
                                     <div class="inputbox" style="width: 100%;">
                                         {{#if inputedData}}
-                                        <input required="required" type="text" name="name" value="{{inputedData.name}}">
+                                        <input id="user-name" required="required" type="text" name="name"
+                                            value="{{inputedData.name}}">
                                         {{else}}
-                                        <input required="required" type="text" name="name">
+                                        <input id="user-name" required="required" type="text" name="name"
+                                            value="{{admin.name}}">
                                         {{/if}}
                                         <span class="">
                                             Name
@@ -180,10 +194,11 @@
                                 <div class="relative flex items-center ">
                                     <div class="inputbox" style="width: 100%;">
                                         {{#if inputedData}}
-                                        <input required="required" type="email" name="email"
+                                        <input id="user-name" required="required" type="email" name="email"
                                             value="{{inputedData.email}}">
                                         {{else}}
-                                        <input required="required" type="email" name="email">
+                                        <input id="user-name" required="required" type="email" name="email"
+                                            value="{{admin.email}}">
                                         {{/if}}
                                         <span class="">
                                             Email
@@ -202,10 +217,11 @@
                                 <div class="relative flex items-center ">
                                     <div class="inputbox" style="width: 100%;">
                                         {{#if inputedData}}
-                                        <input required="required" type="text" name="phone"
+                                        <input id="user-name" required="required" type="text" name="phone"
                                             value="{{inputedData.phone}}">
                                         {{else}}
-                                        <input required="required" type="text" name="phone">
+                                        <input id="user-name" required="required" type="text" name="phone"
+                                            value="{{admin.phone}}">
                                         {{/if}}
                                         <span class="">
                                             Phone
@@ -227,7 +243,8 @@
                                         <input id="username" required="required" type="text" name="username"
                                             value="{{inputedData.username}}">
                                         {{else}}
-                                        <input id="username" required="required" type="text" name="username">
+                                        <input id="username" required="required" type="text" name="username"
+                                            value="{{admin.username}}">
                                         {{/if}}
                                         <span class="">
                                             Username
@@ -243,60 +260,25 @@
                             </div>
 
                             <div style="padding: 10px;">
-                                <div class="relative flex items-center">
-                                    <div class="inputbox" style="width: 100%;">
-                                        {{#if inputedData}}
-                                        <input id="password" required="required" type="password" name="password"
-                                            value="{{inputedData.password}}"><i class=" "></i>
-                                        {{else}}
-                                        <input id="password" required="required" type="password" name="password"><i
-                                            class=" "></i>
-                                        {{/if}}
-                                        <span class="">
-                                            Password
-                                        </span>
-                                    </div>
-
-                                    </svg>
-                                </div>
-                            </div>
-
-                            <!-- Category Dropdown -->
-                            <div style="padding: 10px;">
-                                <select name="language"
-                                    style="width: 100%; padding: 15px; margin-top: 5px; border-radius: 5px; background-color: #000000; color: #ffffff;"
-                                    required>
-                                    {{#if inputedData}}
-                                    <option value="{{inputedData.language}}">{{inputedData.language}}</option>
-                                    {{#if (isEqual inputedData.language 'English')}}
-                                    {{else}}
-                                    <option value="English">English</option>
-                                    {{/if}}
-                                    {{#if (isEqual inputedData.language 'Русский')}}
-                                    {{else}}
-                                    <option value="Русский">Русский</option>
-                                    {{/if}}
-                                    {{else}}
-                                    <option value="">Select language</option>
-                                    <option value="English">English</option>
-                                    <option value="Русский">Русский</option>
-                                    {{/if}}
-                                </select>
-                            </div>
-
-                            <div style="padding: 10px;">
                                 <div style="margin-bottom: 15px; padding-top: 15px">
                                     <label for="input-image" style="inline-block; padding: 13px 749px 13px 20px; color: white;
                                         background-color: black; border-radius: 5px; cursor: pointer; font-size: 16px;
                                         text-align: left;">Select
                                         image</label>
                                     <input type="file" id="input-image" name="file" style="display: none;"
-                                        accept="image/*" required>
+                                        accept="image/*">
                                     <div id="upload-placeholder"
                                         style="padding: 20px; border: 3px dashed #000000; text-align: center; font-size: 14px; color: #ffffff; cursor: pointer; margin-top: 7px;">
                                         Drop files here or click to select image</div>
                                 </div>
                             </div>
+
+                            <a href="/admin/{{admin._id}}/update-password">
+                                <div style="margin-bottom: 0px;">
+                                    <p style="inline-block; padding: 13px 680px 13px 20px; color: white;
+                                        background-color: black; border-radius: 5px; cursor: pointer; font-size: 16px;
+                                        text-align: left;">Change password</p>
+                            </a>
 
                             {{#if errorMessage}}
                             <div class="login-error">
@@ -308,7 +290,7 @@
                             <div class="!mt-8">
                                 <button type="submit"
                                     class="w-full py-3 px-4 text-sm tracking-wide duration-500 rounded-lg text-white border hover:bg-white hover:text-black focus:outline-none">
-                                    Create
+                                    Update
                                 </button>
                             </div>
                             <a href="/admin">

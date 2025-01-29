@@ -149,7 +149,7 @@
                 <div class="category-header">
                     <h1 class="category-title" id="page-title">Update category</h1>
 
-                    <form action="/category/{{oldCategory._id}}/delete" method="post">
+                    <form onsubmit="startLoader()" action="/category/{{oldCategory._id}}/delete" method="post">
                         <button type="submit">
                             <div class="button bg-red-600 del-cotigory">
                                 <div class="button-wrapper">
@@ -161,8 +161,8 @@
                     </form>
                 </div>
 
-                <form class="category-form" action="/category/{{oldCategory._id}}/update" method="post"
-                    id="category-form">
+                <form onsubmit="startLoader()" class="category-form" action="/category/{{oldCategory._id}}/update"
+                    method="post" id="category-form">
                     <div>
                         <label for="category-title-en" id="title-en-label" class="category-label">Category Title
                             (EN)</label>
@@ -209,10 +209,6 @@
 
     </main>
 
-
-
-
-    <!-- <script type="module" src="./js/catigories.js"></script> -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script>
         // Loader closer.
@@ -223,6 +219,12 @@
         function loading() {
             containerLoad.style.display = "none";
         }
+
+        function startLoader() {
+            let containerLoad = document.querySelector(".container-loader");
+            containerLoad.style.display = "grid";
+        }
+
     </script>
 
 

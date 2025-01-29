@@ -145,7 +145,7 @@
         <div class=" w-full ">
             <div class="bg-main-bg p-5 items-center flex justify-between w-full rounded-xl mb-5">
                 <p class="text-[#ffc335] font-bold  text-2xl">Admins: <span id="cotygory-length">
-                        {{admins.docs.length}}</span></p>
+                        {{admins.totalDocs}}</span></p>
                 {{#if (isEqual user.role "SUPERUSER")}}
                 <a href="/admin-create">
                     <div id="add-btn" class="button bg-green-600">
@@ -164,9 +164,10 @@
                 <div class="flex justify-between bg-[#222] p-4 rounded-lg mb-3 font-bold text-[#ffc335]">
                     <p class="w-[20%] text-center">Name</p>
                     <p class="w-[20%] text-center">Username</p>
-                    <p class="w-[25%] text-center">Phone</p>
+                    <p class="w-[20%] text-center">Phone</p>
                     <p class="w-[20%] text-center">Email</p>
-                    <p class="w-[10%] text-center">Role</p>
+                    <p class="w-[20%] text-center">Role</p>
+                    <p class="w-[10%] text-center">Action</p>
                 </div>
 
                 {{#each admins.docs}}
@@ -174,12 +175,34 @@
                     <div class="flex justify-between items-center">
                         <p class="w-[20%] text-center">{{name}}</p>
                         <p class="w-[20%] text-center">{{username}}</p>
-                        <p class="w-[25%] text-center">{{phone}}</p>
+                        <p class="w-[20%] text-center">{{phone}}</p>
                         <p class="w-[20%] text-center">{{email}} </p>
-                        <p class="w-[10%] text-center">{{role}}</p>
+                        <p class="w-[20%] text-center">{{role}}</p>
+                        {{#if (isEqual role 'SUPERUSER')}}
+                        <p class="w-[10%] text-center"></p>
+                        {{else}}
+                        <a href="/admin/{{_id}}/update">
+                            <div type="submit" class="w-[10%] button bg-green-600 edit-cotigory">
+                                <div class="button-wrapper">
+                                    <div class="text">Edit</div>
+                                    <span class="icon"><i class="fa-solid fa-pen"></i></span>
+                                </div>
+                            </div>
+                        </a>
+                        {{/if}}
                     </div>
                 </div>
                 {{/each}}
+
+                <!-- Pagination -->
+
+                <div id="pagination" class="flex justify-center mt-5 gap-2">
+                    {{#if admins.hasPrevPage}}<a href="/admin/?page={{admins.prevPage}}"><button
+                            class="px-3 py-2 rounded-lg bg-black text-white">Previous</button></a>{{/if}}
+                    <button class="px-3 py-2 rounded-lg bg-black text-[#ffc335]">{{admins.page}}</button>
+                    {{#if admins.hasNextPage}}<a href="/admin/?page={{admins.nextPage}}"><button
+                            class="px-3 py-2 rounded-lg bg-black text-white">Next</button></a>{{/if}}
+                </div>
 
             </div>
         </div>

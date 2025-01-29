@@ -182,11 +182,11 @@
 
                 <div id="pagination" class="flex justify-center mt-5 gap-2">
                     {{#if stols.hasPrevPage}}<a href="/stol/?page={{stols.prevPage}}"><button
-                            class="px-3 py-2 rounded-lg bg-[#222] text-white">Previous</button></a>{{/if}}
-                    <button class="px-3 py-2 rounded-lg bg-[#ffc335] text-white">{{stols.page}}</button>
+                            class="px-3 py-2 rounded-lg bg-black text-white">Previous</button></a>{{/if}}
+                    <button class="px-3 py-2 rounded-lg bg-black text-[#ffc335]">{{stols.page}}</button>
                     {{!-- <a href=""><button class="px-3 py-2 rounded-lg bg-[#222] text-white">2</button></a> --}}
                     {{#if stols.hasNextPage}}<a href="/stol/?page={{stols.nextPage}}"><button
-                            class="px-3 py-2 rounded-lg bg-[#222] text-white">Next</button></a>{{/if}}
+                            class="px-3 py-2 rounded-lg bg-black text-white">Next</button></a>{{/if}}
                 </div>
                 {{else}}
                 <p class="text-white">Tables are empty.</p>

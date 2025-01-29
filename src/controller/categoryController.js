@@ -6,14 +6,21 @@ const { uploadImage, getImageUrl, deleteImage } = require("./imageConroller")
 const { validationController } = require("./validationController")
 const { Meal } = require("../model/mealModel")
 const { Admin } = require('../model/userModel')
+const { populate } = require("dotenv")
+
+let page = 1
+let limit = 5
 
 exports.categoryPage = async (req, res) => {
+    const { query } = req
     try {
-        // Get user.
-        const user = await Admin.findById(req.cookies.userId)
+        if (query.page) page = query.page
 
         // Get all categories from database.
-        const categories = await Category.find().populate('meals')
+        const categories = await Category.paginate({}, { page, limit, sort: { en_name: 1 }, populate: 'meals' })
+
+        // Get user.
+        const user = await Admin.findById(req.cookies.userId)
 
         // Rendering.
         return res.render('category', {
