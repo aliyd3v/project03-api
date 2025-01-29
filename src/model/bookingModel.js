@@ -7,8 +7,8 @@ const bookingSchema = new Schema({
     phone: String,
     date: String,
     time_start: String,
-    time_end: String,
-    is_active: Boolean,
+    hour: String,
+    canceled: Boolean,
     stol: { type: Schema.Types.ObjectId, ref: 'Stol' }
 }, { timestamps: true })
 

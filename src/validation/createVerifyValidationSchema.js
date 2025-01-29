@@ -1,4 +1,4 @@
-exports.createVerifyTokenForGetAllBookingsOrdersValidationSchema = {
+exports.createVerifyValidationSchema = {
     email: {
         notEmpty: {
             errorMessage: 'Email is required!',

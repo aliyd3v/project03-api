@@ -4,7 +4,7 @@ const { getAllCategories, getOneCategory, getCategoryMeals } = require('../contr
 const { getAllMeals, getOneMeal } = require('../controller/mealController')
 const { createOrderWithVerification } = require('../controller/orderController')
 const { orderCreateValidationSchema } = require('../../validation/orderCreateValidationSchema')
-const { createVerifyTokenForGetAllBookingsOrdersValidationSchema } = require('../../validation/createVerifyTokenForGetAllBookingsOrdersValidationSchema')
+const { createVerifyValidationSchema } = require('../../validation/createVerifyValidationSchema')
 const { createVerifyForGetAllBookingAndOrder, verifyTokenAndCreateOrderOrBooking } = require('../controller/verifyContorller')
 const { queryEmailValidationSchema } = require('../../validation/queryEmailValidationSchema')
 const { cancelBookingForCustomer } = require('../controller/customerContoller')
@@ -34,7 +34,7 @@ router
     .post('/order/create', checkSchema(orderCreateValidationSchema), createOrderWithVerification)
 
     // Customer cabinet route.
-    .post('/cabinet/create-verify', checkSchema(createVerifyTokenForGetAllBookingsOrdersValidationSchema), createVerifyForGetAllBookingAndOrder)
+    .post('/cabinet/create-verify', checkSchema(createVerifyValidationSchema), createVerifyForGetAllBookingAndOrder)
     .post('/cabinet/cancel-booking/:id', checkSchema(queryEmailValidationSchema), cancelBookingForCustomer)
 
     // Verify token route.
@@ -43,6 +43,10 @@ router
     // Search route.
     .get('/search/category', checkSchema(searchMCategoriesValidatorSchema), searchingCategory)
     .get('/search/meal', checkSchema(searchMealsValidatorSchema), searchingMeals)
+
+    // Stol route.
+    .get('/stol', getAllStols)
+    .get('/stol/:id', getOneStol)
 
     // Direct not found message.
     .use((req, res) => {
@@ -53,9 +57,5 @@ router
             error: { message: "Direct is not found!" }
         })
     })
-
-    // Stol route.
-    .get('/stol', getAllStols)
-    .get('/stol/:id', getOneStol)
 
 module.exports = router
