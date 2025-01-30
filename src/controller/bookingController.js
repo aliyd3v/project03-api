@@ -3,6 +3,7 @@ const { sendVerifyToEmail } = require("../helper/sendToMail")
 const { Booking } = require("../model/bookingModel")
 const { Stol } = require("../model/stolModel")
 const { TokenStore } = require("../model/tokenStoreModel")
+const { Admin } = require("../model/userModel")
 const { errorHandling } = require("./errorController")
 const { idChecking } = require("./idController")
 const { generateToken } = require("./tokenController")
@@ -116,7 +117,7 @@ exports.checkBookingForAvailability = async (req, res) => {
         const availableStols = stols.map(stol => stol.number)
 
         // Getting bookings from database with requesting date.
-        const bookings = await Booking.find({ date: date, is_active: true }).populate('stol')
+        const bookings = await Booking.paginate({ date: date, is_canceled: false }).populate('stol')
 
         // Checking every booking with requesting time.
         if (bookings) {
@@ -151,83 +152,19 @@ exports.checkBookingForAvailability = async (req, res) => {
     }
 }
 
-exports.getAllBooking = async (req, res) => {
-    try {
-        const bookings = await Booking.find().populate('stol').sort({ date: "desc" })/*.limit(10)*/
-
-        // Responding.
-        return res.status(200).send({
-            success: true,
-            error: false,
-            data: {
-                message: "Getted all bookings.",
-                bookings
-            }
-        })
-    }
-
-    // Error handling.
-    catch (error) {
-        errorHandling(error, res)
-    }
-}
-
 exports.getAllActiveBooking = async (req, res) => {
     try {
-        const bookings = await Booking.find({ is_active: true }).populate('stol').sort({ date: "desc" })/*.limit(10)*/
+        // Get user.
+        const user = await Admin.findById(req.cookies.userId)
 
-        // Responding.
-        return res.status(200).send({
-            success: true,
-            error: false,
-            data: {
-                message: "Getted all bookings with active status.",
-                bookings
-            }
-        })
-    }
+        // Getting all active bookings.
+        const bookings = await Booking.paginate({ is_canceled: false }, { page: 1, limit: 10, sort: { date: -1 }, populate: 'stol' })
 
-    // Error handling.
-    catch (error) {
-        errorHandling(error, res)
-    }
-}
-
-exports.getOneBooking = async (req, res) => {
-    const { params: { id } } = req
-    try {
-        // Checking id to valid.
-        const idError = idChecking(req, id)
-        if (idError) {
-            // Responding.
-            return res.status(400).send({
-                success: false,
-                data: null,
-                error: idError
-            })
-        }
-
-        // Geting a booking from database via id and checking for existence.
-        const booking = await Booking.findById(id).populate('stol')
-        if (!booking) {
-            // Responding.
-            return res.status(404).send({
-                success: false,
-                data: null,
-                error: {
-                    message: "Booking is not found!"
-                }
-            })
-        }
-
-        // Responding.
-        return res.status(200).send({
-            success: true,
-            error: false,
-            data: {
-                message: "Booking getted successfully.",
-                booking
-            }
+        // Rendering.
+        return res.render('booking', {
+            layout: false,
+            bookings,
+            user
         })
     }
 
@@ -273,29 +210,6 @@ exports.deactivateBooking = async (req, res) => {
             success: true,
             error: false,
             data: { message: "Booking has been deactivated successfully." }
-        })
-    }
-
-    // Error handling.
-    catch (error) {
-        errorHandling(error, res)
-    }
-}
-
-exports.deleteAllBookings = async (req, res) => {
-    try {
-        // Checking bookings for existence.
-        const bookings = await Booking.find()
-        if (bookings) {
-            // Deleting bookings from database.
-            await Booking.deleteMany()
-        }
-
-        // Responding.
-        return res.status(200).send({
-            success: true,
-            error: false,
-            data: { message: "Bookings have been deleted successfully." }
         })
     }
 
