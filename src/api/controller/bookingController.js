@@ -34,8 +34,8 @@ exports.createBookingWithVerification = async (req, res) => {
                 }
             })
         }
-        // Checking condidats on current date.
 
+        // Checking date and time to booking for next time.
         const date_now = new Date().toISOString().split('T')[0]
         if (data.date < date_now) {
             // Responding.
@@ -51,6 +51,16 @@ exports.createBookingWithVerification = async (req, res) => {
             const [hours, minutes, secunds] = time_now.split(':')
             time_now = `${hours < 10 ? `0${hours}` : hours}:${minutes < 10 ? `0${minutes}` : minutes}`
             console.log(time_now)
+            if (data.time <= time_now) {
+                // Responding.
+                return res.status(400).send({
+                    success: false,
+                    data: null,
+                    error: {
+                        message: "Pleare enter date and time for next time!"
+                    }
+                })
+            }
             // Responding.
             return res.status(400).send({
                 success: false,
@@ -61,17 +71,16 @@ exports.createBookingWithVerification = async (req, res) => {
             })
         }
 
+        // Checking condidats on current date.
         let yesterday = new Date(`${data.date} ${data.time}`)
         yesterday.setHours(yesterday.getHours())
         yesterday.setDate(yesterday.getDate() - 1)
         const [month, day, year] = yesterday.toLocaleDateString().split('/').map(Number)
         yesterday = `${year}-${month < 10 ? `0${month}` : month}-${day < 10 ? `0${day}` : day}`
-
         const existingBookings = await Booking.find({ stol: stol._id, date: { $in: [yesterday, data.date] }, is_canceled: false })
         if (existingBookings) {
             for (const existData of existingBookings) {
                 // Checking existing bookings on current time.
-
                 let newT = new Date(`${data.date} ${data.time}`)
                 newT.setHours(newT.getHours())
                 let newT_end = new Date(newT)
@@ -80,7 +89,6 @@ exports.createBookingWithVerification = async (req, res) => {
                 existT.setHours(existT.getHours())
                 let existT_end = new Date(existT)
                 existT_end.setHours(existT_end.getHours() + Number(existData.hour))
-
                 if (newT < existT_end && newT_end > existT) {
                     // Responding.
                     return res.status(400).send({
