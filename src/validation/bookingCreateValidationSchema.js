@@ -1,7 +1,7 @@
 exports.bookingCreateValidationSchema = {
     customer_name: {
         notEmpty: {
-            errorMessage: 'Customer name is required!',
+            errorMessage: 'Customer name cannot be empty!',
         },
         isString: {
             errorMessage: "Customer name cannot be empty!"
@@ -14,7 +14,7 @@ exports.bookingCreateValidationSchema = {
     },
     email: {
         notEmpty: {
-            errorMessage: 'Email is required!',
+            errorMessage: 'Email cannot be empty!',
         },
         isEmail: {
             errorMessage: 'Email is not valid!',
@@ -24,7 +24,7 @@ exports.bookingCreateValidationSchema = {
     },
     phone: {
         notEmpty: {
-            errorMessage: 'Phone number is required!',
+            errorMessage: 'Phone number cannot be empty!',
         },
         matches: {
             options: [/^(\+998|998|0)?[3-9]\d{8}$/],
@@ -40,7 +40,7 @@ exports.bookingCreateValidationSchema = {
             errorMessage: "Stol number must be a number!"
         },
         escape: true
-    }, 
+    },
     date: {
         notEmpty: {
             errorMessage: "Date cannot be empty!"
@@ -51,7 +51,7 @@ exports.bookingCreateValidationSchema = {
         },
         escape: true
     },
-    time_start: {
+    time: {
         notEmpty: {
             errorMessage: "Time cannot be empty!"
         },
@@ -61,13 +61,12 @@ exports.bookingCreateValidationSchema = {
         },
         escape: true
     },
-    time_end: {
+    hour: {
         notEmpty: {
-            errorMessage: "Billed time cannot be empty!"
+            errorMessage: "Hour(s) cannot be empty!"
         },
-        matches: {
-            options: [/^(0[0-9]|1[0-9]|2[0-3]):([0-5][0-9])$/], // Format: HH:mm
-            errorMessage: 'Time format is wrong!. True format: HH:mm',
+        isInt: {
+            errorMessage: 'Hour(s) must be a number!',
         },
         escape: true
     }

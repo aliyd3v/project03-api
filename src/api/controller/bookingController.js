@@ -35,15 +35,28 @@ exports.createBookingWithVerification = async (req, res) => {
             })
         }
         // Checking condidats on current date.
-        const existingBookings = await Booking.find({ stol: stol._id, date: data.date, is_active: true })
+
+        let yesterday = new Date(`${data.date} ${data.time}`)
+        yesterday.setHours(yesterday.getHours())
+        yesterday.setDate(yesterday.getDate() - 1)
+        const [month, day, year] = yesterday.toLocaleDateString().split('/').map(Number)
+        yesterday = `${year}-${month < 10 ? `0${month}` : month}-${day < 10 ? `0${day}` : day}`
+
+        const existingBookings = await Booking.find({ stol: stol._id, date: { $in: [yesterday, data.date] }, is_canceled: false })
         if (existingBookings) {
-            for (const existingBooking of existingBookings) {
+            for (const existData of existingBookings) {
                 // Checking existing bookings on current time.
-                const existingTimeStart = new Date(`${existingBooking.date} ${existingBooking.time_start}`)
-                const existingTimeEnd = new Date(`${existingBooking.date} ${existingBooking.time_end}`)
-                const newTimeStart = new Date(`${data.date} ${data.time_start}`)
-                const newTimeEnd = new Date(`${data.date} ${data.time_end}`)
-                if (newTimeStart < existingTimeEnd && newTimeEnd > existingTimeStart) {
+
+                let newT = new Date(`${data.date} ${data.time}`)
+                newT.setHours(newT.getHours())
+                let newT_end = new Date(newT)
+                newT_end.setHours(newT_end.getHours() + Number(data.hour))
+                let existT = new Date(`${existData.date} ${existData.time}`)
+                existT.setHours(existT.getHours())
+                let existT_end = new Date(existT)
+                existT_end.setHours(existT_end.getHours() + Number(existData.hour))
+
+                if (newT < existT_end && newT_end > existT) {
                     // Responding.
                     return res.status(400).send({
                         success: false,
@@ -64,8 +77,8 @@ exports.createBookingWithVerification = async (req, res) => {
         const bookingStol = {
             number: data.stol_number,
             date: data.date,
-            time_start: data.time_start,
-            time_end: data.time_end
+            time: data.time,
+            hour: data.hour
         }
         const booking = {
             customer_name: data.customer_name,

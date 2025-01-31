@@ -106,7 +106,7 @@ exports.verifyTokenAndCreateOrderOrBooking = async (req, res) => {
                 status: "Wait accept"
             }
             const newOrder = await Order.create(order)
-            
+
             // Deleting nonce from database for once using from token.
             await TokenStore.findByIdAndDelete(nonce._id)
 
@@ -135,9 +135,9 @@ exports.verifyTokenAndCreateOrderOrBooking = async (req, res) => {
                 phone: data.phone,
                 stol: stol._id,
                 date: data.stol.date,
-                time_start: data.stol.time_start,
-                time_end: data.stol.time_end,
-                is_active: true
+                time: data.stol.time,
+                hour: data.stol.hour,
+                is_canceled: false
             })
 
             // Deleting nonce from database for once using from token.
