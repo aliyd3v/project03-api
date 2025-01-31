@@ -9,7 +9,9 @@ exports.getAllActiveBooking = async (req, res) => {
         const user = await Admin.findById(req.cookies.userId)
 
         // Getting all active bookings.
-        const bookings = await Booking.paginate({ is_canceled: false }, { page: 1, limit: 10, sort: { date: -1 }, populate: 'stol' })
+
+        const now = new Date().toISOString().split('T')[0]
+        const bookings = await Booking.paginate({ is_canceled: false, date: { $gte: now } }, { page: 1, limit: 10, sort: { date: -1 }, populate: 'stol' })
 
         // Rendering.
         return res.render('booking', {
@@ -31,37 +33,29 @@ exports.deactivateBooking = async (req, res) => {
         // Checking id to valid.
         const idError = idChecking(req, id)
         if (idError) {
-            // Responding.
-            return res.status(400).send({
-                success: false,
-                data: null,
-                error: idError
-            })
+            // Rendering.
+            return res.render('not-found', { layout: false })
         }
 
         // Geting a booking from database via id and checking for existence.
         const booking = await Booking.findById(id).populate('stol')
         if (!booking) {
-            // Responding.
-            return res.status(404).send({
-                success: false,
-                data: null,
-                error: {
-                    message: "Booking is not found!"
-                }
-            })
+            // Rendering.
+            return res.render('not-found', { layout: true })
+        }
+
+        // Checking status.
+        if (booking.is_canceled == true) {
+            // Rendering.
+            return res.render('bad-request', { layout: false })
         }
 
         // Writing changes to database.
-        booking.is_active = false
+        booking.is_canceled = true
         await Booking.findByIdAndUpdate(id, booking)
 
-        // Responding.
-        return res.status(200).send({
-            success: true,
-            error: false,
-            data: { message: "Booking has been deactivated successfully." }
-        })
+        // Redirect.
+        return res.redirect('/booking')
     }
 
     // Error handling.
