@@ -10,8 +10,26 @@ exports.getAllActiveBooking = async (req, res) => {
 
         // Getting all active bookings.
 
-        const now = new Date().toISOString().split('T')[0]
-        const bookings = await Booking.paginate({ is_canceled: false, date: { $gte: now } }, { page: 1, limit: 10, sort: { date: -1 }, populate: 'stol' })
+        let now = new Date()
+        let yesterday = new Date()
+        yesterday.setDate(yesterday.getDate() - 1)
+        const [month, day, year] = yesterday.toLocaleDateString().split('/').map(Number)
+        yesterday = `${year}-${month < 10 ? `0${month}` : month}-${day < 10 ? `0${day}` : day}`
+        let bookings = await Booking.paginate({ is_canceled: false, date: { $gte: yesterday } }, { page: 1, limit: 10, sort: { date: -1 }, populate: 'stol' })
+
+        console.log(bookings)
+
+        for (let i = 0; i < bookings.length; i++) {
+            let timeEnd = new Date(`${bookings[i].date} ${bookings[i].time}`)
+            timeEnd.setHours(timeEnd.getHours() + bookings[i].hour)
+            console.log(`time: ${bookings[i].date} ${bookings[i].time}
+    endTime: ${timeEnd}`)
+            if (timeEnd < now) {
+                bookings.splice(i, 1)
+            }
+
+        }
+
 
         // Rendering.
         return res.render('booking', {
