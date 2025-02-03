@@ -147,16 +147,21 @@ exports.bookingHistoryPage = async (req, res) => {
         query.page ? page = query.page : false
 
         // Get bookings.
+
+        let today = new Date();
+        const [month, day, year] = today.toLocaleDateString().split('/').map(Number)
+        today = `${year}-${month < 10 ? `0${month}` : month}-${day < 10 ? `0${day}` : day}`
+
         const bookings = await Booking.paginate(
-            {},
-            { page, limit, sort: { createdAt: -1 } }
+            { date: { $lte: today } },
+            { sort: { createdAt: -1 }, populate: 'stol' }
         )
 
         // Get user.
         const user = await Admin.findById(req.cookies.userId)
 
         // Rendering.
-        return res.render('order-history', {
+        return res.render('booking-history', {
             layout: false,
             user,
             bookings
