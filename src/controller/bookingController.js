@@ -30,6 +30,7 @@ exports.getAllActiveBooking = async (req, res) => {
             // Remove from bookings.docs array.
             if (timeEnd < now) {
                 bookings.docs.splice(i, 1)
+                bookings.totalDocs--
             }
         }
 

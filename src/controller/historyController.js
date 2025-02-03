@@ -16,8 +16,13 @@ exports.historyPage = async (req, res) => {
         const order = await Order.paginate(
             { status: { $in: ['Delivered', 'Dismissed'] } },
             { sort: { createdAt: -1 } })
+
+        let today = new Date();
+        const [month, day, year] = today.toLocaleDateString().split('/').map(Number)
+        today = `${year}-${month < 10 ? `0${month}` : month}-${day < 10 ? `0${day}` : day}`
+
         const booking = await Booking.paginate(
-            {},
+            { date: { $lte: today } },
             { sort: { createdAt: -1 } }
         )
         docs.push(...order.docs, ...booking.docs)
