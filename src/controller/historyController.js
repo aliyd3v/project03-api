@@ -22,8 +22,6 @@ exports.historyPage = async (req, res) => {
         )
         docs.push(...order.docs, ...booking.docs)
 
-        // console.log(docs)
-
         const totalCount = order.totalDocs + booking.totalDocs
 
         return res.render('history', {

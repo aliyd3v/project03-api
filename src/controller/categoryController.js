@@ -6,7 +6,6 @@ const { uploadImage, getImageUrl, deleteImage } = require("./imageConroller")
 const { validationController } = require("./validationController")
 const { Meal } = require("../model/mealModel")
 const { Admin } = require('../model/userModel')
-const { populate } = require("dotenv")
 
 let page = 1
 let limit = 5

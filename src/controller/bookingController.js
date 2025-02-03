@@ -10,26 +10,28 @@ exports.getAllActiveBooking = async (req, res) => {
 
         // Getting all active bookings.
 
-        let now = new Date()
-        let yesterday = new Date()
+        // Get yesterday date.
+        const today = new Date()
+        today.setHours(today.getHours() + 5, 0, 0, 0)
+        let yesterday = new Date(today);
         yesterday.setDate(yesterday.getDate() - 1)
         const [month, day, year] = yesterday.toLocaleDateString().split('/').map(Number)
         yesterday = `${year}-${month < 10 ? `0${month}` : month}-${day < 10 ? `0${day}` : day}`
-        let bookings = await Booking.paginate({ is_canceled: false, date: { $gte: yesterday } }, { page: 1, limit: 10, sort: { date: -1 }, populate: 'stol' })
 
-        console.log(bookings)
+        // Getting date great or equal then yesterday.
+        let bookings = await Booking.paginate({ is_canceled: false, date: { $gte: yesterday } }, { page: 1, limit: 10, sort: { date: 1 }, populate: 'stol' })
 
-        for (let i = 0; i < bookings.length; i++) {
-            let timeEnd = new Date(`${bookings[i].date} ${bookings[i].time}`)
-            timeEnd.setHours(timeEnd.getHours() + bookings[i].hour)
-            console.log(`time: ${bookings[i].date} ${bookings[i].time}
-    endTime: ${timeEnd}`)
+        // Remove older booking from now.
+        const now = new Date()
+        for (let i = 0; i < bookings.docs.length; i++) {
+            let timeEnd = new Date(`${bookings.docs[i].date} ${bookings.docs[i].time}`)
+            timeEnd.setHours(timeEnd.getHours() + bookings.docs[i].hour)
+
+            // Remove from bookings.docs array.
             if (timeEnd < now) {
-                bookings.splice(i, 1)
+                bookings.docs.splice(i, 1)
             }
-
         }
-
 
         // Rendering.
         return res.render('booking', {

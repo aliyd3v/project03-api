@@ -50,8 +50,7 @@ exports.createBookingWithVerification = async (req, res) => {
             let time_now = new Date().toLocaleTimeString().split(' ')[0]
             const [hours, minutes, secunds] = time_now.split(':')
             time_now = `${hours < 10 ? `0${hours}` : hours}:${minutes < 10 ? `0${minutes}` : minutes}`
-            console.log(time_now)
-            if (data.time <= time_now) {
+            if (data.time < time_now) {
                 // Responding.
                 return res.status(400).send({
                     success: false,
@@ -61,14 +60,6 @@ exports.createBookingWithVerification = async (req, res) => {
                     }
                 })
             }
-            // Responding.
-            return res.status(400).send({
-                success: false,
-                data: null,
-                error: {
-                    message: "Pleare enter date and time for next time!"
-                }
-            })
         }
 
         // Checking condidats on current date.
