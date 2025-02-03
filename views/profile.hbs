@@ -161,7 +161,34 @@
                         <p class="profile-email"><span>Email:</span><br> {{user.email}}</p>
                         <p class="profile-phone"><span>Phone:</span><br> {{user.phone}}</p>
                         <p class="profile-role"><span>Role:</span><br> {{user.role}}</p>
-                        <p class="profile-address"><span>Language:</span><br> {{user.language}}</p>
+                        <form action="/profile/{{user._id}}/update/language" method="post">
+                            <!-- Category Dropdown -->
+                            <div style="background-color: black; border-radius: 13px; display: flex;">
+                                <p class="profile-address"><span>Language:</span></p>
+                                <div style="margin: 10px; margin-left: 20px; font-size: 20px;">
+                                    <select style="background-color: rgb(0, 0, 0); color: white;" name="language"
+                                        class="product-select" required>
+                                        {{#if (isEqual user.language 'English')}}
+                                        <option style="color: white;" value="English">
+                                            <p style="color: white;">English</p>
+                                        </option>
+                                        <option style="color: white;" value="Русский">
+                                            <p style="color: white">Русский</pp>
+                                        </option>
+                                        {{else}}
+                                        <option value="Русский">Русский</option>
+                                        <option value="English">English</option>
+                                        {{/if}}
+                                    </select>
+                                </div>
+                                <div
+                                    style="display: flex; justify-content: right; width: 220px; height: 30px; margin-top: 10px;">
+                                    <button type="submit" style="color: white; background-color: rgb(1, 67, 1); font-size: 18px; border-radius: 10px; 
+                                        padding: 0 8px 0 8px ; margin-right: 10px;">Change
+                                        language</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

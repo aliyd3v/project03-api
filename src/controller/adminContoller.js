@@ -455,3 +455,54 @@ exports.profilePage = async (req, res) => {
         errorHandling(error, res)
     }
 }
+
+exports.profileLanguageUpdate = async (req, res) => {
+    const { params: { id }, body: { language } } = req
+    try {
+        // Getting userId from cookies.
+        const cookieUserId = req.cookies.userId
+        // Checking id to valid.
+        const idError = idChecking(req, id)
+        if (idError) {
+            // Rendering.
+            return res.render('bad-request', { layout: false })
+        }
+
+        // Checking userId from cookie and params id.
+        if (id != cookieUserId) {
+            // Rendering.
+            return res.render('bad-request', { layout: false })
+        }
+
+        // Checking user (admin) for existence.
+        const user = await Admin.findById(id)
+        if (!user) {
+            // Rendering.
+            return res.render('not-found', { layout: false })
+        }
+
+        // Checking language to valid and update user.
+        if (!language) {
+            // Rendering.
+            return res.render('bad-request', { layout: false })
+        } else if (language == 'English') {
+            user.language = 'English'
+        } else if (language == 'Русский') {
+            user.language = 'Русский'
+        } else {
+            // Rendering.
+            return res.render('bad-request', { layout: false })
+        }
+
+        // Writing updates to database.
+        await Admin.findByIdAndUpdate(id, user)
+
+        // Redirect.
+        return res.redirect('/profile')
+    }
+
+    // Error handling.
+    catch (error) {
+        errorHandling(error, res)
+    }
+}

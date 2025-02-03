@@ -1,6 +1,6 @@
 const { checkSchema } = require('express-validator')
 const { jwtAccessMiddleware } = require('../middleware/jwtAccessMiddleware')
-const { adminCreate, deleteOneAdmin, adminsPage, profilePage, updateOneAdmin, adminCreatePage, updateAdminPage, updatePasswordAdmin, updatePasswordAdminPage } = require('../controller/adminContoller')
+const { adminCreate, deleteOneAdmin, adminsPage, profilePage, updateOneAdmin, adminCreatePage, updateAdminPage, updatePasswordAdmin, updatePasswordAdminPage, profileLanguageUpdate } = require('../controller/adminContoller')
 const { createAdminValidationSchema } = require('../validation/adminCreateValidationSchema')
 const { SUjwtAccessMiddleware } = require('../middleware/SUjwtAccessMiddleware')
 const { upload } = require('../helper/upload')
@@ -19,5 +19,6 @@ router
     .get('/admin/:id/update-password', SUjwtAccessMiddleware, updatePasswordAdminPage)
     .post('/admin/:id/update-password', SUjwtAccessMiddleware, checkSchema(adminPasswordUdpateValidationSchema), updatePasswordAdmin)
     .get('/profile', jwtAccessMiddleware, profilePage)
+    .post('/profile/:id/update/language', jwtAccessMiddleware, profileLanguageUpdate)
 
 module.exports = router
