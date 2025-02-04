@@ -135,146 +135,79 @@
       </a>
     </div>
     <!-- ===============================Cotigories=====================  -->
-    <div class="">
 
-      <div class=" w-[11 00px]">
-        <h1 class="text-white text-xl mb-3">Categories <span class="text-text-color">*</span></h1>
-        <div class="flex  bg-main-bg w-[100%] py-6 px-5 rounded-xl gap-4    overflow-x-scroll">
+    <div class=" w-full ">
+      <div class="bg-main-bg p-5 items-center flex justify-between w-full h-20 rounded-xl mb-5">
+        <p class="text-[#ffc335] font-bold  text-2xl">Meals: <span id="cotygory-length">
+            {{meals.totalDocs}}</span></p>
 
-          <!-- salad box -->
-          <div class="w-40 h-40 rounded-xl     text-center col-span-2 bg-black">
-            <div class="w-32 mx-auto -mt-5 rounded-full overflow-hidden">
-
-              <img class="w-full" src="/img/healthy-salad-plate-tomatoes-chickpeas-600nw-2427459441.webp" alt="salad">
-            </div>
-            <p class="text-white mt-4"></p>
-          </div>
-          <!-- salad box end -->
-          <!-- salad box -->
-          <div class="w-40 h-40 rounded-xl     text-center col-span-2 bg-black">
-            <div class="w-32 mx-auto -mt-5 rounded-full overflow-hidden">
-
-              <img class="w-full" src="/img/healthy-salad-plate-tomatoes-chickpeas-600nw-2427459441.webp" alt="salad">
-            </div>
-            <p class="text-white mt-4"></p>
-          </div>
-          <!-- salad box end -->
-          <!-- salad box -->
-          <div class="w-40 h-40 rounded-xl     text-center col-span-2 bg-black">
-            <div class="w-32 mx-auto -mt-5 rounded-full overflow-hidden">
-
-              <img class="w-full" src="/img/healthy-salad-plate-tomatoes-chickpeas-600nw-2427459441.webp" alt="salad">
-            </div>
-            <p class="text-white mt-4"></p>
-          </div>
-          <!-- salad box end -->
-          <!-- salad box -->
-          <div class="w-40 h-40 rounded-xl     text-center col-span-2 bg-black">
-            <div class="w-32 mx-auto -mt-5 rounded-full overflow-hidden">
-
-              <img class="w-full" src="/img/healthy-salad-plate-tomatoes-chickpeas-600nw-2427459441.webp" alt="salad">
-            </div>
-            <p class="text-white mt-4"></p>
-          </div>
-          <!-- salad box end -->
-          <!-- salad box -->
-          <div class="w-40 h-40 rounded-xl     text-center col-span-2 bg-black">
-            <div class="w-32 mx-auto -mt-5 rounded-full overflow-hidden">
-
-              <img class="w-full" src="/img/healthy-salad-plate-tomatoes-chickpeas-600nw-2427459441.webp" alt="salad">
-            </div>
-            <p class="text-white mt-4"></p>
-          </div>
-          <!-- salad box end -->
-          <!-- salad box -->
-          <div class="w-40 h-40 rounded-xl     text-center col-span-2 bg-black">
-            <div class="w-32 mx-auto -mt-5 rounded-full overflow-hidden">
-
-              <img class="w-full" src="/img/healthy-salad-plate-tomatoes-chickpeas-600nw-2427459441.webp" alt="salad">
-            </div>
-            <p class="text-white mt-4"></p>
-          </div>
-          <!-- salad box end -->
-
+        <div class="button-group">
+          <p>Sort:</p>
+          <select class="status-button-active" name="" id="">
+            <a href="/meal">All</a>
+            <option value="">All</option>
+            {{#each categories}}
+            <option value="{{_id}}">{{en_name}}</option>
+            {{/each}}
+          </select>
         </div>
 
+        <a href="/meal/create">
+          <div id="add-btn" class="button bg-green-600">
+            <div class="button-wrapper catygoryAddBtn">
+              <div class="text">ADD</div>
+              <span class="icon"><i class="fa-solid fa-plus"></i></span>
+            </div>
+          </div>
+        </a>
       </div>
 
-      <div class=" w-full">
+      <div id="pruduct-container"
+        class="flex  flex-col bg-main-bg w-[100%] py-6 px-5 rounded-xl gap-5 list-none   overflow-x-scroll cotigories-container">
+        {{#if meals.docs.length}}
 
-        <section class="w-full mt-7">
-          <div class="mx-auto max-w-7xl mt-7">
-            <div class="bg-main-bg p-5 items-center flex justify-between w-full h-20 rounded-xl mb-5">
-              <p class="text-[#ffc335] font-bold  text-2xl">Meals: <span id="cotygory-length">
-                  {{meals.totalDocs}}</span>
-              </p>
-              <a href="/meal/create">
-                <div class="button bg-green-600">
-                  <div class="button-wrapper catygoryAddBtn">
-                    <div class="text">ADD</div>
-                    <span class="icon"><i class="fa-solid fa-plus"></i></span>
-                  </div>
-                </div>
-              </a>
+        {{#each meals.docs}}
+        <div class="w-full gap-7 rounded-xl flex items-center p-4 col-span-2 bg-black justify-between">
+          <div class="flex gap-3 items-center">
+            <div class="w-32 h-32 rounded-full overflow-hidden">
+              <img class="w-full" src="{{image_url}}" alt="Mahsulot rasm">
             </div>
-
-            <div id="data-container">
-              {{#if meals.docs.length}}
-              {{#each meals.docs}}
-              <div style="margin-top:20px;"
-                class="bg-main-bg flex items-center justify-around mt-6 w-full h-60 rounded-xl mx-auto sm:mr-0 group cursor-pointer lg:mx-auto transition-all duration-500">
-                <div class="rounded-xl">
-                  <img src="{{image_url}}" alt="{{en_name}}" class="w-full h-52 aspect-square object-cover">
-                </div>
-                <div class="w-[70%] h-52">
-                  <div class="flex items-center justify-between">
-                    <h6
-                      class="font-semibold text-xl leading-8 text-white transition-all duration-500 group-hover:text-indigo-600">
-                      {{en_name}}
-                    </h6>
-                    <h6 class="font-semibold text-xl leading-8 text-indigo-600">
-                      ${{price}}
-                    </h6>
-                  </div>
-                  <div class="mt-3">
-                    <ul class="list-none overflow-scroll h-32 w-[300px]">
-                      <li class="mt-2 font-normal text-sm leading-6 text-gray-500">{{en_description}}</li>
-                      <li class="mt-2 font-normal text-sm leading-6 text-gray-500">Category: {{category.en_name}}
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="flex gap-3 ml-[600px]">
-                    <a href="/meal/{{_id}}/update">
-                      <div class="button bg-green-600" data-id="{{item._id}}">
-                        <div class="button-wrapper">
-                          <div class="text">EDIT</div>
-                          <span class="icon"><i class="fa-solid fa-pen"></i></span>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
+            <div class="w-[300px]">
+              <h1 class="text-white text-3xl" style="padding-left: 15px;">{{en_name}}</h1>
+              <p class="text-[#999] text-xl" style="padding-left: 15px;">{{en_description}}</p>
+            </div>
+            <div class="w-[600px]">
+              <h1 class="text-white text-3xl">Price: ${{price}}</h1>
+              <p class="text-[#999] text-xl">Category: {{category.en_name}}</p>
+            </div>
+          </div>
+          <div class="flex gap-3">
+            <a href="/meal/{{_id}}/update">
+              <div type="submit" class="button bg-green-600 edit-cotigory">
+                <div class="button-wrapper">
+                  <div class="text">Edit</div>
+                  <span class="icon"><i class="fa-solid fa-pen"></i></span>
                 </div>
               </div>
-              {{/each}}
-              <!-- Pagination -->
+            </a>
+          </div>
+        </div>
+        {{/each}}
+        <!-- Pagination -->
 
-              <div id="pagination" class="flex justify-center mt-5 gap-2">
-                {{#if meals.hasPrevPage}}<a href="/meal/?page={{meals.prevPage}}"><button
-                    class="px-3 py-2 rounded-lg bg-black text-white">Previous</button></a>{{/if}}
-                <button class="px-3 py-2 rounded-lg bg-black text-[#ffc335]">{{meals.page}}</button>
-                {{!-- <a href=""><button class="px-3 py-2 rounded-lg bg-[#222] text-white">2</button></a> --}}
-                {{#if meals.hasNextPage}}<a href="/meal/?page={{meals.nextPage}}"><button
-                    class="px-3 py-2 rounded-lg bg-black text-white">Next</button></a>{{/if}}
-              </div>
-              {{else}}
-              <p class="text-white">Meals are empty.</p>
-              {{/if}}
-            </div>
+        <div id="pagination" class="flex justify-center mt-5 gap-2">
+          {{#if meals.hasPrevPage}}<a href="/meal/?page={{meals.prevPage}}"><button
+              class="px-3 py-2 rounded-lg bg-black text-white">Previous</button></a>{{/if}}
+          <button class="px-3 py-2 rounded-lg bg-black text-[#ffc335]">{{meals.page}}</button>
+          {{!-- <a href=""><button class="px-3 py-2 rounded-lg bg-[#222] text-white">2</button></a> --}}
+          {{#if meals.hasNextPage}}<a href="/meal/?page={{meals.nextPage}}"><button
+              class="px-3 py-2 rounded-lg bg-black text-white">Next</button></a>{{/if}}
+        </div>
 
-        </section>
-
+        {{else}}
+        <p class="text-white">Meals are empty.</p>
+        {{/if}}
       </div>
-
     </div>
 
   </main>
