@@ -136,7 +136,76 @@
                 </div>
             </a>
         </div>
+
+        {{!-- Chart statistics --}}
+        <div style="display: flex; gap: 20px;">
+
+        {{!-- Chart for count all time bookings and orders. --}}
+            <div style="border-radius: 15px; background-color: rgb(17 17 17); height: 330px;">
+                <canvas id="allTimeCount" style="width:300px; height:300px;"></canvas>
+            </div>
+
+        {{!-- Chart for count last month bookings and orders. --}}
+            <div style="border-radius: 15px; background-color: rgb(17 17 17); height: 330px; padding: 5px 15px 5px 15px">
+                <canvas id="monthChart" style="width:730px; height:300px;"></canvas>
+            </div>
+
+        </div>
+
     </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+    <script>
+        const bookingsAndOrders = ["Bookings", "Orders"];
+        const bookingsAndOrdersCounts = [{{bookings.totalDocs}}, {{orders.totalDocs}}];
+        const barColors = ["green", "blue"];
+
+        new Chart("allTimeCount", {
+            type: "doughnut",
+            data: {
+                labels: bookingsAndOrders,
+                datasets: [{
+                    backgroundColor: barColors,
+                    data: bookingsAndOrdersCounts
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: "For all time"
+                }
+            }
+        });
+
+        const lastMonthDays = [{{lastMonthDays}}]
+        console.log({{lastMonthDays}})
+        const bookingsForLastMonth = [{{bookingsForLastMonth}}]
+        const orderCountForEveryDay = [{{orderCountForEveryDay}}]
+
+        new Chart("monthChart", {
+            type: "line",
+            data: {
+                labels: lastMonthDays,
+                datasets: [{
+                    data: bookingsForLastMonth,
+                    borderColor: "green",
+                    fill: false
+                }, {
+                    data: orderCountForEveryDay,
+                    borderColor: "blue",
+                    fill: false
+                }]
+            },
+            options: {
+                legend: { display: false },
+                title: {
+                    display: true,
+                    text: "Last month statistics ({{months}})"
+                }
+            }
+        });
+    </script>
 
     <script>
         // Loader closer.
