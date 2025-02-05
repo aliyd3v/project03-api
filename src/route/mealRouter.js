@@ -1,4 +1,4 @@
-const { mealPage, createMeal, getAllMeals, getOneMeal, updateOneMeal, deleteOneMeal, createMealPage, updateMealPage } = require('../controller/mealController')
+const { mealPage, createMeal, getAllMeals, getOneMeal, updateOneMeal, deleteOneMeal, createMealPage, updateMealPage, mealSortByCategory } = require('../controller/mealController')
 const { jwtAccessMiddleware } = require('../middleware/jwtAccessMiddleware')
 const { upload } = require('../helper/upload')
 const { checkSchema } = require('express-validator')
@@ -14,5 +14,6 @@ router
     .get('/meal/:id/update', jwtAccessMiddleware, updateMealPage)
     .post('/meal/:id/update', jwtAccessMiddleware, upload.single('file'), checkSchema(mealUpdateValidationSchema), updateOneMeal)
     .post('/meal/:id/delete', jwtAccessMiddleware, deleteOneMeal)
+    .get('/meal-sort/:id', jwtAccessMiddleware, mealSortByCategory)
 
 module.exports = router

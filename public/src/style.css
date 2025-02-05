@@ -843,3 +843,12 @@ input[type=number]::-webkit-outer-spin-button {
   border-radius: 10px;
   text-align: center;
 }
+
+.dropdown-for-sort {
+  background-color: black;
+  color: rgb(255, 195, 85);
+  padding: 12px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}

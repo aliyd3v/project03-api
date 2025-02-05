@@ -138,19 +138,34 @@
 
     <div class=" w-full ">
       <div class="bg-main-bg p-5 items-center flex justify-between w-full h-20 rounded-xl mb-5">
-        <p class="text-[#ffc335] font-bold  text-2xl">Meals: <span id="cotygory-length">
+        <p class="text-[#ffc335] font-bold  text-2xl">Meals: <span>
             {{meals.totalDocs}}</span></p>
 
         <div class="button-group">
-          <p>Sort:</p>
-          <select class="status-button-active" name="" id="">
+          <p style="font-size: 20px; color: white; padding-top: 5px;">Sort by category:</p>
+          <select id="dropdown" onchange="navigateToLink()" class="dropdown-for-sort">
             <a href="/meal">All</a>
-            <option value="">All</option>
+            {{#if category}}
+            <option value="">{{category.en_name}}</option>
+            {{else}}
+            <option value="">Select category</option>
+            {{/if}}
             {{#each categories}}
-            <option value="{{_id}}">{{en_name}}</option>
+            <option value="/meal-sort/{{_id}}">{{en_name}}</option>
             {{/each}}
           </select>
         </div>
+
+        <script>
+          function navigateToLink() {
+            let dropdown = document.getElementById("dropdown");
+            let selectedValue = dropdown.value;
+
+            if (selectedValue) {
+              window.location.href = selectedValue; // Sahifani tanlangan linkka yo‘naltirish
+            }
+          }
+        </script>
 
         <a href="/meal/create">
           <div id="add-btn" class="button bg-green-600">

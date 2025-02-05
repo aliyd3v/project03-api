@@ -21,11 +21,66 @@ exports.mealPage = async (req, res) => {
         // Get all meals from database.
         const meals = await Meal.paginate({}, { page, limit, sort: { en_name: 1 }, populate: 'category' })
 
+        // Get categories for sorting.
+        const categories = await Category.find().sort({ en_name: 1 })
+
         // Rendering.
         return res.render('meal', {
             layout: false,
             meals,
+            categories,
             user
+        })
+    }
+
+    // Error handling.
+    catch (error) {
+        errorHandling(error, res)
+    }
+}
+
+exports.mealSortByCategory = async (req, res) => {
+    const { query, params: { id } } = req
+    try {
+        // Checking id to valid.
+        const idError = idChecking(req, id)
+        if (idError) {
+            // Rendering.
+            return res.render('not-found', {
+                layout: false
+            })
+        }
+
+        // Checking category for existence.
+        const category = await Category.findById(id)
+        if (!category) {
+            // Rendering.
+            return res.render('not-found', {
+                layout: false
+            })
+        }
+
+        // Get all categories for sorting.
+        const categories = await Category.find().sort({ en_name: 1 })
+        const categoryIndex = categories.findIndex((value, index, array) => {
+            return value.en_name == category.en_name
+        })
+        categories.splice(categoryIndex, 1)
+
+        // Getting meals from category.
+        query.page ? page = query.page : false
+        const meals = await Meal.paginate({ category: id }, { page, limit, sort: { en_name: 1 }, populate: 'category' })
+
+        // Get user.
+        const user = await Admin.findById(req.cookies.userId)
+
+        // Rendering.
+        return res.render('meal', {
+            layout: false,
+            user,
+            category,
+            categories,
+            meals
         })
     }
 
