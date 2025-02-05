@@ -1,10 +1,14 @@
+const { populate } = require("dotenv")
 const { Booking } = require("../model/bookingModel")
 const { Category } = require("../model/categoryModel")
 const { Meal } = require("../model/mealModel")
 const { Order } = require("../model/orderModel")
+const { Admin } = require("../model/userModel")
 const { errorHandling } = require("./errorController")
 const { validationController } = require("./validationController")
 
+let page = 1
+let limit = 5
 
 exports.searchingCategory = async (req, res) => {
     try {
@@ -45,36 +49,39 @@ exports.searchingCategory = async (req, res) => {
 }
 
 exports.searchingMeals = async (req, res) => {
+    const { query } = req
     try {
+        query.page ? page = query.page : false
+
         // Result validation.
         const { data, error } = validationController(req, res)
         if (error) {
-            return res.status(400).send({
-                success: false,
-                data: null,
-                error: {
-                    message: error
-                }
-            })
+            // Rendering.
+            return res.render('bad-request')
         }
 
-        const meals = await Meal.find({
+        const meals = await Meal.paginate({
             $or: [
                 { en_name: { $regex: data.key, $options: "i" } },
                 { ru_name: { $regex: data.key, $options: "i" } },
                 { en_description: { $regex: data.key, $options: "i" } },
                 { ru_description: { $regex: data.key, $options: "i" } }
             ]
-        })
+        }, { page, limit, sort: { en_name: 1 }, populate: 'category' })
 
-        // Responding.
-        return res.status(201).send({
-            success: true,
-            error: false,
-            data: {
-                message: "Searching meals have been successfully.",
-                meals
-            }
+        // Get categories for sorting.
+        const categories = await Category.find().sort({ en_name: 1 })
+
+        // Get user.
+        const user = await Admin.findById(req.cookies.userId)
+
+        // Rendering.
+        return res.render('search-meal', {
+            layout: false,
+            user,
+            categories,
+            meals,
+            key: data.key
         })
     }
 

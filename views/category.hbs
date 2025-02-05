@@ -29,11 +29,14 @@
                 class="w-20" src="/img/gijduvon-premium-logo.webp" alt="main-logo">
 
             <div class="inputbox">
-                <input required="required" type="text">
-                <span class="">
-                    <p class="fa-solid fa-magnifying-glass"></p> Search for a food
-                </span>
-                <i></i>
+                <form action="/search/meal">
+                    <input required type="text" name="key">
+                    <span class="">
+                        <p class="fa-solid fa-magnifying-glass"></p> Search for a food
+                    </span>
+                    <i></i>
+                    <button type="submit" hidden></button>
+                </form>
             </div>
 
         </div>

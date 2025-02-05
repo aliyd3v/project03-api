@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meals</title>
+  <title>Search meal</title>
   <link rel="stylesheet" href="/src/output.css">
   <link rel="stylesheet" href="/src/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
@@ -29,7 +29,7 @@
 
       <div class="inputbox">
         <form action="/search/meal">
-          <input required type="text" name="key">
+          <input required type="text" name="key" {{#if key}}value="{{key}}"{{/if}}>
           <span class="">
             <p class="fa-solid fa-magnifying-glass"></p> Search for a food
           </span>
@@ -103,10 +103,10 @@
           <p class="text-white">History</p>
         </div>
       </a>
-      <a href="/meal" class="w-[300px] bg-[#111] py-3 px-5 rounded-xl ml-3  cursor-pointer">
+      <a href="/meal" class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500   hover:-ml-3 ">
         <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
-          <i class="fa-solid fa-folder-open text-xl text-[#ffc355]"></i>
-          <p class="text-[#ffc355]">Meals</p>
+          <i class="fa-solid fa-folder-open text-xl text-white"></i>
+          <p class="text-white">Meals</p>
         </div>
       </a>
       <a href="/category"
@@ -141,43 +141,8 @@
 
     <div class=" w-full ">
       <div class="bg-main-bg p-5 items-center flex justify-between w-full h-20 rounded-xl mb-5">
-        <p class="text-[#ffc335] font-bold  text-2xl">Meals: <span>
+        <p class="text-[#ffc335] font-bold  text-2xl">Find meals with keyword "{{key}}": <span>
             {{meals.totalDocs}}</span></p>
-
-        <div class="button-group">
-          <p style="font-size: 20px; color: white; padding-top: 5px;">Sort by category:</p>
-          <select id="dropdown" onchange="navigateToLink()" class="dropdown-for-sort">
-            <a href="/meal">All</a>
-            {{#if category}}
-            <option value="">{{category.en_name}}</option>
-            {{else}}
-            <option value="">Select category</option>
-            {{/if}}
-            {{#each categories}}
-            <option value="/meal-sort/{{_id}}">{{en_name}}</option>
-            {{/each}}
-          </select>
-        </div>
-
-        <script>
-          function navigateToLink() {
-            let dropdown = document.getElementById("dropdown");
-            let selectedValue = dropdown.value;
-
-            if (selectedValue) {
-              window.location.href = selectedValue; // Sahifani tanlangan linkka yo‘naltirish
-            }
-          }
-        </script>
-
-        <a href="/meal/create">
-          <div id="add-btn" class="button bg-green-600">
-            <div class="button-wrapper catygoryAddBtn">
-              <div class="text">ADD</div>
-              <span class="icon"><i class="fa-solid fa-plus"></i></span>
-            </div>
-          </div>
-        </a>
       </div>
 
       <div id="pruduct-container"
@@ -223,7 +188,7 @@
         </div>
 
         {{else}}
-        <p class="text-white">Meals are empty.</p>
+        <p class="text-white">Meals not found with keyword '{{key}}'.</p>
         {{/if}}
       </div>
     </div>
