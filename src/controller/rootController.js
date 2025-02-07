@@ -2,128 +2,141 @@ const { errorHandling } = require("./errorController")
 const { Admin } = require('../model/userModel')
 const { Booking } = require('../model/bookingModel')
 const { Order } = require('../model/orderModel')
+const { Meal } = require("../model/mealModel")
+const { Category } = require("../model/categoryModel")
 
 exports.rootController = async (req, res) => {
     try {
         // Get user.
         const user = await Admin.findById(req.cookies.userId)
 
-        // Get all bookings for count.
-        const bookings = await Booking.paginate({ is_canceled: false }, { page: 1, limit: 999 })
-
-        // Get all orders for count.
-        const orders = await Order.paginate({ status: 'Delivered' }, { page: 1, limit: 999 })
-
-        let months = ''
-
         // Get last 30 days statistics.
+        let months = ''
         let lastMonthDays = []
         const today = new Date()
         today.setHours(5, 0, 0, 0)
         let thirtyDaysAgo = new Date(today)
         thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30)
-
         const [tMonth, tDay, tYear] = today.toLocaleDateString().split('/').map(Number)
-        switch (tDay) {
-            case tDay: 1
+        let date = new Date(thirtyDaysAgo)
+        const [month, day, year] = date.toLocaleDateString().split('/').map(Number)
+        switch (month) {
+            case 1:
                 months += 'January'
                 break;
-            case tDay: 2
+            case 2:
                 months += 'February'
                 break;
-            case tDay: 3
+            case 3:
                 months += 'March'
                 break;
-            case tDay: 4
+            case 4:
                 months += 'Aprel'
                 break;
-            case tDay: 5
+            case 5:
                 months += 'May'
                 break;
-            case tDay: 6
+            case 6:
                 months += 'Juny'
                 break;
-            case tDay: 7
+            case 7:
                 months += 'July'
                 break;
-            case tDay: 8
+            case 8:
                 months += 'August'
                 break;
-            case tDay: 9
+            case 9:
                 months += 'September'
                 break;
-            case tDay: 10
+            case 10:
                 months += 'Oktomber'
                 break;
-            case tDay: 11
+            case 11:
                 months += 'November'
                 break;
-            case tDay: 12
+            case 12:
                 months += 'Desember'
                 break;
         }
-
-
-
-        let date = new Date(thirtyDaysAgo)
-        const [month, day, year] = date.toLocaleDateString().split('/').map(Number)
-        switch (day) {
-            case day: 1
+        switch (tMonth) {
+            case 1:
                 months += ', January'
                 break;
-            case day: 2
+            case 2:
                 months += ', February'
                 break;
-            case day: 3
+            case 3:
                 months += ', March'
                 break;
-            case day: 4
+            case 4:
                 months += ', Aprel'
                 break;
-            case day: 5
+            case 5:
                 months += ', May'
                 break;
-            case day: 6
+            case 6:
                 months += ', Juny'
                 break;
-            case day: 7
+            case 7:
                 months += ', July'
                 break;
-            case day: 8
+            case 8:
                 months += ', August'
                 break;
-            case day: 9
+            case 9:
                 months += ', September'
                 break;
-            case day: 10
+            case 10:
                 months += ', Oktomber'
                 break;
-            case day: 11
+            case 11:
                 months += ', November'
                 break;
-            case day: 12
+            case 12:
                 months += ', Desember'
                 break;
         }
-
         for (let i = 1; i <= 30; i++) {
             let date = new Date(thirtyDaysAgo)
             date.setDate(date.getDate() + i)
             const [month, day, year] = date.toLocaleDateString().split('/').map(Number)
             lastMonthDays.push(`${year}-${month < 10 ? `0${month}` : month}-${day < 10 ? `0${day}` : day}`)
         }
+        // Get all bookings for count.
         let bookingsForLastMonth = []
+        const bookings = await Booking.paginate(
+            { is_canceled: false },
+            { page: 1, limit: 999999 }
+        )
         for (const date of lastMonthDays) {
             const bookingsCurrentDate = bookings.docs.filter(booking => booking.date == date)
             bookingsForLastMonth.push(bookingsCurrentDate.length)
         }
+        // Get all orders for count.
+        let orderCountForEveryDay = []
+        const orders = await Order.paginate(
+            { status: 'Delivered' },
+            { page: 1, limit: 999999 }
+        )
+        for (const date of lastMonthDays) {
+            const ordersCurrentDate = orders.docs.filter(order => {
+                const [month, day, year] = order.createdAt.toLocaleDateString().split('/').map(Number)
+                orderCreatedDate = `${year}-${month < 10 ? `0${month}` : month}-${day < 10 ? `0${day}` : day}`
+                return orderCreatedDate == date
+            })
+            orderCountForEveryDay.push(ordersCurrentDate.length)
+        }
+        // Get last month days.
         lastMonthDays = lastMonthDays.map(day => {
             const [year, month, currentDay] = day.split('-').map(Number)
             return currentDay
         })
 
+        // let meals = await Meal.paginate({}, { page: 1, limit: 0 })
+        // let categories = await Category.paginate({}, { page: 1, limit: 0 })
 
-        let orderCountForEveryDay = []
+        // Count last month incomes with the month before last month.
+
 
         // Rendering.
         return res.render('home', {
@@ -134,7 +147,9 @@ exports.rootController = async (req, res) => {
             lastMonthDays,
             bookingsForLastMonth,
             orderCountForEveryDay,
-            months
+            months,
+            // meals,
+            // categories
         })
     }
 

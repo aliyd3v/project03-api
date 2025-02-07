@@ -1,4 +1,4 @@
-const { Schema, model, plugin } = require("mongoose");
+const { Schema, model } = require("mongoose");
 const mongoosePaginate = require('mongoose-paginate-v2')
 
 const mealSchema = new Schema({
