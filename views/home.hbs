@@ -151,8 +151,18 @@
                     style="border-radius: 15px; background-color: rgb(17 17 17); padding: 5px 15px 5px 15px;">
                     <canvas id="monthChart" style="width:730px; height:300px;"></canvas>
                 </div>
-
             </div>
+
+                <div style="border-radius: 15px; background-color: rgb(17 17 17); padding: 5px 15px 5px 15px; width: 530px; height: 200px;">
+                    <h3 style="color: rgb(144, 128, 128); font-size: 25px; text-align: center;">Difference booking with last month:</h3>
+                    <p style="color: white; font-size: 100px; text-align: center; font-family: serif;">{{fromLastMonthBooking}}</p>
+                </div>
+
+                <div style="border-radius: 15px; background-color: rgb(17 17 17); padding: 5px 15px 5px 15px;  width:530px; height:200px;">
+                    <h3 style="color: rgb(144, 128, 128); font-size: 25px; text-align: center;">Difference orders with last month:</h3>
+                    <p style="color: white; font-size: 100px; text-align: center; font-family: serif;">{{fromLastMonthOrders}}</p>
+                </div>
+
         </div>
 
     </main>
@@ -183,7 +193,7 @@
 
         const lastMonthDays = [{{ lastMonthDays }}]
         const bookingsForLastMonth = [{{ bookingsForLastMonth }}]
-        const orderCountForEveryDay = [{{ orderCountForEveryDay }}]
+        const orderCountForLastMonth = [{{ orderCountForLastMonth }}]
 
         new Chart("monthChart", {
             type: "line",
@@ -194,7 +204,7 @@
                     borderColor: "green",
                     fill: false
                 }, {
-                    data: orderCountForEveryDay,
+                    data: orderCountForLastMonth,
                     borderColor: "blue",
                     fill: false
                 }]

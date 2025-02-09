@@ -113,7 +113,7 @@ exports.rootController = async (req, res) => {
             bookingsForLastMonth.push(bookingsCurrentDate.length)
         }
         // Get all orders for count.
-        let orderCountForEveryDay = []
+        let orderCountForLastMonth = []
         const orders = await Order.paginate(
             { status: 'Delivered' },
             { page: 1, limit: 999999 }
@@ -124,7 +124,7 @@ exports.rootController = async (req, res) => {
                 orderCreatedDate = `${year}-${month < 10 ? `0${month}` : month}-${day < 10 ? `0${day}` : day}`
                 return orderCreatedDate == date
             })
-            orderCountForEveryDay.push(ordersCurrentDate.length)
+            orderCountForLastMonth.push(ordersCurrentDate.length)
         }
         // Get last month days.
         lastMonthDays = lastMonthDays.map(day => {
@@ -132,11 +132,56 @@ exports.rootController = async (req, res) => {
             return currentDay
         })
 
-        // let meals = await Meal.paginate({}, { page: 1, limit: 0 })
-        // let categories = await Category.paginate({}, { page: 1, limit: 0 })
+        // Get last second month start date.
+        let lastSecondMonthDays = []
+        let twoMonthAgo = new Date(thirtyDaysAgo)
+        twoMonthAgo.setDate(twoMonthAgo.getDate() - 30)
+        for (let i = 1; i <= 30; i++) {
+            let date = new Date(twoMonthAgo)
+            date.setDate(date.getDate() + i)
+            const [month, day, year] = date.toLocaleDateString().split('/').map(Number)
+            lastSecondMonthDays.push(`${year}-${month < 10 ? `0${month}` : month}-${day < 10 ? `0${day}` : day}`)
+        }
+        // Get all bookings count for last second month.
+        let bookingsForLastSecondMonth = []
+        for (const date of lastSecondMonthDays) {
+            const bookingsCurrentDate = bookings.docs.filter(booking => booking.date == date)
+            bookingsForLastSecondMonth.push(bookingsCurrentDate.length)
+        }
+        // Get all orders count fol last second month.
+        let orderCountForLastSecondMonth = []
+        for (const date of lastSecondMonthDays) {
+            const ordersCurrentDate = orders.docs.filter(order => {
+                const [month, day, year] = order.createdAt.toLocaleDateString().split('/').map(Number)
+                orderCreatedDate = `${year}-${month < 10 ? `0${month}` : month}-${day < 10 ? `0${day}` : day}`
+                return orderCreatedDate == date
+            })
+            orderCountForLastSecondMonth.push(ordersCurrentDate.length)
+        }
 
-        // Count last month incomes with the month before last month.
-
+        // Getting difference for last two months.
+        // For booking.
+        let countAllBookingLastMonth = 0
+        for (const value of bookingsForLastMonth) {
+            countAllBookingLastMonth += value
+        }
+        let countAllBookingSecondLastMonth = 0
+        for (const value of bookingsForLastSecondMonth) {
+            countAllBookingSecondLastMonth += value
+        }
+        let fromLastMonthBooking = countAllBookingLastMonth - countAllBookingSecondLastMonth
+        fromLastMonthBooking = fromLastMonthBooking < 0 ? `-${fromLastMonthBooking}` : `+${fromLastMonthBooking}`
+        // For order.
+        let countAllOrdersLastMonth = 0
+        for (const value of orderCountForLastMonth) {
+            countAllOrdersLastMonth += value
+        }
+        let countAllOrdersSecondLastMonth = 0
+        for (const value of orderCountForLastSecondMonth) {
+            countAllOrdersSecondLastMonth += value
+        }
+        let fromLastMonthOrders = countAllOrdersLastMonth - countAllOrdersSecondLastMonth
+        fromLastMonthOrders = fromLastMonthOrders < 0 ? `-${fromLastMonthOrders}` : `+${fromLastMonthOrders}`
 
         // Rendering.
         return res.render('home', {
@@ -146,8 +191,10 @@ exports.rootController = async (req, res) => {
             user,
             lastMonthDays,
             bookingsForLastMonth,
-            orderCountForEveryDay,
+            orderCountForLastMonth,
             months,
+            fromLastMonthBooking,
+            fromLastMonthOrders,
             // meals,
             // categories
         })
