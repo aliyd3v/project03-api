@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AIF Dashboard</title>
+    <title>История</title>
     <link rel="stylesheet" href="/src/output.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
@@ -13,7 +13,6 @@
 
     <!-- icon  -->
     <link rel="icon" href="/img/gijduvon-premium-logo.webp">
-
 </head>
 
 <body class="bg-black">
@@ -23,46 +22,55 @@
     </div>
 
     <!-- Go -->
-    <header class="w-[1400px] h-24 flex justify-between items-center my-4 mx-auto">
+    <header class="w-[1400px] h-24 flex justify-between items-center  my-4 mx-auto">
         <!-- header-logo -->
-        <div class="flex justify-between items-center h-full px-5 object-cover rounded-xl bg-[#111] w-[75%]">
-            <img class="w-20" src="/img/gijduvon-premium-logo.webp" alt="main-logo">
+        <div class="flex justify-between items-center  h-full px-5 object-cover rounded-xl bg-[#111] w-[75%]"><img
+                class="w-20" src="/img/gijduvon-premium-logo.webp" alt="main-logo">
 
             <div class="inputbox">
                 <form action="/search/meal">
                     <input required type="text" name="key">
                     <span class="">
-                        <p class="fa-solid fa-magnifying-glass"></p> Search for a food
+                        <p class="fa-solid fa-magnifying-glass"></p> Поиск еды
                     </span>
                     <i></i>
                     <button type="submit" hidden></button>
                 </form>
             </div>
+
         </div>
 
         <!-- header-profil -->
         <div class="px-5 h-full object-cover rounded-xl bg-[#111] w-[23%] flex justify-between items-center">
-            <a href="/profile">
-                <p class="text-xl text-[white] duration-500 cursor-pointer hover:text-[#ffc335]">@{{user.username}}</p>
+            <a href="">
+
+                <i class="fa-solid fa-bell text-3xl text-[white] duration-500 cursor-pointer hover:text-[#ffc335] "></i>
             </a>
-            <a href="/profile">
-                <p class="text-x text-[white] duration-500 cursor-pointer hover:text-[#ffc335]">{{user.role}}</p>
+            <a href="">
+
+                <i
+                    class="fa-solid fa-message text-3xl text-[white] duration-500 cursor-pointer hover:text-[#ffc335] "></i>
             </a>
             <!-- header-porofil-logo -->
+
             <a href="/profile">
                 <div
-                    class="w-20 h-20 bg-[white] rounded-full grid place-items-center duration-500 cursor-pointer hover:bg-[#ffc335]">
-                    <img class="w-[90%] object-cover rounded-full" src="/img/3a3f2d35-8167-4708-9ef0-bdaa980989f9.png"
+                    class="w-20 h-20 bg-[white] rounded-full grid place-items-center duration-500 cursor-pointer hover:bg-[#ffc335] ">
+                    <img class="w-[90%] object-cover rounded-full " src="/img/3a3f2d35-8167-4708-9ef0-bdaa980989f9.png"
                         alt="profil-img">
                 </div>
             </a>
         </div>
     </header>
 
+
+    <!-- ============================= -->
     <main class="mx-auto w-[1400px] flex gap-5">
-        <!-- menu -->
+        <!-- ================================= menu ============================================== -->
         <div class="flex flex-col gap-2 w-[300px]">
+            <!-- =================================menu-profil=============================== -->
             <div class="w-[300px] bg-[#111] py-3 px-5 rounded-xl">
+                <!-- profil -->
                 <div class="w-20 h-20  bg-[white] my-0 mx-auto rounded-full grid place-items-center duration-500 cursor-pointer hover:bg-[#ffc335]"
                     style="cursor: auto;">
                     <img class="w-[90%] object-cover rounded-full " src="/img/3a3f2d35-8167-4708-9ef0-bdaa980989f9.png"
@@ -70,53 +78,52 @@
                 </div>
                 <h3 class="text-center text-xl my-5 mx-auto w-40 break-normal text-white">{{user.name}}</h3>
             </div>
-            <!-- Menu-items -->
-            <a href="/" class="w-[300px] bg-[#111] py-3 px-5 rounded-xl ml-3  cursor-pointer">
+            <!-- =========================================menu-Cotigoris=============================== -->
+            <a href="/" class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
-                    <i class="fa-solid fa-house text-xl text-[#ffc355]"></i>
-                    <p class="text-[#ffc355]">Home</p>
+                    <i class="fa-solid fa-home text-white"></i>
+                    <p class="text-white">Основной</p>
                 </div>
             </a>
             <a href="/order"
                 class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
-                    <i class="fa-solid fa-file text-xl text-white"></i>
-                    <p class="text-white">Order</p>
+                    <i class="fa-solid fa-file text-white"></i>
+                    <p class="text-white">Заказы</p>
                 </div>
             </a>
             <a href="/booking"
                 class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
                     <i class="fa-solid fa-calendar text-xl text-white"></i>
-                    <p class="text-white">Booking</p>
+                    <p class="text-white">Бронирование</p>
                 </div>
             </a>
-            <a href="/history"
-                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
+            <a href="/history" class="w-[300px] bg-[#111] py-3 px-5 rounded-xl ml-3  cursor-pointer">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
-                    <i class="fa-solid fa-clock text-xl text-white"></i>
-                    <p class="text-white">History</p>
+                    <i class="fa-solid fa-clock text-xl text-[#ffc355]"></i>
+                    <p class="text-[#ffc355]">История</p>
                 </div>
             </a>
             <a href="/meal"
                 class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500   hover:-ml-3 ">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
                     <i class="fa-solid fa-folder-open text-xl text-white"></i>
-                    <p class="text-white">Meals</p>
+                    <p class="text-white">Блюды</p>
                 </div>
             </a>
             <a href="/category"
                 class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
                     <i class="fa-solid fa-layer-group text-xl text-white"></i>
-                    <p class="text-white">Categories</p>
+                    <p class="text-white">Категории</p>
                 </div>
             </a>
             <a href="/stol"
                 class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
                     <i class="fa-solid fa-table text-xl text-white"></i>
-                    <p class="text-white">Table</p>
+                    <p class="text-white">Стол</p>
                 </div>
             </a>
             {{#if (isEqual user.role "SUPERUSER")}}
@@ -124,7 +131,7 @@
                 class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
                     <i class="fa-solid fa-users text-xl text-white"></i>
-                    <p class="text-white">Admins</p>
+                    <p class="text-white">Админы</p>
                 </div>
             </a>
             {{/if}}
@@ -132,105 +139,70 @@
                 class="w-[300px] boss bg-red-600 py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
                     <i class="fa-solid fa-right-from-bracket text-white"></i>
-                    <p class="text-white">Log out</p>
+                    <p class="text-white">Выйти</p>
                 </div>
             </a>
         </div>
+        <!-- ===============================Cotigories=====================  -->
 
-        <div style="display: flex; align-content: flex-start; flex-wrap: wrap; gap:20px;">
-            {{!-- Chart statistics --}}
-            <div style="display: flex; gap: 20px;">
-
-                {{!-- Chart for count all time bookings and orders. --}}
-                <div style="border-radius: 15px; background-color: rgb(17 17 17);">
-                    <canvas id="allTimeCount" style="width:300px; height:300px;"></canvas>
-                </div>
-
-                {{!-- Chart for count last month bookings and orders. --}}
-                <div
-                    style="border-radius: 15px; background-color: rgb(17 17 17); padding: 5px 15px 5px 15px;">
-                    <canvas id="monthChart" style="width:730px; height:300px;"></canvas>
+        <div class="w-full">
+            <!-- -------------------- -->
+            <div class="bg-main-bg p-5 flex flex-col w-full h-20 rounded-xl mb-5">
+                <div class="header">
+                    <h1 class="text-[#ffc335] font-bold  text-2xl">История: {{totalCount}}</h1>
                 </div>
             </div>
 
-                <div style="border-radius: 15px; background-color: rgb(17 17 17); padding: 5px 15px 5px 15px; width: 530px; height: 200px;">
-                    <h3 style="color: rgb(144, 128, 128); font-size: 20px; text-align: center;">Difference booking with last month:</h3>
-                    <p style="color: white; font-size: 100px; text-align: center; font-family: serif;">{{fromLastMonthBooking}}</p>
+            <!-- order flex -->
+            <div class="w-full p-5 flex flex-col gap-5 bg-main-bg rounded-xl">
+                <!-- Begin History Container -->
+                <div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <a href="/history/order">
+                            <div style="width: 510px; height: 350px; background-color: black; border-radius: 15px;">
+                                <p
+                                    style="width: 100%; color: white; text-align: center; padding-top: 10px; font-size: 40px;">
+                                    История заказов:
+                                </p>
+                                <p
+                                    style="width: 100%; color: white; text-align: center; padding-top: 10px; font-size: 150px;">
+                                    {{order.totalDocs}}
+                                </p>
+                            </div>
+                        </a>
+                        <a href="/history/booking">
+                            <div
+                                style="width: 510px; height: 350px; background-color: black; black; border-radius: 15px;">
+                                <p
+                                    style="width: 100%; color: white; text-align: center; padding-top: 10px; font-size: 40px;">
+                                    История бронирования:
+                                </p>
+                                <p
+                                    style="width: 100%; color: white; text-align: center; padding-top: 10px; font-size: 150px;">
+                                    {{booking.totalDocs}}
+                                </p>
+                            </div>
+                        </a>
+                    </div>
                 </div>
-
-                <div style="border-radius: 15px; background-color: rgb(17 17 17); padding: 5px 15px 5px 15px;  width:530px; height:200px;">
-                    <h3 style="color: rgb(144, 128, 128); font-size: 20px; text-align: center;">Difference orders with last month:</h3>
-                    <p style="color: white; font-size: 100px; text-align: center; font-family: serif;">{{fromLastMonthOrders}}</p>
-                </div>
-
+                {{!-- End History Container --}}
+            </div>
         </div>
 
     </main>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-
-    <script>
-        const bookingsAndOrders = ["Bookings", "Orders"];
-        const bookingsAndOrdersCounts = [{{ bookings.totalDocs }}, {{ orders.totalDocs }}];
-        const barColors = ["green", "blue"];
-
-        new Chart("allTimeCount", {
-            type: "doughnut",
-            data: {
-                labels: bookingsAndOrders,
-                datasets: [{
-                    backgroundColor: barColors,
-                    data: bookingsAndOrdersCounts
-                }]
-            },
-            options: {
-                title: {
-                    display: true,
-                    text: "For all time"
-                }
-            }
-        });
-
-        const lastMonthDays = [{{ lastMonthDays }}]
-        const bookingsForLastMonth = [{{ bookingsForLastMonth }}]
-        const orderCountForLastMonth = [{{ orderCountForLastMonth }}]
-
-        new Chart("monthChart", {
-            type: "line",
-            data: {
-                labels: lastMonthDays,
-                datasets: [{
-                    data: bookingsForLastMonth,
-                    borderColor: "green",
-                    fill: false
-                }, {
-                    data: orderCountForLastMonth,
-                    borderColor: "blue",
-                    fill: false
-                }]
-            },
-            options: {
-                legend: { display: false },
-                title: {
-                    display: true,
-                    text: "Last month statistics ({{months}})"
-                }
-            }
-        });
-    </script>
+    <!-- garph========================== -->
 
     <script>
         // Loader closer.
         let containerLoad = document.querySelector(".container-loader");
-
         window.onload = function () {
             loading();
         };
-
         function loading() {
             containerLoad.style.display = "none";
         }
     </script>
+
 </body>
 
 </html>

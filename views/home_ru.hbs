@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AIF Dashboard</title>
+    <title>AIF Дашбоард</title>
     <link rel="stylesheet" href="/src/output.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
@@ -32,7 +32,7 @@
                 <form action="/search/meal">
                     <input required type="text" name="key">
                     <span class="">
-                        <p class="fa-solid fa-magnifying-glass"></p> Search for a food
+                        <p class="fa-solid fa-magnifying-glass"></p> Поиск еды
                     </span>
                     <i></i>
                     <button type="submit" hidden></button>
@@ -74,49 +74,49 @@
             <a href="/" class="w-[300px] bg-[#111] py-3 px-5 rounded-xl ml-3  cursor-pointer">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
                     <i class="fa-solid fa-house text-xl text-[#ffc355]"></i>
-                    <p class="text-[#ffc355]">Home</p>
+                    <p class="text-[#ffc355]">Основной</p>
                 </div>
             </a>
             <a href="/order"
                 class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
                     <i class="fa-solid fa-file text-xl text-white"></i>
-                    <p class="text-white">Order</p>
+                    <p class="text-white">Заказы</p>
                 </div>
             </a>
             <a href="/booking"
                 class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
                     <i class="fa-solid fa-calendar text-xl text-white"></i>
-                    <p class="text-white">Booking</p>
+                    <p class="text-white">Бронирование</p>
                 </div>
             </a>
             <a href="/history"
                 class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
                     <i class="fa-solid fa-clock text-xl text-white"></i>
-                    <p class="text-white">History</p>
+                    <p class="text-white">История</p>
                 </div>
             </a>
             <a href="/meal"
                 class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500   hover:-ml-3 ">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
                     <i class="fa-solid fa-folder-open text-xl text-white"></i>
-                    <p class="text-white">Meals</p>
+                    <p class="text-white">Блюды</p>
                 </div>
             </a>
             <a href="/category"
                 class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
                     <i class="fa-solid fa-layer-group text-xl text-white"></i>
-                    <p class="text-white">Categories</p>
+                    <p class="text-white">Категория</p>
                 </div>
             </a>
             <a href="/stol"
                 class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
                     <i class="fa-solid fa-table text-xl text-white"></i>
-                    <p class="text-white">Table</p>
+                    <p class="text-white">Стол</p>
                 </div>
             </a>
             {{#if (isEqual user.role "SUPERUSER")}}
@@ -124,7 +124,7 @@
                 class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
                     <i class="fa-solid fa-users text-xl text-white"></i>
-                    <p class="text-white">Admins</p>
+                    <p class="text-white">Админы</p>
                 </div>
             </a>
             {{/if}}
@@ -132,7 +132,7 @@
                 class="w-[300px] boss bg-red-600 py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
                     <i class="fa-solid fa-right-from-bracket text-white"></i>
-                    <p class="text-white">Log out</p>
+                    <p class="text-white">Выйти</p>
                 </div>
             </a>
         </div>
@@ -154,12 +154,12 @@
             </div>
 
                 <div style="border-radius: 15px; background-color: rgb(17 17 17); padding: 5px 15px 5px 15px; width: 530px; height: 200px;">
-                    <h3 style="color: rgb(144, 128, 128); font-size: 20px; text-align: center;">Difference booking with last month:</h3>
+                    <h3 style="color: rgb(144, 128, 128); font-size: 20px; text-align: center;">Разница в бронировании с прошлым месяцем:</h3>
                     <p style="color: white; font-size: 100px; text-align: center; font-family: serif;">{{fromLastMonthBooking}}</p>
                 </div>
 
                 <div style="border-radius: 15px; background-color: rgb(17 17 17); padding: 5px 15px 5px 15px;  width:530px; height:200px;">
-                    <h3 style="color: rgb(144, 128, 128); font-size: 20px; text-align: center;">Difference orders with last month:</h3>
+                    <h3 style="color: rgb(144, 128, 128); font-size: 20px; text-align: center;">Разница заказов с прошлым месяцем:</h3>
                     <p style="color: white; font-size: 100px; text-align: center; font-family: serif;">{{fromLastMonthOrders}}</p>
                 </div>
 
@@ -170,7 +170,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 
     <script>
-        const bookingsAndOrders = ["Bookings", "Orders"];
+        const bookingsAndOrders = ["Бронирования", "Заказы"];
         const bookingsAndOrdersCounts = [{{ bookings.totalDocs }}, {{ orders.totalDocs }}];
         const barColors = ["green", "blue"];
 
@@ -186,7 +186,7 @@
             options: {
                 title: {
                     display: true,
-                    text: "For all time"
+                    text: "На все времена"
                 }
             }
         });
@@ -213,7 +213,7 @@
                 legend: { display: false },
                 title: {
                     display: true,
-                    text: "Last month statistics ({{months}})"
+                    text: "Статистика за последний месяц ({{months}})"
                 }
             }
         });

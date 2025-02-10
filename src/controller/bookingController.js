@@ -35,7 +35,7 @@ exports.getAllActiveBooking = async (req, res) => {
         }
 
         // Rendering.
-        return res.render('booking', {
+        return res.render(`${user.language == 'English' ? 'booking' : 'booking_ru'}`, {
             layout: false,
             bookings,
             user

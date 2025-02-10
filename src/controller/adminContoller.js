@@ -442,7 +442,7 @@ exports.profilePage = async (req, res) => {
         const user = profile
 
         // Rendering.
-        return res.render('profile', {
+        return res.render(`${user.language == 'English' ? 'profile' : 'profile_ru'}`, {
             layout: false,
             userId: id,
             profile,

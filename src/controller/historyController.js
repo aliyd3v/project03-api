@@ -29,7 +29,7 @@ exports.historyPage = async (req, res) => {
 
         const totalCount = order.totalDocs + booking.totalDocs
 
-        return res.render('history', {
+        return res.render(`${user.language == 'English' ? 'history' : 'history_ru'}`, {
             layout: false,
             isAll: true,
             totalCount,
@@ -61,7 +61,7 @@ exports.orderHistoryPage = async (req, res) => {
         const user = await Admin.findById(req.cookies.userId)
 
         // Rendering.
-        return res.render('order-history', {
+        return res.render(`${user.language == 'English' ? 'order-history' : 'order-history_ru'}`, {
             layout: false,
             user,
             orders,
@@ -93,7 +93,7 @@ exports.deliveredOrderHistoryPage = async (req, res) => {
         const user = await Admin.findById(req.cookies.userId)
 
         // Rendering.
-        return res.render('order-history', {
+        return res.render(`${user.language == 'English' ? 'order-history' : 'order-history_ru'}`, {
             layout: false,
             user,
             orders,
@@ -125,7 +125,7 @@ exports.dismissedOrderHistoryPage = async (req, res) => {
         const user = await Admin.findById(req.cookies.userId)
 
         // Rendering.
-        return res.render('order-history', {
+        return res.render(`${user.language == 'English' ? 'order-history' : 'order-history_ru'}`, {
             layout: false,
             user,
             orders,

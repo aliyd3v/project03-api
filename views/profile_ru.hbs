@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль</title>
+    <link rel="stylesheet" href="/src/output.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/src/style.css">
+    <link rel="stylesheet" href="/src/admin.css">
+
+    <!-- icon  -->
+    <link rel="icon" href="/img/gijduvon-premium-logo.webp">
+</head>
+
+<body class="bg-black">
+
+    <div class="container-loader">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Go -->
+    <header class="w-[1400px] h-24 flex justify-between items-center  my-4 mx-auto">
+        <!-- header-logo -->
+        <div class="flex justify-between items-center  h-full px-5 object-cover rounded-xl bg-[#111] w-[75%]"><img
+                class="w-20" src="/img/gijduvon-premium-logo.webp" alt="main-logo">
+
+            <div class="inputbox">
+                <form action="/search/meal">
+                    <input required type="text" name="key">
+                    <span class="">
+                        <p class="fa-solid fa-magnifying-glass"></p> Поиск еды
+                    </span>
+                    <i></i>
+                    <button type="submit" hidden></button>
+                </form>
+            </div>
+
+        </div>
+
+        <!-- header-profil -->
+        <div class="px-5 h-full object-cover rounded-xl bg-[#111] w-[23%] flex justify-between items-center">
+            <a href="">
+
+                <i class="fa-solid fa-bell text-3xl text-[white] duration-500 cursor-pointer hover:text-[#ffc335] "></i>
+            </a>
+            <a href="">
+
+                <i
+                    class="fa-solid fa-message text-3xl text-[white] duration-500 cursor-pointer hover:text-[#ffc335] "></i>
+            </a>
+            <!-- header-porofil-logo -->
+
+            <div
+                class="w-20 h-20 bg-[white] rounded-full grid place-items-center duration-500 cursor-pointer hover:bg-[#ffc335] ">
+                <img class="w-[90%] object-cover rounded-full " src="/img/3a3f2d35-8167-4708-9ef0-bdaa980989f9.png"
+                    alt="profil-img">
+            </div>
+        </div>
+    </header>
+
+
+    <!-- ============================= -->
+    <main class="mx-auto w-[1400px] flex gap-5">
+        <!-- ================================= menu ============================================== -->
+        <div class="flex flex-col gap-2 w-[300px]">
+            <!-- =================================menu-profil=============================== -->
+            <div class="w-[300px] bg-[#111] py-3 px-5 rounded-xl">
+                <!-- profil -->
+                <div class="w-20 h-20  bg-[white] my-0 mx-auto rounded-full grid place-items-center duration-500 cursor-pointer hover:bg-[#ffc335]"
+                    style="cursor: auto;">
+                    <img class="w-[90%] object-cover rounded-full " src="/img/3a3f2d35-8167-4708-9ef0-bdaa980989f9.png"
+                        alt="profil-img">
+                </div>
+                <h3 class="text-center text-xl my-5 mx-auto w-40 break-normal text-white">{{user.name}}</h3>
+            </div>
+            <!-- =========================================menu-Cotigoris=============================== -->
+            <a href="/" class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
+                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+                    <i class="fa-solid fa-home text-white"></i>
+                    <p class="text-white">Основной</p>
+                </div>
+            </a>
+            <a href="/order"
+                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
+                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+                    <i class="fa-solid fa-file text-xl text-white"></i>
+                    <p class="text-white">Заказы</p>
+                </div>
+            </a>
+            <a href="/booking"
+                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
+                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+                    <i class="fa-solid fa-calendar text-xl text-white"></i>
+                    <p class="text-white">Бронирование</p>
+                </div>
+            </a>
+            <a href="/history"
+                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
+                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+                    <i class="fa-solid fa-clock text-xl text-white"></i>
+                    <p class="text-white">История</p>
+                </div>
+            </a>
+            <a href="/meal"
+                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500   hover:-ml-3 ">
+                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+                    <i class="fa-solid fa-folder-open text-xl text-white"></i>
+                    <p class="text-white">Блюды</p>
+                </div>
+            </a>
+            <a href="/category"
+                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
+                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+                    <i class="fa-solid fa-layer-group text-xl text-white"></i>
+                    <p class="text-white">Категории</p>
+                </div>
+            </a>
+            <a href="/stol"
+                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
+                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+                    <i class="fa-solid fa-table text-xl text-white"></i>
+                    <p class="text-white">Стол</p>
+                </div>
+            </a>
+            {{#if (isEqual user.role "SUPERUSER")}}
+            <a href="/admin"
+                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
+                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+                    <i class="fa-solid fa-users text-xl text-white"></i>
+                    <p class="text-white">Админы</p>
+                </div>
+            </a>
+            {{/if}}
+            <a href="/logout"
+                class="w-[300px] boss bg-red-600 py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
+                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+                    <i class="fa-solid fa-right-from-bracket text-white"></i>
+                    <p class="text-white">Выйти</p>
+                </div>
+            </a>
+        </div>
+        <!-- ===============================Cotigories=====================  -->
+
+        <div class="w-full">
+            <!-- -------------------- -->
+            <div class="bg-main-bg p-5 flex flex-col w-full h-20 rounded-xl mb-5">
+                <div class="header">
+                    <h1 class="text-[#ffc335] font-bold  text-2xl">Профиль</h1>
+                </div>
+            </div>
+
+            <div class="profile-container">
+                <div class="profile-card">
+                    <div class="profile-image">
+                        <img src="{{user.image_url}}" alt="Изображение профиля">
+                        <h2 class="profile-name">{{user.name}}</h2>
+                    </div>
+                    <div class="profile-info">
+                        <p class="profil-userName"><span>Имя пользователя:</span><br> {{user.username}}</p>
+                        <p class="profile-email"><span>Электронная почта:</span><br> {{user.email}}</p>
+                        <p class="profile-phone"><span>Телефон:</span><br> {{user.phone}}</p>
+                        <p class="profile-role"><span>Роль:</span><br> {{user.role}}</p>
+                        <form action="/profile/{{user._id}}/update/language" method="post">
+                            <!-- Category Dropdown -->
+                            <div style="background-color: black; border-radius: 13px; display: flex;">
+                                <p class="profile-address"><span>Язык:</span></p>
+                                <div style="margin: 10px; margin-left: 20px; font-size: 20px;">
+                                    <select style="background-color: rgb(0, 0, 0); color: white;" name="language"
+                                        class="product-select" required>
+                                        {{#if (isEqual user.language 'English')}}
+                                        <option style="color: white;" value="English">
+                                            <p style="color: white;">English</p>
+                                        </option>
+                                        <option style="color: white;" value="Русский">
+                                            <p style="color: white">Русский</pp>
+                                        </option>
+                                        {{else}}
+                                        <option value="Русский">Русский</option>
+                                        <option value="English">English</option>
+                                        {{/if}}
+                                    </select>
+                                </div>
+                                <div
+                                    style="display: flex; justify-content: right; width: 220px; height: 30px; margin-top: 10px;">
+                                    <button type="submit" style="color: white; background-color: rgb(1, 67, 1); font-size: 18px; border-radius: 10px; 
+                                        padding: 0 8px 0 8px ; margin-right: 10px;">Изменить язык</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        window.onload = function () {
+            loading();
+        };
+        function loading() {
+            let containerLoad = document.querySelector(".container-loader");
+            containerLoad.style.display = "none";
+        }
+    </script>
+
+</body>
+
+</html>

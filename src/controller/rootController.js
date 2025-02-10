@@ -184,7 +184,7 @@ exports.rootController = async (req, res) => {
         fromLastMonthOrders = fromLastMonthOrders < 0 ? `-${fromLastMonthOrders}` : `+${fromLastMonthOrders}`
 
         // Rendering.
-        return res.render('home', {
+        return res.render(`${user.language == 'English' ? 'home' : 'home_ru'}`, {
             layout: false,
             bookings,
             orders,
