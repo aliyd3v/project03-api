@@ -161,7 +161,7 @@ exports.bookingHistoryPage = async (req, res) => {
         const user = await Admin.findById(req.cookies.userId)
 
         // Rendering.
-        return res.render('booking-history', {
+        return res.render(`${user.language == 'English' ? 'booking-history' : 'booking-history_ru'}`, {
             layout: false,
             user,
             bookings
