@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create meal</title>
+    <title>Обновить категорию</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -15,7 +15,7 @@
 
     <!-- icon  -->
     <link rel="icon" href="/img/gijduvon-premium-logo.webp">
-    <link rel="stylesheet" href="/src/productC.css">
+    <link rel="stylesheet" href="/src/createC.css">
 </head>
 
 <body class="bg-black">
@@ -33,7 +33,7 @@
                 <form action="/search/meal">
                     <input required type="text" name="key">
                     <span class="">
-                        <p class="fa-solid fa-magnifying-glass"></p> Search for a food
+                        <p class="fa-solid fa-magnifying-glass"></p> Поиск еды
                     </span>
                     <i></i>
                     <button type="submit" hidden></button>
@@ -54,6 +54,7 @@
                     class="fa-solid fa-message text-3xl text-[white] duration-500 cursor-pointer hover:text-[#ffc335] "></i>
             </a>
             <!-- header-porofil-logo -->
+
             <a href="/profile">
                 <div
                     class="w-20 h-20 bg-[white] rounded-full grid place-items-center duration-500 cursor-pointer hover:bg-[#ffc335] ">
@@ -80,48 +81,48 @@
             <a href="/" class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
                     <i class="fa-solid fa-home text-white"></i>
-                    <p class="text-white">Home</p>
+                    <p class="text-white">Основной</p>
                 </div>
             </a>
             <a href="/order"
                 class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
                     <i class="fa-solid fa-file text-xl text-white"></i>
-                    <p class="text-white">Order</p>
+                    <p class="text-white">Заказы</p>
                 </div>
             </a>
             <a href="/booking"
                 class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
                     <i class="fa-solid fa-calendar text-xl text-white"></i>
-                    <p class="text-white">Booking</p>
+                    <p class="text-white">Бронирование</p>
                 </div>
             </a>
             <a href="/history"
                 class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
                     <i class="fa-solid fa-clock text-xl text-white"></i>
-                    <p class="text-white">History</p>
+                    <p class="text-white">История</p>
                 </div>
             </a>
-            <a href="/meal" class="w-[300px] bg-[#111] py-3 px-5 rounded-xl ml-3  cursor-pointer">
-                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
-                    <i class="fa-solid fa-folder-open text-xl text-[#ffc355]"></i>
-                    <p class="text-[#ffc355]">Meals</p>
-                </div>
-            </a>
-            <a href="/category"
+            <a href="/meal"
                 class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500   hover:-ml-3 ">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
-                    <i class="fa-solid fa-layer-group text-xl text-white"></i>
-                    <p class="text-white">Categories</p>
+                    <i class="fa-solid fa-folder-open text-xl text-white"></i>
+                    <p class="text-white">Блюды</p>
+                </div>
+            </a>
+            <a href="/category" class="w-[300px] bg-[#111] py-3 px-5 rounded-xl ml-3  cursor-pointer">
+                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+                    <i class="fa-solid fa-layer-group text-xl text-[#ffc355]"></i>
+                    <p class="text-[#ffc355]">Категории</p>
                 </div>
             </a>
             <a href="/stol"
                 class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
                     <i class="fa-solid fa-table text-xl text-white"></i>
-                    <p class="text-white">Table</p>
+                    <p class="text-white">Стол</p>
                 </div>
             </a>
             {{#if (isEqual user.role "SUPERUSER")}}
@@ -129,7 +130,7 @@
                 class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
                     <i class="fa-solid fa-users text-xl text-white"></i>
-                    <p class="text-white">Admins</p>
+                    <p class="text-white">Админы</p>
                 </div>
             </a>
             {{/if}}
@@ -137,7 +138,7 @@
                 class="w-[300px] boss bg-red-600 py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
                     <i class="fa-solid fa-right-from-bracket text-white"></i>
-                    <p class="text-white">Log out</p>
+                    <p class="text-white">Выйти</p>
                 </div>
             </a>
         </div>
@@ -147,122 +148,70 @@
 
             <!-- Create Cotegory -->
 
-            <div class="product-container">
-                <!-- Header -->
-                <div class="product-header">
-                    <h1 class="text-[#ffc335] font-bold  text-2xl">CREATE MEAL</h1>
+            <div class="category-container">
+                <div class="category-header">
+                    <h1 class="category-title" id="page-title">Обновить категорию</h1>
+
+                    <form onsubmit="startLoader()" action="/category/{{oldCategory._id}}/delete" method="post">
+                        <button type="submit">
+                            <div class="button bg-red-600 del-cotigory">
+                                <div class="button-wrapper">
+                                    <div class="text">УДАЛИТЬ</div>
+                                    <span class="icon"><i class="fa-solid fa-trash"></i></span>
+                                </div>
+                            </div>
+                        </button>
+                    </form>
                 </div>
 
-                <!-- Form -->
-                <form onsubmit="startLoader()" class="product-form" action="/meal/create" method="post"
-                    enctype="multipart/form-data">
-                    <!-- Product Title (EN and UZ) -->
-                    <div class="form-group product-title-group">
-                        <div>
-                            <label for="product-title-en" id="title-en-label" class="product-label">Product Title
-                                (EN)</label>
-                            {{#if inputedData}}
-                            <input type="text" id="product-title-en" name="en_name" class="product-input"
-                                placeholder="Enter product title (EN)" required value="{{inputedData.en_name}}">
-                            {{else}}
-                            <input type="text" id="product-title-en" name="en_name" class="product-input"
-                                placeholder="Enter product title (EN)" required>
-                            {{/if}}
-                        </div>
-                        <div>
-                            <label for="product-title-uz" id="title-uz-label" class="product-label">Product Title
-                                (RU)</label>
-                            {{#if inputedData}}
-                            <input type="text" id="product-title-uz" name="ru_name" class="product-input"
-                                placeholder="Enter product title (RU)" required value="{{inputedData.ru_name}}">
-                            {{else}}
-                            <input type="text" id="product-title-uz" name="ru_name" class="product-input"
-                                placeholder="Enter product title (RU)" required>
-                            {{/if}}
-                        </div>
-                    </div>
-
-                    <!-- Product Description (EN and UZ) -->
-                    <div class="form-group product-description-group">
-                        <label for="product-description-en" id="description-en-label" class="product-label">Product
-                            Description (EN)</label>
+                <form onsubmit="startLoader()" class="category-form" action="/category/{{oldCategory._id}}/update"
+                    method="post" id="category-form">
+                    <div>
+                        <label for="category-title-en" id="title-en-label" class="category-label">Название категории
+                            (EN)</label>
                         {{#if inputedData}}
-                        <textarea id="product-description-en" name="en_description" class="product-textarea"
-                            placeholder="Enter product description (EN)"
-                            required>{{inputedData.en_description}}</textarea>
+                        <input type="text" id="category-title-en" name="en_name" class="category-input"
+                            placeholder="Введите название категории (EN)" value="{{inputedData.en_name}}" required>
                         {{else}}
-                        <textarea id="product-description-en" name="en_description" class="product-textarea"
-                            placeholder="Enter product description (EN)" required></textarea>
-                        {{/if}}
-
-                        <label for="product-description-uz" id="description-uz-label" class="product-label">Product
-                            Description (RU)</label>
-                        {{#if inputedData}}
-                        <textarea id="product-description-uz" name="ru_description" class="product-textarea"
-                            placeholder="Enter product description (RU)"
-                            required>{{inputedData.ru_description}}</textarea>
-                        {{else}}
-                        <textarea id="product-description-uz" name="ru_description" class="product-textarea"
-                            placeholder="Enter product description (RU)" required></textarea>
+                        <input type="text" id="category-title-en" name="en_name" class="category-input"
+                            placeholder="Введите название категории (EN)" required value="{{oldCategory.en_name}}">
                         {{/if}}
                     </div>
-
-                    <div class="form-group product-title-group">
-                        <div>
-                            <label for="product-price" class="product-label">Price ($)</label>
-                            {{#if inputedData}}
-                            <input type="number" id="product-price" name="price" class="product-input"
-                                placeholder="Enter product price" required value="{{inputedData.price}}">
-                            {{else}}
-                            <input type="number" id="product-price" name="price" class="product-input"
-                                placeholder="Enter product price" required>
-                            {{/if}}
-                        </div>
+                    <div>
+                        <label for="category-title-uz" id="title-uz-label" class="category-label">Название категории
+                            (RU)</label>
+                        {{#if inputedData}}
+                        <input type="text" id="category-title-uz" name="ru_name" class="category-input"
+                            placeholder="Введите название категории (RU)" value="{{inputedData.ru_name}}" required>
+                        {{else}}
+                        <input type="text" id="category-title-uz" name="ru_name" class="category-input"
+                            placeholder="Введите название категории (RU)" required value="{{oldCategory.ru_name}}">
+                        {{/if}}
                     </div>
-
-                    <!-- Product Gallery -->
-                    <div class="form-group product-gallery-group">
-                        <label id="gallery-label" class="product-label">Select new image</label>
-                        <input type="file" id="product-image" name="file" class="product-file-input" accept="image/*"
-                            required>
-                        <div id="upload-placeholder" class="product-image-placeholder">Drop files here or click to
-                            upload</div>
-                    </div>
-
-                    <!-- Category Dropdown -->
-                    <div class="form-group product-category-group">
-                        <label for="product-category" id="category-label" class="product-label">Select Category</label>
-                        <select id="product-category" name="category" class="product-select" required>
-                            {{#if selectedCategory}}
-                            <option value="{{selectedCategory._id}}">{{selectedCategory.en_name}}</option>
-                            {{#each categories}}
-                            <option value="{{this._id}}">{{this.en_name}}</option>
-                            {{/each}}
-                            {{else}}
-                            <option value="">Select category</option>
-                            {{#each categories}}
-                            <option value="{{this._id}}">{{this.en_name}}</option>
-                            {{/each}}
-                            {{/if}}
-                        </select>
-                    </div>
-
-                    <!-- Submit Button -->
-                    <div class="buttons">
-                        <button type="submit" id="submit-btn" class="product-submit-btn">CREATE</button>
-                        <a type="button" href="/meal" class="product-cancel-btn">CANCEL</a>
-                    </div>
-                </form>
             </div>
 
-            {{#if errorMessage}}
-            <div class="bg-main-bg p-5 items-center flex justify-between w-full h-20 rounded-xl mb-5">
-                <p class="create-error-message">{{errorMessage}}</p>
+            <div class="form-group category-gallery-group">
+                <label id="gallery-label" class="category-label">Category Gallery</label>
+                <input type="file" id="category-image" class="category-file-input" accept="image/*">
+                <div id="upload-placeholder" class="category-image-placeholder">Перетащите файлы сюда или нажмите, чтобы загрузить</div>
             </div>
-            {{/if}}
+
+            <div class="buttons">
+                <button type="submit" class="category-submit-btn">ОБНОВИТЬ</button>
+                <a class="category-cancel-btn" href="/category">ОТМЕНА</a>
+            </div>
+            </form>
+        </div>
+
+        {{#if errorMessage}}
+        <div class="bg-main-bg p-5 items-center flex justify-between w-full h-20 rounded-xl mb-5">
+            <p class="create-error-message">{{errorMessage}}</p>
+        </div>
+        {{/if}}
 
     </main>
 
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script>
         // Loader closer.
         window.onload = function () {
@@ -280,6 +229,7 @@
             containerLoad.style.display = "grid";
         }
     </script>
+
 
 
 </body>

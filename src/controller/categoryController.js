@@ -22,7 +22,7 @@ exports.categoryPage = async (req, res) => {
         const user = await Admin.findById(req.cookies.userId)
 
         // Rendering.
-        return res.render('category', {
+        return res.render(`${user.language == 'English' ? 'category' : 'category_ru'}`, {
             layout: false,
             user,
             categories
@@ -41,7 +41,7 @@ exports.createCategoryPage = async (req, res) => {
         const user = await Admin.findById(req.cookies.userId)
 
         // Rendering.
-        return res.render('category-create', {
+        return res.render(`${user.language == 'English' ? 'category-create' : 'category-create_ru'}`, {
             layout: false,
             user
         })
@@ -62,7 +62,7 @@ exports.createCategory = async (req, res) => {
         const { data, error } = validationController(req, res)
         if (error) {
             // Rendering.
-            return res.render('category-create', {
+            return res.render(`${user.language == 'English' ? 'category-create' : 'category-create_ru'}`, {
                 layout: false,
                 inputedData: data,
                 errorMessage: error,
@@ -79,10 +79,10 @@ exports.createCategory = async (req, res) => {
         if (en_name_condidat) {
             fs.unlinkSync(filePath)
             // Rendering.
-            return res.render('category-create', {
+            return res.render(`${user.language == 'English' ? 'category-create' : 'category-create_ru'}`, {
                 layout: false,
                 inputedData: data,
-                errorMessage: `Already exists category with english name "${data.en_name}". Please enter another english name!`,
+                errorMessage: `${user.language == 'English' ? `Already exists category with english name "${data.en_name}". Please enter another english name!` : `Категория с английским названием "${data.en_name}" уже существует. Введите другое английское название!`}`,
                 user
             })
         }
@@ -90,10 +90,10 @@ exports.createCategory = async (req, res) => {
         if (ru_name_condidat) {
             fs.unlinkSync(filePath)
             // Rendering.
-            return res.render('category-create', {
+            return res.render(`${user.language == 'English' ? 'category-create' : 'category-create_ru'}`, {
                 layout: false,
                 inputedData: data,
-                errorMessage: `Already exists category with russian name "${data.ru_name}". Please enter another russian name!`,
+                errorMessage: `${user.language == 'English' ? `Already exists category with russian name "${data.ru_name}".Please enter another russian name!` : `Категория с русским названием «${data.ru_name}» уже существует. Введите другое русское название!`}`,
                 user
             })
         }
@@ -103,10 +103,10 @@ exports.createCategory = async (req, res) => {
         if (errorSupabase) {
             fs.unlinkSync(filePath)
             // Responding.
-            return res.render('category-create', {
+            return res.render(`${user.language == 'English' ? 'category-create' : 'category-create_ru'} `, {
                 layout: false,
                 inputed: data,
-                errorMessage: 'Error uploading image! Please try again later.',
+                errorMessage: `${user.language == 'English' ? 'Error uploading image! Please try again later.' : 'Ошибка загрузки изображения! Попробуйте еще раз позже.'} `,
                 user
             })
         }
@@ -123,53 +123,6 @@ exports.createCategory = async (req, res) => {
 
         // Redirect.
         return res.redirect('/category')
-    }
-
-    // Error handling.
-    catch (error) {
-        errorHandling(error, res)
-    }
-}
-
-exports.getCategoryMeals = async (req, res) => {
-    const { params: { id } } = req
-    try {
-        // Checking id to valid.
-        const idError = idChecking(req, id)
-        if (idError) {
-            // Responding.
-            return res.status(400).send({
-                success: false,
-                data: null,
-                error: idError
-            })
-        }
-
-        // Searching category with id.
-        const category = await Category.findById(id)
-
-        // Checking category for existence.
-        if (!category) {
-            // Responding.
-            return res.status(404).send({
-                success: false,
-                data: null,
-                error: { message: "Category is not found!" }
-            })
-        }
-
-        // Getting all meals in selected category.
-        const meals = await Meal.find({ category: category._id })
-
-        // Responding.
-        return res.status(200).send({
-            success: true,
-            error: false,
-            data: {
-                message: `Meals in category ${category.en_name} (${category.ru_name}) has been getted successful.`,
-                meals
-            }
-        })
     }
 
     // Error handling.
@@ -200,7 +153,7 @@ exports.updateCategoryPage = async (req, res) => {
             })
         }
 
-        return res.render('category-update', {
+        return res.render(`${user.language == 'English' ? 'category-update' : 'category-update_ru'}`, {
             layout: false,
             oldCategory,
             user
@@ -243,7 +196,7 @@ exports.updateOneCategory = async (req, res) => {
         const { data, error } = validationController(req, res)
         if (error) {
             // Rendering.
-            return res.render('category-update', {
+            return res.render(`${user.language == 'English' ? 'category-update' : 'category-update_ru'}`, {
                 layout: false,
                 errorMessage: error,
                 user
@@ -257,20 +210,20 @@ exports.updateOneCategory = async (req, res) => {
                 const en_name_condidat = await Category.findOne({ en_name: data.en_name })
                 if (en_name_condidat) {
                     // Rendering.
-                    return res.render('category-update', {
+                    return res.render(`${user.language == 'English' ? 'category-update' : 'category-update_ru'}`, {
                         layout: false,
                         inputedData: data,
-                        errorMessage: `Already exists category with english name "${data.en_name}". Please enter another english name!`,
+                        errorMessage: `${user.language == 'English' ? `Already exists category with english name "${data.en_name}".Please enter another english name!` : `Категория с английским названием "${data.en_name}" уже существует. Введите другое английское название!`}`,
                         user
                     })
                 }
                 const ru_name_condidat = await Category.findOne({ ru_name: data.ru_name })
                 if (ru_name_condidat) {
                     // Rendering.
-                    return res.render('category-update', {
+                    return res.render(`${user.language == 'English' ? 'category-update' : 'category-update_ru'}`, {
                         layout: false,
                         inputedData: data,
-                        errorMessage: `Already exists category with russian name "${data.ru_name}". Please enter another russian name!`,
+                        errorMessage: `${user.language == 'English' ? `Already exists category with russian name "${data.ru_name}".Please enter another russian name!` : `Категория с русским названием "${data.ru_name}" уже существует. Введите другое русское название!`}`,
                         user
                     })
                 }
@@ -291,10 +244,10 @@ exports.updateOneCategory = async (req, res) => {
             if (en_name_condidat) {
                 fs.unlinkSync(filePath)
                 // Rendering.
-                return res.render('category-update', {
+                return res.render(`${user.language == 'English' ? 'category-update' : 'category-update_ru'}`, {
                     layout: false,
                     inputedData: data,
-                    errorMessage: `Already exists category with english name "${data.en_name}". Please enter another english name!`,
+                    errorMessage: `${user.language == 'English' ? `Already exists category with english name "${data.en_name}".Please enter another english name!` : `Категория с английским названием "${data.en_name}" уже существует. Введите другое английское название!`}`,
                     user
                 })
             }
@@ -302,10 +255,10 @@ exports.updateOneCategory = async (req, res) => {
             if (ru_name_condidat) {
                 fs.unlinkSync(filePath)
                 // Rendering.
-                return res.render('category-update', {
+                return res.render(`${user.language == 'English' ? 'category-update' : 'category-update_ru'}`, {
                     layout: false,
                     inputedData: data,
-                    errorMessage: `Already exists category with russian name "${data.ru_name}". Please enter another russian name!`,
+                    errorMessage: `${user.language == 'English' ? `Already exists category with russian name "${data.ru_name}".Please enter another russian name!` : `Категория с русским названием "${data.ru_name}" уже существует. Введите другое русское название!`}`,
                     user
                 })
             }

@@ -4,12 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Бронирование</title>
-    <link rel="stylesheet" href="/src/output.css">
+    <title>Категории</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="/src/style.css">
+    <link rel="stylesheet" href="../src/output.css">
+    <link rel="stylesheet" href="../src/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
 
     <!-- icon  -->
     <link rel="icon" href="/img/gijduvon-premium-logo.webp">
@@ -21,7 +23,6 @@
         <div class="loader"></div>
     </div>
 
-    <!-- Go -->
     <header class="w-[1400px] h-24 flex justify-between items-center  my-4 mx-auto">
         <!-- header-logo -->
         <div class="flex justify-between items-center  h-full px-5 object-cover rounded-xl bg-[#111] w-[75%]"><img
@@ -44,7 +45,7 @@
         <div class="px-5 h-full object-cover rounded-xl bg-[#111] w-[23%] flex justify-between items-center">
             <a href="">
 
-                <i class="fa-solid fa-bell text-3xl text-[white] duration-500 cursor-pointer hover:text-[#ffc335] "></i>
+                <i class="fa-solid fa-bell text-3xl text-white duration-500 cursor-pointer hover:text-[#ffc335] "></i>
             </a>
             <a href="">
 
@@ -62,10 +63,7 @@
             </a>
         </div>
     </header>
-
-
-    <!-- ============================= -->
-    <main class="mx-auto w-[1400px] flex gap-5">
+    <main class="mx-auto w-[1400px] flex justify-between gap-5">
         <!-- ================================= menu ============================================== -->
         <div class="flex flex-col gap-2 w-[300px]">
             <!-- =================================menu-profil=============================== -->
@@ -92,10 +90,11 @@
                     <p class="text-white">Заказы</p>
                 </div>
             </a>
-            <a href="/booking" class="w-[300px] bg-[#111] py-3 px-5 rounded-xl ml-3  cursor-pointer">
+            <a href="/booking"
+                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
-                    <i class="fa-solid fa-calendar text-xl text-[#ffc355]"></i>
-                    <p class="text-[#ffc355]">Бронирование</p>
+                    <i class="fa-solid fa-calendar text-xl text-white"></i>
+                    <p class="text-white">Бронирование</p>
                 </div>
             </a>
             <a href="/history"
@@ -112,11 +111,10 @@
                     <p class="text-white">Блюды</p>
                 </div>
             </a>
-            <a href="/category"
-                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
+            <a href="/category" class="w-[300px] bg-[#111] py-3 px-5 rounded-xl ml-3  cursor-pointer">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
-                    <i class="fa-solid fa-layer-group text-xl text-white"></i>
-                    <p class="text-white">Категории</p>
+                    <i class="fa-solid fa-layer-group text-xl text-[#ffc355]"></i>
+                    <p class="text-[#ffc355]">Категории</p>
                 </div>
             </a>
             <a href="/stol"
@@ -145,81 +143,63 @@
         </div>
         <!-- ===============================Cotigories=====================  -->
 
-        <div class="w-full">
-
-            <!-- order flex -->
-
-            <div class="bg-main-bg p-5 flex flex-col w-full h-20 rounded-xl mb-5">
-                <div class="header">
-                    <h1 class="text-[#ffc335] font-bold  text-2xl">Бронирование: {{bookings.totalDocs}}</h1>
-                </div>
-            </div>
-
-            <div class="w-full p-5 flex flex-col gap-5 bg-main-bg rounded-xl">
-
-
-
-                <!-- order box -->
-
-                {{#if bookings.docs.length}}
-                {{#each bookings.docs}}
-                <div class="w-full bg-black p-6 rounded-xl">
-
-                    <!-- order -->
-
-                    <p class="text-white ">Идентификатор бронирования <span class="text-text-color">#{{_id}}</span></p>
-                    <div class="flex justify-between w-[90%]">
-                        <div class="">
-                            <div class="text-white ml-5 mt-3">
-                                <p class="">Имя клиент: <span class="ml-3 text-xl">{{customer_name}}</span>
-                                </p>
-                                <p class="">Электронная почта: <span class="ml-3 text-xl">{{email}}</span>
-                                </p>
-                                <p class="">Телефон: <span class="ml-3 text-xl">{{phone}}</span> </p>
-                            </div>
-                        </div>
-                        <div class="w-[40%]">
-                            <ul class="flex justify-around text-end text-white">
-                                <h1>Номер стол: {{stol.number}}</h1>
-                            </ul>
-                            <ul class="flex justify-around text-end text-white">
-                                <h1>Дата: {{date}}</h1>
-                            </ul>
-                            <ul class="flex justify-around text-end text-white">
-                                <h1>Время: {{time}}</h1>
-                            </ul>
-                            <ul class="flex justify-around text-end text-white">
-                                <h1>Час(ы): {{hour}}</h1>
-                            </ul>
-
+        <div class=" w-full ">
+            <div class="bg-main-bg p-5 items-center flex justify-between w-full h-20 rounded-xl mb-5">
+                <p class="text-[#ffc335] font-bold  text-2xl">Категории: <span id="cotygory-length">
+                        {{categories.totalDocs}}</span></p>
+                <a href="/category/create">
+                    <div id="add-btn" class="button bg-green-600">
+                        <div class="button-wrapper catygoryAddBtn">
+                            <div class="text">ДОБАВИТЬ</div>
+                            <span class="icon"><i class="fa-solid fa-plus"></i></span>
                         </div>
                     </div>
-                    <form action="/booking/{{_id}}/deactivate" method="post">
-                        <div class="text-end mt-10">
-                            <button type="submit" class="bg-green-600 text-white rounded py-2 px-5">Деактивировать</button>
+                </a>
+            </div>
+
+            <div id="pruduct-container"
+                class="flex  flex-col bg-main-bg w-[100%] py-6 px-5 rounded-xl gap-5 list-none   overflow-x-scroll cotigories-container">
+                {{#if categories.docs.length}}
+
+                {{#each categories.docs}}
+                <div class="w-full gap-7 rounded-xl flex items-center p-4 col-span-2 bg-black justify-between">
+                    <div class="flex gap-3 items-center">
+                        <div class="w-32 h-32 rounded-full overflow-hidden">
+                            <img class="w-full" src="{{image_url}}" alt="Mahsulot rasm">
                         </div>
-                    </form>
+                        <div class="w-[300px]">
+                            <h1 class="text-white text-3xl">{{ru_name}}</h1>
+                            <p class="text-[#999] text-xl">Блюды: {{meals.length}}</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-3">
+                        <a href="/category/{{_id}}/update">
+                            <div type="submit" class="button bg-green-600 edit-cotigory">
+                                <div class="button-wrapper">
+                                    <div class="text">Изменить</div>
+                                    <span class="icon"><i class="fa-solid fa-pen"></i></span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
                 </div>
                 {{/each}}
-
                 <!-- Pagination -->
 
                 <div id="pagination" class="flex justify-center mt-5 gap-2">
-                    {{#if bookings.hasPrevPage}}<a href="/booking/?page={{bookings.prevPage}}"><button
+                    {{#if categories.hasPrevPage}}<a href="/category/?page={{categories.prevPage}}"><button
                             class="px-3 py-2 rounded-lg bg-black text-white">Предыдущий</button></a>{{/if}}
-                    <button class="px-3 py-2 rounded-lg bg-black text-[#ffc335]">{{bookings.page}}</button>
+                    <button class="px-3 py-2 rounded-lg bg-black text-[#ffc335]">{{categories.page}}</button>
                     {{!-- <a href=""><button class="px-3 py-2 rounded-lg bg-[#222] text-white">2</button></a> --}}
-                    {{#if bookings.hasNextPage}}<a href="/booking/?page={{bookings.nextPage}}"><button
+                    {{#if categories.hasNextPage}}<a href="/category/?page={{categories.nextPage}}"><button
                             class="px-3 py-2 rounded-lg bg-black text-white">Следующий</button></a>{{/if}}
                 </div>
+
                 {{else}}
-                <p class="empty-message">Бронирования пусты!</p>
+                <p class="text-white">Категории пусты.</p>
                 {{/if}}
-
-
             </div>
         </div>
-
     </main>
 
     <script>

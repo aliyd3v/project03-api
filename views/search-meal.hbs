@@ -196,13 +196,21 @@
   </main>
 
   <script>
-    window.onload = function () {
-      loading();
-    };
-    function loading() {
-      let containerLoad = document.querySelector(".container-loader");
-      containerLoad.style.display = "none";
-    }
+        // Loader closer.
+        window.onload = function () {
+            loading();
+        };
+        function loading() {
+            let containerLoad = document.querySelector(".container-loader");
+            containerLoad.style.display = "none";
+        }
+
+        function startLoader() {
+            let containerInput = document.querySelector('.profile-info')
+            containerInput.style.display = 'none'
+            let containerLoad = document.querySelector(".container-loader");
+            containerLoad.style.display = "grid";
+        }
   </script>
 
 </body>

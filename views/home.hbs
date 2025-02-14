@@ -29,9 +29,9 @@
             <img class="w-20" src="/img/gijduvon-premium-logo.webp" alt="main-logo">
 
             <div class="inputbox">
-                <form action="/search/meal">
-                    <input required type="text" name="key">
-                    <span class="">
+                <form onsubmit="startLoader()" action="/search/meal">
+                    <input class="searchInput" required type="text" name="key">
+                    <span>
                         <p class="fa-solid fa-magnifying-glass"></p> Search for a food
                     </span>
                     <i></i>
@@ -221,14 +221,21 @@
 
     <script>
         // Loader closer.
-        let containerLoad = document.querySelector(".container-loader");
-
         window.onload = function () {
             loading();
         };
-
         function loading() {
+            let containerLoad = document.querySelector(".container-loader");
             containerLoad.style.display = "none";
+        }
+
+        function startLoader() {
+            let searchInput = document.querySelector('.searchInput')
+            searchInput.style.display = 'none'
+            let containerInput = document.querySelector('.profile-info')
+            containerInput.style.display = 'none'
+            let containerLoad = document.querySelector(".container-loader");
+            containerLoad.style.display = "grid";
         }
     </script>
 </body>

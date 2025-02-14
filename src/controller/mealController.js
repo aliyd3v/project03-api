@@ -25,7 +25,7 @@ exports.mealPage = async (req, res) => {
         const categories = await Category.find().sort({ en_name: 1 })
 
         // Rendering.
-        return res.render('meal', {
+        return res.render(`${user.language == 'English' ? 'meal' : 'meal_ru'}`, {
             layout: false,
             meals,
             categories,
@@ -75,7 +75,7 @@ exports.mealSortByCategory = async (req, res) => {
         const user = await Admin.findById(req.cookies.userId)
 
         // Rendering.
-        return res.render('meal', {
+        return res.render(`${user.language == 'English' ? 'meal' : 'meal_ru'}`, {
             layout: false,
             user,
             category,
@@ -101,15 +101,15 @@ exports.createMealPage = async (req, res) => {
         // Checking categories for existence.
         if (!categories) {
             // Rendering.
-            return res.render('meal-create', {
+            return res.render(`${user.language == 'English' ? 'meal-create' : 'meal-create_ru'}`, {
                 layout: false,
-                errorMessage: "Categories are empty. Please, first create category!",
+                errorMessage: `${user.language == 'English' ? "Categories are empty. Please create a category first!" : "Категории пусты. Пожалуйста, сначала создайте категорию!"}`,
                 user
             })
         }
 
         // Rendering.
-        return res.render('meal-create', {
+        return res.render(`${user.language == 'English' ? 'meal-create' : 'meal-create_ru'}`, {
             layout: false,
             categories,
             user
@@ -131,7 +131,7 @@ exports.createMeal = async (req, res) => {
         const { data, error } = validationController(req, res)
         if (error) {
             // Rendering.
-            return res.render('meal-create', {
+            return res.render(`${user.language == 'English' ? 'meal-create' : 'meal-create_ru'}`, {
                 layout: false,
                 inputedData: data,
                 errorMessage: error,
@@ -159,12 +159,12 @@ exports.createMeal = async (req, res) => {
             if (en_name_condidat) {
                 fs.unlinkSync(filePath)
                 // Rendering.
-                return res.render('meal-create', {
+                return res.render(`${user.language == 'English' ? 'meal-create' : 'meal-create_ru'}`, {
                     layout: false,
                     inputedData: data,
                     categories,
                     selectedCategory,
-                    errorMessage: `Already exists with english name "${data.en_name}"! Please enter another name.`,
+                    errorMessage: `${user.language == 'English' ? `Already exists with English name "${data.en_name}"! Please enter another name.` : `Уже существует с английским именем "${data.en_name}"! Пожалуйста, введите другое имя.`}`,
                     user
                 })
             }
@@ -172,22 +172,22 @@ exports.createMeal = async (req, res) => {
             if (ru_name_condidat) {
                 fs.unlinkSync(filePath)
                 // Rendering.
-                return res.render('meal-create', {
+                return res.render(`${user.language == 'English' ? 'meal-create' : 'meal-create_ru'}`, {
                     layout: false,
                     inputedData: data,
                     categories,
                     selectedCategory,
-                    errorMessage: `Already exists with russian name "${data.ru_name}"! Please enter another name.`,
+                    errorMessage: `${user.language == 'English' ? `Already exists with Russian name "${data.ru_name}"! Please enter another name.` : `Уже существует с русским названием "${data.ru_name}"! Пожалуйста, введите другое имя.`}`,
                     user
                 })
             }
         } else {
             fs.unlinkSync(filePath)
             // Rendering.
-            return res.render('meal-create', {
+            return res.render(`${user.language == 'English' ? 'meal-create' : 'meal-create_ru'}`, {
                 layout: false,
                 inputedData: data,
-                errorMessage: `Category is not valid. Please, select try again!`,
+                errorMessage: `${user.language == 'English' ? `The category is invalid. Please try again!` : `Категория недействительна. Пожалуйста, попробуйте еще раз!`}`,
                 user
             })
         }
@@ -255,7 +255,7 @@ exports.updateMealPage = async (req, res) => {
         const user = await Admin.findById(req.cookies.userId)
 
         // Rendering.
-        return res.render('meal-update', {
+        return res.render(`${user.language == 'English' ? 'meal-update' : 'meal-update_ru'}`, {
             layout: false,
             oldMeal: meal,
             categories,
@@ -298,7 +298,7 @@ exports.updateOneMeal = async (req, res) => {
         const { data, error } = validationController(req, res)
         if (error) {
             // Rendering.
-            return res.render('meal-update', {
+            return res.render(`${user.language == 'English' ? 'meal-update' : 'meal-update_ru'}`, {
                 layout: false,
                 oldMeal: meal,
                 inputedData: data,
@@ -314,11 +314,11 @@ exports.updateOneMeal = async (req, res) => {
                 if (en_name_condidat) {
                     if (en_name_condidat._id != id) {
                         // Rendering.
-                        return res.render('meal-update', {
+                        return res.render(`${user.language == 'English' ? 'meal-update' : 'meal-update_ru'}`, {
                             layout: false,
                             oldMeal: meal,
                             inputedData: data,
-                            errorMessage: `Already exists with english title meal "${data.en_name}".`,
+                            errorMessage: `${user.language == 'English' ? `There is already a food with the English name "${data.en_name}".` : `Уже существует с английским названием еда "${data.en_name}".`}`,
                             categories,
                             user
                         })
@@ -328,11 +328,11 @@ exports.updateOneMeal = async (req, res) => {
                 if (ru_name_condidat) {
                     if (en_name_condidat._id != id) {
                         // Rendering.
-                        return res.render('meal-update', {
+                        return res.render(`${user.language == 'English' ? 'meal-update' : 'meal-update_ru'}`, {
                             layout: false,
                             oldMeal: meal,
                             inputedData: data,
-                            errorMessage: `Already exists with russian title meal "${data.ru_name}".`,
+                            errorMessage: `${user.language == 'English' ? `There is already a food item with a Russian name "${data.ru_name}".` : `Уже существует с русским названием еда "${data.ru_name}".`}`,
                             categories,
                             user
                         })
@@ -375,11 +375,11 @@ exports.updateOneMeal = async (req, res) => {
                 if (en_name_condidat._id != id) {
                     fs.unlinkSync(filePath)
                     // Rendering.
-                    return res.render('meal-update', {
+                    return res.render(`${user.language == 'English' ? 'meal-update' : 'meal-update_ru'}`, {
                         layout: false,
                         oldMeal: meal,
                         inputedData: data,
-                        errorMessage: `Already exists with english title meal "${data.en_name}".`,
+                        errorMessage: `${user.language == 'English' ? `There is already a food with the English name "${data.en_name}".` : `Уже существует с английским названием еда "${data.en_name}".`}`,
                         categories,
                         user
                     })
@@ -390,11 +390,11 @@ exports.updateOneMeal = async (req, res) => {
                 if (en_name_condidat._id != id) {
                     fs.unlinkSync(filePath)
                     // Rendering.
-                    return res.render('meal-update', {
+                    return res.render(`${user.language == 'English' ? 'meal-update' : 'meal-update_ru'}`, {
                         layout: false,
                         oldMeal: meal,
                         inputedData: data,
-                        errorMessage: `Already exists with russian title meal "${data.ru_name}".`,
+                        errorMessage: `${user.language == 'English' ? `There is already a food item with a Russian name "${data.ru_name}".` : `Уже существует с русским названием еда "${data.ru_name}".`}`,
                         categories,
                         user
                     })
