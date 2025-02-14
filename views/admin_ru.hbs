@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>История</title>
+    <title>Админы</title>
     <link rel="stylesheet" href="/src/output.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
@@ -31,7 +31,7 @@
                 <form action="/search/meal">
                     <input required type="text" name="key">
                     <span class="">
-                        <p class="fa-solid fa-magnifying-glass"></p>Поиск еды
+                        <p class="fa-solid fa-magnifying-glass"></p> Поиск еды
                     </span>
                     <i></i>
                     <button type="submit" hidden></button>
@@ -64,12 +64,14 @@
             <!-- =================================menu-profil=============================== -->
             <div class="w-[300px] bg-[#111] py-3 px-5 rounded-xl">
                 <!-- profil -->
-                <div class="w-20 h-20  bg-[white] my-0 mx-auto rounded-full grid place-items-center duration-500 cursor-pointer hover:bg-[#ffc335]"
-                    style="cursor: auto;">
-                    <img class="w-[90%] object-cover rounded-full " src="/img/3a3f2d35-8167-4708-9ef0-bdaa980989f9.png"
-                        alt="profil-img">
-                </div>
-                <h3 class="text-center text-xl my-5 mx-auto w-40 break-normal text-white">{{user.name}}</h3>
+                <a href="/">
+                    <div
+                        class="w-20 h-20  bg-[white] my-0 mx-auto rounded-full grid place-items-center duration-500 cursor-pointer hover:bg-[#ffc335] ">
+                        <img class="w-[90%] object-cover rounded-full "
+                            src="/img/3a3f2d35-8167-4708-9ef0-bdaa980989f9.png" alt="profil-img">
+                    </div>
+                    <h3 class="text-center text-xl my-5 mx-auto w-40 break-normal text-white">{{user.name}}</h3>
+                </a>
             </div>
             <!-- =========================================menu-Cotigoris=============================== -->
             <a href="/" class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
@@ -81,7 +83,7 @@
             <a href="/order"
                 class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
-                    <i class="fa-solid fa-file text-white"></i>
+                    <i class="fa-solid fa-file text-xl text-white"></i>
                     <p class="text-white">Заказы</p>
                 </div>
             </a>
@@ -92,10 +94,11 @@
                     <p class="text-white">Бронирование</p>
                 </div>
             </a>
-            <a href="/history" class="w-[300px] bg-[#111] py-3 px-5 rounded-xl ml-3  cursor-pointer">
+            <a href="/history"
+                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
-                    <i class="fa-solid fa-clock text-xl text-[#ffc355]"></i>
-                    <p class="text-[#ffc355]">История</p>
+                    <i class="fa-solid fa-clock text-xl text-white"></i>
+                    <p class="text-white">История</p>
                 </div>
             </a>
             <a href="/meal"
@@ -116,18 +119,15 @@
                 class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
                     <i class="fa-solid fa-table text-xl text-white"></i>
-                    <p class="text-white">Стол</p>
+                    <p class="text-white">Table</p>
                 </div>
             </a>
-            {{#if (isEqual user.role "SUPERUSER")}}
-            <a href="/admin"
-                class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
+            <a href="/admin" class="w-[300px] bg-[#111] py-3 px-5 rounded-xl ml-3  cursor-pointer">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
-                    <i class="fa-solid fa-users text-xl text-white"></i>
-                    <p class="text-white">Админы</p>
+                    <i class="fa-solid fa-users text-xl text-[#ffc355]"></i>
+                    <p class="text-[#ffc355]">Админы</p>
                 </div>
             </a>
-            {{/if}}
             <a href="/logout"
                 class="w-[300px] boss bg-red-600 py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
@@ -138,51 +138,54 @@
         </div>
         <!-- ===============================Cotigories=====================  -->
 
-        <div class="w-full">
-            <!-- order flex -->
-
-            <div class="bg-main-bg p-5 flex flex-col w-full h-20 rounded-xl mb-5">
-                <div class="header">
-                    <h1 class="text-[#ffc335] font-bold  text-2xl">История бронирования: {{bookings.totalDocs}}</h1>
-                </div>
+        <div class=" w-full ">
+            <div class="bg-main-bg p-5 items-center flex justify-between w-full rounded-xl mb-5">
+                <p class="text-[#ffc335] font-bold  text-2xl">Админы: <span id="cotygory-length">
+                        {{admins.totalDocs}}</span></p>
+                {{#if (isEqual user.role "SUPERUSER")}}
+                <a href="/admin-create">
+                    <div id="add-btn" class="button bg-green-600">
+                        <div class="button-wrapper catygoryAddBtn">
+                            <div class="text">ДОБАВИТЬ</div>
+                            <span class="icon"><i class="fa-solid fa-plus"></i></span>
+                        </div>
+                    </div>
+                </a>
+                {{/if}}
             </div>
+            <!-- -------------------- -->
+            <div id="history-section" class="w-[1100px] bg-[#111] rounded-xl p-5 mt-5 text-white">
 
-            <div class="w-full p-5 flex flex-col gap-5 bg-main-bg rounded-xl">
+                <!-- Header Box -->
+                <div class="flex justify-between bg-[#222] p-4 rounded-lg mb-3 font-bold text-[#ffc335]">
+                    <p class="w-[20%] text-center">Имя</p>
+                    <p class="w-[20%] text-center">Username</p>
+                    <p class="w-[20%] text-center">Телефон</p>
+                    <p class="w-[20%] text-center">Электронная почта</p>
+                    <p class="w-[20%] text-center">Роль</p>
+                    <p class="w-[10%] text-center">Действие</p>
+                </div>
 
-
-                <!-- order box -->
-                {{#if bookings.docs.length}}
-                {{#each bookings.docs}}
-                <div class="w-full bg-black p-6 rounded-xl">
-
-                    <!-- order -->
-
-                    <p class="text-white ">Идентификатор бронирования <span class="text-text-color">#{{_id}}</span></p>
-                    <div class="flex justify-between w-[90%]">
-                        <div class="">
-                            <div class="text-white ml-5 mt-3">
-                                <p class="">Имя: <span class="ml-3 text-xl">{{customer_name}}</span>
-                                </p>
-                                <p class="">Электронная почта: <span class="ml-3 text-xl">{{email}}</span>
-                                </p>
-                                <p class="">Телефон: <span class="ml-3 text-xl">{{phone}}</span> </p>
+                {{#each admins.docs}}
+                <div class="order-container bg-black p-4 rounded-lg mb-3">
+                    <div class="flex justify-between items-center">
+                        <p class="w-[20%] text-center">{{name}}</p>
+                        <p class="w-[20%] text-center">{{username}}</p>
+                        <p class="w-[20%] text-center">{{phone}}</p>
+                        <p class="w-[20%] text-center">{{email}} </p>
+                        <p class="w-[20%] text-center">{{role}}</p>
+                        {{#if (isEqual role 'SUPERUSER')}}
+                        <p class="w-[10%] text-center"></p>
+                        {{else}}
+                        <a href="/admin/{{_id}}/update">
+                            <div type="submit" class="w-[10%] button bg-green-600 edit-cotigory">
+                                <div class="button-wrapper">
+                                    <div class="text">Изменить</div>
+                                    <span class="icon"><i class="fa-solid fa-pen"></i></span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="w-[40%]">
-                            <ul class="flex justify-around text-end text-white">
-                                <h1>Номер стол: {{stol.number}}</h1>
-                            </ul>
-                            <ul class="flex justify-around text-end text-white">
-                                <h1>Дата: {{date}}</h1>
-                            </ul>
-                            <ul class="flex justify-around text-end text-white">
-                                <h1>Время: {{time}}</h1>
-                            </ul>
-                            <ul class="flex justify-around text-end text-white">
-                                <h1>Час(ы): {{hour}}</h1>
-                            </ul>
-
-                        </div>
+                        </a>
+                        {{/if}}
                     </div>
                 </div>
                 {{/each}}
@@ -190,21 +193,17 @@
                 <!-- Pagination -->
 
                 <div id="pagination" class="flex justify-center mt-5 gap-2">
-                    {{#if bookings.hasPrevPage}}<a href="/booking/?page={{bookings.prevPage}}"><button
+                    {{#if admins.hasPrevPage}}<a href="/admin/?page={{admins.prevPage}}"><button
                             class="px-3 py-2 rounded-lg bg-black text-white">Предыдущий</button></a>{{/if}}
-                    <button class="px-3 py-2 rounded-lg bg-black text-[#ffc335]">{{bookings.page}}</button>
-                    {{!-- <a href=""><button class="px-3 py-2 rounded-lg bg-[#222] text-white">2</button></a> --}}
-                    {{#if bookings.hasNextPage}}<a href="/booking/?page={{bookings.nextPage}}"><button
+                    <button class="px-3 py-2 rounded-lg bg-black text-[#ffc335]">{{admins.page}}</button>
+                    {{#if admins.hasNextPage}}<a href="/admin/?page={{admins.nextPage}}"><button
                             class="px-3 py-2 rounded-lg bg-black text-white">Следующий</button></a>{{/if}}
                 </div>
-                {{else}}
-                <p class="empty-message">Бронирования пусты!</p>
-                {{/if}}
+
             </div>
         </div>
 
     </main>
-    <!-- garph========================== -->
 
     <script>
         // Loader closer.

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Table create</title>
+    <title>Админ создать</title>
     <link rel="stylesheet" href="/src/output.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
@@ -32,7 +32,7 @@
                 <form action="/search/meal">
                     <input required type="text" name="key">
                     <span class="">
-                        <p class="fa-solid fa-magnifying-glass"></p> Search for a food
+                        <p class="fa-solid fa-magnifying-glass"></p> Поиск еды
                     </span>
                     <i></i>
                     <button type="submit" hidden></button>
@@ -76,64 +76,62 @@
             <a href="/" class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
                     <i class="fa-solid fa-home text-white"></i>
-                    <p class="text-white">Home</p>
+                    <p class="text-white">Основной</p>
                 </div>
             </a>
             <a href="/order"
                 class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
                     <i class="fa-solid fa-file text-xl text-white"></i>
-                    <p class="text-white">Order</p>
+                    <p class="text-white">Заказы</p>
                 </div>
             </a>
             <a href="/booking"
                 class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
                     <i class="fa-solid fa-calendar text-xl text-white"></i>
-                    <p class="text-white">Booking</p>
+                    <p class="text-white">Бронирование</p>
                 </div>
             </a>
             <a href="/history"
                 class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
                     <i class="fa-solid fa-clock text-xl text-white"></i>
-                    <p class="text-white">History</p>
+                    <p class="text-white">История</p>
                 </div>
             </a>
             <a href="/meal"
                 class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500   hover:-ml-3 ">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
                     <i class="fa-solid fa-folder-open text-xl text-white"></i>
-                    <p class="text-white">Meals</p>
+                    <p class="text-white">Блюды</p>
                 </div>
             </a>
             <a href="/category"
                 class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
                     <i class="fa-solid fa-layer-group text-xl text-white"></i>
-                    <p class="text-white">Categories</p>
+                    <p class="text-white">Категории</p>
                 </div>
             </a>
-            <a href="/stol" class="w-[300px] bg-[#111] py-3 px-5 rounded-xl ml-3  cursor-pointer">
-                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
-                    <i class="fa-solid fa-table text-xl text-[#ffc355]"></i>
-                    <p class="text-[#ffc355]">Table</p>
-                </div>
-            </a>
-            {{#if (isEqual user.role "SUPERUSER")}}
-            <a href="/admin"
+            <a href="/stol"
                 class="w-[300px] boss bg-[#111] py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
-                    <i class="fa-solid fa-users text-xl text-white"></i>
-                    <p class="text-white">Admins</p>
+                    <i class="fa-solid fa-table text-xl text-white"></i>
+                    <p class="text-white">Table</p>
                 </div>
             </a>
-            {{/if}}
+            <a href="/admin" class="w-[300px] bg-[#111] py-3 px-5 rounded-xl ml-3  cursor-pointer">
+                <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
+                    <i class="fa-solid fa-users text-xl text-[#ffc355]"></i>
+                    <p class="text-[#ffc355]">Админы</p>
+                </div>
+            </a>
             <a href="/logout"
                 class="w-[300px] boss bg-red-600 py-3 px-5 rounded-xl cursor-pointer duration-500 hover:-ml-3">
                 <div class="h-9 w-full flex items-center gap-4 hover:text-[#ffc335]">
                     <i class="fa-solid fa-right-from-bracket text-white"></i>
-                    <p class="text-white">Log out</p>
+                    <p class="text-white">Выйти</p>
                 </div>
             </a>
         </div>
@@ -143,11 +141,11 @@
             <!-- -------------------- -->
             <div class="bg-main-bg p-5 flex flex-col w-full h-20 rounded-xl mb-5">
                 <div class="header">
-                    <h1 class="text-[#ffc335] font-bold  text-2xl">Create table:</h1>
+                    <h1 class="text-[#ffc335] font-bold  text-2xl">Админ создать:</h1>
                 </div>
             </div>
 
-            <form onsubmit="startLoader()" action="/stol/create" method="post">
+            <form onsubmit="startLoader()" action="/admin-create" method="post" enctype="multipart/form-data">
                 <div class="profile-container" style="width: 100%;">
                     <div class="profile-card" style="width: 100%;">
                         <div class="profile-info" style="width: 100%; margin-left: 100; margin-right: 100px;">
@@ -156,13 +154,12 @@
                                 <div class="relative flex items-center ">
                                     <div class="inputbox" style="width: 100%;">
                                         {{#if inputedData}}
-                                        <input id="number" required="required" type="number" name="number"
-                                            value="{{inputedData.number}}">
+                                        <input required="required" type="text" name="name" value="{{inputedData.name}}">
                                         {{else}}
-                                        <input id="number" required="required" type="number" name="number">
+                                        <input required="required" type="text" name="name">
                                         {{/if}}
                                         <span class="">
-                                            Number
+                                            Имя
                                         </span>
                                         <i class=""></i>
                                     </div>
@@ -178,13 +175,13 @@
                                 <div class="relative flex items-center ">
                                     <div class="inputbox" style="width: 100%;">
                                         {{#if inputedData}}
-                                        <input id="price" required="required" type="number" name="price"
-                                            value="{{inputedData.price}}">
+                                        <input required="required" type="email" name="email"
+                                            value="{{inputedData.email}}">
                                         {{else}}
-                                        <input id="price" required="required" type="number" name="price">
+                                        <input required="required" type="email" name="email">
                                         {{/if}}
                                         <span class="">
-                                            Price $
+                                            Электронная почта
                                         </span>
                                         <i class=""></i>
                                     </div>
@@ -200,13 +197,13 @@
                                 <div class="relative flex items-center ">
                                     <div class="inputbox" style="width: 100%;">
                                         {{#if inputedData}}
-                                        <input id="capacity" required="required" type="number" name="capacity"
-                                            value="{{inputedData.capacity}}">
+                                        <input required="required" type="text" name="phone"
+                                            value="{{inputedData.phone}}">
                                         {{else}}
-                                        <input id="capacity" required="required" type="number" name="capacity">
+                                        <input required="required" type="text" name="phone">
                                         {{/if}}
                                         <span class="">
-                                            Capacity
+                                            Телефон
                                         </span>
                                         <i class=""></i>
                                     </div>
@@ -215,6 +212,83 @@
                                         d="M14 15H6a5 5 0 0 0-5 5 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 5 5 0 0 0-5-5zm8-4h-2.59l.3-.29a1 1 0 0 0-1.42-1.42l-2 2a1 1 0 0 0 0 1.42l2 2a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42l-.3-.29H22a1 1 0 0 0 0-2z"
                                         data-original="#000000"></path>
                                     </svg>
+                                </div>
+                            </div>
+
+                            <div style="padding: 10px;">
+                                <div class="relative flex items-center ">
+                                    <div class="inputbox" style="width: 100%;">
+                                        {{#if inputedData}}
+                                        <input id="username" required="required" type="text" name="username"
+                                            value="{{inputedData.username}}">
+                                        {{else}}
+                                        <input id="username" required="required" type="text" name="username">
+                                        {{/if}}
+                                        <span class="">
+                                            Username
+                                        </span>
+                                        <i class=""></i>
+                                    </div>
+                                    <circle cx="10" cy="7" r="6" data-original="#000000"></circle>
+                                    <path
+                                        d="M14 15H6a5 5 0 0 0-5 5 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 5 5 0 0 0-5-5zm8-4h-2.59l.3-.29a1 1 0 0 0-1.42-1.42l-2 2a1 1 0 0 0 0 1.42l2 2a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42l-.3-.29H22a1 1 0 0 0 0-2z"
+                                        data-original="#000000"></path>
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <div style="padding: 10px;">
+                                <div class="relative flex items-center">
+                                    <div class="inputbox" style="width: 100%;">
+                                        {{#if inputedData}}
+                                        <input id="password" required="required" type="password" name="password"
+                                            value="{{inputedData.password}}"><i class=" "></i>
+                                        {{else}}
+                                        <input id="password" required="required" type="password" name="password"><i
+                                            class=" "></i>
+                                        {{/if}}
+                                        <span class="">
+                                            Пароль
+                                        </span>
+                                    </div>
+
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <!-- Category Dropdown -->
+                            <div style="padding: 10px;">
+                                <select name="language"
+                                    style="width: 100%; padding: 15px; margin-top: 5px; border-radius: 5px; background-color: #000000; color: #ffffff;"
+                                    required>
+                                    {{#if inputedData}}
+                                    <option value="{{inputedData.language}}">{{inputedData.language}}</option>
+                                    {{#if (isEqual inputedData.language 'English')}}
+                                    {{else}}
+                                    <option value="English">English</option>
+                                    {{/if}}
+                                    {{#if (isEqual inputedData.language 'Русский')}}
+                                    {{else}}
+                                    <option value="Русский">Русский</option>
+                                    {{/if}}
+                                    {{else}}
+                                    <option value="">Выберите язык</option>
+                                    <option value="English">English</option>
+                                    <option value="Русский">Русский</option>
+                                    {{/if}}
+                                </select>
+                            </div>
+
+                            <div style="padding: 10px;">
+                                <div style="margin-bottom: 15px; padding-top: 15px">
+                                    <label for="input-image" style="inline-block; padding: 13px 749px 13px 20px; color: white;
+                                        background-color: black; border-radius: 5px; cursor: pointer; font-size: 16px;
+                                        text-align: left;">Фото</label>
+                                    <input type="file" id="input-image" name="file" style="display: none;"
+                                        accept="image/*" required>
+                                    <div id="upload-placeholder"
+                                        style="padding: 20px; border: 3px dashed #000000; text-align: center; font-size: 14px; color: #ffffff; cursor: pointer; margin-top: 7px;">
+                                        Перетащите файлы сюда или щелкните, чтобы выбрать изображение</div>
                                 </div>
                             </div>
 
@@ -228,14 +302,14 @@
                             <div class="!mt-8">
                                 <button type="submit"
                                     class="w-full py-3 px-4 text-sm tracking-wide duration-500 rounded-lg text-white border hover:bg-white hover:text-black focus:outline-none">
-                                    Create
+                                    Создать
                                 </button>
                             </div>
-                            <a href="/stol">
+                            <a href="/admin">
                                 <div class="!mt-8">
                                     <button type="button"
                                         class="w-full py-3 px-4 text-sm tracking-wide duration-500 rounded-lg text-white border hover:bg-white hover:text-black focus:outline-none">
-                                        Cancel
+                                        Отмена
                                     </button>
                                 </div>
                             </a>
@@ -265,6 +339,7 @@
             let containerLoad = document.querySelector(".container-loader");
             containerLoad.style.display = "grid";
         }
+
     </script>
 
 </body>

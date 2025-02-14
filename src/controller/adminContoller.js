@@ -22,7 +22,7 @@ exports.adminsPage = async (req, res) => {
         const admins = await Admin.paginate({}, { page, limit, sort: { username: 1 } })
 
         // Rendering.
-        return res.render('admin', {
+        return res.render(`${user.language == 'English' ? 'admin' : 'admin_ru'}`, {
             layout: false,
             user,
             admins
@@ -41,7 +41,7 @@ exports.adminCreatePage = async (req, res) => {
         const user = await Admin.findById(req.cookies.userId)
 
         // Rendering.
-        return res.render('admin-create', {
+        return res.render(`${user.language == 'English' ? 'admin-create' : 'admin-create_ru'}`, {
             layout: false,
             user
         })
@@ -62,7 +62,7 @@ exports.adminCreate = async (req, res) => {
         const { data, error } = validationController(req, res)
         if (error) {
             // Rendering.
-            return res.render('admin-create', {
+            return res.render(`${user.language == 'English' ? 'admin-create' : 'admin-create_ru'}`, {
                 layout: false,
                 inputedData: data,
                 errorMessage: error,
@@ -79,10 +79,10 @@ exports.adminCreate = async (req, res) => {
         if (condidat) {
             // Rendering.
             fs.unlinkSync(filePath)
-            return res.render('admin-create', {
+            return res.render(`${user.language == 'English' ? 'admin-create' : 'admin-create_ru'}`, {
                 layout: false,
                 inputedData: data,
-                errorMessage: `'${data.username}' already used. Please, enter another username!`,
+                errorMessage: `${user.language == 'English' ? `'${data.username}' already used. Please, enter another username!` : `'${data.username}' уже используется. Пожалуйста, введите другое имя пользователя!`}`,
                 user
             })
         }
@@ -95,7 +95,7 @@ exports.adminCreate = async (req, res) => {
             return res.render('admin-create', {
                 layout: false,
                 inputed: data,
-                errorMessage: 'Error uploading image! Please try again later.',
+                errorMessage: `${user.language == 'English' ? 'Error uploading image! Please try again later.' : 'Ошибка загрузки изображения! Повторите попытку позже.'}`,
                 user
             })
         }
@@ -155,7 +155,7 @@ exports.updateAdminPage = async (req, res) => {
         const user = await Admin.findById(req.cookies.userId)
 
         // Rendering.
-        return res.render('admin-update', {
+        return res.render(`${user.language == 'English' ? 'admin-update' : 'admin-update_ru'}`, {
             layout: false,
             admin,
             user
@@ -198,7 +198,7 @@ exports.updateOneAdmin = async (req, res) => {
         const { data, error } = validationController(req, res)
         if (error) {
             // Rendering.
-            return res.render('admin-update', {
+            return res.render(`${user.language == 'English' ? 'admin-update' : 'admin-update_ru'}`, {
                 layout: false,
                 inputedData: data,
                 errorMessage: error,
@@ -218,10 +218,10 @@ exports.updateOneAdmin = async (req, res) => {
             if (condidat._id != admin._id) {
                 // Rendering.
                 fs.unlinkSync(filePath)
-                return res.render('admin-update', {
+                return res.render(`${user.language == 'English' ? 'admin-update' : 'admin-update_ru'}`, {
                     layout: false,
                     inputedData: data,
-                    errorMessage: `'${data.username}' already used. Please, enter another username!`,
+                    errorMessage: `${user.language == 'English' ? `'${data.username}' already used. Please, enter another username!` : `'${data.username}' уже используется. Пожалуйста, введите другое имя пользователя!`}`,
                     admin,
                     user
                 })
@@ -232,10 +232,10 @@ exports.updateOneAdmin = async (req, res) => {
             if (errorSupabase) {
                 fs.unlinkSync(filePath)
                 // Responding.
-                return res.render('admin-update', {
+                return res.render(`${user.language == 'English' ? 'admin-update' : 'admin-update_ru'}`, {
                     layout: false,
                     inputed: data,
-                    errorMessage: 'Error uploading image! Please try again later.',
+                    errorMessage: `${user.language == 'English' ? 'Error uploading image! Please try again later.' : 'Ошибка загрузки изображения! Повторите попытку позже.'}`,
                     admin,
                     user
                 })
@@ -260,10 +260,10 @@ exports.updateOneAdmin = async (req, res) => {
                 const condidat = await Admin.findOne({ username: data.username })
                 if (condidat._id != admin._id) {
                     // Rendering.
-                    return res.render('admin-update', {
+                    return res.render(`${user.language == 'English' ? 'admin-update' : 'admin-update_ru'}`, {
                         layout: false,
                         inputedData: data,
-                        errorMessage: `'${data.username}' already used. Please, enter another username!`,
+                        errorMessage: `${user.language == 'English' ? `'${data.username}' already used. Please, enter another username!` : `'${data.username}' уже используется. Пожалуйста, введите другое имя пользователя!`}`,
                         admin,
                         user
                     })
@@ -317,7 +317,7 @@ exports.updatePasswordAdminPage = async (req, res) => {
         const user = await Admin.findById(req.cookies.userId)
 
         // Rendering.
-        return res.render('admin-password-update', {
+        return res.render(`${user.language == 'English' ? 'admin-password-update' : 'admin-password-update_ru'}`, {
             layout: false,
             admin,
             user
@@ -360,7 +360,7 @@ exports.updatePasswordAdmin = async (req, res) => {
         const { data, error } = validationController(req, res)
         if (error) {
             // Rendering.
-            return res.render('admin-create', {
+            return res.render(`${user.language == 'English' ? 'admin-password-update' : 'admin-password-update_ru'}`, {
                 layout: false,
                 inputedData: data,
                 errorMessage: error,

@@ -13,7 +13,7 @@ exports.createStolPage = async (req, res) => {
         const user = await Admin.findById(req.cookies.userId)
 
         // Rendering.
-        return res.render('table-create', {
+        return res.render(`${user.language == 'English' ? 'table-create' : 'table-create_ru'}`, {
             layout: false,
             user
         })
@@ -34,7 +34,7 @@ exports.createStol = async (req, res) => {
         const { data, error } = validationController(req, res)
         if (error) {
             // Rendering.
-            return res.render('table-create', {
+            return res.render(`${user.language == 'English' ? 'table-create' : 'table-create_ru'}`, {
                 layout: false,
                 inputedData: data,
                 errorMessage: error,
@@ -46,10 +46,10 @@ exports.createStol = async (req, res) => {
         const condidat = await Stol.findOne({ number: data.number })
         if (condidat) {
             // Rendering.
-            return res.render('table-create', {
+            return res.render(`${user.language == 'English' ? 'table-create' : 'table-create_ru'}`, {
                 layout: false,
                 inputedData: data,
-                errorMessage: `Already exists stol with number - ${data.number}. Please enter another number!`,
+                errorMessage: `${user.language == 'English' ? `Already exists stol with number - ${data.number}. Please enter another number!` : `Уже существует стол с номером - ${data.number}. Введите другой номер!`}`,
                 user
             })
         }
@@ -81,7 +81,7 @@ exports.getAllStols = async (req, res) => {
         const stols = await Stol.paginate({}, { page, limit, sort: { number: 1 } })
 
         // Responding.
-        return res.render('table', {
+        return res.render(`${user.language == 'English' ? 'table' : 'table_ru'}`, {
             layout: false,
             stols,
             user
@@ -117,7 +117,7 @@ exports.updateOneStolPage = async (req, res) => {
         }
 
         // Rendering.
-        return res.render('table-update', {
+        return res.render(`${user.language == 'English' ? 'table-update' : 'table-update_ru'}`, {
             layout: false,
             stol,
             user
@@ -156,7 +156,7 @@ exports.updateOneStol = async (req, res) => {
         const { data, error } = validationController(req, res)
         if (error) {
             // Rendering.
-            return res.render('table-update', {
+            return res.render(`${user.language == 'English' ? 'table-update' : 'table-update_ru'}`, {
                 layout: false,
                 inputedData: data,
                 errorMessage: error,
