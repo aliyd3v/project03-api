@@ -52,7 +52,8 @@
             </a>
             <!-- header-porofil-logo -->
             <a href="/profile">
-                <i class="fa-solid fa-user text-3xl text-[white] duration-500 cursor-pointer hover:text-[#ffc335];" style="margin-right: 20px;"></i>
+                <i class="fa-solid fa-user text-3xl text-[white] duration-500 cursor-pointer hover:text-[#ffc335];"
+                    style="margin-right: 20px;"></i>
             </a>
         </div>
     </header>
@@ -145,6 +146,15 @@
             <div class="bg-main-bg p-5 flex flex-col w-full h-20 rounded-xl mb-5">
                 <div class="header">
                     <h1 class="text-[#ffc335] font-bold  text-2xl">Profile</h1>
+                    {{#if (isEqual user.role 'SUPERUSER')}}
+                    <a href="/admin/{{profile._id}}/update-password">
+                        <div style="margin-bottom: 0px;">
+                            <p style="inline-block; padding: 13px 25px 13px 20px; color: white;
+                                        background-color: black; border-radius: 5px; cursor: pointer; font-size: 16px;
+                                        text-align: left;">Change password</p>
+                        </div>
+                    </a>
+                    {{/if}}
                 </div>
             </div>
 

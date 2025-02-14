@@ -307,14 +307,14 @@ exports.updatePasswordAdminPage = async (req, res) => {
             return res.render('not-found', { layout: false })
         }
 
+        // Get user.
+        const user = await Admin.findById(req.cookies.userId)
+
         // Checking admin role.
-        if (admin.role == 'SUPERUSER') {
+        if (admin.role == 'SUPERUSER' && admin.username != user.username) {
             // Rendering.
             return res.render('bad-request', { layout: false })
         }
-
-        // Get user.
-        const user = await Admin.findById(req.cookies.userId)
 
         // Rendering.
         return res.render(`${user.language == 'English' ? 'admin-password-update' : 'admin-password-update_ru'}`, {
@@ -347,14 +347,14 @@ exports.updatePasswordAdmin = async (req, res) => {
             return res.render('not-found', { layout: false })
         }
 
-        // Checking admin role.
-        if (admin.role == 'SUPERUSER') {
+        // Get user.
+        const user = await Admin.findById(req.cookies.userId)
+
+        // Checking admin role and user.
+        if (admin.role == 'SUPERUSER' && admin.username != user.username) {
             // Rendering.
             return res.render('bad-request', { layout: false })
         }
-
-        // Get user.
-        const user = await Admin.findById(req.cookies.userId)
 
         // Result validation.
         const { data, error } = validationController(req, res)
