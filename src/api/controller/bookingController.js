@@ -46,10 +46,14 @@ exports.createBookingWithVerification = async (req, res) => {
                     message: "Pleare enter date and time for next time!"
                 }
             })
-        } else if (data.date = date_now) {
+        } else if (data.date >= date_now) {
+
+            // Time now to date format.
             let time_now = new Date().toLocaleTimeString().split(' ')[0]
             const [hours, minutes, secunds] = time_now.split(':')
             time_now = `${hours < 10 ? `0${hours}` : hours}:${minutes < 10 ? `0${minutes}` : minutes}`
+
+            // Time checking for not older from now.
             if (data.time < time_now) {
                 // Responding.
                 return res.status(400).send({
@@ -70,16 +74,25 @@ exports.createBookingWithVerification = async (req, res) => {
         yesterday = `${year}-${month < 10 ? `0${month}` : month}-${day < 10 ? `0${day}` : day}`
         const existingBookings = await Booking.find({ stol: stol._id, date: { $in: [yesterday, data.date] }, is_canceled: false })
         if (existingBookings) {
+
+            // New time to date format.
+            let newT = new Date(`${data.date} ${data.time}`)
+
+            // New end time to date format.
+            let newT_end = new Date(newT)
+            newT_end.setHours(newT_end.getHours() + Number(data.hour))
+
+            // Itoration existing bookings and check time for non-intersection.
             for (const existData of existingBookings) {
-                // Checking existing bookings on current time.
-                let newT = new Date(`${data.date} ${data.time}`)
-                newT.setHours(newT.getHours())
-                let newT_end = new Date(newT)
-                newT_end.setHours(newT_end.getHours() + Number(data.hour))
+
+                // Exist time to date format.
                 let existT = new Date(`${existData.date} ${existData.time}`)
-                existT.setHours(existT.getHours())
+
+                // Exist end time to date format.
                 let existT_end = new Date(existT)
                 existT_end.setHours(existT_end.getHours() + Number(existData.hour))
+
+                // Checking for non-intersection.
                 if (newT < existT_end && newT_end > existT) {
                     // Responding.
                     return res.status(400).send({

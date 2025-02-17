@@ -15,8 +15,8 @@ exports.supabaseKey = process.env.SUPABASE_ACCESS_KEY
 exports.supabaseBucketName = process.env.SUPABASE_BUCKET_NAME
 
 // Email for nodemailer.
-exports.MyTestEmail = process.env.MY_EMAIL
-exports.MyTestEmailPassword = process.env.MY_EMAIL_PASSWORD
+exports.emailCompany = process.env.MY_EMAIL
+exports.emailPassword = process.env.MY_EMAIL_PASSWORD
 
 // Project status.
 exports.projectStatus = process.env.NODE_ENV

@@ -1,19 +1,21 @@
 const nodemailer = require('nodemailer');
-const { MyTestEmail, MyTestEmailPassword } = require('../config/config');
+const { emailCompany, emailPassword } = require('../config/config');
 
 const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.mail.ru',
+    port: 587,
+    secure: false,
     auth: {
-        user: MyTestEmail,
-        pass: MyTestEmailPassword
+        user: emailCompany,
+        pass: emailPassword
     }
 });
 
 exports.sendVerifyToEmail = (customerEmail, verifyUrl) => {
     const mailOptions = {
-        from: MyTestEmail,
+        from: `'AIF Restaurant' <${emailCompany}>`,
         to: customerEmail,
-        subject: 'Tasdiqlash uchun link',
+        subject: 'Verify your email',
         html: `<!DOCTYPE html>
 <html lang="en">
 <head>
