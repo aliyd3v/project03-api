@@ -3,8 +3,13 @@ const { Admin } = require("../model/userModel")
 const { errorHandling } = require("./errorController")
 const { idChecking } = require("./idController")
 
+let page = 1
+let limit = 5
+
 exports.getAllActiveBooking = async (req, res) => {
     try {
+        req.query.page ? page = req.query.page : false
+
         // Get user.
         const user = await Admin.findById(req.cookies.userId)
 
@@ -12,14 +17,14 @@ exports.getAllActiveBooking = async (req, res) => {
 
         // Get yesterday date.
         const today = new Date()
-        today.setHours(today.getHours() + 5, 0, 0, 0)
+        today.setHours(5, 0, 0, 0)
         let yesterday = new Date(today);
         yesterday.setDate(yesterday.getDate() - 1)
         const [month, day, year] = yesterday.toLocaleDateString().split('/').map(Number)
         yesterday = `${year}-${month < 10 ? `0${month}` : month}-${day < 10 ? `0${day}` : day}`
 
         // Getting date great or equal then yesterday.
-        let bookings = await Booking.paginate({ is_canceled: false, date: { $gte: yesterday } }, { page: 1, limit: 10, sort: { date: 1 }, populate: 'stol' })
+        let bookings = await Booking.paginate({ is_canceled: false, date: { $gte: yesterday } }, { page, limit, sort: { date: 1 }, populate: 'stol' })
 
         // Remove older booking from now.
         const now = new Date()

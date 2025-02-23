@@ -190,11 +190,11 @@
                 <!-- Pagination -->
 
                 <div id="pagination" class="flex justify-center mt-5 gap-2">
-                    {{#if bookings.hasPrevPage}}<a href="/booking/?page={{bookings.prevPage}}"><button
+                    {{#if bookings.hasPrevPage}}<a href="/history/booking/?page={{bookings.prevPage}}"><button
                             class="px-3 py-2 rounded-lg bg-black text-white">Previous</button></a>{{/if}}
                     <button class="px-3 py-2 rounded-lg bg-black text-[#ffc335]">{{bookings.page}}</button>
                     {{!-- <a href=""><button class="px-3 py-2 rounded-lg bg-[#222] text-white">2</button></a> --}}
-                    {{#if bookings.hasNextPage}}<a href="/booking/?page={{bookings.nextPage}}"><button
+                    {{#if bookings.hasNextPage}}<a href="/history/booking/?page={{bookings.nextPage}}"><button
                             class="px-3 py-2 rounded-lg bg-black text-white">Next</button></a>{{/if}}
                 </div>
                 {{else}}

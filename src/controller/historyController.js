@@ -154,7 +154,7 @@ exports.bookingHistoryPage = async (req, res) => {
 
         const bookings = await Booking.paginate(
             { date: { $lte: today } },
-            { sort: { createdAt: -1 }, populate: 'stol' }
+            { page, limit, sort: { createdAt: -1 }, populate: 'stol' }
         )
 
         // Get user.
