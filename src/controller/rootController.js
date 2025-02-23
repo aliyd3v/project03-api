@@ -170,7 +170,7 @@ exports.rootController = async (req, res) => {
             countAllBookingSecondLastMonth += value
         }
         let fromLastMonthBooking = countAllBookingLastMonth - countAllBookingSecondLastMonth
-        fromLastMonthBooking = fromLastMonthBooking < 0 ? `-${fromLastMonthBooking}` : `+${fromLastMonthBooking}`
+        fromLastMonthBooking = fromLastMonthBooking < 0 ? `${fromLastMonthBooking}` : `+${fromLastMonthBooking}`
         // For order.
         let countAllOrdersLastMonth = 0
         for (const value of orderCountForLastMonth) {
@@ -181,7 +181,7 @@ exports.rootController = async (req, res) => {
             countAllOrdersSecondLastMonth += value
         }
         let fromLastMonthOrders = countAllOrdersLastMonth - countAllOrdersSecondLastMonth
-        fromLastMonthOrders = fromLastMonthOrders < 0 ? `-${fromLastMonthOrders}` : `+${fromLastMonthOrders}`
+        fromLastMonthOrders = fromLastMonthOrders < 0 ? `${fromLastMonthOrders}` : `+${fromLastMonthOrders}`
 
         // Rendering.
         return res.render(`${user.language == 'English' ? 'home' : 'home_ru'}`, {
