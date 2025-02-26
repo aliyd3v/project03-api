@@ -149,32 +149,62 @@ exports.createBookingWithVerification = async (req, res) => {
 }
 
 exports.checkBookingForAvailability = async (req, res) => {
-    const { query: { date, time_start, time_end } } = req
     try {
-        // Checking data and time to valid.
-        if (!date, !time_start, !time_end || time_start > time_end) {
+        // Result validation.
+        const { data, error } = validationController(req, res)
+        if (error) {
+            // Responding.
             return res.status(400).send({
                 success: false,
                 data: null,
-                error: { message: "Date and time is valid!" }
+                error: {
+                    message: error
+                }
+            })
+        }
+
+        // Checking data and time to valid.
+        let selectedDateTime = new Date(`${data.date} ${data.time}`)
+        let now = new Date()
+        if (now > selectedDateTime) {
+            return res.status(400).send({
+                success: false,
+                data: null,
+                error: { message: "Pleare enter date and time for next time!" }
+            })
+        }
+        if (data.hour > 18 || data.hour < 1) {
+            return res.status(400).send({
+                success: false,
+                data: null,
+                error: { message: "You cannot book a table for longer than 18 hour and short than 1 hour!" }
             })
         }
 
         // Getting all stols.
-        const stols = await Stol.find()
+        const stols = await Stol.find().sort({ number: 1 })
+        const allStolsLength = stols.length
         const availableStols = stols.map(stol => stol.number)
 
         // Getting bookings from database with requesting date.
-        const bookings = await Booking.find({ date: date, is_active: true }).populate('stol')
+        let yesterdayFromSelectedDate = new Date(selectedDateTime)
+        yesterdayFromSelectedDate.setDate(yesterdayFromSelectedDate.getDate() - 1)
+        const [yesterdayMonth, yesterdayDay, yesterdayYear] = yesterdayFromSelectedDate.toLocaleDateString().split('/').map(Number)
+        yesterdayFromSelectedDate = `${yesterdayYear}-${yesterdayMonth < 10 ? `0${yesterdayMonth}` : yesterdayMonth}-${yesterdayDay < 10 ? `0${yesterdayDay}` : yesterdayDay}`
+
+        // Getting bookings with yesterday date from selected date.
+        const bookings = await Booking.find({ date: { $in: [yesterdayFromSelectedDate, data.date] }, is_canceled: false }).populate('stol')
 
         // Checking every booking with requesting time.
         if (bookings) {
             for (const booking of bookings) {
                 // Checking existing bookings on current time.
-                const existingTimeStart = new Date(`${booking.date} ${booking.time_start}`)
-                const existingTimeEnd = new Date(`${booking.date} ${booking.time_end}`)
-                const requestingTimeStart = new Date(`${date} ${time_start}`)
-                const requestingTimeEnd = new Date(`${date} ${time_end}`)
+                const existingTimeStart = new Date(`${booking.date} ${booking.time}`)
+                let existingTimeEnd = new Date(existingTimeStart)
+                existingTimeEnd.setHours(existingTimeEnd.getHours() + booking.hour)
+                const requestingTimeStart = new Date(`${data.date} ${data.time}`)
+                let requestingTimeEnd = new Date(requestingTimeStart)
+                requestingTimeEnd.setHours(requestingTimeEnd.getHours() + Number(data.hour))
                 if (requestingTimeStart < existingTimeEnd && requestingTimeEnd > existingTimeStart) {
                     let indexBooking = availableStols.indexOf(booking.stol.number)
                     availableStols.splice(indexBooking, 1)
@@ -188,8 +218,9 @@ exports.checkBookingForAvailability = async (req, res) => {
             error: false,
             data: {
                 message: "Getted availabling stols.",
-                date, time_start, time_end,
-                available_stols: availableStols
+                date: data.date, time: data.time, hour: data.hour,
+                available_stols: availableStols,
+                allStolsLength
             }
         })
     }

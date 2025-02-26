@@ -12,6 +12,7 @@ const { searchMCategoriesValidatorSchema } = require('../../validation/searchCat
 const { searchingCategory, searchingMeals } = require('../controller/searchController')
 const { searchMealsValidatorSchema } = require('../../validation/searchMealsValidationSchema')
 const { getAllStols, getOneStol } = require('../controller/stolController')
+const { checkBookingAvailabilityValidationSchema } = require('../../validation/checkBookingAvailibilityValidationSchema')
 const { checkSchema } = require('express-validator')
 
 const router = require('express').Router()
@@ -19,7 +20,7 @@ const router = require('express').Router()
 router
     //  Booking route.
     .post('/booking/create', checkSchema(bookingCreateValidationSchema), createBookingWithVerification)
-    .get('/booking/availability', checkBookingForAvailability)
+    .post('/booking/availability', checkSchema(checkBookingAvailabilityValidationSchema), checkBookingForAvailability)
 
     // Category route.
     .get('/categories', getAllCategories)
