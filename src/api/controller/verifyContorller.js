@@ -1,12 +1,10 @@
 const { TokenStore } = require('../../model/tokenStoreModel')
 const { Order } = require('../../model/orderModel')
-const { succesMsgToHtml } = require('../../helper/successMsgToHtml')
 const { sendingOrderToTgChannel } = require('../../helper/sendingOrderToTgChannel')
 const { Booking } = require('../../model/bookingModel')
 const { sendingBookingToTgChannel } = require('../../helper/sendingBookingToTgChannel')
 const { errorHandling } = require('./errorController')
 const { Stol } = require('../../model/stolModel')
-const { verifyFailedHtml } = require('../../helper/verifyFailedHtml')
 const { generateToken, verifyToken } = require('./tokenController')
 const { validationController } = require('./validationController')
 const { domain } = require('../../config/config')
@@ -66,23 +64,39 @@ exports.verifyTokenAndCreateOrderOrBooking = async (req, res) => {
         // Checking id and token.
         if (id != 'email-verification' || !token) {
             // Responding.
-            return res.status(400).send(verifyFailedHtml)
+            return res.status(400).send({
+                success: false,
+                data: null,
+                error: { message: "Invalid URL!" }
+            })
         }
 
         // Checking token for valid.
         const { error, data } = verifyToken(token)
         if (error) {
             // Responding.
-            return res.status(400).send(verifyFailedHtml)
+            return res.status(400).send({
+                success: false,
+                data: null,
+                error: { message: "Invalid token!" }
+            })
         }
         if (!data.nonce) {
             // Responding.
-            return res.status(400).send(verifyFailedHtml)
+            return res.status(400).send({
+                success: false,
+                data: null,
+                error: { message: "Invalid token!" }
+            })
         }
         const nonce = await TokenStore.findOne({ nonce: data.nonce })
         if (!nonce) {
             // Responding.
-            return res.status(400).send(verifyFailedHtml)
+            return res.status(400).send({
+                success: false,
+                data: null,
+                error: { message: "Verify URL is already used!" }
+            })
         }
 
         // Writing to database 
@@ -118,11 +132,15 @@ exports.verifyTokenAndCreateOrderOrBooking = async (req, res) => {
             }
             sendingOrderToTgChannel(selectedPieceFromOrder)
 
-            // Create success message to customer.
-            const html = succesMsgToHtml(data.customer_name, 'Order')
-
             // Responding with html.
-            return res.status(200).send(html)
+            return res.status(200).send({
+                success: true,
+                error: false,
+                data: {
+                    message: "Order is successfully created.",
+                    order: newOrder
+                }
+            })
         }
 
         // For booking.
@@ -156,11 +174,15 @@ exports.verifyTokenAndCreateOrderOrBooking = async (req, res) => {
             }
             sendingBookingToTgChannel(selectedPieceFromBooking)
 
-            // Create success message to customer.
-            const html = succesMsgToHtml(data.customer_name, 'Booking')
-
             // Responding with html.
-            return res.status(200).send(html)
+            return res.status(200).send({
+                success: true,
+                error: false,
+                data: {
+                    message: "Booking is successfully created.",
+                    booking: newBooking
+                }
+            })
         }
 
         // Getting bookings and orders for customer-cabinet.
