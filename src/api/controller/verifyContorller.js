@@ -37,7 +37,7 @@ exports.createVerifyForGetAllBookingAndOrder = async (req, res) => {
 
         // Generate token with bookings and orders for verify token.
         const token = generateToken(payload)
-        const verifyUrl = `${domain}/verify/email-verification?token=${token}`
+        const verifyUrl = `${domain}/verify/?token=${token}`
 
         // Sending verify message to customer email.
         sendVerifyToEmail(data.email, verifyUrl)
@@ -180,7 +180,8 @@ exports.verifyTokenAndCreateOrderOrBooking = async (req, res) => {
                 error: false,
                 data: {
                     message: "Booking is successfully created.",
-                    booking: newBooking
+                    booking: newBooking,
+                    table: data.stol.number
                 }
             })
         }
