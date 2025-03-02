@@ -1,15 +1,10 @@
 const { Order } = require("../model/orderModel")
 const { errorHandling } = require("./errorController")
-const { domain } = require('../config/config')
-const { validationController } = require("./validationController")
-const { sendVerifyToEmail } = require("../helper/sendToMail")
-const { TokenStore } = require("../model/tokenStoreModel")
-const { generateToken } = require("./tokenController")
 const { idChecking } = require("./idController")
 const { Admin } = require('../model/userModel')
 
 let limit = 3
-let page
+let page = 1
 
 exports.orderPage = async (req, res) => {
     const { query } = req

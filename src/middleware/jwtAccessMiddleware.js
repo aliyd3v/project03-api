@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken")
 const { Admin } = require("../model/userModel")
 const { idChecking } = require("../controller/idController")
 
-exports.jwtAccessMiddleware = async function (req, res, next) {
+exports.jwtAccessMiddleware = async (req, res, next) => {
     try {
         //Checking token for valid.
         const token = req.cookies.token

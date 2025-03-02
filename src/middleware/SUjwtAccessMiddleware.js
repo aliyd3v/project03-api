@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken")
 const { Admin } = require("../model/userModel")
 const { idChecking } = require("../controller/idController")
 
-exports.SUjwtAccessMiddleware = async function (req, res, next) {
+exports.SUjwtAccessMiddleware = async (req, res, next) => {
     try {
         //Checking token for valid.
         const token = req.cookies.token
@@ -57,7 +57,7 @@ exports.SUjwtAccessMiddleware = async function (req, res, next) {
         // Checking role.
         if (admin.role !== 'SUPERUSER') {
             // Rendering.
-            return res.render('bad-request', {layout: false})
+            return res.render('bad-request', { layout: false })
         }
 
         next()

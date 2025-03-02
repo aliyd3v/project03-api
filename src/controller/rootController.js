@@ -2,8 +2,6 @@ const { errorHandling } = require("./errorController")
 const { Admin } = require('../model/userModel')
 const { Booking } = require('../model/bookingModel')
 const { Order } = require('../model/orderModel')
-const { Meal } = require("../model/mealModel")
-const { Category } = require("../model/categoryModel")
 
 exports.rootController = async (req, res) => {
     try {

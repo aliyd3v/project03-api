@@ -36,7 +36,7 @@ exports.createOrderWithVerification = async (req, res) => {
 
         // Generate token with order for verify token.
         const token = generateToken(order)
-        const verifyUrl = `${domain}/api/verify/email-verification?token=${token}`
+        const verifyUrl = `${domain}/verify/email-verification?token=${token}`
 
         // Sending verify message to customer email.
         sendVerifyToEmail(data.email, verifyUrl)
